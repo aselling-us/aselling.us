@@ -1,7 +1,29 @@
 {
-  "fetchedAt": "2026-07-24T11:13:41.560Z",
+  "fetchedAt": "2026-07-25T10:44:40.023Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "The Evil Dead",
+      "year": 1981,
+      "link": "https://letterboxd.com/aselling/film/the-evil-dead/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/c7/4g/ae/zn/7cpSdCrBY7UhiygkcP57dpixXsW-0-600-0-900-crop.jpg?v=1525e98692",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-07-25",
+      "review": "a psychosexual feverdream of a film set in an abandoned house with max gore, some of the best cinematography, and a budget of $375,000 and director aged 21. Obsession and Backrooms got nothing on my guy Raimi"
+    },
+    {
+      "title": "Babygirl",
+      "year": 2024,
+      "link": "https://letterboxd.com/aselling/film/babygirl-2024/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/9/8/9/1/2/5/989125-babygirl-2024-0-600-0-900-crop.jpg?v=b175884970",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-07-25",
+      "review": "had to do some genre whiplash after my horror binge. \n\nEsther-Rose McGregor somehow was the star of this film, though. I will die on that hill. \n\nAlso to note: the color grading in this was insane. and the soundtrack was perfect for the movies content...\n\nInteresting plot... I guess. holy manipulation. been there done that too many times"
+    },
     {
       "title": "Final Destination Bloodlines",
       "year": 2025,
@@ -30,7 +52,7 @@
       "link": "https://letterboxd.com/aselling/film/the-final-destination/",
       "poster": "https://a.ltrbxd.com/resized/sm/upload/dm/oa/gw/qk/qQ6IvrEDe5OutlYs1xRQby9gcZE-0-600-0-900-crop.jpg?v=2b994df6a2",
       "rating": null,
-      "liked": true,
+      "liked": false,
       "rewatch": true,
       "watchedDate": "2026-07-23",
       "review": "The Final Destination found dead in a ditch, replaced by F1 (2025). get brain rot dave franco out of here. It wasn't as bad as I expecting; some of the deaths were pretty good, but not the casting or acting. Too much cgi"
@@ -496,28 +518,6 @@
       "rewatch": false,
       "watchedDate": "2026-06-15",
       "review": "like not my favorite but what the fuck was with the polaroid"
-    },
-    {
-      "title": "Enigma",
-      "year": 2023,
-      "link": "https://letterboxd.com/aselling/film/enigma-2023-1/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/1/0/7/6/2/3/8/1076238-enigma-0-600-0-900-crop.jpg?v=6ad8bfd510",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-06-15",
-      "review": "like so odd yet also so touching. shows you what matters."
-    },
-    {
-      "title": "Mulholland Drive",
-      "year": 2001,
-      "link": "https://letterboxd.com/aselling/film/mulholland-drive/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/1/7/1/p/6VOuh0j7Ec5o1fuVUda6b13puEP-0-600-0-900-crop.jpg?v=2b570b4f02",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-06-15",
-      "review": "whoever said \"This is just La La Land's evil twin\" made it make so much sense yet no sense still. Somehow very pulp fictionesque. Some of it was about dual roles, some of it about the struggle of acting, and I guess the economic issues of Hollywood. lets hope im right."
     },
     {
       "title": "Oppenheimer",
