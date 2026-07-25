@@ -496,8 +496,29 @@ try {
 } catch {}
 const previousFilmByLink = new Map((previousLetterboxd?.films ?? []).map((f) => [f.link, f]));
 
+// A real per-entry custom poster is rare — most diary rows just show the
+// film's default. If a large share of resolved rows disagree with the RSS
+// default poster in a single run, that's not 49 simultaneous customizations;
+// it's Letterboxd (or the network path to it — a Cloudflare challenge response,
+// a bad edge-cache node, IP-based poster personalization) handing back the
+// wrong artwork for the whole page. Trust the scrape only when disagreement
+// stays rare; otherwise fall back to RSS defaults for this run same as a
+// failed scrape would.
+const diaryOverrides = [...diaryPosters.entries()].map(([viewingId, poster]) => {
+  const film = rawFilms.find((f) => f.viewingId === viewingId);
+  return { viewingId, poster, divergesFromDefault: film ? poster !== film.poster : false };
+});
+const divergentCount = diaryOverrides.filter((o) => o.divergesFromDefault).length;
+const diaryPostersTrustworthy =
+  diaryOverrides.length === 0 || divergentCount / diaryOverrides.length <= 0.2;
+if (!diaryPostersTrustworthy) {
+  console.warn(
+    `diary posters: ${divergentCount}/${diaryOverrides.length} resolved posters differ from the RSS default in this run — that's too many for real per-entry customization, discarding diary poster overrides and keeping previous posters instead`
+  );
+}
+
 const films = rawFilms.map(({ viewingId, ...film }) => {
-  const custom = diaryPosters.get(viewingId);
+  const custom = diaryPostersTrustworthy ? diaryPosters.get(viewingId) : null;
   if (custom) return { ...film, poster: custom };
   // No custom poster resolved this run for this diary entry — that's the
   // normal case for entries with no custom poster, but also what a failed/
@@ -519,9 +540,26 @@ const previousGithub = (() => {
 const contributions = fetchedCalendar ?? previousGithub?.contributions ?? null;
 const contributedRepos = fetchedContributedRepos ?? previousGithub?.contributedRepos ?? [];
 
-function backfillPosters(entries, previousEntries) {
+// Same "resolved but implausible" guard as diaryPostersTrustworthy above,
+// applied where there's no RSS default to compare against — favorites/watchlist
+// posters only ever come from this same scrape. A member's favorites/watchlist
+// posters essentially never change day to day, so if most of them differ from
+// what was committed last time, treat this run's scrape as untrustworthy and
+// keep the previous posters rather than overwrite good data with a bad scrape.
+function backfillPosters(entries, previousEntries, label) {
   const previousByLink = new Map((previousEntries ?? []).map((e) => [e.link, e.poster]));
-  return entries.map((e) => (e.poster ? e : { ...e, poster: previousByLink.get(e.link) ?? null }));
+  const comparable = entries.filter((e) => e.poster && previousByLink.get(e.link));
+  const changed = comparable.filter((e) => e.poster !== previousByLink.get(e.link));
+  const churnedTooMuch = comparable.length >= 3 && changed.length / comparable.length > 0.5;
+  if (churnedTooMuch) {
+    console.warn(
+      `${label}: ${changed.length}/${comparable.length} posters changed from last run — likely a bad scrape, keeping previous posters instead`
+    );
+  }
+  return entries.map((e) => {
+    if (churnedTooMuch) return { ...e, poster: previousByLink.get(e.link) ?? e.poster ?? null };
+    return e.poster ? e : { ...e, poster: previousByLink.get(e.link) ?? null };
+  });
 }
 
 writeSnapshot('goodreads.json', { fetchedAt, userId: GOODREADS_USER_ID, currentlyReading, toRead, read });
@@ -529,8 +567,8 @@ writeSnapshot('letterboxd.json', {
   fetchedAt,
   username: LETTERBOXD_USER,
   films,
-  favorites: backfillPosters(favorites, previousLetterboxd?.favorites),
-  watchlist: backfillPosters(watchlist, previousLetterboxd?.watchlist),
+  favorites: backfillPosters(favorites, previousLetterboxd?.favorites, 'favorites'),
+  watchlist: backfillPosters(watchlist, previousLetterboxd?.watchlist, 'watchlist'),
 });
 writeSnapshot('github.json', { fetchedAt, username: GITHUB_USER, repos, contributions, contributedRepos });
 console.log(
