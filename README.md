@@ -1,10 +1,10 @@
 # aselling.us
 
-[![Playwright Tests](https://github.com/asellingson28/asellingson28.github.io/actions/workflows/playwright.yml/badge.svg)](https://github.com/asellingson28/asellingson28.github.io/actions/workflows/playwright.yml)
+[![Playwright Tests](https://github.com/aselling-us/aselling.us/actions/workflows/playwright.yml/badge.svg)](https://github.com/aselling-us/aselling.us/actions/workflows/playwright.yml)
 
-[![Unit Tests](https://github.com/asellingson28/asellingson28.github.io/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/asellingson28/asellingson28.github.io/actions/workflows/unit-tests.yml)
+[![Unit Tests](https://github.com/aselling-us/aselling.us/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/aselling-us/aselling.us/actions/workflows/unit-tests.yml)
 
-[![Deploy](https://github.com/asellingson28/asellingson28.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/asellingson28/asellingson28.github.io/actions/workflows/deploy.yml)
+[![Deploy](https://github.com/aselling-us/aselling.us/actions/workflows/deploy.yml/badge.svg)](https://github.com/aselling-us/aselling.us/actions/workflows/deploy.yml)
 
 
 Personal site built with [Astro](https://astro.build), deployed to GitHub Pages. Contains public data of projects, places, media, and my in progress blog.

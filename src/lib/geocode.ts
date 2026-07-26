@@ -38,7 +38,7 @@ export async function geocode(location: string): Promise<[number, number] | unde
 
   try {
     const res = await fetch(url, {
-      headers: { 'User-Agent': 'asellingson28.github.io (personal site places map)' },
+      headers: { 'User-Agent': 'aselling.us (personal site places map)' },
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const results: { lat: string; lon: string; addresstype?: string }[] = await res.json();

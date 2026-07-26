@@ -59,7 +59,7 @@ describe('coverRawUrl', () => {
   it('resolves a relative cover path against the markdown file location', () => {
     const url = coverRawUrl('src/content/blog/on-slow-technology.md', './cover.jpg');
     expect(url).toBe(
-      'https://raw.githubusercontent.com/asellingson28/asellingson28.github.io/main/src/content/blog/cover.jpg'
+      'https://raw.githubusercontent.com/aselling-us/aselling.us/main/src/content/blog/cover.jpg'
     );
   });
 
