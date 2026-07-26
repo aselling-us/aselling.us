@@ -1,11 +1,11 @@
 {
   "fetchedAt": "2026-07-26T10:54:21.023Z",
-  "username": "asellingson28",
+  "username": "aselling-us",
   "repos": [
     {
-      "name": "asellingson28.github.io",
+      "name": "aselling.us",
       "description": "My website containing a portfolio of a variety of projects. E2E tested with Playwright.",
-      "link": "https://github.com/asellingson28/asellingson28.github.io",
+      "link": "https://github.com/aselling-us/aselling.us",
       "homepage": "http://aselling.us/",
       "language": "Astro",
       "stars": 0,
@@ -15,7 +15,7 @@
     {
       "name": "resume",
       "description": "A resume-generator based on a latex template from Overleaf. ",
-      "link": "https://github.com/asellingson28/resume",
+      "link": "https://github.com/aselling-us/resume",
       "homepage": null,
       "language": "TeX",
       "stars": 0,
@@ -25,7 +25,7 @@
     {
       "name": "csc-308-app",
       "description": "The first assignment for CSC 308 (Software Engineering 1) at Cal Poly",
-      "link": "https://github.com/asellingson28/csc-308-app",
+      "link": "https://github.com/aselling-us/csc-308-app",
       "homepage": null,
       "language": "JavaScript",
       "stars": 0,
@@ -35,7 +35,7 @@
     {
       "name": "Professional-References-Template",
       "description": null,
-      "link": "https://github.com/asellingson28/Professional-References-Template",
+      "link": "https://github.com/aselling-us/Professional-References-Template",
       "homepage": null,
       "language": "TeX",
       "stars": 0,
@@ -45,7 +45,7 @@
     {
       "name": "CSC-357",
       "description": "Work for Cal Poly Class CSC 357 Systems Programming",
-      "link": "https://github.com/asellingson28/CSC-357",
+      "link": "https://github.com/aselling-us/CSC-357",
       "homepage": null,
       "language": "C++",
       "stars": 0,
@@ -55,7 +55,7 @@
     {
       "name": "Obsidian-Resources",
       "description": null,
-      "link": "https://github.com/asellingson28/Obsidian-Resources",
+      "link": "https://github.com/aselling-us/Obsidian-Resources",
       "homepage": null,
       "language": "Python",
       "stars": 0,
@@ -65,7 +65,7 @@
     {
       "name": "CPE-225",
       "description": null,
-      "link": "https://github.com/asellingson28/CPE-225",
+      "link": "https://github.com/aselling-us/CPE-225",
       "homepage": null,
       "language": "Assembly",
       "stars": 0,
@@ -75,7 +75,7 @@
     {
       "name": "CS50-Final-Project",
       "description": null,
-      "link": "https://github.com/asellingson28/CS50-Final-Project",
+      "link": "https://github.com/aselling-us/CS50-Final-Project",
       "homepage": null,
       "language": "HTML",
       "stars": 0,

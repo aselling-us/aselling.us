@@ -44,7 +44,7 @@ export function logoDataUri() {
 // scripts here run outside that pipeline and can't predict the hash. The
 // repo is public, so raw.githubusercontent.com serves the original file
 // directly and needs no build step.
-const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/asellingson28/asellingson28.github.io/main';
+const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/aselling-us/aselling.us/main';
 
 const IMAGE_MIME_TYPES = {
   '.jpg': 'image/jpeg',
