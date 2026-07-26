@@ -21,8 +21,12 @@ const fmtDate = (iso: string | null) =>
       })
     : null;
 
-// 7 columns × 2 rows per page — matches the fixed 7-column grid in BookGrid
+// 7 columns × 2 rows per page — matches the fixed 7-column grid in BookGrid.
+// Mobile drops to a 2-column grid (see BookGrid's <=700px breakpoint), so
+// Pagination.astro uses a smaller page size there — 2 × 3 rows — to keep a
+// mobile "page" a short scroll instead of the same 14 items spread over 7 rows.
 const PAGE_SIZE = 14;
+const MOBILE_PAGE_SIZE = 6;
 ---
 <BaseLayout title="Reading" description="Books I've read, pulled from my Goodreads shelves.">
   <span class="mono-label">index / 04</span>
@@ -69,7 +73,7 @@ const PAGE_SIZE = 14;
       read / {String(read.length).padStart(2, '0')}
       <a class="shelf-link" href={readShelfUrl} target="_blank" rel="noopener noreferrer">view on Goodreads →</a>
     </h2>
-    <BookGrid books={read} gridId="read-grid" paginationLabel="Read shelf pages" pageSize={PAGE_SIZE} showMeta fmtDate={fmtDate} />
+    <BookGrid books={read} gridId="read-grid" paginationLabel="Read shelf pages" pageSize={PAGE_SIZE} mobilePageSize={MOBILE_PAGE_SIZE} showMeta fmtDate={fmtDate} />
   </section>
 
   {toRead.length > 0 && (
@@ -78,7 +82,7 @@ const PAGE_SIZE = 14;
         want to read / {String(toRead.length).padStart(2, '0')}
         <a class="shelf-link" href={toReadShelfUrl} target="_blank" rel="noopener noreferrer">view on Goodreads →</a>
       </h2>
-      <BookGrid books={toRead} gridId="toread-grid" paginationLabel="Want to read shelf pages" pageSize={PAGE_SIZE} />
+      <BookGrid books={toRead} gridId="toread-grid" paginationLabel="Want to read shelf pages" pageSize={PAGE_SIZE} mobilePageSize={MOBILE_PAGE_SIZE} />
     </section>
   )}
 
@@ -121,6 +125,12 @@ const PAGE_SIZE = 14;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: var(--space-3);
+  }
+  @media (max-width: 700px) {
+    .current-list {
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+    }
   }
   .current-item {
     display: flex;

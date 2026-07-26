@@ -12,10 +12,12 @@ const diaryUrl = `${profileUrl}films/diary/`;
 const watchlistUrl = `${profileUrl}watchlist/`;
 const updated = letterboxd.fetchedAt.slice(0, 16).replace("T", " · ") + " utc";
 
-// 7 columns × 2 rows per page — matches the fixed 7-column grid in BookGrid
+// 7 columns × 2 rows per page — matches the fixed 7-column film-grid below.
+// Mobile drops to a 2-column grid (see film-grid's <=700px breakpoint), so
+// Pagination.astro uses a smaller page size there — 2 × 3 rows — to keep a
+// mobile "page" a short scroll instead of the same 14 items spread over 7 rows.
 const PAGE_SIZE = 14;
-const diaryPages = Math.ceil(films.length / PAGE_SIZE);
-const watchlistPages = Math.ceil(watchlist.length / PAGE_SIZE);
+const MOBILE_PAGE_SIZE = 6;
 
 const fmtDate = (iso: string | null) =>
   iso
@@ -95,7 +97,7 @@ const stars = (r: number) => "★".repeat(Math.floor(r)) + (r % 1 ? "½" : "");
               "film",
               { "is-hidden": Math.floor(i / PAGE_SIZE) + 1 !== 1 },
             ]}
-            data-page={Math.floor(i / PAGE_SIZE) + 1}
+            data-index={i}
             title={film.review ?? undefined}
           >
             <a href={film.link} target="_blank" rel="noopener noreferrer">
@@ -136,7 +138,7 @@ const stars = (r: number) => "★".repeat(Math.floor(r)) + (r % 1 ? "½" : "");
         ))
       }
     </ul>
-    <Pagination pages={diaryPages} gridId="diary-grid" label="Diary pages" />
+    <Pagination itemCount={films.length} gridId="diary-grid" label="Diary pages" pageSize={PAGE_SIZE} mobilePageSize={MOBILE_PAGE_SIZE} />
   </section>
 
   {
@@ -161,7 +163,7 @@ const stars = (r: number) => "★".repeat(Math.floor(r)) + (r % 1 ? "½" : "");
                 "film",
                 { "is-hidden": Math.floor(i / PAGE_SIZE) + 1 !== 1 },
               ]}
-              data-page={Math.floor(i / PAGE_SIZE) + 1}
+              data-index={i}
             >
               <a href={film.link} target="_blank" rel="noopener noreferrer">
                 {film.poster && (
@@ -187,9 +189,11 @@ const stars = (r: number) => "★".repeat(Math.floor(r)) + (r % 1 ? "½" : "");
           ))}
         </ul>
         <Pagination
-          pages={watchlistPages}
+          itemCount={watchlist.length}
           gridId="watchlist-grid"
           label="Watchlist pages"
+          pageSize={PAGE_SIZE}
+          mobilePageSize={MOBILE_PAGE_SIZE}
         />
       </section>
     )
@@ -250,6 +254,12 @@ const stars = (r: number) => "★".repeat(Math.floor(r)) + (r % 1 ? "½" : "");
     grid-template-columns: repeat(4, minmax(160px, 260px));
     gap: var(--space-3);
   }
+  @media (max-width: 700px) {
+    .favorites-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-2);
+    }
+  }
   .favorite a {
     display: flex;
     flex-direction: column;
@@ -289,6 +299,7 @@ const stars = (r: number) => "★".repeat(Math.floor(r)) + (r % 1 ? "½" : "");
     .film-grid {
       grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
       width: 100%;
+      gap: var(--space-2) var(--space-2);
     }
   }
   .film {

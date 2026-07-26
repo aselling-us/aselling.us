@@ -15,18 +15,18 @@ interface Props {
   gridId: string;
   paginationLabel: string;
   pageSize?: number;
+  mobilePageSize?: number;
   showMeta?: boolean;
   fmtDate?: (iso: string | null) => string | null;
 }
 
-const { books, gridId, paginationLabel, pageSize = 21, showMeta = false, fmtDate } = Astro.props;
-const pages = Math.ceil(books.length / pageSize);
+const { books, gridId, paginationLabel, pageSize = 21, mobilePageSize, showMeta = false, fmtDate } = Astro.props;
 ---
 <ul class="book-grid" id={gridId}>
   {books.map((book, i) => {
     const page = Math.floor(i / pageSize) + 1;
     return (
-      <li class:list={['book', { 'is-hidden': page !== 1 }]} data-page={page}>
+      <li class:list={['book', { 'is-hidden': page !== 1 }]} data-index={i}>
         <a href={book.link} target="_blank" rel="noopener noreferrer">
           {book.cover && <img class="book-cover" src={book.cover} alt={`Cover of ${book.title}`} loading="lazy" referrerpolicy="no-referrer" />}
         </a>
@@ -46,7 +46,7 @@ const pages = Math.ceil(books.length / pageSize);
     );
   })}
 </ul>
-<Pagination pages={pages} gridId={gridId} label={paginationLabel} />
+<Pagination itemCount={books.length} gridId={gridId} label={paginationLabel} pageSize={pageSize} mobilePageSize={mobilePageSize} />
 
 <style>
   .book-grid {
@@ -103,6 +103,7 @@ const pages = Math.ceil(books.length / pageSize);
     .book-grid {
       grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
       width: 100%;
+      gap: var(--space-3) var(--space-2);
     }
   }
 </style>

@@ -1,25 +1,44 @@
 ---
 // Client-side pager for a `<ul>`/`<ol>` grid whose `<li>` children each carry
-// a `data-page="N"` attribute (1-indexed). Targets #{gridId} by id, so it
-// works for any grid shape (book covers, film posters, ...) — the grid
-// markup and item styling stay page-specific, only the paging behavior and
-// controls are shared here.
+// a `data-index="N"` attribute (0-indexed position in the full list). Targets
+// #{gridId} by id, so it works for any grid shape (book covers, film
+// posters, ...) — the grid markup and item styling stay page-specific, only
+// the paging behavior and controls are shared here.
+//
+// Page size is responsive: `mobilePageSize` (default: same as `pageSize`)
+// applies at the same <=700px breakpoint the grids themselves use to drop to
+// fewer columns, so a mobile "page" stays a short scroll instead of the same
+// item count spread over far more rows than the desktop grid. Since the two
+// breakpoints can need different numbers of pages, the server renders enough
+// page-number buttons for whichever needs more (mobile, almost always) and
+// the client script hides the ones the current breakpoint doesn't need.
 interface Props {
-  pages: number;
+  itemCount: number;
   gridId: string;
   label: string;
+  pageSize: number;
+  mobilePageSize?: number;
 }
 
-const { pages, gridId, label } = Astro.props;
+const { itemCount, gridId, label, pageSize, mobilePageSize = pageSize } = Astro.props;
+const desktopPages = Math.ceil(itemCount / pageSize);
+const mobilePages = Math.ceil(itemCount / mobilePageSize);
+const maxPages = Math.max(desktopPages, mobilePages);
 ---
-{pages > 1 && (
+{maxPages > 1 && (
   <>
-    <nav class="pagination" data-target={gridId} aria-label={label}>
+    <nav
+      class="pagination"
+      data-target={gridId}
+      data-page-size={pageSize}
+      data-mobile-page-size={mobilePageSize}
+      aria-label={label}
+    >
       <button type="button" class="page-btn" data-page="prev" disabled>‹ prev</button>
-      {Array.from({ length: pages }, (_, i) => i + 1).map((n) => (
+      {Array.from({ length: maxPages }, (_, i) => i + 1).map((n) => (
         <button
           type="button"
-          class:list={['page-btn', 'page-num', { 'is-active': n === 1 }]}
+          class:list={['page-btn', 'page-num', { 'is-active': n === 1, 'is-hidden': n > desktopPages }]}
           data-page={n}
           aria-current={n === 1 ? 'page' : undefined}
         >{n}</button>
@@ -48,13 +67,21 @@ const { pages, gridId, label } = Astro.props;
     const pageButtons = Array.from(nav.querySelectorAll<HTMLButtonElement>('.page-num'));
     const prevBtn = nav.querySelector<HTMLButtonElement>('[data-page="prev"]');
     const nextBtn = nav.querySelector<HTMLButtonElement>('[data-page="next"]');
-    const totalPages = pageButtons.length;
+
+    const pageSize = Number(nav.dataset.pageSize) || items.length || 1;
+    const mobilePageSize = Number(nav.dataset.mobilePageSize) || pageSize;
+    const mobileQuery = window.matchMedia('(max-width: 700px)');
+
+    let effectivePageSize = pageSize;
+    let totalPages = 1;
     let currentPage = 1;
 
     const showPage = (page: number) => {
       currentPage = Math.min(Math.max(page, 1), totalPages);
       items.forEach((li) => {
-        li.classList.toggle('is-hidden', Number(li.dataset.page) !== currentPage);
+        const index = Number(li.dataset.index);
+        const itemPage = Math.floor(index / effectivePageSize) + 1;
+        li.classList.toggle('is-hidden', itemPage !== currentPage);
       });
       pageButtons.forEach((btn) => {
         const isActive = Number(btn.dataset.page) === currentPage;
@@ -78,6 +105,19 @@ const { pages, gridId, label } = Astro.props;
       }
     };
 
+    // re-derive page count/grouping for the breakpoint's page size, hide any
+    // page-number buttons the current breakpoint doesn't need, and re-clamp
+    // the current page before redrawing.
+    const recalculate = () => {
+      effectivePageSize = mobileQuery.matches ? mobilePageSize : pageSize;
+      totalPages = Math.max(1, Math.ceil(items.length / effectivePageSize));
+      nav.classList.toggle('is-hidden', totalPages <= 1);
+      pageButtons.forEach((btn) => {
+        btn.classList.toggle('is-hidden', Number(btn.dataset.page) > totalPages);
+      });
+      showPage(Math.min(currentPage, totalPages));
+    };
+
     nav.addEventListener('click', (ev) => {
       const btn = (ev.target as HTMLElement).closest<HTMLButtonElement>('button.page-btn');
       if (!btn) return;
@@ -87,6 +127,9 @@ const { pages, gridId, label } = Astro.props;
       else if (val) showPage(Number(val));
       list.scrollIntoView({ block: 'nearest' });
     });
+
+    mobileQuery.addEventListener('change', recalculate);
+    recalculate();
   });
 </script>
 
@@ -114,5 +157,12 @@ const { pages, gridId, label } = Astro.props;
     background: var(--color-gold);
     border-color: var(--color-gold);
     color: var(--color-bg);
+  }
+
+  @media (max-width: 700px) {
+    .page-btn {
+      padding: 0.4rem 0.75rem;
+      font-size: 0.72rem;
+    }
   }
 </style>
