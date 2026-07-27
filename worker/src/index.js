@@ -21,14 +21,14 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // belong in a Workers bundle, and it's a handful of hex values, not worth a
 // shared-build step across two different runtimes.
 const THEME = {
-  bg: '#0a0d12',
-  card: '#10141c',
-  line: '#232b38',
-  gold: '#c9a227',
-  blueBright: '#7fb0e0',
-  text: '#e4e1d8',
-  textDim: '#8a8f98',
-  textFaint: '#565c68',
+  bg: '#120d0c',
+  card: '#1a1312',
+  line: '#7e6a44',
+  gold: '#8a170f',
+  blueBright: '#45b2ba',
+  text: '#ece0dd',
+  textDim: '#a18b91',
+  textFaint: '#6d5661',
 };
 
 function escapeHtml(value) {

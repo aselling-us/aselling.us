@@ -77,17 +77,17 @@ export function coverDataUri(mdFile, coverValue) {
   return `data:${mime};base64,${fs.readFileSync(absPath).toString('base64')}`;
 }
 
-// Mirrors the site's "cherry" theme, the default (src/styles/global.css :root
-// tokens): near-black burgundy ground, hairline crimson-gold rule, teal accent, monospace annotations.
+// Mirrors the site's "caravaggio" theme, the default (src/styles/global.css
+// :root tokens): near-black ground, brick-red accent, hairline gold rule, teal accent, monospace annotations.
 // Email clients don't load the site's web fonts or CSS custom properties, so
 // colors are hardcoded and fonts fall back to system serif/sans/mono stacks.
 export const EMAIL_THEME = {
-  bg: '#140a10',
-  card: '#1d0f17',
-  line: '#3a1e2b',
-  gold: '#b02540',
-  goldBright: '#d94f63',
-  blueBright: '#46bccb',
+  bg: '#120d0c',
+  card: '#1a1312',
+  line: '#7e6a44',
+  gold: '#8a170f',
+  goldBright: '#d5271a',
+  blueBright: '#45b2ba',
   text: '#ece0dd',
   textDim: '#a18b91',
   textFaint: '#6d5661',
@@ -196,7 +196,7 @@ export function buildUnsubscribeUrl(email) {
   );
 }
 
-// Shared "cherry" card shell used by both the new-post and confirm-subscription
+// Shared "caravaggio" card shell used by both the new-post and confirm-subscription
 // emails: hairline gold->line->blue rule, mono eyebrow, serif title, optional
 // body copy, a bordered CTA button, hairline divider, mono footer.
 // title is escaped as plain text by default; pass titleHtml instead (already

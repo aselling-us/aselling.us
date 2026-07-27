@@ -4,29 +4,32 @@
    Dark ground, hairline gold rules, steel-blue accents,
    monospace "index" labels used like drawing annotations.
 
-   Default theme: cherry — near-black burgundy ground with
-   crimson gold rules, teal takes the blue role. Toggled via
-   data-theme on <html> (slider in Nav); the default has no
-   data-theme attribute and lives directly in :root.
+   Default theme: caravaggio — near-black ground, a brick-red
+   accent (sampled from the curtain in Judith Beheading
+   Holofernes), hairline gold rules (sampled from Mary
+   Magdalene's hair) and a muted teal-blue (sampled from her
+   drapery). Toggled via data-theme on <html> (slider in Nav);
+   the default has no data-theme attribute and lives directly
+   in :root.
 =========================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
 
 :root {
   /* -- color: ground -- */
-  --color-bg: #140a10;
-  --color-bg-elevated: #1d0f17;
-  --color-bg-inset: #180c13;
+  --color-bg: #120d0c;
+  --color-bg-elevated: #1a1312;
+  --color-bg-inset: #160f0f;
 
   /* -- color: line work -- */
-  --color-line: #3a1e2b;
-  --color-line-bright: #5c3244;
+  --color-line: #7e6a44;
+  --color-line-bright: #b4985f;
 
   /* -- color: accents -- */
-  --color-blue: #1f8d9c;
-  --color-blue-bright: #46bccb;
-  --color-gold: #b02540;
-  --color-gold-bright: #d94f63;
+  --color-blue: #20696f;
+  --color-blue-bright: #45b2ba;
+  --color-gold: #8a170f;
+  --color-gold-bright: #d5271a;
 
   /* -- color: text -- */
   --color-text: #ece0dd;
@@ -35,7 +38,7 @@
 
   /* -- color: ornaments (vines, chains) -- */
   --color-vine: #3f8f5f;
-  --color-chain: #8d5f4b;
+  --color-chain: #946b38;
 
   /* -- color: places map dots (lived/want-to-go/third-place — event/travel reuse gold/blue) -- */
   --color-dot-lived: #4f9e6f;

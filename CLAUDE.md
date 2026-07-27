@@ -45,7 +45,7 @@ The most involved page. At build time it resolves coordinates, optimizes photos 
 
 ### Theming
 
-Four themes — `odyssey` (default), `sunset`, `cherry`, `monet` — toggled by a slider in `Nav.astro`, which sets `data-theme` on `<html>` and persists the choice to `localStorage`. `BaseLayout.astro` has an inline `is:inline` script in `<head>` that restores the saved theme before first paint (avoids a flash of the default theme). Each theme is a `[data-theme='...']` block in `src/styles/global.css` that redefines the same `--color-*` custom properties as `:root`; anything styled off those tokens (rather than hardcoded hex) reskins automatically. A few one-off decorative colors (e.g. the `lived`/`want-to-go` map dots, the vine/chain ornament colors) are theme-aware too, defined per `[data-theme]` block rather than as swappable tokens.
+Four themes — `caravaggio` (default), `sunset`, `odyssey`, `monet` — toggled by a slider in `Nav.astro`, which sets `data-theme` on `<html>` and persists the choice to `localStorage`. `BaseLayout.astro` has an inline `is:inline` script in `<head>` that restores the saved theme before first paint (avoids a flash of the default theme). Each theme is a `[data-theme='...']` block in `src/styles/global.css` that redefines the same `--color-*` custom properties as `:root`; anything styled off those tokens (rather than hardcoded hex) reskins automatically. A few one-off decorative colors (e.g. the `lived`/`want-to-go` map dots, the vine/chain ornament colors) are theme-aware too, defined per `[data-theme]` block rather than as swappable tokens.
 
 ### Media snapshots (`/books`, `/films`, `/projects`)
 
