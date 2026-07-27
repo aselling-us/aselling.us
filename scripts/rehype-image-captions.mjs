@@ -7,8 +7,13 @@
 // rendered HTML tree; Astro's asset pipeline still finds the <img> and
 // optimizes it normally since it does a generic recursive visit for `img`
 // elements regardless of how deep they're nested.
-// The title is inserted as plain text, not parsed as markdown.
+// The title is run through the same small inline-markdown renderer as the
+// frontmatter cover caption (src/lib/inline-markdown.mjs), so `*italic*`,
+// `**bold**`, `` `code` ``, and links in a caption render as markup instead
+// of showing up as literal asterisks/backticks.
 import { visit } from 'unist-util-visit';
+import { fromHtml } from 'hast-util-from-html';
+import { renderInlineMarkdown } from '../src/lib/inline-markdown.mjs';
 
 export default function rehypeImageCaptions() {
   return (tree) => {
@@ -17,6 +22,7 @@ export default function rehypeImageCaptions() {
       const caption = node.properties?.title;
       if (!caption) return;
       delete node.properties.title;
+      const { children } = fromHtml(renderInlineMarkdown(String(caption)), { fragment: true });
       parent.children[index] = {
         type: 'element',
         tagName: 'figure',
@@ -27,7 +33,7 @@ export default function rehypeImageCaptions() {
             type: 'element',
             tagName: 'figcaption',
             properties: { className: ['mono-label'] },
-            children: [{ type: 'text', value: String(caption) }],
+            children,
           },
         ],
       };
