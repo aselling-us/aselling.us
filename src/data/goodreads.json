@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-07-25T22:28:57.508Z",
+  "fetchedAt": "2026-07-27T12:37:27.716Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -10,9 +10,7 @@
       "rating": 0,
       "readAt": null,
       "addedAt": "2026-07-18",
-      "review": null,
-      "currentPage": 30,
-      "totalPages": 320
+      "review": null
     },
     {
       "title": "A Happy Death",
@@ -38,6 +36,16 @@
     }
   ],
   "toRead": [
+    {
+      "title": "Notebooks, 1935-1951",
+      "author": "Albert Camus",
+      "link": "https://www.goodreads.com/book/show/15704",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1374680386l/15704.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-07-26",
+      "review": null
+    },
     {
       "title": "The Meaning of Your Life: Finding Purpose in an Age of Emptiness",
       "author": "Arthur C. Brooks",
