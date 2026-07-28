@@ -52,7 +52,12 @@ async function fetchGenericTitle(url) {
   });
   const html = await res.text();
   const match = html.match(/<title[^>]*>([^<]*)<\/title>/i);
-  return match ? decodeEntities(match[1].trim().replace(/\s+/g, ' ')) : url;
+  const title = match ? decodeEntities(match[1].trim().replace(/\s+/g, ' ')) : '';
+  // Some sites (YouTube in particular) serve datacenter/CI IPs a stripped
+  // shell page with an empty <title></title> instead of erroring — treat
+  // that the same as a failed fetch rather than caching a blank title.
+  if (!title) throw new Error(`no page title found for ${url}`);
+  return title;
 }
 
 async function fetchTitle(url) {
