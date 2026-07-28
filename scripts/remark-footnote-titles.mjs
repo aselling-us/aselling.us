@@ -17,6 +17,34 @@ function cleanTitle(title) {
   return title.replace(/\s*[-–—:|]\s*(YouTube|Reddit)\s*$/i, '').trim();
 }
 
+// <title> text comes straight from the page's HTML source, so entities
+// (&#39;, &amp;, &rsquo;, …) are still encoded. Left undecoded, that raw
+// "&" ends up in an mdast text node and gets re-escaped on serialization
+// (e.g. "&#39;" -> "&amp;#39;"), so the browser shows "&#39;" literally
+// instead of an apostrophe.
+const NAMED_ENTITIES = {
+  amp: '&',
+  lt: '<',
+  gt: '>',
+  quot: '"',
+  apos: "'",
+  nbsp: ' ',
+  rsquo: '’',
+  lsquo: '‘',
+  rdquo: '”',
+  ldquo: '“',
+  mdash: '—',
+  ndash: '–',
+  hellip: '…',
+};
+
+function decodeEntities(s) {
+  return s
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
+    .replace(/&(\w+);/g, (m, name) => NAMED_ENTITIES[name.toLowerCase()] ?? m);
+}
+
 async function fetchGenericTitle(url) {
   const res = await fetch(url, {
     headers: { 'User-Agent': 'Mozilla/5.0 (compatible; aselling.us-footnote-fetcher/1.0)' },
@@ -24,7 +52,7 @@ async function fetchGenericTitle(url) {
   });
   const html = await res.text();
   const match = html.match(/<title[^>]*>([^<]*)<\/title>/i);
-  return match ? match[1].trim().replace(/\s+/g, ' ') : url;
+  return match ? decodeEntities(match[1].trim().replace(/\s+/g, ' ')) : url;
 }
 
 async function fetchTitle(url) {
