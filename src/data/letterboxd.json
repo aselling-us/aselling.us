@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-07-26T10:54:21.023Z",
+  "fetchedAt": "2026-07-29T11:34:40.187Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "The Trial",
+      "year": 1962,
+      "link": "https://letterboxd.com/aselling/film/the-trial/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/9/9/5/5/49955-the-trial-0-600-0-900-crop.jpg?v=aa8efe1e63",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-07-27",
+      "review": "I would argue a pretty good adaptation of Kafka's The Trial. The ambiguity of the whole situation was very well done and played off well. The large scales of the courtroom depicted in Kafka's writing were recreated beautifully. Leni's seductive nature was quite compelling, too. \n\nIg im doing this now:\n68/100"
+    },
     {
       "title": "Memento",
       "year": 2000,
@@ -507,17 +518,6 @@
       "rewatch": false,
       "watchedDate": "2026-06-17",
       "review": "she has the most diverse facial expressions ever"
-    },
-    {
-      "title": "Interstellar: Nolan's Odyssey",
-      "year": 2014,
-      "link": "https://letterboxd.com/aselling/film/interstellar-nolans-odyssey/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/2/2/8/9/6/4/p/fOdYEJ8VtrGy3HTyiIuHcOgLJMY-0-600-0-900-crop.jpg?v=34bb196157",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-06-17",
-      "review": "This title aged well"
     },
     {
       "title": "Oppenheimer",
