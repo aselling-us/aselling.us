@@ -15,7 +15,7 @@ const posts = await getCollection('blog', ({ data }) => import.meta.env.DEV || d
 const latestPost = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())[0];
 
 // letterboxd diary is already re-sorted most-recent-first by fetch-media.mjs
-const latestFilm = letterboxd.films[0];
+const recentFilms = letterboxd.films.slice(0, 4);
 // goodreads currently-reading shelf, most recently added first
 const currentlyReading = goodreads.currentlyReading;
 
@@ -101,24 +101,30 @@ const fmtIsoDate = (iso: string | null) =>
     </section>
   )}
 
-  {(latestFilm || currentlyReading.length > 0) && (
+  {(recentFilms.length > 0 || currentlyReading.length > 0) && (
     <section class="home-section">
       <h2 class="mono-label section-label">currently</h2>
       <div class="currently-grid">
-        {latestFilm && (
+        {recentFilms.length > 0 && (
           <div class="currently-col">
             <span class="mono-label item-label">watching</span>
-            <a class="currently-link" href={latestFilm.link} target="_blank" rel="noopener noreferrer">
-              {latestFilm.poster && (
-                <img class="currently-poster" src={latestFilm.poster} alt={`Poster for ${latestFilm.title}`} loading="lazy" referrerpolicy="no-referrer" />
-              )}
-              <span class="currently-title">
-                {latestFilm.title}{latestFilm.year && <span class="currently-dim"> ({latestFilm.year})</span>}
-              </span>
-              {latestFilm.watchedDate && (
-                <span class="mono-label currently-date">{fmtIsoDate(latestFilm.watchedDate)}</span>
-              )}
-            </a>
+            <ul class="currently-books currently-books-row">
+              {recentFilms.map((film) => (
+                <li class="currently-book">
+                  <a class="currently-link" href={film.link} target="_blank" rel="noopener noreferrer">
+                    {film.poster && (
+                      <img class="currently-poster" src={film.poster} alt={`Poster for ${film.title}`} loading="lazy" referrerpolicy="no-referrer" />
+                    )}
+                    <span class="currently-title">
+                      {film.title}{film.year && <span class="currently-dim"> ({film.year})</span>}
+                    </span>
+                    {film.watchedDate && (
+                      <span class="mono-label currently-date">{fmtIsoDate(film.watchedDate)}</span>
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
 
