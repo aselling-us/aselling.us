@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-07-29T11:34:40.187Z",
+  "fetchedAt": "2026-07-30T11:21:43.680Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -20,9 +20,7 @@
       "rating": 0,
       "readAt": null,
       "addedAt": "2026-07-10",
-      "review": null,
-      "currentPage": 58,
-      "totalPages": 144
+      "review": null
     },
     {
       "title": "The Secret History",
@@ -32,10 +30,22 @@
       "rating": 0,
       "readAt": null,
       "addedAt": "2026-05-19",
-      "review": null
+      "review": null,
+      "currentPage": 77,
+      "totalPages": 559
     }
   ],
   "toRead": [
+    {
+      "title": "A Brief History of Intelligence: Evolution, AI, and the Five Breakthroughs That Made Our Brains",
+      "author": "Max Solomon Bennett",
+      "link": "https://www.goodreads.com/book/show/62050269",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1678219676l/62050269.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-07-29",
+      "review": null
+    },
     {
       "title": "Notebooks, 1935-1951",
       "author": "Albert Camus",

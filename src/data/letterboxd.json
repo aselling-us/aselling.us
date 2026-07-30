@@ -1,7 +1,29 @@
 {
-  "fetchedAt": "2026-07-29T11:34:40.187Z",
+  "fetchedAt": "2026-07-30T11:21:43.680Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "T2 Trainspotting",
+      "year": 2017,
+      "link": "https://letterboxd.com/aselling/film/t2-trainspotting/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/qb/bg/ys/eg/ckYQm2LWP7fqg16HvJ3hYfAXnpT-0-600-0-900-crop.jpg?v=5cbd8dc67c",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-07-29",
+      "review": "An unique and engaging commentation of a cult classic. Lots of throwbacks to the 1997 version. Very unique cinematography. Not sure why this was needed but at least it wasn't a flop. \n\nAnd somehow, I have both 28 years later rented on Blu Ray right now, so it's a Danny Boyle weekend."
+    },
+    {
+      "title": "Trap",
+      "year": 2024,
+      "link": "https://letterboxd.com/aselling/film/trap-2024/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/9/3/1/1/6/4/931164-trap-0-600-0-900-crop.jpg?v=23298a998e",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-07-28",
+      "review": "This review may contain spoilers.\n\nLaughably bad. Not what I expected at all. No thrills or horror, so mislabeled. Cringe-worthy script and acting. Could've been executed so much better.\nNot Trip Fontaine being the main character too. \n14/100"
+    },
     {
       "title": "The Trial",
       "year": 1962,
@@ -496,28 +518,6 @@
       "rewatch": true,
       "watchedDate": "2026-06-17",
       "review": "sweet disposition will play at my funeral"
-    },
-    {
-      "title": "Lady Bird",
-      "year": 2017,
-      "link": "https://letterboxd.com/aselling/film/lady-bird/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/2/6/2/7/9/p/1odfZspnhFhLwkrweh543NuoneA-0-600-0-900-crop.jpg?v=ce084385cc",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-06-17",
-      "review": "i related too hard to this..."
-    },
-    {
-      "title": "Cranberry Nights",
-      "year": 2020,
-      "link": "https://letterboxd.com/aselling/film/cranberry-nights/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/6/2/8/1/5/9/628159-cranberry-nights-0-600-0-900-crop.jpg?v=3b50090681",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-06-17",
-      "review": "she has the most diverse facial expressions ever"
     },
     {
       "title": "Oppenheimer",
