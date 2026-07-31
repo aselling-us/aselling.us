@@ -12,7 +12,7 @@ One show I grew up watching (and still love to this day) is *How I Met Your Moth
 
 One of his most notable rules was simply
 
-> ==**New is always better**==
+> **New is always better**
 
 This was used to arguing the destruction of a famous landmark in the show, but he applies it when stating that the new *Star Wars* films were better than the old and that Guns and Roses' *Chinese Democracy* was better than _Appetite for Destruction_.
 
