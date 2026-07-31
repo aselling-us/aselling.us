@@ -677,4 +677,34 @@ const devJson = import.meta.env.DEV
     padding: 0.05em 0.2em;
     border-radius: 2px;
   }
+  .post-preview .prose blockquote {
+    position: relative;
+    margin: var(--space-3) 0;
+    padding: var(--space-2) var(--space-3);
+    border-left: 2px solid var(--color-gold);
+    background: var(--color-bg-inset);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+  .post-preview .prose blockquote::before {
+    content: '\201C';
+    position: absolute;
+    top: -0.1em;
+    left: var(--space-1);
+    font-family: var(--font-display);
+    font-style: normal;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--color-line-bright);
+  }
+  .post-preview .prose blockquote p {
+    margin: 0 0 var(--space-1);
+    padding-left: var(--space-2);
+  }
+  .post-preview .prose blockquote p:last-child {
+    margin-bottom: 0;
+  }
 </style>
