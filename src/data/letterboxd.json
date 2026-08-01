@@ -1,7 +1,29 @@
 {
-  "fetchedAt": "2026-07-30T11:21:43.680Z",
+  "fetchedAt": "2026-08-01T10:49:02.655Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Burn After Reading",
+      "year": 2008,
+      "link": "https://letterboxd.com/aselling/film/burn-after-reading/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/9/0/5/4/49054-burn-after-reading-0-600-0-900-crop.jpg?v=1a29d1c090",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-07-31",
+      "review": "was afraid of a CIA movie and was unsettled for the first 20 minutes, but quickly turned around. saw alot of Fargo in this. Incredibly funny, maybe one of Brad Pitts best. stole the show. I liked the references to Meet Joe Black, similar Pitt energy. Very intense soundtrack. Overall incredible experience in the Palm. Cheers to Mike for making the place what it is."
+    },
+    {
+      "title": "28 Years Later",
+      "year": 2025,
+      "link": "https://letterboxd.com/aselling/film/28-years-later/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/9/9/2/7/8/6/992786-28-years-later-0-600-0-900-crop.jpg?v=014e09c066",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-07-30",
+      "review": "i am genuinely concerned for Aaron Taylor-Johnsons irl kids. \n\n72/100"
+    },
     {
       "title": "T2 Trainspotting",
       "year": 2017,
@@ -496,28 +518,6 @@
       "rewatch": false,
       "watchedDate": "2026-06-19",
       "review": "wow. wasn't expecting to like this as much as I did. felt like a mystery being solved almost. Robert Pattinson is one tasty meal for sure (it's the hair). really liked the sequence of Zoe Kravitz with Pattinson in her ear. Gotham had hella world building in this for sure. Lighting was a big deal.\n\ndid not to be fucking 3 hrs tho my gosh"
-    },
-    {
-      "title": "Under the Skin",
-      "year": 2013,
-      "link": "https://letterboxd.com/aselling/film/under-the-skin-2013/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/8/0/1/9/8/80198-under-the-skin-0-600-0-900-crop.jpg?v=732bdd03b9",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-06-18",
-      "review": "Lynchian in plot and sound. Disturbing, but somewhat also humanizing. Surreal. Remind me of Blade Runner 2049's \"You look lonely, I can fix that\" plot armor. Very repetitive scenes though. Did not captivate me enough to fully finish."
-    },
-    {
-      "title": "(500) Days of Summer",
-      "year": 2009,
-      "link": "https://letterboxd.com/aselling/film/500-days-of-summer/7/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/9/3/5/0/p/eym4HnOMG54NKkBHZtNGlLSjuAg-0-600-0-900-crop.jpg?v=0563d2fed1",
-      "rating": null,
-      "liked": true,
-      "rewatch": true,
-      "watchedDate": "2026-06-17",
-      "review": "sweet disposition will play at my funeral"
     },
     {
       "title": "Oppenheimer",
