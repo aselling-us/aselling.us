@@ -28,6 +28,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { blogEditHandler, isLocalRequest, EMAIL_RE } from './dev-edit-blog.mjs';
+import { careerEditHandler } from './dev-edit-career.mjs';
 import { confirmationEmail } from './send-subscription-confirmations.mjs';
 import { createTransporter, logoAttachment, LOGO_CID } from './lib/mail-theme.mjs';
 import { WORKER_URL as DEFAULT_WORKER_URL } from '../src/lib/subscribe-worker.mjs';
@@ -47,6 +48,7 @@ export default function devAddPlace() {
     name: 'dev-add-place',
     configureServer(server) {
       server.middlewares.use('/__edit-blog', blogEditHandler());
+      server.middlewares.use('/__edit-career', careerEditHandler());
       server.middlewares.use('/__test-confirmation-email', (req, res) => {
         const reply = (code, payload) => {
           res.statusCode = code;

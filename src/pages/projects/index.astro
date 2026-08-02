@@ -53,6 +53,9 @@ const monthOf = (week: { date: string }[]) => week[0].date.slice(0, 7);
 
   {contributions && (
     <section>
+      {/* total mirrors exactly what's shown on the public GitHub profile —
+          see the comment above fetchContributionCalendar in fetch-media.mjs
+          for how private contributions factor into that number */}
       <h2 class="mono-label section-label">contributions / {contributions.total} in the last year</h2>
       <div class="graph-scroll">
         <div class="graph" style={`--weeks: ${weeks.length};`}>
@@ -128,6 +131,10 @@ const monthOf = (week: { date: string }[]) => week[0].date.slice(0, 7);
             <span class="mono-label repo-row">
               {repo.language && <span class="repo-lang">{repo.language}</span>}
               {repo.stars > 0 && <span>★ {repo.stars}</span>}
+              {/* commits is last-year commit count only, capped to the top 25
+                  repos by that count — see fetchContributionCalendar in
+                  fetch-media.mjs. Absent for older/PR-only contributions. */}
+              {repo.commits && <span>{repo.commits} commit{repo.commits === 1 ? '' : 's'} / last yr</span>}
               {repo.pushedAt && <span>pushed / {fmtDate(repo.pushedAt)}</span>}
             </span>
           </li>

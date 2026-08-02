@@ -149,6 +149,20 @@ async function fetchGithubRepos() {
 // CI); any authenticated token works since the data itself is public. When
 // no token is available (e.g. a contributor's local checkout), skip and let
 // the caller fall back to whatever's already committed.
+//
+// `totalContributions`/`contributionCount` reflect exactly what GitHub shows
+// on the public profile page for GITHUB_USER — nothing more. Whether that
+// includes private-repo activity is controlled entirely by that account's own
+// "Include private contributions on my profile" setting (Settings > Profile),
+// not by this token's scope: with the setting on, GitHub already folds private
+// counts into the public totals (while keeping which repos anonymized), so an
+// authenticated request sees the same numbers a logged-out visitor does.
+//
+// `commitContributionsByRepository` additionally breaks the total down by
+// repo (used to annotate the "contributed to" list below with a per-repo
+// count) — capped at the 25 repos with the most commits in the same 12-month
+// window as the calendar, and commits only (no PRs/issues/reviews), since
+// GraphQL has no field for a repo-scoped all-time contribution count.
 async function fetchContributionCalendar() {
   if (!process.env.GH_CONTRIB_TOKEN) {
     console.log('contribution calendar: GH_CONTRIB_TOKEN not set, skipping');
@@ -167,6 +181,10 @@ async function fetchContributionCalendar() {
               }
             }
           }
+          commitContributionsByRepository(maxRepositories: 25) {
+            repository { nameWithOwner }
+            contributions { totalCount }
+          }
         }
       }
     }`;
@@ -182,10 +200,15 @@ async function fetchContributionCalendar() {
   if (!res.ok) throw new Error(`${res.status} ${res.statusText} for GitHub contribution calendar`);
   const json = await res.json();
   if (json.errors) throw new Error(`GitHub GraphQL error: ${json.errors.map((e) => e.message).join('; ')}`);
-  const calendar = json.data.user.contributionsCollection.contributionCalendar;
+  const collection = json.data.user.contributionsCollection;
+  const calendar = collection.contributionCalendar;
+  const commitsByRepo = Object.fromEntries(
+    collection.commitContributionsByRepository.map((c) => [c.repository.nameWithOwner, c.contributions.totalCount])
+  );
   return {
     total: calendar.totalContributions,
     days: calendar.weeks.flatMap((w) => w.contributionDays).map((d) => ({ date: d.date, count: d.contributionCount })),
+    commitsByRepo,
   };
 }
 
@@ -516,8 +539,17 @@ const previousGithub = (() => {
     return null;
   }
 })();
-const contributions = fetchedCalendar ?? previousGithub?.contributions ?? null;
-const contributedRepos = fetchedContributedRepos ?? previousGithub?.contributedRepos ?? [];
+const contributions = fetchedCalendar
+  ? { total: fetchedCalendar.total, days: fetchedCalendar.days }
+  : (previousGithub?.contributions ?? null);
+// `commits` is last-year commit count only (see fetchContributionCalendar) —
+// not a full all-time contribution count, hence the more modest field name.
+const contributedRepos = fetchedContributedRepos
+  ? fetchedContributedRepos.map((r) => ({
+      ...r,
+      commits: fetchedCalendar?.commitsByRepo[`${r.owner}/${r.name}`] ?? null,
+    }))
+  : (previousGithub?.contributedRepos ?? []);
 
 function backfillPosters(entries, previousEntries) {
   const previousByLink = new Map((previousEntries ?? []).map((e) => [e.link, e.poster]));
