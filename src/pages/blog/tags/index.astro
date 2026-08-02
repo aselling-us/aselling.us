@@ -1,0 +1,79 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { renderInlineMarkdown } from '../../../lib/inline-markdown.mjs';
+import { collectTags } from '../../../lib/tags.mjs';
+
+// same draft rule as /blog: dev shows drafts (so they're editable there),
+// builds never do
+const posts = await getCollection('blog', ({ data }) => import.meta.env.DEV || data.draft !== true);
+
+// largest tag first — with a long tag list, count is a more useful default
+// ordering for browsing than alphabetical
+const tags = collectTags(posts);
+---
+<BaseLayout title="Tags" description="Every tag used across the writing archive, largest first.">
+  <span class="mono-label">writing / tags</span>
+  <div class="title-row">
+    <h1>Tags</h1>
+    <p class="lede">Every tag across <a href="/blog">the writing archive</a> — {tags.length} in total, largest first.</p>
+  </div>
+
+  {tags.length > 0 ? (
+    <ul class="tag-cloud" role="list">
+      {tags.map((tag) => (
+        <li>
+          <a href={`/blog/tags/${tag.slug}`} class="tag-cloud-link">
+            <span set:html={renderInlineMarkdown(tag.label)} />
+            <span class="mono-label tag-count">{tag.posts.length}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p style="color: var(--color-text-dim);">No tags yet.</p>
+  )}
+</BaseLayout>
+
+<style>
+  .title-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+  }
+  .lede { color: var(--color-text-dim); }
+
+  .tag-cloud {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding: 0;
+    margin: var(--space-4) 0 0;
+  }
+  .tag-cloud-link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-highlight-bright);
+    border: 1px solid var(--color-highlight-bright);
+    border-radius: 9999px;
+    padding: 0.3rem 0.9rem;
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .tag-cloud-link:hover {
+    background: var(--color-highlight-bright);
+    color: var(--color-bg);
+  }
+  .tag-count {
+    opacity: 0.6;
+  }
+  .tag-cloud-link:hover .tag-count {
+    opacity: 0.85;
+  }
+</style>

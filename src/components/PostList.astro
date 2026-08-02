@@ -1,0 +1,161 @@
+---
+// Shared post-list rendering for /blog (all posts) and /blog/tags/[tag]
+// (posts filtered to one tag) — kept as one component so the two don't
+// drift out of sync on markup or styling.
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { renderInlineMarkdown, stripMarkdown } from '../lib/inline-markdown.mjs';
+import { readingTimeLabel } from '../lib/reading-time.mjs';
+import { tagSlug } from '../lib/tags.mjs';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+  // draft badge + edit button are dev-only, and the editor dialog/script
+  // that makes the edit button do anything lives on /blog itself — leave
+  // this off anywhere else that renders a PostList
+  showDevControls?: boolean;
+}
+
+const { posts, showDevControls = false } = Astro.props;
+---
+
+<ul class="post-list">
+  {posts.map((post) => (
+    <li data-tags={JSON.stringify((post.data.tags ?? []).map((t) => t.toLowerCase()))}>
+      <div class="post-main">
+        <a href={`/blog/${post.id}`} set:html={renderInlineMarkdown(post.data.title)} />
+        {showDevControls && post.data.draft && <span class="draft-badge mono-label">draft</span>}
+        {showDevControls && (
+          <button class="post-edit dev-btn mono-label" data-id={post.id} type="button">edit</button>
+        )}
+        <span class="mono-label post-date">
+          {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+          {' · '}
+          {readingTimeLabel(post.body)}
+        </span>
+        {post.data.description && <p class="post-desc" set:html={renderInlineMarkdown(post.data.description)} />}
+        {post.data.tags && post.data.tags.length > 0 && (
+          <ul class="tag-list">
+            {post.data.tags.slice(0, 3).map((tag) => (
+              <li class="tag"><a href={`/blog/tags/${tagSlug(tag)}`} set:html={renderInlineMarkdown(tag)} /></li>
+            ))}
+            {post.data.tags.length > 3 && (
+              <li class="tag tag-more" title={post.data.tags.slice(3).map(stripMarkdown).join(', ')}>+{post.data.tags.length - 3}</li>
+            )}
+          </ul>
+        )}
+      </div>
+      {post.data.cover && (
+        <figure class="post-cover">
+          <Image src={post.data.cover} alt={post.data.coverCaption ? stripMarkdown(post.data.coverCaption) : `Cover art for ${stripMarkdown(post.data.title)}`} width={560} />
+          {post.data.coverCaption && <figcaption class="mono-label" set:html={renderInlineMarkdown(post.data.coverCaption)} />}
+        </figure>
+      )}
+    </li>
+  ))}
+</ul>
+
+<style>
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+  }
+  .post-list > li {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--color-hairline);
+  }
+  .post-main { flex: 1; min-width: 0; }
+
+  .post-cover {
+    flex-shrink: 0;
+    width: 240px;
+    margin: 0;
+  }
+  .post-cover img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+    border: 1px solid var(--color-hairline);
+  }
+  .post-cover figcaption {
+    margin-top: 0.35rem;
+    text-transform: none;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 640px) {
+    .post-list > li { flex-direction: column; }
+    .post-cover { width: 100%; }
+    .post-cover img { height: 180px; }
+  }
+  .post-list a {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--color-accent-bright);
+  }
+  .post-list a:hover { color: var(--color-highlight-bright); }
+  .post-date { display: block; margin-top: 0.3rem; }
+  .post-desc { color: var(--color-text-dim); margin-top: 0.4rem; }
+
+  .tag-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    padding: 0;
+    margin: 0.5rem 0 0;
+  }
+  .tag a {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-highlight-bright);
+    border: 1px solid var(--color-highlight-bright);
+    border-radius: 9999px;
+    padding: 0.2rem 0.75rem;
+    line-height: 1;
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .tag a:hover {
+    background: var(--color-highlight-bright);
+    color: var(--color-bg);
+  }
+  .tag-more {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-highlight-bright);
+    border: 1px solid var(--color-highlight-bright);
+    border-radius: 9999px;
+    padding: 0.2rem 0.75rem;
+    line-height: 1;
+    opacity: 0.5;
+    cursor: help;
+  }
+  .tag-more:hover {
+    background: var(--color-highlight-bright);
+    color: var(--color-bg);
+  }
+
+  .draft-badge {
+    color: var(--color-highlight-bright);
+    border: 1px dashed var(--color-highlight-bright);
+    padding: 0.1rem 0.4rem;
+    margin-left: 0.5rem;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .draft-badge:hover {
+    background: var(--color-highlight-bright);
+    color: var(--color-bg);
+  }
+</style>

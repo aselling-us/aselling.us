@@ -5,6 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import SubscribeForm from '../../components/SubscribeForm.astro';
 import { renderInlineMarkdown, stripMarkdown } from '../../lib/inline-markdown.mjs';
 import { readingTimeLabel } from '../../lib/reading-time.mjs';
+import { tagSlug } from '../../lib/tags.mjs';
 
 // Tells Astro which pages to generate at build time — one per post.
 export async function getStaticPaths() {
@@ -29,7 +30,9 @@ const { Content } = await render(post);
     {post.data.tags && post.data.tags.length > 0 && (
       <ul class="tag-list">
         {post.data.tags.map((tag) => (
-          <li class="tag mono-label" set:html={renderInlineMarkdown(tag)} />
+          <li class="tag mono-label">
+            <a href={`/blog/tags/${tagSlug(tag)}`} set:html={renderInlineMarkdown(tag)} />
+          </li>
         ))}
       </ul>
     )}
@@ -134,10 +137,17 @@ const { Content } = await render(post);
     padding: 0;
     margin: 0.8rem 0 0;
   }
-  .tag {
+  .tag a {
+    display: inline-block;
     color: var(--color-accent-bright);
     border: 1px solid var(--color-hairline-bright);
     border-radius: 3px;
     padding: 0.15rem 0.5rem;
+    text-decoration: none;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .tag a:hover {
+    color: var(--color-highlight-bright);
+    border-color: var(--color-highlight);
   }
 </style>
