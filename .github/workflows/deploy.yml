@@ -32,6 +32,17 @@ jobs:
         with:
           node-version: 22
       - run: npm ci
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Refresh media snapshots
+        # Best-effort: a flaky Goodreads/Letterboxd/GitHub fetch shouldn't
+        # block a real code deploy — on failure this just leaves the
+        # already-checked-out src/data/*.json (committed by refresh-media.yml)
+        # in place, same as a local build would use.
+        continue-on-error: true
+        env:
+          GH_CONTRIB_TOKEN: ${{ secrets.GH_CONTRIB_TOKEN }}
+        run: npm run fetch:media
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:

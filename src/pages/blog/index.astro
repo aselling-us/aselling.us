@@ -166,6 +166,7 @@ const devJson = import.meta.env.DEV
               <button type="submit">save post</button>
               <button type="button" id="post-preview-refresh">refresh preview</button>
               <button type="button" id="post-cancel">cancel</button>
+              ${p?.draft ? '<button type="button" id="post-delete-draft" class="danger-btn">delete draft</button>' : ''}
             </div>
             <div class="row test-email-row">
               <input type="email" id="test-email-address" placeholder="dummy@address.com" title="Address to send a real test copy of the notification email to" />
@@ -184,6 +185,35 @@ const devJson = import.meta.env.DEV
       const previewBody = document.getElementById('post-preview-body') as HTMLDivElement;
 
       document.getElementById('post-cancel')?.addEventListener('click', () => dialog.close());
+
+      document.getElementById('post-delete-draft')?.addEventListener('click', async () => {
+        if (!p) return;
+        const ok = confirm(`Permanently delete the draft "${p.title}"?\n\nThis deletes src/content/blog/${p.id}.md (and any cover/inline images) and can't be undone.`);
+        if (!ok) return;
+
+        const button = document.getElementById('post-delete-draft') as HTMLButtonElement;
+        button.disabled = true;
+        button.textContent = 'deleting…';
+        try {
+          const res = await fetch('/__edit-blog/delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ slug: p.id }),
+          });
+          if (!res.ok) {
+            const { error } = await res.json().catch(() => ({ error: res.statusText }));
+            alert(`Could not delete draft: ${error}`);
+            button.disabled = false;
+            button.textContent = 'delete draft';
+            return;
+          }
+          location.reload();
+        } catch {
+          alert('Could not delete draft: network error');
+          button.disabled = false;
+          button.textContent = 'delete draft';
+        }
+      });
 
       // the /preview endpoint runs a bare markdown processor with no asset
       // pipeline, so it can't resolve the relative paths inline images are
@@ -517,6 +547,27 @@ const devJson = import.meta.env.DEV
   }
   .post-editor #post-send-test-email:disabled { opacity: 0.5; cursor: default; }
   .post-editor .test-email-row input[type='email'] { flex: 1; width: auto; }
+
+  /* deliberately distinct from cancel/refresh/send-test above: colored (not
+     dim) at rest and pushed to the far end of the row, so it reads as
+     destructive and isn't next to the buttons someone actually wants */
+  .post-editor .danger-btn {
+    background: none;
+    border: 1px solid var(--color-highlight-bright);
+    color: var(--color-highlight-bright);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.45rem 0.7rem;
+    cursor: pointer;
+    margin-left: auto;
+  }
+  .post-editor .danger-btn:hover {
+    background: var(--color-highlight-bright);
+    color: var(--color-bg);
+  }
+  .post-editor .danger-btn:disabled { opacity: 0.5; cursor: default; }
 
   /* rendered post-editor preview — sits beside the form as its own panel,
      mirroring the real /blog/[slug] typography closely enough to catch

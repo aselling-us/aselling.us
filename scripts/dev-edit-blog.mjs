@@ -4,6 +4,11 @@
 //   with slug: rewrites the managed frontmatter fields of an existing post,
 //   leaving anything else in the frontmatter untouched, and replaces the body
 //   without slug: creates src/content/blog/<slug-from-title>.md
+// POST /__edit-blog/delete { slug }
+//   deletes a draft post's <slug>.md plus its cover/inline images — refuses
+//   (400) if the post isn't `draft: true`, so a published post (already
+//   possibly emailed to subscribers / linked elsewhere) can't be removed
+//   this way; there's no undo, the UI is expected to confirm() first
 // POST /__edit-blog/image?slug=<slug>&name=<filename>  (raw image body)
 //   saves the post's cover photo as <slug>-cover.<ext> next to the .md file
 //   and sets its `cover:` frontmatter line
@@ -268,6 +273,51 @@ export function blogEditHandler({ dir = path.resolve('src/content/blog') } = {})
         } catch (err) {
           return reply(500, { error: err instanceof Error ? err.message : 'send failed' });
         }
+        reply(200, { ok: true });
+      });
+      return;
+    }
+
+    if (url.pathname === '/delete') {
+      let raw = '';
+      req.on('data', (chunk) => (raw += chunk));
+      req.on('end', () => {
+        let p;
+        try {
+          p = JSON.parse(raw);
+        } catch {
+          return reply(400, { error: 'invalid JSON' });
+        }
+        const slug = slugify(String(p.slug ?? ''));
+        const file = path.join(dir, `${slug}.md`);
+        if (!fs.existsSync(file)) return reply(400, { error: `no post file for slug "${slug}"` });
+
+        const m = fs.readFileSync(file, 'utf8').match(FM_RE);
+        const isDraft = m ? /^draft:\s*true\s*$/m.test(m[1]) : false;
+        if (!isDraft) return reply(400, { error: 'only draft posts can be deleted this way' });
+
+        // other posts' slugs, so cleaning up this slug's cover/inline images
+        // by filename prefix can't also sweep up another post's images when
+        // one slug happens to prefix another (e.g. deleting "test" must not
+        // touch "test-post-cover.jpg", which belongs to "test-post")
+        const otherSlugs = fs
+          .readdirSync(dir)
+          .filter((f) => f.endsWith('.md') && f !== `${slug}.md`)
+          .map((f) => f.slice(0, -3));
+
+        fs.unlinkSync(file);
+
+        // image files only — IMAGE_EXTS keeps this sweep from ever touching
+        // another post's .md (or anything else) even if its name happens to
+        // start with this slug plus a hyphen
+        const assetPrefix = `${slug}-`;
+        for (const name of fs.readdirSync(dir)) {
+          if (!name.startsWith(assetPrefix)) continue;
+          if (!IMAGE_EXTS.has(path.extname(name).toLowerCase())) continue;
+          if (otherSlugs.some((other) => other.length > slug.length && name.startsWith(`${other}-`))) continue;
+          fs.unlinkSync(path.join(dir, name));
+        }
+
         reply(200, { ok: true });
       });
       return;
