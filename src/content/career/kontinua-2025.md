@@ -2,12 +2,13 @@
 # TEMPLATE — replace this file's contents with your real experience, or
 # copy it to a new file (e.g. acme-2024.md) for each role and delete this one.
 # startDate/endDate are "YYYY-MM"; omit endDate for a current role.
-role: Content and Quiz Developer
-company: Kontinua
-companyUrl: https://kontinua.org/
-location: Remote
-startDate: '2025-06'
-tags: [Education, LaTeX, Python]
+role: "Content and Quiz Developer"
+company: "Kontinua"
+companyUrl: "https://kontinua.org/"
+location: "Remote"
+startDate: "2025-06"
+tags: ["Education","LaTeX","Python"]
+logo: ./kontinua-2025-logo.png
 ---
 
 Working one—on—one with MIT professor Aaron Hillegass to create an open and accessible STEM curriculum with accompanying resources for home-schools and under-privileged students.
@@ -24,4 +25,3 @@ quiz PDFs, and support deployment of [public workbook PDFs](https://kontinuafoun
     - Linear Algebra Sequence
     - Bitmap and Hexadecimal Chapters
     - Drones, Quadcopters, and Helicopters
-    

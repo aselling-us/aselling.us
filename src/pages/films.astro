@@ -230,7 +230,7 @@ const stars = (r: number) => "★".repeat(Math.floor(r)) + (r % 1 ? "½" : "");
     justify-content: space-between;
     align-items: baseline;
     gap: var(--space-2);
-    color: var(--color-gold);
+    color: var(--color-gold-bright);
     border-bottom: 1px solid var(--color-line);
     padding-bottom: var(--space-1);
     margin: 0 0 var(--space-3);
@@ -341,16 +341,21 @@ const stars = (r: number) => "★".repeat(Math.floor(r)) + (r % 1 ? "½" : "");
     flex-wrap: wrap;
   }
   .stars {
-    color: var(--color-gold);
+    color: var(--color-gold-bright);
     letter-spacing: 0.1em;
   }
   .liked {
     color: var(--color-gold-bright);
   }
   .rewatch {
-    color: var(--color-gold);
-    border: 1px solid var(--color-gold);
+    color: var(--color-gold-bright);
+    border: 1px solid var(--color-gold-bright);
     padding: 0.05rem 0.35rem;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .rewatch:hover {
+    background: var(--color-gold-bright);
+    color: var(--color-bg);
   }
 
   .data-footer {

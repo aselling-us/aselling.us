@@ -383,9 +383,12 @@ async function fetchWatchlist(page) {
 // from the film's default poster embedded in the RSS feed. The diary
 // listing page renders each row keyed by data-viewing-id — the same numeric
 // id as the suffix on each RSS item's guid (see parseFilm's `viewingId`) —
-// so rows can be matched back to films even across rewatches. Posters lazy-
-// load on scroll, so a tall viewport is used instead of scrolling to force
-// every row to resolve at once.
+// so rows can be matched back to films even across rewatches. Poster <img>s
+// are marked loading="lazy" and Chromium's lazy-load heuristic doesn't
+// reliably resolve every row within a bounded wait just from a tall
+// viewport (observed leaving even the first/most-recent row as the
+// empty-poster placeholder) — strip the attribute so every image fetches
+// eagerly instead of waiting on a real scroll/intersection trigger.
 async function fetchDiaryPosters(page) {
   const posters = new Map();
   for (let pageNum = 1; pageNum <= 3; pageNum++) {
@@ -394,6 +397,7 @@ async function fetchDiaryPosters(page) {
         ? `https://letterboxd.com/${LETTERBOXD_USER}/films/diary/`
         : `https://letterboxd.com/${LETTERBOXD_USER}/films/diary/page/${pageNum}/`;
     await page.goto(url, { waitUntil: 'domcontentloaded' });
+    await page.$$eval('.diary-entry-row .poster img', (imgs) => imgs.forEach((img) => img.removeAttribute('loading')));
     await page
       .waitForFunction(() => !document.querySelector('.diary-entry-row .poster img[src*="empty-poster"]'), undefined, {
         timeout: 20000,
@@ -440,7 +444,7 @@ async function fetchFavoritesAndWatchlist() {
     // rather than failing the whole media fetch over it.
     let diaryPosters = new Map();
     try {
-      const diaryContext = await browser.newContext({ ...contextOptions, viewport: { width: 1280, height: 20000 } });
+      const diaryContext = await browser.newContext(contextOptions);
       diaryPosters = await fetchDiaryPosters(await diaryContext.newPage());
       await diaryContext.close();
     } catch (err) {

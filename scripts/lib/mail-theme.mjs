@@ -86,7 +86,7 @@ export const EMAIL_THEME = {
   card: '#1a1312',
   line: '#7e6a44',
   gold: '#8a170f',
-  goldBright: '#d5271a',
+  goldBright: '#e74438',
   blueBright: '#45b2ba',
   text: '#ece0dd',
   textDim: '#a18b91',

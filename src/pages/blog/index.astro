@@ -69,6 +69,7 @@ const devJson = import.meta.env.DEV
     </ul>
   )}
 
+  <h2 class="mono-label section-label">posts / {String(posts.length).padStart(2, '0')}</h2>
   <ul class="post-list">
     {posts.map((post) => (
       <li data-tags={JSON.stringify((post.data.tags ?? []).map((t) => t.toLowerCase()))}>
@@ -404,6 +405,16 @@ const devJson = import.meta.env.DEV
     gap: var(--space-3);
   }
 
+  .section-label {
+    color: var(--color-gold-bright);
+    border-bottom: 1px solid var(--color-line);
+    padding-bottom: var(--space-1);
+    margin: var(--space-4) 0 var(--space-3);
+    font-size: 0.7rem;
+    font-weight: 400;
+    display: block;
+  }
+
   .tag-filter {
     list-style: none;
     display: flex;
@@ -418,23 +429,24 @@ const devJson = import.meta.env.DEV
     letter-spacing: 0.06em;
     text-transform: uppercase;
     background: none;
-    color: var(--color-gold);
-    border: 1px solid var(--color-gold);
+    color: var(--color-gold-bright);
+    border: 1px solid var(--color-gold-bright);
     border-radius: 9999px;
     padding: 0.2rem 0.75rem;
     line-height: 1.4;
     cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
   }
-  .tag-filter-btn:hover { color: var(--color-gold-bright); border-color: var(--color-gold-bright); }
+  .tag-filter-btn:hover,
   .tag-filter-btn.is-active {
-    background: var(--color-gold);
+    background: var(--color-gold-bright);
     color: var(--color-bg);
   }
 
   .post-list {
     list-style: none;
     padding: 0;
-    margin-top: var(--space-4);
+    margin-top: 0;
   }
   .post-list > li {
     display: flex;
@@ -491,24 +503,38 @@ const devJson = import.meta.env.DEV
     font-size: 0.65rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--color-gold);
-    border: 1px solid var(--color-gold);
+    color: var(--color-gold-bright);
+    border: 1px solid var(--color-gold-bright);
     border-radius: 9999px;
     padding: 0.2rem 0.75rem;
     line-height: 1;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .tag:hover {
+    background: var(--color-gold-bright);
+    color: var(--color-bg);
   }
   .tag-more {
-    color: var(--color-gold);
-    border-color: var(--color-gold);
+    color: var(--color-gold-bright);
+    border-color: var(--color-gold-bright);
     opacity: 0.5;
     cursor: help;
+  }
+  .tag-more:hover {
+    background: var(--color-gold-bright);
+    color: var(--color-bg);
   }
 
   .draft-badge {
     color: var(--color-gold-bright);
-    border: 1px dashed var(--color-gold);
+    border: 1px dashed var(--color-gold-bright);
     padding: 0.1rem 0.4rem;
     margin-left: 0.5rem;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .draft-badge:hover {
+    background: var(--color-gold-bright);
+    color: var(--color-bg);
   }
 </style>
 
@@ -672,7 +698,7 @@ const devJson = import.meta.env.DEV
     letter-spacing: 0.04em;
   }
   .post-preview .prose mark {
-    background: var(--color-gold);
+    background: var(--color-gold-bright);
     color: var(--color-bg);
     padding: 0.05em 0.2em;
     border-radius: 2px;
