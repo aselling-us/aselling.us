@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-08-02T00:25:39.735Z",
+  "fetchedAt": "2026-08-02T04:41:01.968Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Legally Blonde",
+      "year": 2001,
+      "link": "https://letterboxd.com/aselling/film/legally-blonde/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/7/5/8/6/47586-legally-blonde-0-600-0-900-crop.jpg?v=683a318854",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-01",
+      "review": "watched this and then washed it down with a tall glass of you look pretty sad for a girl so in love.\n\n64/100"
+    },
     {
       "title": "Burn After Reading",
       "year": 2008,
@@ -507,17 +518,6 @@
       "rewatch": false,
       "watchedDate": "2026-06-20",
       "review": "This review may contain spoilers.\n\ndare I say a sound masterpiece. emotionally touching, heart wrenching, a perfect film. would give it 5 stars if I were rating. when Niki jumped off the hat stage - so hot. And that sequence of the safe during Ruthie's performance - I did not breathe. Definitely a comfort film even with the crime aspect. I really like the fact that his hearing issue was not the first thing revealed. And we got a lot of background info before he actually started safe cracking."
-    },
-    {
-      "title": "The Batman",
-      "year": 2022,
-      "link": "https://letterboxd.com/aselling/film/the-batman/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/4/8/9/1/4/p/seyWFgGInaLqW7nOZvu0ZC95rtx-0-600-0-900-crop.jpg?v=a6e77c81b2",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-06-19",
-      "review": "wow. wasn't expecting to like this as much as I did. felt like a mystery being solved almost. Robert Pattinson is one tasty meal for sure (it's the hair). really liked the sequence of Zoe Kravitz with Pattinson in her ear. Gotham had hella world building in this for sure. Lighting was a big deal.\n\ndid not to be fucking 3 hrs tho my gosh"
     },
     {
       "title": "Oppenheimer",
