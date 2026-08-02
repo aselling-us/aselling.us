@@ -266,9 +266,12 @@ async function fetchContributedRepos() {
   if (!res.ok) throw new Error(`${res.status} ${res.statusText} for GitHub contributed repos`);
   const json = await res.json();
   if (json.errors) throw new Error(`GitHub GraphQL error: ${json.errors.map((e) => e.message).join('; ')}`);
+  const nodes = json.data.user.repositoriesContributedTo.nodes;
   // forks and archived repos are noise here too (mirrors fetchGithubRepos);
-  // private repos are excluded outright — see the note above
-  return json.data.user.repositoriesContributedTo.nodes
+  // private repos are excluded outright — see the note above. Their count
+  // (not name/description/link/etc.) is safe to show on the public site, so
+  // it's surfaced separately as privateCount rather than silently dropped.
+  const repos = nodes
     .filter((r) => !r.isFork && !r.isArchived && !r.isPrivate)
     .map((r) => ({
       name: r.name,
@@ -280,6 +283,8 @@ async function fetchContributedRepos() {
       stars: r.stargazerCount,
       pushedAt: toIsoDate(r.pushedAt),
     }));
+  const privateCount = nodes.filter((r) => r.isPrivate && !r.isFork && !r.isArchived).length;
+  return { repos, privateCount };
 }
 
 // --- Letterboxd --------------------------------------------------------
@@ -549,11 +554,16 @@ const contributions = fetchedCalendar
 // `commits` is last-year commit count only (see fetchContributionCalendar) —
 // not a full all-time contribution count, hence the more modest field name.
 const contributedRepos = fetchedContributedRepos
-  ? fetchedContributedRepos.map((r) => ({
+  ? fetchedContributedRepos.repos.map((r) => ({
       ...r,
       commits: fetchedCalendar?.commitsByRepo[`${r.owner}/${r.name}`] ?? null,
     }))
   : (previousGithub?.contributedRepos ?? []);
+// count only (no name/description/link) — safe to show publicly even though
+// the repos themselves are excluded from contributedRepos above
+const contributedPrivateCount = fetchedContributedRepos
+  ? fetchedContributedRepos.privateCount
+  : (previousGithub?.contributedPrivateCount ?? 0);
 
 function backfillPosters(entries, previousEntries) {
   const previousByLink = new Map((previousEntries ?? []).map((e) => [e.link, e.poster]));
@@ -568,7 +578,14 @@ writeSnapshot('letterboxd.json', {
   favorites: backfillPosters(favorites, previousLetterboxd?.favorites),
   watchlist: backfillPosters(watchlist, previousLetterboxd?.watchlist),
 });
-writeSnapshot('github.json', { fetchedAt, username: GITHUB_USER, repos, contributions, contributedRepos });
+writeSnapshot('github.json', {
+  fetchedAt,
+  username: GITHUB_USER,
+  repos,
+  contributions,
+  contributedRepos,
+  contributedPrivateCount,
+});
 console.log(
-  `${read.length} read, ${currentlyReading.length} currently reading, ${toRead.length} to read, ${films.length} films, ${favorites.length} favorites, ${watchlist.length} watchlist, ${repos.length} repos, ${contributedRepos.length} contributed repos`
+  `${read.length} read, ${currentlyReading.length} currently reading, ${toRead.length} to read, ${films.length} films, ${favorites.length} favorites, ${watchlist.length} watchlist, ${repos.length} repos, ${contributedRepos.length} contributed repos, ${contributedPrivateCount} private`
 );

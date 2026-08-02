@@ -3,9 +3,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import github from '../../data/github.json';
 
 // snapshot written by `npm run fetch:media`; fetchedAt only changes when the repo list does
-// contributedRepos may be absent on an older snapshot written before this field existed
+// contributedRepos/contributedPrivateCount may be absent on an older snapshot written before those fields existed
 const { repos, contributions } = github;
 const contributedRepos = github.contributedRepos ?? [];
+const contributedPrivateCount = github.contributedPrivateCount ?? 0;
 const profileUrl = `https://github.com/${github.username}`;
 const updated = github.fetchedAt.slice(0, 16).replace('T', ' · ') + ' utc';
 
@@ -104,7 +105,7 @@ const monthOf = (week: { date: string }[]) => week[0].date.slice(0, 7);
           {repo.description && <p class="repo-desc">{repo.description}</p>}
           <span class="mono-label repo-row">
             {repo.language && <span class="repo-lang">{repo.language}</span>}
-            {repo.stars > 0 && <span>★ {repo.stars}</span>}
+            {repo.stars > 0 && <span class="repo-stars">★ {repo.stars}</span>}
             {repo.pushedAt && <span>pushed / {fmtDate(repo.pushedAt)}</span>}
           </span>
         </li>
@@ -112,34 +113,41 @@ const monthOf = (week: { date: string }[]) => week[0].date.slice(0, 7);
     </ul>
   </section>
 
-  {contributedRepos.length > 0 && (
+  {(contributedRepos.length > 0 || contributedPrivateCount > 0) && (
     <section>
       <h2 class="mono-label section-label">contributed to / {String(contributedRepos.length).padStart(2, '0')}</h2>
-      <ul class="repo-list">
-        {contributedRepos.map((repo) => (
-          <li class="repo">
-            <div class="repo-head">
-              <a class="repo-name" href={repo.link} target="_blank" rel="noopener noreferrer">{repo.owner}/{repo.name}</a>
-              <span class="repo-head-right">
-                {repo.homepage && (
-                  <a class="repo-live mono-label" href={repo.homepage} target="_blank" rel="noopener noreferrer">live →</a>
-                )}
-                <span class="mono-label contributor-badge">contributor</span>
+      {contributedPrivateCount > 0 && (
+        <p class="private-note mono-label">
+          + {contributedPrivateCount} private repo{contributedPrivateCount === 1 ? '' : 's'} contributed to
+        </p>
+      )}
+      {contributedRepos.length > 0 && (
+        <ul class="repo-list">
+          {contributedRepos.map((repo) => (
+            <li class="repo">
+              <div class="repo-head">
+                <a class="repo-name" href={repo.link} target="_blank" rel="noopener noreferrer">{repo.owner}/{repo.name}</a>
+                <span class="repo-head-right">
+                  {repo.homepage && (
+                    <a class="repo-live mono-label" href={repo.homepage} target="_blank" rel="noopener noreferrer">live →</a>
+                  )}
+                  <span class="mono-label contributor-badge">contributor</span>
+                </span>
+              </div>
+              {repo.description && <p class="repo-desc">{repo.description}</p>}
+              <span class="mono-label repo-row">
+                {repo.language && <span class="repo-lang">{repo.language}</span>}
+                {repo.stars > 0 && <span class="repo-stars">★ {repo.stars} /</span>}
+                {/* commits is last-year commit count only, capped to the top 25
+                    repos by that count — see fetchContributionCalendar in
+                    fetch-media.mjs. Absent for older/PR-only contributions. */}
+                {repo.commits && <span>{repo.commits} commit{repo.commits === 1 ? '' : 's'}</span>}
+                {repo.pushedAt && <span>pushed / {fmtDate(repo.pushedAt)}</span>}
               </span>
-            </div>
-            {repo.description && <p class="repo-desc">{repo.description}</p>}
-            <span class="mono-label repo-row">
-              {repo.language && <span class="repo-lang">{repo.language}</span>}
-              {repo.stars > 0 && <span>★ {repo.stars}</span>}
-              {/* commits is last-year commit count only, capped to the top 25
-                  repos by that count — see fetchContributionCalendar in
-                  fetch-media.mjs. Absent for older/PR-only contributions. */}
-              {repo.commits && <span>{repo.commits} commit{repo.commits === 1 ? '' : 's'} / last yr</span>}
-              {repo.pushedAt && <span>pushed / {fmtDate(repo.pushedAt)}</span>}
-            </span>
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      )}
     </section>
   )}
 
@@ -151,18 +159,23 @@ const monthOf = (week: { date: string }[]) => week[0].date.slice(0, 7);
 
 <style>
   .lede { color: var(--color-text-dim); }
-  .lede a { color: var(--color-blue-bright); }
-  .lede a:hover { color: var(--color-gold-bright); }
+  .lede a { color: var(--color-accent-bright); }
+  .lede a:hover { color: var(--color-highlight-bright); }
 
   section { margin-top: var(--space-4); }
 
   .section-label {
-    color: var(--color-gold-bright);
-    border-bottom: 1px solid var(--color-line);
+    color: var(--color-highlight-bright);
+    border-bottom: 1px solid var(--color-hairline);
     padding-bottom: var(--space-1);
     margin: 0 0 var(--space-3);
     font-size: 0.7rem;
     font-weight: 400;
+  }
+
+  .private-note {
+    color: var(--color-text-faint);
+    margin: -0.5rem 0 var(--space-3);
   }
 
   .graph-scroll {
@@ -209,13 +222,13 @@ const monthOf = (week: { date: string }[]) => week[0].date.slice(0, 7);
     width: var(--cell);
     height: var(--cell);
     display: inline-block;
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-hairline);
   }
   .level-0 { background: var(--color-bg-inset); }
-  .level-1 { background: color-mix(in srgb, var(--color-gold) 25%, var(--color-bg-inset)); border-color: transparent; }
-  .level-2 { background: color-mix(in srgb, var(--color-gold) 50%, var(--color-bg-inset)); border-color: transparent; }
-  .level-3 { background: color-mix(in srgb, var(--color-gold) 80%, var(--color-bg-inset)); border-color: transparent; }
-  .level-4 { background: var(--color-gold-bright); border-color: transparent; }
+  .level-1 { background: color-mix(in srgb, var(--color-highlight) 25%, var(--color-bg-inset)); border-color: transparent; }
+  .level-2 { background: color-mix(in srgb, var(--color-highlight) 50%, var(--color-bg-inset)); border-color: transparent; }
+  .level-3 { background: color-mix(in srgb, var(--color-highlight) 80%, var(--color-bg-inset)); border-color: transparent; }
+  .level-4 { background: var(--color-highlight-bright); border-color: transparent; }
 
   .graph-legend {
     display: flex;
@@ -238,11 +251,11 @@ const monthOf = (week: { date: string }[]) => week[0].date.slice(0, 7);
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-hairline);
     background: var(--color-bg-elevated);
     padding: var(--space-2);
   }
-  .repo:hover { border-color: var(--color-gold); }
+  .repo:hover { border-color: var(--color-highlight); }
 
   .repo-head {
     display: flex;
@@ -258,9 +271,9 @@ const monthOf = (week: { date: string }[]) => week[0].date.slice(0, 7);
     min-width: 0;
     overflow-wrap: anywhere;
   }
-  .repo-name:hover { color: var(--color-gold-bright); }
-  .repo-live { color: var(--color-blue-bright); flex-shrink: 0; }
-  .repo-live:hover { color: var(--color-gold-bright); }
+  .repo-name:hover { color: var(--color-highlight-bright); }
+  .repo-live { color: var(--color-accent-bright); flex-shrink: 0; }
+  .repo-live:hover { color: var(--color-highlight-bright); }
 
   .repo-head-right {
     display: flex;
@@ -269,8 +282,8 @@ const monthOf = (week: { date: string }[]) => week[0].date.slice(0, 7);
     flex-shrink: 0;
   }
   .contributor-badge {
-    color: var(--color-blue-bright);
-    border: 1px solid var(--color-blue-bright);
+    color: var(--color-accent-bright);
+    border: 1px solid var(--color-accent-bright);
     padding: 0.1rem 0.4rem;
   }
 
@@ -288,12 +301,13 @@ const monthOf = (week: { date: string }[]) => week[0].date.slice(0, 7);
     flex-wrap: wrap;
     color: var(--color-text-faint);
   }
-  .repo-lang { color: var(--color-blue-bright); }
+  .repo-lang { color: var(--color-accent-bright); }
+  .repo-stars { color: var(--color-hairline); }
 
   .data-footer {
     margin-top: var(--space-5);
     padding-top: var(--space-2);
-    border-top: 1px solid var(--color-line);
+    border-top: 1px solid var(--color-hairline);
     display: flex;
     justify-content: space-between;
     gap: var(--space-2);
