@@ -330,8 +330,8 @@ const devJson = import.meta.env.DEV
     color: var(--color-text-dim);
   }
   .section-label {
-    color: var(--color-gold-bright);
-    border-bottom: 1px solid var(--color-line);
+    color: var(--color-highlight-bright);
+    border-bottom: 1px solid var(--color-hairline);
     padding-bottom: var(--space-1);
     margin: 0 0 var(--space-3);
     font-size: 0.7rem;
@@ -347,7 +347,7 @@ const devJson = import.meta.env.DEV
     justify-content: space-between;
     gap: var(--space-3);
     flex-wrap: wrap;
-    border-bottom: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-hairline);
     padding-bottom: var(--space-1);
     margin: 0 0 var(--space-3);
   }
@@ -378,7 +378,7 @@ const devJson = import.meta.env.DEV
     flex: 0 0 410px;
   }
   .resume-window {
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-hairline);
     background: var(--color-bg-inset);
     padding: 6px;
     aspect-ratio: 8.5 / 11;
@@ -393,10 +393,10 @@ const devJson = import.meta.env.DEV
   .resume-link {
     display: inline-block;
     margin-top: var(--space-1);
-    color: var(--color-blue-bright);
+    color: var(--color-accent-bright);
   }
   .resume-link:hover {
-    color: var(--color-gold-bright);
+    color: var(--color-highlight-bright);
   }
 
   .about-panel {
@@ -419,14 +419,14 @@ const devJson = import.meta.env.DEV
     gap: var(--space-3);
     align-items: flex-start;
     padding: 1.75rem 0;
-    border-bottom: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-hairline);
   }
   .history-logo {
     flex-shrink: 0;
     width: 56px;
     height: 56px;
     object-fit: cover;
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-hairline);
     background: #fff;
   }
   .history-main {
@@ -447,11 +447,11 @@ const devJson = import.meta.env.DEV
     margin: 0;
   }
   .history-company {
-    color: var(--color-blue-bright);
+    color: var(--color-accent-bright);
     font-size: 0.95rem;
   }
   .history-company a:hover {
-    color: var(--color-gold-bright);
+    color: var(--color-highlight-bright);
   }
   .history-meta {
     display: flex;
@@ -477,10 +477,10 @@ const devJson = import.meta.env.DEV
     margin: 0.2rem 0;
   }
   .prose :global(a) {
-    color: var(--color-blue-bright);
+    color: var(--color-accent-bright);
   }
   .prose :global(a:hover) {
-    color: var(--color-gold-bright);
+    color: var(--color-highlight-bright);
   }
 
   .tag-list {
@@ -496,15 +496,15 @@ const devJson = import.meta.env.DEV
     font-size: 0.65rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--color-gold-bright);
-    border: 1px solid var(--color-gold-bright);
+    color: var(--color-highlight-bright);
+    border: 1px solid var(--color-highlight-bright);
     border-radius: 9999px;
     padding: 0.2rem 0.75rem;
     line-height: 1;
     transition: background-color 0.15s ease, color 0.15s ease;
   }
   .tag:hover {
-    background: var(--color-gold-bright);
+    background: var(--color-highlight-bright);
     color: var(--color-bg);
   }
 
@@ -532,14 +532,14 @@ const devJson = import.meta.env.DEV
   /* dev-only editor (dialog is created by script, so styles must be global) */
   .dev-btn {
     background: none;
-    border: 1px dashed var(--color-line-bright);
+    border: 1px dashed var(--color-hairline-bright);
     color: var(--color-text-dim);
     padding: 0.25rem 0.6rem;
     cursor: pointer;
   }
   .dev-btn:hover {
-    color: var(--color-gold-bright);
-    border-color: var(--color-gold);
+    color: var(--color-highlight-bright);
+    border-color: var(--color-highlight);
   }
   .history-edit {
     margin-left: 0.2rem;
@@ -552,7 +552,7 @@ const devJson = import.meta.env.DEV
     overflow-y: auto;
     background: var(--color-bg-elevated);
     color: var(--color-text);
-    border: 1px solid var(--color-line-bright);
+    border: 1px solid var(--color-hairline-bright);
     border-radius: 4px;
     padding: var(--space-3);
   }
@@ -575,7 +575,7 @@ const devJson = import.meta.env.DEV
   .career-editor textarea {
     width: 100%;
     background: var(--color-bg-inset);
-    border: 1px solid var(--color-line-bright);
+    border: 1px solid var(--color-hairline-bright);
     color: var(--color-text);
     font: inherit;
     font-size: 0.9rem;
@@ -602,7 +602,7 @@ const devJson = import.meta.env.DEV
     border-style: dashed;
   }
   .career-editor button[type='submit'] {
-    background: var(--color-gold);
+    background: var(--color-highlight);
     border: none;
     color: var(--color-bg);
     font-family: var(--font-mono);
@@ -613,11 +613,11 @@ const devJson = import.meta.env.DEV
     cursor: pointer;
   }
   .career-editor button[type='submit']:hover {
-    background: var(--color-gold-bright);
+    background: var(--color-highlight-bright);
   }
   .career-editor #career-cancel {
     background: none;
-    border: 1px solid var(--color-line-bright);
+    border: 1px solid var(--color-hairline-bright);
     color: var(--color-text-dim);
     font-family: var(--font-mono);
     font-size: 0.75rem;
@@ -627,7 +627,7 @@ const devJson = import.meta.env.DEV
     cursor: pointer;
   }
   .career-editor #career-cancel:hover {
-    color: var(--color-gold-bright);
-    border-color: var(--color-gold);
+    color: var(--color-highlight-bright);
+    border-color: var(--color-highlight);
   }
 </style>

@@ -147,15 +147,15 @@ const maxPages = Math.max(desktopPages, mobilePages);
     letter-spacing: 0.04em;
     background: none;
     color: var(--color-text-dim);
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-hairline);
     padding: 0.25rem 0.6rem;
     cursor: pointer;
   }
-  .page-btn:hover:not(:disabled) { color: var(--color-gold-bright); border-color: var(--color-gold); }
+  .page-btn:hover:not(:disabled) { color: var(--color-highlight-bright); border-color: var(--color-highlight); }
   .page-btn:disabled { opacity: 0.35; cursor: default; }
   .page-num.is-active {
-    background: var(--color-gold-bright);
-    border-color: var(--color-gold-bright);
+    background: var(--color-highlight-bright);
+    border-color: var(--color-highlight-bright);
     color: var(--color-bg);
   }
 

@@ -69,9 +69,9 @@ const { books, gridId, paginationLabel, pageSize = 21, mobilePageSize, showMeta 
     aspect-ratio: 2 / 3;
     object-fit: cover;
     display: block;
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-hairline);
   }
-  .book a:hover .book-cover { border-color: var(--color-gold); }
+  .book a:hover .book-cover { border-color: var(--color-highlight); }
 
   .book-title {
     font-family: var(--font-display);
@@ -79,7 +79,7 @@ const { books, gridId, paginationLabel, pageSize = 21, mobilePageSize, showMeta 
     line-height: 1.3;
     color: var(--color-text);
   }
-  .book-title:hover { color: var(--color-gold-bright); }
+  .book-title:hover { color: var(--color-highlight-bright); }
   .book .book-title { margin-top: 0.2rem; }
 
   .book-author {
@@ -94,10 +94,10 @@ const { books, gridId, paginationLabel, pageSize = 21, mobilePageSize, showMeta 
     flex-wrap: wrap;
   }
   .stars {
-    color: var(--color-gold-bright);
+    color: var(--color-highlight-bright);
     letter-spacing: 0.1em;
   }
-  .stars-empty { color: var(--color-line-bright); }
+  .stars-empty { color: var(--color-hairline-bright); }
 
   @media (max-width: 700px) {
     .book-grid {

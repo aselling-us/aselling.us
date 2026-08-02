@@ -5,12 +5,12 @@
    monospace "index" labels used like drawing annotations.
 
    Default theme: caravaggio — near-black ground, a brick-red
-   accent (sampled from the curtain in Judith Beheading
-   Holofernes), hairline gold rules (sampled from Mary
-   Magdalene's hair) and a muted teal-blue (sampled from her
-   drapery). Toggled via data-theme on <html> (slider in Nav);
-   the default has no data-theme attribute and lives directly
-   in :root.
+   highlight (sampled from the curtain in Judith Beheading
+   Holofernes), hairline rules in a dull gold (sampled from Mary
+   Magdalene's hair) and a muted teal-blue accent (sampled from
+   her drapery). Toggled via data-theme on <html> (slider in
+   Nav); the default has no data-theme attribute and lives
+   directly in :root.
 =========================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
@@ -22,14 +22,14 @@
   --color-bg-inset: #160f0f;
 
   /* -- color: line work -- */
-  --color-line: #7e6a44;
-  --color-line-bright: #b4985f;
+  --color-hairline: #7e6a44;
+  --color-hairline-bright: #b4985f;
 
   /* -- color: accents -- */
-  --color-blue: #20696f;
-  --color-blue-bright: #45b2ba;
-  --color-gold: #8a170f;
-  --color-gold-bright: #e74438;
+  --color-accent: #20696f;
+  --color-accent-bright: #45b2ba;
+  --color-highlight: #8a170f;
+  --color-highlight-bright: #e74438;
 
   /* -- color: text -- */
   --color-text: #ece0dd;
@@ -40,7 +40,7 @@
   --color-vine: #3f8f5f;
   --color-chain: #946b38;
 
-  /* -- color: places map dots (lived/want-to-go/third-place — event/travel reuse gold/blue) -- */
+  /* -- color: places map dots (lived/want-to-go/third-place — event/travel reuse highlight/accent) -- */
   --color-dot-lived: #4f9e6f;
   --color-dot-want-to-go: #9b72d1;
   --color-dot-third-place: #e0973f;
@@ -63,7 +63,7 @@
 /* ===========================================================
    THEME: sunset
    Light pastel variant — peach ground, dusty-rose line work,
-   purple takes the blue role, coral takes the gold role.
+   purple takes the accent role, coral takes the highlight role.
    Toggled via data-theme on <html> (slider in Nav).
 =========================================================== */
 [data-theme='sunset'] {
@@ -73,14 +73,14 @@
   --color-bg-inset: #f3ddd8;
 
   /* -- color: line work -- */
-  --color-line: #e4c8cc;
-  --color-line-bright: #d89ba9;
+  --color-hairline: #e4c8cc;
+  --color-hairline-bright: #d89ba9;
 
   /* -- color: accents -- */
-  --color-blue: #9e8cb8;
-  --color-blue-bright: #75619a;
-  --color-gold: #c98a74;
-  --color-gold-bright: #91533d;
+  --color-accent: #9e8cb8;
+  --color-accent-bright: #6f5c92;
+  --color-highlight: #c98a74;
+  --color-highlight-bright: #91533d;
 
   /* -- color: text -- */
   --color-text: #4a3a55;
@@ -91,7 +91,7 @@
   --color-vine: #7da377;
   --color-chain: #966040;
 
-  /* -- color: places map dots (lived/want-to-go/third-place — event/travel reuse gold/blue) -- */
+  /* -- color: places map dots (lived/want-to-go/third-place — event/travel reuse highlight/accent) -- */
   --color-dot-lived: #5a9165;
   --color-dot-want-to-go: #c15f92;
   --color-dot-third-place: #c67f1f;
@@ -100,8 +100,8 @@
 /* ===========================================================
    THEME: odyssey
    Near-black navy ground with a hazy blue-teal fog, bronze/brass
-   takes the gold role (armor and bone ornament rather than metal
-   coin-gold). The original default, now a named theme. Toggled
+   takes the highlight role (armor and bone ornament rather than
+   metal coin-gold). The original default, now a named theme. Toggled
    via data-theme on <html> (slider in Nav).
 =========================================================== */
 [data-theme='odyssey'] {
@@ -111,14 +111,14 @@
   --color-bg-inset: #0c141c;
 
   /* -- color: line work -- */
-  --color-line: #25323f;
-  --color-line-bright: #3d5464;
+  --color-hairline: #25323f;
+  --color-hairline-bright: #3d5464;
 
   /* -- color: accents -- */
-  --color-blue: #4f7f96;
-  --color-blue-bright: #7eb0c4;
-  --color-gold: #a9814a;
-  --color-gold-bright: #d1a562;
+  --color-accent: #4f7f96;
+  --color-accent-bright: #7eb0c4;
+  --color-highlight: #a9814a;
+  --color-highlight-bright: #d1a562;
 
   /* -- color: text -- */
   --color-text: #e6e0d2;
@@ -129,7 +129,7 @@
   --color-vine: #52785f;
   --color-chain: #8f6b45;
 
-  /* -- color: places map dots (lived/want-to-go/third-place — event/travel reuse gold/blue) -- */
+  /* -- color: places map dots (lived/want-to-go/third-place — event/travel reuse highlight/accent) -- */
   --color-dot-lived: #6fbf8f;
   --color-dot-want-to-go: #a385d9;
   --color-dot-third-place: #e8944a;
@@ -138,8 +138,8 @@
 /* ===========================================================
    THEME: monet
    Impressionist light variant — hazy blue-green ground (sky and
-   water washes), lavender line work, muted coral takes the gold
-   role (Antibes rooftops), sage takes the vine role.
+   water washes), lavender line work, muted coral takes the
+   highlight role (Antibes rooftops), sage takes the vine role.
    Toggled via data-theme on <html> (slider in Nav).
 =========================================================== */
 [data-theme='monet'] {
@@ -149,14 +149,14 @@
   --color-bg-inset: #dbe6e6;
 
   /* -- color: line work -- */
-  --color-line: #c9d8da;
-  --color-line-bright: #9ab6bc;
+  --color-hairline: #c9d8da;
+  --color-hairline-bright: #9ab6bc;
 
   /* -- color: accents -- */
-  --color-blue: #6f9bb0;
-  --color-blue-bright: #4f7f9e;
-  --color-gold: #cf8871;
-  --color-gold-bright: #96513c;
+  --color-accent: #6f9bb0;
+  --color-accent-bright: #3f6a86;
+  --color-highlight: #cf8871;
+  --color-highlight-bright: #96513c;
 
   /* -- color: text -- */
   --color-text: #3d4d4c;
@@ -167,7 +167,7 @@
   --color-vine: #7fa06a;
   --color-chain: #b08a5f;
 
-  /* -- color: places map dots (lived/want-to-go/third-place — event/travel reuse gold/blue) -- */
+  /* -- color: places map dots (lived/want-to-go/third-place — event/travel reuse highlight/accent) -- */
   --color-dot-lived: #5f9e78;
   --color-dot-want-to-go: #8f6fb0;
   --color-dot-third-place: #c9922f;
@@ -211,15 +211,15 @@ h3 { font-size: 1.25rem; }
 p { margin: 0 0 var(--space-2); }
 
 a {
-  color: var(--color-blue-bright);
+  color: var(--color-accent-bright);
   text-decoration: none;
 }
-a:hover { color: var(--color-gold-bright); }
+a:hover { color: var(--color-highlight-bright); }
 
 /* keyboard focus visibility -- kept even though nav uses custom states */
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--color-gold);
+  outline: 2px solid var(--color-highlight-bright);
   outline-offset: 2px;
 }
 

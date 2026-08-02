@@ -210,10 +210,10 @@ const stars = (r: number) => "★".repeat(Math.floor(r)) + (r % 1 ? "½" : "");
     color: var(--color-text-dim);
   }
   .lede a {
-    color: var(--color-blue-bright);
+    color: var(--color-accent-bright);
   }
   .lede a:hover {
-    color: var(--color-gold-bright);
+    color: var(--color-highlight-bright);
   }
 
   .updated-top {
@@ -230,8 +230,8 @@ const stars = (r: number) => "★".repeat(Math.floor(r)) + (r % 1 ? "½" : "");
     justify-content: space-between;
     align-items: baseline;
     gap: var(--space-2);
-    color: var(--color-gold-bright);
-    border-bottom: 1px solid var(--color-line);
+    color: var(--color-highlight-bright);
+    border-bottom: 1px solid var(--color-hairline);
     padding-bottom: var(--space-1);
     margin: 0 0 var(--space-3);
     font-size: 0.7rem;
@@ -243,7 +243,7 @@ const stars = (r: number) => "★".repeat(Math.floor(r)) + (r % 1 ? "½" : "");
     font-weight: 400;
   }
   .shelf-link:hover {
-    color: var(--color-blue-bright);
+    color: var(--color-accent-bright);
   }
 
   .favorites-grid {
@@ -271,10 +271,10 @@ const stars = (r: number) => "★".repeat(Math.floor(r)) + (r % 1 ? "½" : "");
     aspect-ratio: 2 / 3;
     object-fit: cover;
     display: block;
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-hairline);
   }
   .favorite a:hover .favorite-poster {
-    border-color: var(--color-gold);
+    border-color: var(--color-highlight);
   }
   .favorite-title {
     font-family: var(--font-display);
@@ -283,7 +283,7 @@ const stars = (r: number) => "★".repeat(Math.floor(r)) + (r % 1 ? "½" : "");
     color: var(--color-text);
   }
   .favorite a:hover .favorite-title {
-    color: var(--color-gold-bright);
+    color: var(--color-highlight-bright);
   }
 
   .film-grid {
@@ -313,10 +313,10 @@ const stars = (r: number) => "★".repeat(Math.floor(r)) + (r % 1 ? "½" : "");
     aspect-ratio: 2 / 3;
     object-fit: cover;
     display: block;
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-hairline);
   }
   .film a:hover .film-poster {
-    border-color: var(--color-gold);
+    border-color: var(--color-highlight);
   }
 
   .film-title {
@@ -327,7 +327,7 @@ const stars = (r: number) => "★".repeat(Math.floor(r)) + (r % 1 ? "½" : "");
     margin-top: 0.2rem;
   }
   .film-title:hover {
-    color: var(--color-gold-bright);
+    color: var(--color-highlight-bright);
   }
   .film-year {
     color: var(--color-text-dim);
@@ -341,27 +341,27 @@ const stars = (r: number) => "★".repeat(Math.floor(r)) + (r % 1 ? "½" : "");
     flex-wrap: wrap;
   }
   .stars {
-    color: var(--color-gold-bright);
+    color: var(--color-highlight-bright);
     letter-spacing: 0.1em;
   }
   .liked {
-    color: var(--color-gold-bright);
+    color: var(--color-highlight-bright);
   }
   .rewatch {
-    color: var(--color-gold-bright);
-    border: 1px solid var(--color-gold-bright);
+    color: var(--color-highlight-bright);
+    border: 1px solid var(--color-highlight-bright);
     padding: 0.05rem 0.35rem;
     transition: background-color 0.15s ease, color 0.15s ease;
   }
   .rewatch:hover {
-    background: var(--color-gold-bright);
+    background: var(--color-highlight-bright);
     color: var(--color-bg);
   }
 
   .data-footer {
     margin-top: var(--space-5);
     padding-top: var(--space-2);
-    border-top: 1px solid var(--color-line);
+    border-top: 1px solid var(--color-hairline);
     display: flex;
     justify-content: space-between;
     gap: var(--space-2);

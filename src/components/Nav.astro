@@ -101,7 +101,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
     letter-spacing: 0.02em;
     color: var(--color-text);
   }
-  .mark:hover .mark-text { color: var(--color-gold-bright); }
+  .mark:hover .mark-text { color: var(--color-highlight-bright); }
   .mark-sub { color: var(--color-text-faint); }
 
   :global(.mark-disc) {
@@ -138,19 +138,19 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 
   .nav-link:hover {
     color: var(--color-text);
-    border-bottom-color: var(--color-line-bright);
+    border-bottom-color: var(--color-hairline-bright);
   }
-  .nav-link:hover .nav-n { color: var(--color-blue-bright); }
+  .nav-link:hover .nav-n { color: var(--color-accent-bright); }
 
   .nav-link.active {
     color: var(--color-text);
-    border-bottom-color: var(--color-gold);
+    border-bottom-color: var(--color-highlight);
   }
-  .nav-link.active .nav-n { color: var(--color-gold-bright); }
+  .nav-link.active .nav-n { color: var(--color-highlight-bright); }
 
   .rule {
     height: 1px;
-    background: linear-gradient(90deg, var(--color-gold) 0%, var(--color-line) 50%, var(--color-blue) 100%);
+    background: linear-gradient(90deg, var(--color-highlight) 0%, var(--color-hairline) 50%, var(--color-accent) 100%);
     opacity: 0.6;
   }
 
@@ -166,7 +166,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
     gap: 0.5rem;
     user-select: none;
   }
-  .switch-name { padding-right: 0.3rem; border-right: 1px solid var(--color-line); }
+  .switch-name { padding-right: 0.3rem; border-right: 1px solid var(--color-hairline); }
 
   /* 4-position dial styled as a mini turntable: the record mark spins
      in the center and a needle swings to the N/E/S/W point of the
@@ -192,7 +192,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
     left: 50%;
     width: 1px;
     height: 10px;
-    background: var(--color-gold);
+    background: var(--color-highlight);
     transform-origin: 50% 100%;
     transform: translate(-50%, -100%) rotate(0deg);
     transition: transform 0.25s ease;
@@ -203,15 +203,15 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
     height: 8px;
     margin: 0;
     padding: 0;
-    border: 1px solid var(--color-line-bright);
+    border: 1px solid var(--color-hairline-bright);
     border-radius: 50%;
     background: var(--color-bg);
     cursor: pointer;
   }
-  .wheel-point:hover { border-color: var(--color-gold); }
-  .wheel-point.active { background: var(--color-gold); border-color: var(--color-gold); }
+  .wheel-point:hover { border-color: var(--color-highlight); }
+  .wheel-point.active { background: var(--color-highlight); border-color: var(--color-highlight); }
   .wheel-point:focus-visible {
-    outline: 2px solid var(--color-gold);
+    outline: 2px solid var(--color-highlight-bright);
     outline-offset: 2px;
   }
   .wheel-n { top: -4px; left: 50%; transform: translate(-50%, 0); }
@@ -228,7 +228,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
   }
   .theme-switch .opt:hover { color: var(--color-text-dim); }
   .theme-switch .opt.active { color: var(--color-text); }
-  .sep { color: var(--color-line-bright); }
+  .sep { color: var(--color-hairline-bright); }
 
   @media (max-width: 640px) {
     nav ul { gap: var(--space-2) var(--space-3); flex-wrap: wrap; }

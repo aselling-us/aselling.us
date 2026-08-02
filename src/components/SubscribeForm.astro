@@ -138,7 +138,7 @@ import { WORKER_URL } from '../lib/subscribe-worker.mjs';
   .subscribe-form {
     margin: var(--space-3) 0;
     padding: var(--space-3);
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-hairline);
     background: var(--color-bg-elevated);
   }
 
@@ -157,14 +157,14 @@ import { WORKER_URL } from '../lib/subscribe-worker.mjs';
     flex: 1;
     min-width: 200px;
     background: var(--color-bg-inset);
-    border: 1px solid var(--color-line-bright);
+    border: 1px solid var(--color-hairline-bright);
     color: var(--color-text);
     font: inherit;
     font-size: 0.9rem;
     padding: 0.5rem 0.65rem;
   }
   .subscribe-email:focus-visible {
-    outline: 2px solid var(--color-gold);
+    outline: 2px solid var(--color-highlight-bright);
     outline-offset: 1px;
   }
 
@@ -179,7 +179,7 @@ import { WORKER_URL } from '../lib/subscribe-worker.mjs';
   }
 
   .subscribe-form button[type='submit'] {
-    background: var(--color-gold-bright);
+    background: var(--color-highlight-bright);
     border: none;
     color: var(--color-bg);
     font-family: var(--font-mono);
@@ -189,7 +189,7 @@ import { WORKER_URL } from '../lib/subscribe-worker.mjs';
     padding: 0.5rem 0.9rem;
     cursor: pointer;
   }
-  .subscribe-form button[type='submit']:hover:not(:disabled) { background: var(--color-gold-bright); }
+  .subscribe-form button[type='submit']:hover:not(:disabled) { background: var(--color-highlight-bright); }
   .subscribe-form button[type='submit']:disabled { opacity: 0.6; cursor: default; }
 
   .subscribe-status {
@@ -201,7 +201,7 @@ import { WORKER_URL } from '../lib/subscribe-worker.mjs';
   .dev-confirm-test {
     margin: 0.6rem 0 var(--space-3);
     padding: var(--space-2);
-    border: 1px dashed var(--color-line-bright);
+    border: 1px dashed var(--color-hairline-bright);
   }
   .dev-confirm-test-row {
     display: flex;
@@ -213,7 +213,7 @@ import { WORKER_URL } from '../lib/subscribe-worker.mjs';
     flex: 1;
     min-width: 200px;
     background: var(--color-bg-inset);
-    border: 1px solid var(--color-line-bright);
+    border: 1px solid var(--color-hairline-bright);
     color: var(--color-text);
     font: inherit;
     font-size: 0.9rem;
@@ -221,11 +221,11 @@ import { WORKER_URL } from '../lib/subscribe-worker.mjs';
   }
   .dev-btn {
     background: none;
-    border: 1px dashed var(--color-line-bright);
+    border: 1px dashed var(--color-hairline-bright);
     color: var(--color-text-dim);
     padding: 0.25rem 0.6rem;
     cursor: pointer;
   }
-  .dev-btn:hover { color: var(--color-gold-bright); border-color: var(--color-gold); }
+  .dev-btn:hover { color: var(--color-highlight-bright); border-color: var(--color-highlight); }
   .dev-btn:disabled { opacity: 0.5; cursor: default; }
 </style>

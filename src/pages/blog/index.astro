@@ -406,8 +406,8 @@ const devJson = import.meta.env.DEV
   }
 
   .section-label {
-    color: var(--color-gold-bright);
-    border-bottom: 1px solid var(--color-line);
+    color: var(--color-highlight-bright);
+    border-bottom: 1px solid var(--color-hairline);
     padding-bottom: var(--space-1);
     margin: var(--space-4) 0 var(--space-3);
     font-size: 0.7rem;
@@ -429,8 +429,8 @@ const devJson = import.meta.env.DEV
     letter-spacing: 0.06em;
     text-transform: uppercase;
     background: none;
-    color: var(--color-gold-bright);
-    border: 1px solid var(--color-gold-bright);
+    color: var(--color-highlight-bright);
+    border: 1px solid var(--color-highlight-bright);
     border-radius: 9999px;
     padding: 0.2rem 0.75rem;
     line-height: 1.4;
@@ -439,7 +439,7 @@ const devJson = import.meta.env.DEV
   }
   .tag-filter-btn:hover,
   .tag-filter-btn.is-active {
-    background: var(--color-gold-bright);
+    background: var(--color-highlight-bright);
     color: var(--color-bg);
   }
 
@@ -454,7 +454,7 @@ const devJson = import.meta.env.DEV
     align-items: flex-start;
     gap: var(--space-3);
     padding: 2rem 0;
-    border-bottom: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-hairline);
   }
   .post-main { flex: 1; min-width: 0; }
 
@@ -468,7 +468,7 @@ const devJson = import.meta.env.DEV
     height: 160px;
     object-fit: cover;
     display: block;
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-hairline);
   }
   .post-cover figcaption {
     margin-top: 0.35rem;
@@ -484,9 +484,9 @@ const devJson = import.meta.env.DEV
   .post-list a {
     font-family: var(--font-display);
     font-size: 1.2rem;
-    color: var(--color-blue-bright);
+    color: var(--color-accent-bright);
   }
-  .post-list a:hover { color: var(--color-gold-bright); }
+  .post-list a:hover { color: var(--color-highlight-bright); }
   .post-date { display: block; margin-top: 0.3rem; }
   .post-desc { color: var(--color-text-dim); margin-top: 0.4rem; }
 
@@ -503,37 +503,37 @@ const devJson = import.meta.env.DEV
     font-size: 0.65rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--color-gold-bright);
-    border: 1px solid var(--color-gold-bright);
+    color: var(--color-highlight-bright);
+    border: 1px solid var(--color-highlight-bright);
     border-radius: 9999px;
     padding: 0.2rem 0.75rem;
     line-height: 1;
     transition: background-color 0.15s ease, color 0.15s ease;
   }
   .tag:hover {
-    background: var(--color-gold-bright);
+    background: var(--color-highlight-bright);
     color: var(--color-bg);
   }
   .tag-more {
-    color: var(--color-gold-bright);
-    border-color: var(--color-gold-bright);
+    color: var(--color-highlight-bright);
+    border-color: var(--color-highlight-bright);
     opacity: 0.5;
     cursor: help;
   }
   .tag-more:hover {
-    background: var(--color-gold-bright);
+    background: var(--color-highlight-bright);
     color: var(--color-bg);
   }
 
   .draft-badge {
-    color: var(--color-gold-bright);
-    border: 1px dashed var(--color-gold-bright);
+    color: var(--color-highlight-bright);
+    border: 1px dashed var(--color-highlight-bright);
     padding: 0.1rem 0.4rem;
     margin-left: 0.5rem;
     transition: background-color 0.15s ease, color 0.15s ease;
   }
   .draft-badge:hover {
-    background: var(--color-gold-bright);
+    background: var(--color-highlight-bright);
     color: var(--color-bg);
   }
 </style>
@@ -542,12 +542,12 @@ const devJson = import.meta.env.DEV
   /* dev-only editor (dialog is created by script, so styles must be global) */
   .dev-btn {
     background: none;
-    border: 1px dashed var(--color-line-bright);
+    border: 1px dashed var(--color-hairline-bright);
     color: var(--color-text-dim);
     padding: 0.25rem 0.6rem;
     cursor: pointer;
   }
-  .dev-btn:hover { color: var(--color-gold-bright); border-color: var(--color-gold); }
+  .dev-btn:hover { color: var(--color-highlight-bright); border-color: var(--color-highlight); }
   .post-edit { margin-left: 0.6rem; padding: 0.1rem 0.45rem; }
 
   .post-editor {
@@ -556,7 +556,7 @@ const devJson = import.meta.env.DEV
     overflow-y: auto;
     background: var(--color-bg-elevated);
     color: var(--color-text);
-    border: 1px solid var(--color-line-bright);
+    border: 1px solid var(--color-hairline-bright);
     border-radius: 4px;
     padding: var(--space-3);
   }
@@ -576,7 +576,7 @@ const devJson = import.meta.env.DEV
   .post-editor textarea {
     width: 100%;
     background: var(--color-bg-inset);
-    border: 1px solid var(--color-line-bright);
+    border: 1px solid var(--color-hairline-bright);
     color: var(--color-text);
     font: inherit;
     font-size: 0.9rem;
@@ -584,7 +584,7 @@ const devJson = import.meta.env.DEV
   }
   .post-editor textarea { font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.5; }
   .post-editor input[type='date'] { width: auto; }
-  .post-editor input[type='checkbox'] { width: auto; accent-color: var(--color-gold); }
+  .post-editor input[type='checkbox'] { width: auto; accent-color: var(--color-highlight); }
   .post-editor .draft-toggle { display: flex; gap: 0.4rem; align-items: center; cursor: pointer; }
   .post-editor .cover-label { display: grid; gap: 0.25rem; }
   .post-editor input[type='file'] { border-style: dashed; }
@@ -593,15 +593,15 @@ const devJson = import.meta.env.DEV
     align-items: center;
     gap: 0.4rem;
     width: fit-content;
-    border: 1px dashed var(--color-line-bright);
+    border: 1px dashed var(--color-hairline-bright);
     padding: 0.3rem 0.6rem;
     cursor: pointer;
   }
-  .post-editor .insert-image-label:hover { color: var(--color-gold-bright); border-color: var(--color-gold); }
+  .post-editor .insert-image-label:hover { color: var(--color-highlight-bright); border-color: var(--color-highlight); }
   .post-editor .insert-image-label:has(input:disabled) { opacity: 0.5; cursor: default; }
   .post-editor .insert-image-label input[type='file'] { display: none; }
   .post-editor button[type='submit'] {
-    background: var(--color-gold);
+    background: var(--color-highlight);
     border: none;
     color: var(--color-bg);
     font-family: var(--font-mono);
@@ -611,12 +611,12 @@ const devJson = import.meta.env.DEV
     padding: 0.45rem 0.7rem;
     cursor: pointer;
   }
-  .post-editor button[type='submit']:hover { background: var(--color-gold-bright); }
+  .post-editor button[type='submit']:hover { background: var(--color-highlight-bright); }
   .post-editor #post-cancel,
   .post-editor #post-preview-refresh,
   .post-editor #post-send-test-email {
     background: none;
-    border: 1px solid var(--color-line-bright);
+    border: 1px solid var(--color-hairline-bright);
     color: var(--color-text-dim);
     font-family: var(--font-mono);
     font-size: 0.75rem;
@@ -628,8 +628,8 @@ const devJson = import.meta.env.DEV
   .post-editor #post-cancel:hover,
   .post-editor #post-preview-refresh:hover,
   .post-editor #post-send-test-email:hover {
-    color: var(--color-gold-bright);
-    border-color: var(--color-gold);
+    color: var(--color-highlight-bright);
+    border-color: var(--color-highlight);
   }
   .post-editor #post-send-test-email:disabled { opacity: 0.5; cursor: default; }
   .post-editor .test-email-row input[type='email'] { flex: 1; width: auto; }
@@ -641,7 +641,7 @@ const devJson = import.meta.env.DEV
     display: flex;
     flex-direction: column;
     max-height: calc(90vh - 2 * var(--space-3));
-    border: 1px dashed var(--color-line-bright);
+    border: 1px dashed var(--color-hairline-bright);
     border-radius: 4px;
     padding: var(--space-3);
     min-width: 0;
@@ -665,8 +665,8 @@ const devJson = import.meta.env.DEV
     margin: 0.6rem 0 0;
   }
   .post-preview .tag {
-    color: var(--color-blue-bright);
-    border: 1px solid var(--color-line-bright);
+    color: var(--color-accent-bright);
+    border: 1px solid var(--color-hairline-bright);
     border-radius: 3px;
     padding: 0.15rem 0.5rem;
   }
@@ -676,7 +676,7 @@ const devJson = import.meta.env.DEV
     max-height: 280px;
     object-fit: cover;
     display: block;
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-hairline);
   }
   .post-preview .post-cover figcaption { margin-top: 0.4rem; text-transform: none; letter-spacing: 0.04em; }
   .post-preview .post-desc { color: var(--color-text-dim); margin-top: 0.6rem; }
@@ -687,7 +687,7 @@ const devJson = import.meta.env.DEV
     height: auto;
     display: block;
     margin: var(--space-3) auto;
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-hairline);
   }
   .post-preview .prose figure { margin: var(--space-3) auto; }
   .post-preview .prose figure img { margin: 0; }
@@ -698,7 +698,7 @@ const devJson = import.meta.env.DEV
     letter-spacing: 0.04em;
   }
   .post-preview .prose mark {
-    background: var(--color-gold-bright);
+    background: var(--color-highlight-bright);
     color: var(--color-bg);
     padding: 0.05em 0.2em;
     border-radius: 2px;
@@ -707,7 +707,7 @@ const devJson = import.meta.env.DEV
     position: relative;
     margin: var(--space-3) 0;
     padding: var(--space-2) var(--space-3);
-    border-left: 2px solid var(--color-gold);
+    border-left: 2px solid var(--color-highlight);
     background: var(--color-bg-inset);
     font-family: var(--font-display);
     font-style: italic;
@@ -724,7 +724,7 @@ const devJson = import.meta.env.DEV
     font-style: normal;
     font-size: 2.4rem;
     line-height: 1;
-    color: var(--color-line-bright);
+    color: var(--color-hairline-bright);
   }
   .post-preview .prose blockquote p {
     margin: 0 0 var(--space-1);
