@@ -89,6 +89,65 @@ const devJson = import.meta.env.DEV
       >
         open full résumé ↗
       </a>
+
+      <div class="reference-box">
+        <button type="button" id="reference-toggle" class="reference-cta">
+          Request Professional References
+        </button>
+        <form class="reference-form" id="reference-form" novalidate hidden>
+          <input
+            class="reference-input"
+            id="reference-name"
+            name="name"
+            type="text"
+            placeholder="Your name (optional)"
+            autocomplete="name"
+          />
+          <input
+            class="reference-input"
+            id="reference-email"
+            name="email"
+            type="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+          />
+          <input
+            class="reference-input"
+            id="reference-message"
+            name="message"
+            type="text"
+            placeholder="Role / company you're evaluating me for (optional)"
+          />
+          <!-- honeypot: see SubscribeForm.astro for why it's named/hidden this way -->
+          <input
+            class="reference-hp"
+            name="hp-note-b2"
+            type="text"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+            data-1p-ignore="true"
+            data-lpignore="true"
+            data-bwignore="true"
+            data-form-type="other"
+          />
+          <div class="reference-actions">
+            <button type="submit" id="reference-submit">send request</button>
+            <button type="button" id="reference-cancel">cancel</button>
+          </div>
+        </form>
+        <p class="reference-status mono-label" id="reference-status" role="status" aria-live="polite"></p>
+      </div>
+
+      {import.meta.env.DEV && (
+        <div class="dev-reference-test">
+          <span class="mono-label">dev: test reference request email</span>
+          <button type="button" id="send-reference-test" class="dev-btn">
+            send test email to me
+          </button>
+        </div>
+      )}
     </div>
 
     <div class="about-panel">
@@ -120,69 +179,6 @@ const devJson = import.meta.env.DEV
       </p>
     </div>
   </section>
-
-  <section class="references">
-    <span class="mono-label section-label">professional references</span>
-    <div class="reference-box">
-      <button type="button" id="reference-toggle" class="reference-cta">
-        Request Professional References
-      </button>
-      <form class="reference-form" id="reference-form" novalidate hidden>
-        <input
-          class="reference-input"
-          id="reference-name"
-          name="name"
-          type="text"
-          placeholder="Your name (optional)"
-          autocomplete="name"
-        />
-        <input
-          class="reference-input"
-          id="reference-email"
-          name="email"
-          type="email"
-          placeholder="you@example.com"
-          autocomplete="email"
-          required
-        />
-        <input
-          class="reference-input"
-          id="reference-message"
-          name="message"
-          type="text"
-          placeholder="Role / company you're evaluating me for (optional)"
-        />
-        <!-- honeypot: see SubscribeForm.astro for why it's named/hidden this way -->
-        <input
-          class="reference-hp"
-          name="hp-note-b2"
-          type="text"
-          tabindex="-1"
-          autocomplete="off"
-          aria-hidden="true"
-          data-1p-ignore="true"
-          data-lpignore="true"
-          data-bwignore="true"
-          data-form-type="other"
-        />
-        <div class="reference-actions">
-          <button type="submit" id="reference-submit">send request</button>
-          <button type="button" id="reference-cancel">cancel</button>
-        </div>
-      </form>
-      <p class="reference-status mono-label" id="reference-status" role="status" aria-live="polite"></p>
-    </div>
-
-    {import.meta.env.DEV && (
-      <div class="dev-reference-test">
-        <span class="mono-label">dev: test reference request email</span>
-        <button type="button" id="send-reference-test" class="dev-btn">
-          send test email to me
-        </button>
-      </div>
-    )}
-  </section>
-
 
   <section class="history">
     <div class="history-header">
@@ -690,6 +686,10 @@ const devJson = import.meta.env.DEV
   }
   .reference-cta:hover {
     opacity: 0.9;
+  }
+  /* same [hidden]-losing-to-`display` issue as .reference-form[hidden] below */
+  .reference-cta[hidden] {
+    display: none;
   }
   .reference-form {
     display: grid;
