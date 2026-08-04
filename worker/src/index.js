@@ -5,9 +5,11 @@
 // GitHub Actions, which polls this Worker on a schedule.
 //
 // KV layout:
-//   pending:<token>  -> { email, requestedAt, emailedAt? }   (48h TTL)
+//   pending:<token>   -> { email, requestedAt, emailedAt? }   (48h TTL)
 //   confirmed         -> JSON array of confirmed emails
+//   reference:<id>    -> { name?, email, message?, requestedAt, emailedAt? } (48h TTL)
 //   ratelimit:<ip>    -> request count this hour               (1h TTL)
+//   ratelimit:ref:<ip> -> request count this hour, /request-references only (1h TTL)
 
 const SITE_ORIGIN = 'https://aselling.us';
 const DEV_ORIGINS = ['http://localhost:4321', 'http://localhost:4322', 'http://localhost:4329'];
@@ -15,6 +17,8 @@ const PENDING_TTL_SECONDS = 60 * 60 * 48;
 const RATE_LIMIT_WINDOW_SECONDS = 60 * 60;
 const RATE_LIMIT_MAX = 5;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MAX_NAME_LENGTH = 200;
+const MAX_MESSAGE_LENGTH = 2000;
 
 // Mirrors scripts/lib/mail-theme.mjs's EMAIL_THEME. Duplicated (not
 // imported) on purpose: that module pulls in nodemailer, which doesn't
@@ -229,6 +233,92 @@ async function handleSubscribe(request, env, origin) {
   return genericOk();
 }
 
+// Public backend for the career page's "Request Professional References"
+// form. Unlike /subscribe there's no "already on the list" state to hide, so
+// a malformed email gets a real 400 (better UX — the visitor can fix a typo)
+// rather than the blanket generic-ok /subscribe uses to prevent enumerating
+// confirmed subscribers. Honeypot and rate-limit hits still respond
+// generically, same anti-bot reasoning as /subscribe.
+function logReferenceEvent(event, detail) {
+  console.log(JSON.stringify({ event: `reference_${event}`, ...detail }));
+}
+
+async function handleRequestReferences(request, env, origin) {
+  const headers = corsHeaders(origin);
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return json({ error: 'Invalid request' }, { status: 400, headers });
+  }
+
+  const honeypot = String(body.website ?? '');
+  const ip = request.headers.get('CF-Connecting-IP') ?? 'unknown';
+  const genericOk = () => json({ ok: true }, { headers });
+
+  if (honeypot) {
+    logReferenceEvent('skip_honeypot', { ip });
+    return genericOk();
+  }
+
+  const email = String(body.email ?? '').trim().toLowerCase();
+  if (!EMAIL_RE.test(email) || email.length > 320) {
+    return json({ error: 'Enter a valid email address' }, { status: 400, headers });
+  }
+
+  // Own rate-limit bucket (same helper as /subscribe, different key
+  // namespace via the "ref:" prefix) so the two forms can't throttle
+  // each other.
+  if (!(await checkRateLimit(env, `ref:${ip}`))) {
+    logReferenceEvent('skip_rate_limited', { ip, email: maskEmail(email) });
+    return genericOk();
+  }
+
+  const name = String(body.name ?? '').trim().slice(0, MAX_NAME_LENGTH);
+  const message = String(body.message ?? '').trim().slice(0, MAX_MESSAGE_LENGTH);
+
+  const id = randomToken();
+  await env.SUBSCRIBERS.put(`reference:${id}`, JSON.stringify({ name, email, message, requestedAt: Date.now() }), {
+    expirationTtl: PENDING_TTL_SECONDS,
+  });
+  logReferenceEvent('queued', { email: maskEmail(email) });
+
+  return genericOk();
+}
+
+async function handlePendingReferences(request, env) {
+  if (!requireAuth(request, env)) return json({ error: 'Unauthorized' }, { status: 401 });
+
+  const { keys } = await env.SUBSCRIBERS.list({ prefix: 'reference:' });
+  const entries = [];
+  for (const key of keys) {
+    const raw = await env.SUBSCRIBERS.get(key.name);
+    if (!raw) continue;
+    const data = JSON.parse(raw);
+    if (data.emailedAt) continue;
+    entries.push({ id: key.name.slice('reference:'.length), name: data.name, email: data.email, message: data.message });
+  }
+  return json({ pending: entries });
+}
+
+async function handleMarkReferencesSent(request, env) {
+  if (!requireAuth(request, env)) return json({ error: 'Unauthorized' }, { status: 401 });
+
+  const body = await request.json().catch(() => ({}));
+  const ids = Array.isArray(body.ids) ? body.ids : [];
+
+  for (const id of ids) {
+    const key = `reference:${id}`;
+    const raw = await env.SUBSCRIBERS.get(key);
+    if (!raw) continue;
+    const data = JSON.parse(raw);
+    data.emailedAt = Date.now();
+    await env.SUBSCRIBERS.put(key, JSON.stringify(data), { expirationTtl: PENDING_TTL_SECONDS });
+  }
+
+  return json({ ok: true });
+}
+
 async function handlePending(request, env) {
   if (!requireAuth(request, env)) return json({ error: 'Unauthorized' }, { status: 401 });
 
@@ -357,6 +447,15 @@ export default {
     }
     if (url.pathname === '/subscribe' && request.method === 'POST') {
       return handleSubscribe(request, env, origin);
+    }
+    if (url.pathname === '/request-references' && request.method === 'POST') {
+      return handleRequestReferences(request, env, origin);
+    }
+    if (url.pathname === '/pending-references' && request.method === 'GET') {
+      return handlePendingReferences(request, env);
+    }
+    if (url.pathname === '/mark-references-sent' && request.method === 'POST') {
+      return handleMarkReferencesSent(request, env);
     }
     if (url.pathname === '/pending' && request.method === 'GET') {
       return handlePending(request, env);

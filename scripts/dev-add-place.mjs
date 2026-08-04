@@ -22,6 +22,16 @@
 //   (see createTransporter in scripts/lib/mail-theme.mjs). Same
 //   localhost-only and real-SMTP-credentials caveats as
 //   /__edit-blog/send-test-email — see isLocalRequest in dev-edit-blog.mjs.
+// POST /__test-reference-request-email {}
+//   sends a real test of the "reference request" notification email (via
+//   scripts/lib/mail-theme.mjs's buildReferenceRequestMailOptions, so it
+//   can't drift from what a real request produces) to the site owner's own
+//   address (ownerEmail()) using canned sample name/email/message — driven
+//   by the dev-only button next to the career page's "Request Professional
+//   References" form. Always sends "to me": unlike the other two test-email
+//   endpoints there's no recipient to type in, since production behaves the
+//   same way (the requester's info goes to the owner, not the requester).
+//   Same localhost-only and real-SMTP-credentials caveats as above.
 // Never part of the built site.
 // NOTE: this file is loaded once at dev-server startup — after editing it,
 // restart `npm run dev` or requests will hit the old handler.
@@ -30,7 +40,7 @@ import path from 'node:path';
 import { blogEditHandler, isLocalRequest, EMAIL_RE } from './dev-edit-blog.mjs';
 import { careerEditHandler } from './dev-edit-career.mjs';
 import { confirmationEmail } from './send-subscription-confirmations.mjs';
-import { createTransporter, logoAttachment, LOGO_CID } from './lib/mail-theme.mjs';
+import { createTransporter, logoAttachment, LOGO_CID, buildReferenceRequestMailOptions, ownerEmail } from './lib/mail-theme.mjs';
 import { WORKER_URL as DEFAULT_WORKER_URL } from '../src/lib/subscribe-worker.mjs';
 
 const PLACES_DIR = path.resolve('src/content/places');
@@ -91,6 +101,39 @@ export default function devAddPlace() {
           }
           reply(200, { ok: true });
         });
+      });
+      server.middlewares.use('/__test-reference-request-email', (req, res) => {
+        const reply = (code, payload) => {
+          res.statusCode = code;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify(payload));
+        };
+        if (req.method !== 'POST') return reply(405, { error: 'POST only' });
+        if (!isLocalRequest(req)) return reply(403, { error: 'only available from localhost' });
+
+        const to = ownerEmail();
+        if (!to) return reply(500, { error: 'set MAIL_REPLY_TO or MAIL_FROM in .env.local first' });
+
+        (async () => {
+          try {
+            const transporter = createTransporter();
+            await transporter.sendMail(
+              buildReferenceRequestMailOptions({
+                name: 'Test Recruiter',
+                email: 'test-recruiter@example.com',
+                message: 'This is a test message from the dev-only "send test email" button on /working.',
+                to,
+                from: process.env.MAIL_FROM,
+                subjectPrefix: '[TEST] ',
+                logoSrc: `cid:${LOGO_CID}`,
+                attachments: [logoAttachment()],
+              })
+            );
+          } catch (err) {
+            return reply(500, { error: err instanceof Error ? err.message : 'send failed' });
+          }
+          reply(200, { to });
+        })();
       });
       server.middlewares.use('/__add-place', (req, res) => {
         const reply = (code, payload) => {

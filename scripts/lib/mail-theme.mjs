@@ -327,6 +327,67 @@ export function buildBlogPostMailOptions({
   };
 }
 
+// The site owner's real inbox for messages that need a human reply (e.g. a
+// reference request notification) — MAIL_REPLY_TO if set (see
+// buildUnsubscribeUrl above for why that's usually the owner's personal
+// address rather than MAIL_FROM's no-reply-style sending address), else
+// MAIL_FROM's own address.
+export function ownerEmail() {
+  return process.env.MAIL_REPLY_TO || addressFromFormatted(process.env.MAIL_FROM);
+}
+
+// The "reference request" notification — sent to the site owner (not the
+// requester) whenever someone submits the career page's "Request
+// Professional References" form. Shared by the real send
+// (scripts/send-reference-requests.mjs) and the dev-only test button
+// (scripts/dev-add-place.mjs) so the test can't drift from what a real
+// request looks like.
+export function renderReferenceRequestEmail({ name, email, message, logoSrc = LOGO_URL }) {
+  const who = name ? `${name} <${email}>` : email;
+  return renderEmailCard({
+    eyebrow: '01 / working · reference request',
+    title: 'New reference request',
+    bodyHtml: [
+      `<p style="margin:0 0 12px;font-family:${EMAIL_THEME.fontBody};font-size:15px;line-height:1.6;color:${EMAIL_THEME.text};">${escapeHtml(who)} asked for your professional references from the career page.</p>`,
+      message
+        ? `<p style="margin:0;font-family:${EMAIL_THEME.fontBody};font-size:15px;line-height:1.6;color:${EMAIL_THEME.textDim};white-space:pre-wrap;">${escapeHtml(message)}</p>`
+        : '',
+    ]
+      .filter(Boolean)
+      .join('\n'),
+    cta: { href: `mailto:${email}`, label: 'Reply to them →' },
+    footerHtml: `sent from the "request professional references" form on ${SITE_DOMAIN}/working`,
+    logoSrc,
+  });
+}
+
+// Builds the full nodemailer message for a reference-request notification.
+// `to` is the site owner's address (see ownerEmail()); `replyTo` is set to
+// the requester's own email so hitting "reply" in the owner's inbox goes
+// straight to them, no copy-pasting needed. Shared by
+// scripts/send-reference-requests.mjs (real sends) and the dev-only
+// /__test-reference-request-email endpoint the same way
+// buildBlogPostMailOptions is shared between the real send and its test
+// button.
+export function buildReferenceRequestMailOptions({ name, email, message, to, from, subjectPrefix = '', attachments, logoSrc }) {
+  const who = name ? `${name} (${email})` : email;
+  return {
+    from,
+    to,
+    replyTo: email,
+    subject: `${subjectPrefix}New reference request from ${who}`,
+    text: [
+      `${who} asked for your professional references from the career page.`,
+      '',
+      message || '(no message)',
+      '',
+      `Reply directly to ${email}.`,
+    ].join('\n'),
+    html: renderReferenceRequestEmail({ name, email, message, logoSrc }),
+    attachments,
+  };
+}
+
 // Wraps a rendered email fragment (from renderEmailCard/renderBlogPostEmail)
 // in a minimal document with an explicit charset. The fragment alone has no
 // <head>, so opening it directly (a local .html file, or a Blob without a

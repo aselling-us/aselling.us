@@ -25,6 +25,19 @@ function subscribe(body, { origin = SITE_ORIGIN, ip = '203.0.113.1', headers = {
   });
 }
 
+function requestReferences(body, { origin = SITE_ORIGIN, ip = '203.0.113.1', headers = {} } = {}) {
+  return worker.fetch(`${BASE_URL}/request-references`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Origin: origin,
+      'CF-Connecting-IP': ip,
+      ...headers,
+    },
+    body: JSON.stringify(body),
+  });
+}
+
 // token: null means "send no Authorization header at all" (distinct from
 // the default, since a caller explicitly passing `undefined` would
 // otherwise silently fall back to it via JS default-parameter semantics).
@@ -57,6 +70,15 @@ async function unsubscribeToken(email, secret = UNSUBSCRIBE_SECRET) {
 
 async function pendingEntries() {
   const { keys } = await env.SUBSCRIBERS.list({ prefix: 'pending:' });
+  const entries = [];
+  for (const key of keys) {
+    entries.push({ key: key.name, data: JSON.parse(await env.SUBSCRIBERS.get(key.name)) });
+  }
+  return entries;
+}
+
+async function referenceEntries() {
+  const { keys } = await env.SUBSCRIBERS.list({ prefix: 'reference:' });
   const entries = [];
   for (const key of keys) {
     entries.push({ key: key.name, data: JSON.parse(await env.SUBSCRIBERS.get(key.name)) });
@@ -158,6 +180,117 @@ describe('POST /subscribe', () => {
       body: 'not json',
     });
     expect(res.status).toBe(400);
+  });
+});
+
+describe('POST /request-references', () => {
+  it('queues a pending reference request for a valid address', async () => {
+    const res = await requestReferences({ name: 'Jamie Recruiter', email: 'Jamie@Example.com  ', message: 'Hiring for a senior role.' });
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ ok: true });
+
+    const entries = await referenceEntries();
+    expect(entries).toHaveLength(1);
+    expect(entries[0].data).toMatchObject({
+      name: 'Jamie Recruiter',
+      email: 'jamie@example.com',
+      message: 'Hiring for a senior role.',
+    });
+  });
+
+  it('allows an empty name and message — only email is required', async () => {
+    const res = await requestReferences({ email: 'bare@example.com' });
+    expect(res.status).toBe(200);
+    const entries = await referenceEntries();
+    expect(entries[0].data).toMatchObject({ name: '', email: 'bare@example.com', message: '' });
+  });
+
+  it('silently drops honeypot hits without queuing anything', async () => {
+    const res = await requestReferences({ email: 'bot@example.com', website: 'http://spam.example' });
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ ok: true });
+    expect(await referenceEntries()).toHaveLength(0);
+  });
+
+  it('rejects a malformed address with a real 400 (no confirmed-list state to hide here)', async () => {
+    const res = await requestReferences({ email: 'not-an-email' });
+    expect(res.status).toBe(400);
+    expect(await referenceEntries()).toHaveLength(0);
+  });
+
+  it('truncates an oversized name/message instead of rejecting the request', async () => {
+    const res = await requestReferences({ email: 'long@example.com', name: 'n'.repeat(500), message: 'm'.repeat(5000) });
+    expect(res.status).toBe(200);
+    const [{ data }] = await referenceEntries();
+    expect(data.name).toHaveLength(200);
+    expect(data.message).toHaveLength(2000);
+  });
+
+  it('rate-limits by IP after 5 requests/hour, without ever surfacing that to the caller', async () => {
+    for (let i = 0; i < 5; i++) {
+      const res = await requestReferences({ email: `person${i}@example.com` }, { ip: '198.51.100.9' });
+      expect(res.status).toBe(200);
+    }
+    expect(await referenceEntries()).toHaveLength(5);
+
+    const sixth = await requestReferences({ email: 'person6@example.com' }, { ip: '198.51.100.9' });
+    expect(sixth.status).toBe(200);
+    expect(await sixth.json()).toEqual({ ok: true });
+    expect(await referenceEntries()).toHaveLength(5);
+  });
+
+  it('tracks its own rate-limit bucket, separate from /subscribe', async () => {
+    for (let i = 0; i < 5; i++) {
+      await subscribe({ email: `sub${i}@example.com` }, { ip: '198.51.100.20' });
+    }
+    const res = await requestReferences({ email: 'still-fine@example.com' }, { ip: '198.51.100.20' });
+    expect(res.status).toBe(200);
+    expect(await referenceEntries()).toHaveLength(1);
+  });
+
+  it('rejects a request whose body is not JSON', async () => {
+    const res = await worker.fetch(`${BASE_URL}/request-references`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Origin: SITE_ORIGIN },
+      body: 'not json',
+    });
+    expect(res.status).toBe(400);
+  });
+});
+
+describe('internal reference-request endpoints require the shared secret', () => {
+  it('/pending-references rejects requests with no Authorization header', async () => {
+    const res = await authedGet('/pending-references', null);
+    expect(res.status).toBe(401);
+  });
+
+  it('/mark-references-sent rejects an unauthorized caller', async () => {
+    const res = await authedPost('/mark-references-sent', { ids: [] }, 'wrong-secret');
+    expect(res.status).toBe(401);
+  });
+
+  it('/pending-references lists only un-notified entries, keyed by id', async () => {
+    await requestReferences({ email: 'one@example.com' }, { ip: '203.0.113.40' });
+    await requestReferences({ email: 'two@example.com' }, { ip: '203.0.113.41' });
+    const [{ key }] = (await referenceEntries()).filter((e) => e.data.email === 'one@example.com');
+    await authedPost('/mark-references-sent', { ids: [key.slice('reference:'.length)] });
+
+    const res = await authedGet('/pending-references');
+    const { pending } = await res.json();
+    expect(pending).toHaveLength(1);
+    expect(pending[0].email).toBe('two@example.com');
+  });
+
+  it('/mark-references-sent leaves the entry in KV, just marked emailed (so /pending-references stops returning it)', async () => {
+    await requestReferences({ email: 'mark-me@example.com' }, { ip: '203.0.113.42' });
+    const [{ key }] = await referenceEntries();
+    const id = key.slice('reference:'.length);
+
+    const res = await authedPost('/mark-references-sent', { ids: [id] });
+    expect(res.status).toBe(200);
+
+    const stored = JSON.parse(await env.SUBSCRIBERS.get(key));
+    expect(stored.emailedAt).toEqual(expect.any(Number));
   });
 });
 
