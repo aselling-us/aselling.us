@@ -388,12 +388,22 @@ async function fetchWatchlist(page) {
 // from the film's default poster embedded in the RSS feed. The diary
 // listing page renders each row keyed by data-viewing-id — the same numeric
 // id as the suffix on each RSS item's guid (see parseFilm's `viewingId`) —
-// so rows can be matched back to films even across rewatches. Poster <img>s
-// are marked loading="lazy" and Chromium's lazy-load heuristic doesn't
-// reliably resolve every row within a bounded wait just from a tall
-// viewport (observed leaving even the first/most-recent row as the
-// empty-poster placeholder) — strip the attribute so every image fetches
-// eagerly instead of waiting on a real scroll/intersection trigger.
+// so rows can be matched back to films even across rewatches.
+//
+// Poster resolution here isn't just a slow race — it's gated on scroll
+// position. Diagnosed by watching individual rows' <img src> over time: every
+// row inside the initial viewport resolved to its real poster within ~1s,
+// and every row below that never changed at all even after 20s of waiting,
+// confirming the below-the-fold rows' resolution never even starts (not that
+// it's slow) without the row actually scrolling into view — removing the
+// `loading="lazy"` attribute only defeats the browser's *native* lazy
+// loading, not Letterboxd's own visibility-gated fetch. Scrolling
+// step-by-step did trigger more rows but plateaued well short of 100% even
+// after 70s. What reliably resolves every row: making the whole diary table
+// "on screen" from the start via a very tall viewport (browserContext's
+// `viewport` in fetchFavoritesAndWatchlist) — confirmed 0 unresolved rows
+// within 2s across all 49 diary entries, vs. dozens still stuck with a normal
+// viewport height regardless of how long or how much scrolling was tried.
 async function fetchDiaryPosters(page) {
   const posters = new Map();
   for (let pageNum = 1; pageNum <= 3; pageNum++) {
@@ -415,6 +425,10 @@ async function fetchDiaryPosters(page) {
         poster: n.querySelector('.poster.film-poster img')?.getAttribute('src') ?? null,
       }))
     );
+    const unresolved = rows.filter((r) => !r.poster || r.poster.includes('empty-poster')).length;
+    if (unresolved > 0) {
+      console.warn(`diary posters page ${pageNum}: ${unresolved}/${rows.length} still unresolved after the viewport fix`);
+    }
     if (rows.length === 0) break;
     for (const { viewingId, poster } of rows) {
       if (viewingId && poster && !poster.includes('empty-poster')) {
@@ -433,6 +447,11 @@ async function fetchFavoritesAndWatchlist() {
     const contextOptions = {
       userAgent:
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 aselling.us media snapshot (arjan.ellingson@gmail.com)',
+      // Tall enough that every row of a full diary page (50) or watchlist
+      // page (28) sits inside the initial viewport — see fetchDiaryPosters
+      // for how this was diagnosed as a hard visibility gate, not just a slow
+      // load, on Letterboxd's poster resolution.
+      viewport: { width: 1280, height: 20000 },
     };
     // Separate contexts per page: reusing one session for both requests trips
     // Letterboxd's Cloudflare bot check on the second navigation.
