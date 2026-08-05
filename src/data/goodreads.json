@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-02T04:28:48.647Z",
+  "fetchedAt": "2026-08-05T11:30:03.013Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -36,6 +36,16 @@
     }
   ],
   "toRead": [
+    {
+      "title": "The Thomas Crown Affair",
+      "author": "Evan Lee Heyman",
+      "link": "https://www.goodreads.com/book/show/2025340",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1698704695l/2025340._SY475_.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-08-04",
+      "review": null
+    },
     {
       "title": "A Brief History of Intelligence: Evolution, AI, and the Five Breakthroughs That Made Our Brains",
       "author": "Max Solomon Bennett",
