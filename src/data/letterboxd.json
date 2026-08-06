@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-08-05T11:30:03.013Z",
+  "fetchedAt": "2026-08-06T11:33:43.121Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Waves",
+      "year": 2019,
+      "link": "https://letterboxd.com/aselling/film/waves-2019/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/6/2/5/7/3/462573-waves-0-600-0-900-crop.jpg?v=5a8ec53acd",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-05",
+      "review": "a24 delivers again. incredible dual narrative of how love and loss affects all differently. talk about the color grading on this, and soundtrack by the same guys on Challengers. I liked the aspect ratio alteration a ton.You have to take a leap of faiththat's all anything is, a leap of faith. \n\n77/100"
+    },
     {
       "title": "Nuremberg",
       "year": 2025,
@@ -550,10 +561,10 @@
       "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/9/3/5/0/p/6h6nfckQgkvYBGd7BbXQcoaNDRW-0-600-0-900-crop.jpg?v=e6451fd68d"
     },
     {
-      "title": "My Girl",
-      "year": 1991,
-      "link": "https://letterboxd.com/film/my-girl/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/9/5/2/4/p/2X07UBMn6P0xZNUSrB1X6EwRZK0-0-600-0-900-crop.jpg?v=7d6dca97e4"
+      "title": "Portrait of a Lady on Fire",
+      "year": 2019,
+      "link": "https://letterboxd.com/film/portrait-of-a-lady-on-fire/",
+      "poster": null
     },
     {
       "title": "Ferris Bueller's Day Off",
