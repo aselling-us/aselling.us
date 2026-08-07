@@ -22,12 +22,75 @@ interface MapPlace {
   kind: 'event' | 'travel' | 'lived' | 'want-to-go' | 'third-place';
   coords: [number, number];
   date?: string;
+  /** best-effort ms-since-epoch parse of `date` (see parsePlaceDate), for
+   *  sorting and for the client-side countdown — null when `date` is absent
+   *  or unparseable */
+  sortDate: number | null;
   detail?: string;
   images: { thumb: string; full: string }[];
   /** original filenames backing `images`, in the same order — dev only, for photo reordering */
   imageFiles?: string[];
   /** raw markdown body — only included in dev, for the edit form */
   notes?: string;
+}
+
+const MONTHS: Record<string, number> = {
+  jan: 0, january: 0,
+  feb: 1, february: 1,
+  mar: 2, march: 2,
+  apr: 3, april: 3,
+  may: 4,
+  jun: 5, june: 5,
+  jul: 6, july: 6,
+  aug: 7, august: 7,
+  sep: 8, sept: 8, september: 8,
+  oct: 9, october: 9,
+  nov: 10, november: 10,
+  dec: 11, december: 11,
+};
+
+// `date` is a free-form display string (single day, month-only, or a range —
+// see the dev form's "Date (e.g. 2024)" placeholder), not a structured date.
+// This pulls out a best-effort sortable timestamp, used both for the
+// timeline's chronological sort and the future-events countdown below.
+// Falls back to the first year/month found anywhere in the string when the
+// shape isn't one of the known ones.
+function parsePlaceDate(raw: string): number | null {
+  const s = raw.trim();
+
+  // "2024-present" / "2006-2024" / "2024" — a year or year range, use the start
+  let m = s.match(/^(\d{4})(?:\s*-\s*(?:\d{4}|present))?$/i);
+  if (m) return Date.UTC(Number(m[1]), 0, 1);
+
+  // "29Aug - 1 Sept 2025" — day+month stuck together on one side, full date on the other
+  m = s.match(/^(\d{1,2})\s*([A-Za-z]+)\s*-\s*\d{1,2}\s*[A-Za-z]+\s+(\d{4})$/);
+  if (m && MONTHS[m[2].toLowerCase()] !== undefined) {
+    return Date.UTC(Number(m[3]), MONTHS[m[2].toLowerCase()], Number(m[1]));
+  }
+
+  // "15-18 August 2025" / "22-24 March 2026" — day range, single month
+  m = s.match(/^(\d{1,2})\s*-\s*\d{1,2}\s+([A-Za-z]+)\s+(\d{4})$/);
+  if (m && MONTHS[m[2].toLowerCase()] !== undefined) {
+    return Date.UTC(Number(m[3]), MONTHS[m[2].toLowerCase()], Number(m[1]));
+  }
+
+  // "22 Sept 2022" / "18 Jan 2026" — single day
+  m = s.match(/^(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]+)\.?\s+(\d{4})$/);
+  if (m && MONTHS[m[2].toLowerCase()] !== undefined) {
+    return Date.UTC(Number(m[3]), MONTHS[m[2].toLowerCase()], Number(m[1]));
+  }
+
+  // "Apr 2022" / "Sept 2023" — month + year, no day
+  m = s.match(/^([A-Za-z]+)\.?\s+(\d{4})$/);
+  if (m && MONTHS[m[1].toLowerCase()] !== undefined) {
+    return Date.UTC(Number(m[2]), MONTHS[m[1].toLowerCase()], 1);
+  }
+
+  // fallback: pull the first year (and month name, if any) found anywhere
+  const year = s.match(/\d{4}/)?.[0];
+  if (!year) return null;
+  const month = s.match(/[A-Za-z]+/)?.[0];
+  return Date.UTC(Number(year), month ? (MONTHS[month.toLowerCase()] ?? 0) : 0, 1);
 }
 
 const mapPlaces: MapPlace[] = [];
@@ -76,6 +139,7 @@ for (const entry of entries) {
     kind: entry.data.kind,
     coords,
     date: entry.data.date,
+    sortDate: entry.data.date ? parsePlaceDate(entry.data.date) : null,
     detail: entry.data.detail,
     images,
     imageFiles: canReorder ? imageFiles : undefined,
@@ -84,64 +148,6 @@ for (const entry of entries) {
 }
 
 const placesJson = JSON.stringify(mapPlaces).replace(/</g, '\\u003c');
-
-const MONTHS: Record<string, number> = {
-  jan: 0, january: 0,
-  feb: 1, february: 1,
-  mar: 2, march: 2,
-  apr: 3, april: 3,
-  may: 4,
-  jun: 5, june: 5,
-  jul: 6, july: 6,
-  aug: 7, august: 7,
-  sep: 8, sept: 8, september: 8,
-  oct: 9, october: 9,
-  nov: 10, november: 10,
-  dec: 11, december: 11,
-};
-
-// `date` is a free-form display string (single day, month-only, or a range —
-// see the dev form's "Date (e.g. 2024)" placeholder), not a structured date.
-// This pulls out a best-effort sortable timestamp for the timeline below.
-// Falls back to the first year/month found anywhere in the string when the
-// shape isn't one of the known ones.
-function parsePlaceDate(raw: string): number | null {
-  const s = raw.trim();
-
-  // "2024-present" / "2006-2024" / "2024" — a year or year range, use the start
-  let m = s.match(/^(\d{4})(?:\s*-\s*(?:\d{4}|present))?$/i);
-  if (m) return Date.UTC(Number(m[1]), 0, 1);
-
-  // "29Aug - 1 Sept 2025" — day+month stuck together on one side, full date on the other
-  m = s.match(/^(\d{1,2})\s*([A-Za-z]+)\s*-\s*\d{1,2}\s*[A-Za-z]+\s+(\d{4})$/);
-  if (m && MONTHS[m[2].toLowerCase()] !== undefined) {
-    return Date.UTC(Number(m[3]), MONTHS[m[2].toLowerCase()], Number(m[1]));
-  }
-
-  // "15-18 August 2025" / "22-24 March 2026" — day range, single month
-  m = s.match(/^(\d{1,2})\s*-\s*\d{1,2}\s+([A-Za-z]+)\s+(\d{4})$/);
-  if (m && MONTHS[m[2].toLowerCase()] !== undefined) {
-    return Date.UTC(Number(m[3]), MONTHS[m[2].toLowerCase()], Number(m[1]));
-  }
-
-  // "22 Sept 2022" / "18 Jan 2026" — single day
-  m = s.match(/^(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]+)\.?\s+(\d{4})$/);
-  if (m && MONTHS[m[2].toLowerCase()] !== undefined) {
-    return Date.UTC(Number(m[3]), MONTHS[m[2].toLowerCase()], Number(m[1]));
-  }
-
-  // "Apr 2022" / "Sept 2023" — month + year, no day
-  m = s.match(/^([A-Za-z]+)\.?\s+(\d{4})$/);
-  if (m && MONTHS[m[1].toLowerCase()] !== undefined) {
-    return Date.UTC(Number(m[2]), MONTHS[m[1].toLowerCase()], 1);
-  }
-
-  // fallback: pull the first year (and month name, if any) found anywhere
-  const year = s.match(/\d{4}/)?.[0];
-  if (!year) return null;
-  const month = s.match(/[A-Za-z]+/)?.[0];
-  return Date.UTC(Number(year), month ? (MONTHS[month.toLowerCase()] ?? 0) : 0, 1);
-}
 
 const kindLabel = (kind: MapPlace['kind']) =>
   kind === 'want-to-go' ? 'want to go' : kind === 'third-place' ? 'third place' : kind;
@@ -153,7 +159,7 @@ const now = Date.now();
 const timelinePlaces = mapPlaces
   .filter((p): p is MapPlace & { date: string } => Boolean(p.date))
   .map((p) => {
-    const sortDate = parsePlaceDate(p.date) ?? -Infinity;
+    const sortDate = p.sortDate ?? -Infinity;
     return { ...p, sortDate, isFuture: sortDate > now };
   })
   .sort((a, b) => {
@@ -200,7 +206,9 @@ const timelinePlaces = mapPlaces
         <li class={`kind-${place.kind}`}>
           <div class="post-main">
             <strong>{place.name}</strong>
-            {place.isFuture && <span class="future-badge mono-label">future</span>}
+            {place.isFuture && (
+              <span class="future-badge mono-label" data-sort-date={place.sortDate}>future</span>
+            )}
             {import.meta.env.DEV && (
               <button class="timeline-edit dev-btn mono-label" data-id={place.id} type="button">edit</button>
             )}
@@ -262,6 +270,7 @@ const timelinePlaces = mapPlaces
     kind: PlaceKind;
     coords: [number, number];
     date?: string;
+    sortDate: number | null; // ms-since-epoch, see parsePlaceDate in the frontmatter
     detail?: string;
     images: { thumb: string; full: string }[];
     imageFiles?: string[]; // original filenames backing `images`, present in dev only
@@ -269,6 +278,22 @@ const timelinePlaces = mapPlaces
   }
 
   const places: MapPlace[] = JSON.parse(document.getElementById('places-data')!.textContent!);
+
+  // Countdown text for a future `sortDate`, computed against the viewer's own
+  // clock at page-load time rather than baked in at build time — this page
+  // only rebuilds on a push, so a build-time countdown would silently go
+  // stale for however long it is until the next deploy. Returns null once
+  // the date is no longer in the future (by the viewer's clock).
+  function formatCountdown(sortDate: number): string | null {
+    const days = Math.ceil((sortDate - Date.now()) / 86400000);
+    if (days <= 0) return null;
+    if (days === 1) return 'tomorrow';
+    if (days < 14) return `in ${days} days`;
+    if (days < 60) return `in ${Math.round(days / 7)} weeks`;
+    if (days < 365) return `in ${Math.round(days / 30)} months`;
+    const years = Math.round((days / 365) * 10) / 10;
+    return `in ${years} year${years === 1 ? '' : 's'}`;
+  }
 
   const map = L.map('map', { worldCopyJump: true, scrollWheelZoom: false });
 
@@ -356,7 +381,8 @@ const timelinePlaces = mapPlaces
   const markersById: Record<string, L.Marker> = {};
 
   for (const place of places) {
-    const meta = [kindLabel(place.kind), place.date].filter(Boolean).join(' · ');
+    const countdown = place.sortDate != null ? formatCountdown(place.sortDate) : null;
+    const meta = [kindLabel(place.kind), place.date, countdown].filter(Boolean).join(' · ');
     const notes =
       document.querySelector<HTMLTemplateElement>(`template[data-notes="${CSS.escape(place.id)}"]`)
         ?.innerHTML ?? '';
@@ -568,6 +594,17 @@ const timelinePlaces = mapPlaces
       });
     });
   }
+
+  // timeline "future" badges: the server only knows a place is future as of
+  // build time, so it renders a generic placeholder carrying the real
+  // sortDate — fill in an actual countdown (or drop the badge if the
+  // viewer's own clock says it's no longer future) once this runs.
+  document.querySelectorAll<HTMLElement>('.future-badge[data-sort-date]').forEach((badge) => {
+    const sortDate = Number(badge.dataset.sortDate);
+    const countdown = formatCountdown(sortDate);
+    if (countdown) badge.textContent = countdown;
+    else badge.remove();
+  });
 
   // timeline photo carousels: swap the cover img's src, wrap-around at the ends;
   // clicking the image opens the same lightbox as the map popups
