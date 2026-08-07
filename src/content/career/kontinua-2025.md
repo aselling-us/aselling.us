@@ -22,6 +22,7 @@ quiz PDFs, and support deployment of [public workbook PDFs](https://kontinuafoun
     - Newtonian Physics
     - Circular Motion
     - Electromagnetism
+    - Data Structures in C/C++
     - Linear Algebra Sequence
     - Bitmap and Hexadecimal Chapters
     - Drones, Quadcopters, and Helicopters

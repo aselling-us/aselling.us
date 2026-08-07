@@ -19,6 +19,12 @@ const recentFilms = letterboxd.films.slice(0, 4);
 // goodreads currently-reading shelf, most recently added first
 const currentlyReading = goodreads.currentlyReading;
 
+// career entries with no endDate are current roles (see src/content.config.ts)
+const roles = await getCollection('career');
+const currentlyWorking = roles
+  .filter((entry) => !entry.data.endDate)
+  .sort((a, b) => b.data.startDate.localeCompare(a.data.startDate));
+
 const fmtPostDate = (d: Date) =>
   d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 
@@ -101,12 +107,12 @@ const fmtIsoDate = (iso: string | null) =>
     </section>
   )}
 
-  {(recentFilms.length > 0 || currentlyReading.length > 0) && (
+  {(recentFilms.length > 0 || currentlyReading.length > 0 || currentlyWorking.length > 0) && (
     <section class="home-section">
       <h2 class="mono-label section-label">currently</h2>
       <div class="currently-grid">
         {recentFilms.length > 0 && (
-          <div class="currently-col">
+          <div class="currently-col currently-col-watching">
             <span class="mono-label item-label">watching</span>
             <ul class="currently-books currently-books-row">
               {recentFilms.map((film) => (
@@ -129,7 +135,7 @@ const fmtIsoDate = (iso: string | null) =>
         )}
 
         {currentlyReading.length > 0 && (
-          <div class="currently-col">
+          <div class="currently-col currently-col-reading">
             <span class="mono-label item-label">reading</span>
             <ul class="currently-books currently-books-row">
               {currentlyReading.map((book) => (
@@ -149,6 +155,38 @@ const fmtIsoDate = (iso: string | null) =>
                         <span class="mono-label progress-label">page {book.currentPage} / {book.totalPages}</span>
                       </span>
                     )}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {currentlyWorking.length > 0 && (
+          <div class="currently-col currently-col-working">
+            <span class="mono-label item-label">working at</span>
+            <ul class="currently-jobs">
+              {currentlyWorking.map((job) => (
+                <li class="currently-job">
+                  <a
+                    class="currently-link currently-job-link"
+                    href={job.data.companyUrl ?? '/working'}
+                    target={job.data.companyUrl ? '_blank' : undefined}
+                    rel={job.data.companyUrl ? 'noopener noreferrer' : undefined}
+                  >
+                    {job.data.logo && (
+                      <Image
+                        src={job.data.logo}
+                        alt={`${job.data.company} logo`}
+                        width={40}
+                        height={40}
+                        class="currently-job-logo"
+                      />
+                    )}
+                    <span class="currently-job-text">
+                      <span class="currently-title">{job.data.role}</span>
+                      <span class="currently-dim">{job.data.company}</span>
+                    </span>
                   </a>
                 </li>
               ))}
@@ -240,8 +278,27 @@ const fmtIsoDate = (iso: string | null) =>
 
   .currently-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-template-areas:
+      "watching reading"
+      "working  reading";
+    align-items: start;
     gap: var(--space-4);
+  }
+  .currently-col-watching { grid-area: watching; }
+  .currently-col-reading { grid-area: reading; }
+  .currently-col-working {
+    grid-area: working;
+    padding-top: var(--space-2);
+  }
+  @media (max-width: 500px) {
+    .currently-grid {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "watching"
+        "working"
+        "reading";
+    }
   }
   .item-label {
     display: block;
@@ -303,5 +360,35 @@ const fmtIsoDate = (iso: string | null) =>
   }
   .currently-book {
     width: 100px;
+  }
+
+  .currently-jobs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .currently-job-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .currently-job-link:hover .currently-title { color: var(--color-highlight-bright); }
+  .currently-job-logo {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border: 1px solid var(--color-hairline);
+    background: #fff;
+  }
+  .currently-job-link:hover .currently-job-logo { border-color: var(--color-highlight); }
+  .currently-job-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
   }
 </style>
