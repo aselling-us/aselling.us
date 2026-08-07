@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-08-07T01:04:28.141Z",
+  "fetchedAt": "2026-08-07T10:11:04.578Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "One Night Only",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/one-night-only-2026/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/3/1/1/6/7/7/1311677-one-night-only-2026-0-600-0-900-crop.jpg?v=9e18b23e11",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-06",
+      "review": "me n who me n who me n who me n who me n who me n who me n who me n who me n who\n\n91/100"
+    },
     {
       "title": "Waves",
       "year": 2019,
@@ -520,17 +531,6 @@
       "review": "incredible film. never having children, never going to therapy."
     },
     {
-      "title": "GoodFellas",
-      "year": 1990,
-      "link": "https://letterboxd.com/aselling/film/goodfellas/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/3/8/3/p/eZpRSjHZDVbhcrFHh6Qsg9O2N62-0-600-0-900-crop.jpg?v=66cce21922",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-06-22",
-      "review": "lowkenuinely I got really bored even though ray liotta is so fine."
-    },
-    {
       "title": "Oppenheimer",
       "year": 2023,
       "link": "https://letterboxd.com/aselling/film/oppenheimer-2023/2/",
@@ -553,31 +553,6 @@
       "review": "ABSOLUTE CINEMA"
     }
   ],
-  "favorites": [
-    {
-      "title": "(500) Days of Summer",
-      "year": 2009,
-      "link": "https://letterboxd.com/film/500-days-of-summer/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/9/3/5/0/p/6h6nfckQgkvYBGd7BbXQcoaNDRW-0-600-0-900-crop.jpg?v=e6451fd68d"
-    },
-    {
-      "title": "Portrait of a Lady on Fire",
-      "year": 2019,
-      "link": "https://letterboxd.com/film/portrait-of-a-lady-on-fire/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/6/0/8/3/0/p/brYql72LnXNcecodypOlcc0ehCF-0-600-0-900-crop.jpg?v=98cc0adc4b"
-    },
-    {
-      "title": "Ferris Bueller's Day Off",
-      "year": 1986,
-      "link": "https://letterboxd.com/film/ferris-buellers-day-off/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/7/2/1/9/p/zACzLwjg8WqWh2tEKiee9w90Z7b-0-600-0-900-crop.jpg?v=2a3ea45b90"
-    },
-    {
-      "title": "Train Dreams",
-      "year": 2025,
-      "link": "https://letterboxd.com/film/train-dreams/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/1/2/5/3/8/3/p/Auo1FtIv7tZYWHR3o31OskGTnh7-0-600-0-900-crop.jpg?v=b7e593870c"
-    }
-  ],
+  "favorites": [],
   "watchlist": []
 }

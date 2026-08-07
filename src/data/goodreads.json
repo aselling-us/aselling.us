@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-05T11:30:03.013Z",
+  "fetchedAt": "2026-08-07T10:11:04.578Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -20,7 +20,9 @@
       "rating": 0,
       "readAt": null,
       "addedAt": "2026-07-10",
-      "review": null
+      "review": null,
+      "currentPage": 90,
+      "totalPages": 144
     },
     {
       "title": "The Secret History",
