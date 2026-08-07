@@ -323,64 +323,117 @@ async function fetchFilms() {
   return films;
 }
 
-// --- Letterboxd favorites + watchlist (scraped — not available via RSS) ---
+// --- Letterboxd favorites + watchlist + diary posters (scraped — not available via RSS) ---
 
-// Both the favorites grid and the watchlist grid render posters via a React
-// component that resolves the image client-side — a plain HTML fetch only
-// ever sees a placeholder src, and Letterboxd's underlying image-lookup
-// endpoint sits behind a Cloudflare JS challenge. A real browser is the only
-// way to read the resolved <img src>.
-function parseGridEntries(entries, cropFrom) {
-  return entries.map(({ fullName, path, poster }) => {
+// Favorites, watchlist, and diary rows all render their poster through the
+// same "LazyPoster" React component, which resolves the real image by
+// calling a same-origin JSON endpoint client-side — a plain HTML fetch only
+// ever sees a placeholder src, and hitting that endpoint directly (even with
+// valid cookies attached) gets a Cloudflare JS-challenge 403. Every previous
+// version of this code worked around that by waiting for the component to
+// resolve on its own — polling for the placeholder to disappear, stripping
+// loading="lazy", even giving the page a very tall viewport so every row
+// was "on screen" from first paint. All of that turned out to be racing a
+// client-side fetch with no reliable completion signal: rerunning the exact
+// same "tall viewport" code back to back left a different, non-trivial
+// fraction of rows unresolved each time (confirmed directly — not a one-off).
+//
+// The actual fix: skip the client-side race entirely. Every LazyPoster
+// element's *initial, server-rendered* HTML already carries everything
+// needed to ask for the final image ourselves — `data-item-slug`, and a
+// `data-resolvable-poster-path` JSON blob with `preferredAlternativePosterId`
+// (the member's per-review/per-favorite custom poster choice, when set) and
+// a `cacheBustingKey`. Watching the page's own network requests while it
+// resolved posters normally showed exactly what it calls with those values:
+// `/film/<slug>/poster/std/<posterId?>/<width>/?k=<cacheBustingKey>`, which
+// answers immediately with `{"url": "<final CDN url at that width>", ...}` —
+// no waiting, scrolling, or retrying required. It still has to run as a
+// `fetch()` from *inside* an already-loaded page (page.evaluate), not a
+// standalone request: Cloudflare accepts the browser's own fetch (same
+// TLS/JS fingerprint the page load itself already passed) but 403s an
+// out-of-band request even carrying the same cookies.
+//
+// Resolves a batch of `{ slug, posterId, cacheBustingKey }` descriptors (any
+// of which may be null/missing — such entries just resolve to null) to their
+// final poster image URLs in one round trip.
+async function resolvePosterUrls(page, items) {
+  return page.evaluate(async (items) => {
+    return Promise.all(
+      items.map(async ({ slug, posterId, cacheBustingKey }) => {
+        if (!slug || !cacheBustingKey) return null;
+        const path = posterId
+          ? `/film/${slug}/poster/std/${posterId}/600/?k=${cacheBustingKey}`
+          : `/film/${slug}/poster/std/600/?k=${cacheBustingKey}`;
+        try {
+          const res = await fetch(path, { headers: { Accept: 'text/json, */*' } });
+          if (!res.ok) return null;
+          const data = await res.json();
+          return data.url ?? null;
+        } catch {
+          return null;
+        }
+      })
+    );
+  }, items);
+}
+
+function parseGridEntries(entries, urls) {
+  return entries.map(({ fullName, path }, i) => {
     const [, title, year] = fullName.match(/^(.*)\s\((\d{4})\)$/) ?? [null, fullName, null];
     return {
       title,
       year: year ? Number(year) : null,
       link: `https://letterboxd.com${path}`,
-      poster: poster && !poster.includes('empty-poster') ? poster.replace(cropFrom, '-0-600-0-900-crop') : null,
+      poster: urls[i] ?? null,
     };
   });
 }
 
 async function fetchFavorites(page) {
-  // networkidle is unreliable here (see fetchWatchlist) — domcontentloaded +
-  // polling for resolved posters is faster and more consistent.
   await page.goto(`https://letterboxd.com/${LETTERBOXD_USER}/`, { waitUntil: 'domcontentloaded' });
-  await page
-    .waitForFunction(() => !document.querySelector('#favourites img[src*="empty-poster"]'), { timeout: 15000 })
-    .catch(() => {}); // fall through with whatever resolved in time
 
   const entries = await page.$$eval('#favourites .favourite-production-poster-container', (nodes) =>
-    nodes.map((node) => ({
-      fullName: node.querySelector('.react-component')?.getAttribute('data-item-full-display-name') ?? '',
-      path: node.querySelector('.react-component')?.getAttribute('data-item-link') ?? '',
-      poster: node.querySelector('img')?.getAttribute('src') ?? null,
-    }))
+    nodes.map((node) => {
+      const rc = node.querySelector('.react-component');
+      let resolvable = null;
+      try {
+        resolvable = JSON.parse(rc?.getAttribute('data-resolvable-poster-path') ?? 'null');
+      } catch {}
+      return {
+        fullName: rc?.getAttribute('data-item-full-display-name') ?? '',
+        path: rc?.getAttribute('data-item-link') ?? '',
+        slug: rc?.getAttribute('data-item-slug') ?? null,
+        posterId: resolvable?.preferredAlternativePosterId ?? null,
+        cacheBustingKey: resolvable?.cacheBustingKey ?? null,
+      };
+    })
   );
 
-  // bump the served crop up from the profile grid's 150×225 thumbnail
-  return parseGridEntries(entries, '-0-150-0-225-crop');
+  return parseGridEntries(entries, await resolvePosterUrls(page, entries));
 }
 
 // Top 20 by popularity; the `/by/popular/` sort puts them in order, so the
 // first page (28 items) always has enough to slice from.
 async function fetchWatchlist(page) {
-  // networkidle is unreliable here (the grid page keeps background requests
-  // going); domcontentloaded + polling for resolved posters is faster and more consistent.
   await page.goto(`https://letterboxd.com/${LETTERBOXD_USER}/watchlist/by/popular/`, { waitUntil: 'domcontentloaded' });
-  await page
-    .waitForFunction(() => !document.querySelector('.griditem img[src*="empty-poster"]'), { timeout: 15000 })
-    .catch(() => {});
 
   const entries = await page.$$eval('.griditem .react-component', (nodes) =>
-    nodes.slice(0, 20).map((node) => ({
-      fullName: node.getAttribute('data-item-full-display-name') ?? '',
-      path: node.getAttribute('data-item-link') ?? '',
-      poster: node.querySelector('img')?.getAttribute('src') ?? null,
-    }))
+    nodes.slice(0, 20).map((n) => {
+      let resolvable = null;
+      try {
+        resolvable = JSON.parse(n.getAttribute('data-resolvable-poster-path') ?? 'null');
+      } catch {}
+      return {
+        fullName: n.getAttribute('data-item-full-display-name') ?? '',
+        path: n.getAttribute('data-item-link') ?? '',
+        slug: n.getAttribute('data-item-slug') ?? null,
+        posterId: resolvable?.preferredAlternativePosterId ?? null,
+        cacheBustingKey: resolvable?.cacheBustingKey ?? null,
+      };
+    })
   );
 
-  return parseGridEntries(entries, '-0-125-0-187-crop');
+  return parseGridEntries(entries, await resolvePosterUrls(page, entries));
 }
 
 // A diary entry can carry a per-log custom poster (an alternate official
@@ -388,22 +441,8 @@ async function fetchWatchlist(page) {
 // from the film's default poster embedded in the RSS feed. The diary
 // listing page renders each row keyed by data-viewing-id — the same numeric
 // id as the suffix on each RSS item's guid (see parseFilm's `viewingId`) —
-// so rows can be matched back to films even across rewatches.
-//
-// Poster resolution here isn't just a slow race — it's gated on scroll
-// position. Diagnosed by watching individual rows' <img src> over time: every
-// row inside the initial viewport resolved to its real poster within ~1s,
-// and every row below that never changed at all even after 20s of waiting,
-// confirming the below-the-fold rows' resolution never even starts (not that
-// it's slow) without the row actually scrolling into view — removing the
-// `loading="lazy"` attribute only defeats the browser's *native* lazy
-// loading, not Letterboxd's own visibility-gated fetch. Scrolling
-// step-by-step did trigger more rows but plateaued well short of 100% even
-// after 70s. What reliably resolves every row: making the whole diary table
-// "on screen" from the start via a very tall viewport (browserContext's
-// `viewport` in fetchFavoritesAndWatchlist) — confirmed 0 unresolved rows
-// within 2s across all 49 diary entries, vs. dozens still stuck with a normal
-// viewport height regardless of how long or how much scrolling was tried.
+// so rows can be matched back to films even across rewatches. See
+// resolvePosterUrls above for how each row's poster is actually resolved.
 async function fetchDiaryPosters(page) {
   const posters = new Map();
   for (let pageNum = 1; pageNum <= 3; pageNum++) {
@@ -412,29 +451,32 @@ async function fetchDiaryPosters(page) {
         ? `https://letterboxd.com/${LETTERBOXD_USER}/films/diary/`
         : `https://letterboxd.com/${LETTERBOXD_USER}/films/diary/page/${pageNum}/`;
     await page.goto(url, { waitUntil: 'domcontentloaded' });
-    await page.$$eval('.diary-entry-row .poster img', (imgs) => imgs.forEach((img) => img.removeAttribute('loading')));
-    await page
-      .waitForFunction(() => !document.querySelector('.diary-entry-row .poster img[src*="empty-poster"]'), undefined, {
-        timeout: 20000,
-      })
-      .catch(() => {}); // fall through with whatever resolved in time
 
-    const rows = await page.$$eval('tr.diary-entry-row', (nodes) =>
-      nodes.map((n) => ({
-        viewingId: n.getAttribute('data-viewing-id'),
-        poster: n.querySelector('.poster.film-poster img')?.getAttribute('src') ?? null,
-      }))
+    const rows = await page.$$eval('tr.diary-entry-row', (trs) =>
+      trs.map((tr) => {
+        const lp = tr.querySelector('.react-component[data-component-class="LazyPoster"]');
+        let resolvable = null;
+        try {
+          resolvable = JSON.parse(lp?.getAttribute('data-resolvable-poster-path') ?? 'null');
+        } catch {}
+        return {
+          viewingId: tr.getAttribute('data-viewing-id'),
+          slug: lp?.getAttribute('data-item-slug') ?? null,
+          posterId: resolvable?.preferredAlternativePosterId ?? null,
+          cacheBustingKey: resolvable?.cacheBustingKey ?? null,
+        };
+      })
     );
-    const unresolved = rows.filter((r) => !r.poster || r.poster.includes('empty-poster')).length;
-    if (unresolved > 0) {
-      console.warn(`diary posters page ${pageNum}: ${unresolved}/${rows.length} still unresolved after the viewport fix`);
-    }
     if (rows.length === 0) break;
-    for (const { viewingId, poster } of rows) {
-      if (viewingId && poster && !poster.includes('empty-poster')) {
-        posters.set(viewingId, poster.replace(/-0-\d+-0-\d+-crop/, '-0-600-0-900-crop'));
-      }
+
+    const urls = await resolvePosterUrls(page, rows);
+    const unresolved = urls.filter((u) => !u).length;
+    if (unresolved > 0) {
+      console.warn(`diary posters page ${pageNum}: ${unresolved}/${rows.length} failed to resolve`);
     }
+    rows.forEach((row, i) => {
+      if (row.viewingId && urls[i]) posters.set(row.viewingId, urls[i]);
+    });
     if (rows.length < 50) break; // last page
   }
   return posters;
@@ -447,11 +489,6 @@ async function fetchFavoritesAndWatchlist() {
     const contextOptions = {
       userAgent:
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 aselling.us media snapshot (arjan.ellingson@gmail.com)',
-      // Tall enough that every row of a full diary page (50) or watchlist
-      // page (28) sits inside the initial viewport — see fetchDiaryPosters
-      // for how this was diagnosed as a hard visibility gate, not just a slow
-      // load, on Letterboxd's poster resolution.
-      viewport: { width: 1280, height: 20000 },
     };
     // Separate contexts per page: reusing one session for both requests trips
     // Letterboxd's Cloudflare bot check on the second navigation.
