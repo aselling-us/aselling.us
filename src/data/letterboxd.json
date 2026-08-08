@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-08-07T10:11:04.578Z",
+  "fetchedAt": "2026-08-08T09:54:59.497Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Romería",
+      "year": 2025,
+      "link": "https://letterboxd.com/aselling/film/romeria/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/0/6/9/0/3/7/1069037-romeria-0-600-0-900-crop.jpg?v=5268e5d224",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-07",
+      "review": "This was such a beautiful film. What really stood out was the color grading, immaculate blending of colors on the screen with a bit of shading to make them stand out a bit more. Even the night time shots for the shadows had such a bright undertone to them. \n\nI think it was quite the interesting, but really fitting choice to have the same actress play Marina and her mother. Beautiful flashback \"rebellion\" sequence. Glad she finally found her home 🩵🌊"
+    },
     {
       "title": "One Night Only",
       "year": 2026,
@@ -540,17 +551,6 @@
       "rewatch": true,
       "watchedDate": "2025-06-19",
       "review": "Watched on Thursday June 19, 2025."
-    },
-    {
-      "title": "Scott Pilgrim vs. the World",
-      "year": 2010,
-      "link": "https://letterboxd.com/aselling/film/scott-pilgrim-vs-the-world/",
-      "poster": "https://a.ltrbxd.com/resized/sm/upload/vs/75/02/fx/2B5zjs5E3xerqAyowpw3QcOCyLq-0-600-0-900-crop.jpg?v=3aef2095df",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2025-05-09",
-      "review": "ABSOLUTE CINEMA"
     }
   ],
   "favorites": [],
