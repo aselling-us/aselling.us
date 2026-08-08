@@ -1,0 +1,1066 @@
+---
+import { getCollection, render } from 'astro:content';
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { geocode } from '../lib/geocode';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet.markercluster/dist/MarkerCluster.css';
+
+const entries = await getCollection('places');
+
+// Photos dropped in src/content/places/<place-id>/ attach to that place
+// automatically, ordered by filename — prefix 01-, 02-… to control order.
+const galleries = import.meta.glob<{ default: ImageMetadata }>(
+  '../content/places/*/*.{jpg,jpeg,JPG,JPEG,png,PNG,webp,gif,avif}',
+  { eager: true }
+);
+
+interface MapPlace {
+  id: string;
+  name: string;
+  kind: 'event' | 'travel' | 'lived' | 'want-to-go' | 'third-place';
+  coords: [number, number];
+  date?: string;
+  /** best-effort ms-since-epoch parse of `date` (see parsePlaceDate), for
+   *  sorting and for the client-side countdown — null when `date` is absent
+   *  or unparseable */
+  sortDate: number | null;
+  detail?: string;
+  images: { thumb: string; full: string }[];
+  /** original filenames backing `images`, in the same order — dev only, for photo reordering */
+  imageFiles?: string[];
+  /** raw markdown body — only included in dev, for the edit form */
+  notes?: string;
+}
+
+const MONTHS: Record<string, number> = {
+  jan: 0, january: 0,
+  feb: 1, february: 1,
+  mar: 2, march: 2,
+  apr: 3, april: 3,
+  may: 4,
+  jun: 5, june: 5,
+  jul: 6, july: 6,
+  aug: 7, august: 7,
+  sep: 8, sept: 8, september: 8,
+  oct: 9, october: 9,
+  nov: 10, november: 10,
+  dec: 11, december: 11,
+};
+
+// `date` is a free-form display string (single day, month-only, or a range —
+// see the dev form's "Date (e.g. 2024)" placeholder), not a structured date.
+// This pulls out a best-effort sortable timestamp, used both for the
+// timeline's chronological sort and the future-events countdown below.
+// Falls back to the first year/month found anywhere in the string when the
+// shape isn't one of the known ones.
+function parsePlaceDate(raw: string): number | null {
+  const s = raw.trim();
+
+  // "2024-present" / "2006-2024" / "2024" — a year or year range, use the start
+  let m = s.match(/^(\d{4})(?:\s*-\s*(?:\d{4}|present))?$/i);
+  if (m) return Date.UTC(Number(m[1]), 0, 1);
+
+  // "29Aug - 1 Sept 2025" — day+month stuck together on one side, full date on the other
+  m = s.match(/^(\d{1,2})\s*([A-Za-z]+)\s*-\s*\d{1,2}\s*[A-Za-z]+\s+(\d{4})$/);
+  if (m && MONTHS[m[2].toLowerCase()] !== undefined) {
+    return Date.UTC(Number(m[3]), MONTHS[m[2].toLowerCase()], Number(m[1]));
+  }
+
+  // "15-18 August 2025" / "22-24 March 2026" — day range, single month
+  m = s.match(/^(\d{1,2})\s*-\s*\d{1,2}\s+([A-Za-z]+)\s+(\d{4})$/);
+  if (m && MONTHS[m[2].toLowerCase()] !== undefined) {
+    return Date.UTC(Number(m[3]), MONTHS[m[2].toLowerCase()], Number(m[1]));
+  }
+
+  // "22 Sept 2022" / "18 Jan 2026" — single day
+  m = s.match(/^(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]+)\.?\s+(\d{4})$/);
+  if (m && MONTHS[m[2].toLowerCase()] !== undefined) {
+    return Date.UTC(Number(m[3]), MONTHS[m[2].toLowerCase()], Number(m[1]));
+  }
+
+  // "Apr 2022" / "Sept 2023" — month + year, no day
+  m = s.match(/^([A-Za-z]+)\.?\s+(\d{4})$/);
+  if (m && MONTHS[m[1].toLowerCase()] !== undefined) {
+    return Date.UTC(Number(m[2]), MONTHS[m[1].toLowerCase()], 1);
+  }
+
+  // fallback: pull the first year (and month name, if any) found anywhere
+  const year = s.match(/\d{4}/)?.[0];
+  if (!year) return null;
+  const month = s.match(/[A-Za-z]+/)?.[0];
+  return Date.UTC(Number(year), month ? (MONTHS[month.toLowerCase()] ?? 0) : 0, 1);
+}
+
+const mapPlaces: MapPlace[] = [];
+const noteRenders: { id: string; Content: any }[] = [];
+
+for (const entry of entries) {
+  const coords =
+    entry.data.coords ?? (entry.data.location ? await geocode(entry.data.location) : undefined);
+  if (!coords) {
+    console.warn(`[travels] skipping "${entry.data.name}" — no coordinates`);
+    continue;
+  }
+
+  const listed = entry.data.images;
+  const folderImgs = Object.keys(galleries)
+    .filter((p) => p.startsWith(`../content/places/${entry.id}/`))
+    .sort()
+    .map((p) => galleries[p].default)
+    .filter((img) => !listed.some((l) => l.src === img.src));
+
+  const images: { thumb: string; full: string }[] = [];
+  const imageFiles: string[] = [];
+  for (const img of [...listed, ...folderImgs]) {
+    // thumb: small grid/cover crop. full: larger source for the fullscreen lightbox —
+    // reusing the thumb there meant a 560px image got stretched to viewport width and looked blurry.
+    const [thumb, full] = await Promise.all([
+      getImage({ src: img, width: 560, format: 'webp', quality: 80 }),
+      getImage({ src: img, width: Math.min(img.width, 1920), format: 'webp', quality: 82 }),
+    ]);
+    images.push({ thumb: thumb.src, full: full.src });
+    // raw (pre-optimization) src is a real filesystem path in dev — reused to let
+    // the timeline carousel's reorder buttons rename files on disk (see dev-add-place.mjs)
+    if (import.meta.env.DEV) imageFiles.push(img.src.split('/').pop()?.split('?')[0] ?? '');
+  }
+  // reordering only supports plain folder-dropped photos, which is all places currently use
+  const canReorder = import.meta.env.DEV && listed.length === 0 && folderImgs.length > 1;
+
+  if (entry.body?.trim()) {
+    const { Content } = await render(entry);
+    noteRenders.push({ id: entry.id, Content });
+  }
+
+  mapPlaces.push({
+    id: entry.id,
+    name: entry.data.name,
+    kind: entry.data.kind,
+    coords,
+    date: entry.data.date,
+    sortDate: entry.data.date ? parsePlaceDate(entry.data.date) : null,
+    detail: entry.data.detail,
+    images,
+    imageFiles: canReorder ? imageFiles : undefined,
+    notes: import.meta.env.DEV ? (entry.body ?? '').trim() : undefined,
+  });
+}
+
+const placesJson = JSON.stringify(mapPlaces).replace(/</g, '\\u003c');
+
+const kindLabel = (kind: MapPlace['kind']) =>
+  kind === 'want-to-go' ? 'want to go' : kind === 'third-place' ? 'third place' : kind;
+
+const now = Date.now();
+
+// Chronological list of everything with a date — want-to-go entries lead
+// (they're the future plans), then the rest sorted most-recent-first.
+const timelinePlaces = mapPlaces
+  .filter((p): p is MapPlace & { date: string } => Boolean(p.date))
+  .map((p) => {
+    const sortDate = p.sortDate ?? -Infinity;
+    return { ...p, sortDate, isFuture: sortDate > now };
+  })
+  .sort((a, b) => {
+    const aWant = a.kind === 'want-to-go' ? 0 : 1;
+    const bWant = b.kind === 'want-to-go' ? 0 : 1;
+    return aWant !== bWant ? aWant - bWant : b.sortDate - a.sortDate;
+  });
+---
+<BaseLayout title="Places" description="An interactive map of places — events, travels, and homes.">
+  <span class="mono-label">index / 06</span>
+  <h1>Places</h1>
+  <p style="color: var(--color-text-dim);">Places I've been — for concerts, travels, events, or just to be there. Includes some of my favorite <span style="font-style: italic;">3<sup>rd</sup></span> spaces. Click a marker for photos and notes.</p>
+
+  <div class="map-legend" role="group" aria-label="Filter map markers">
+    <label class="legend-item"><input type="checkbox" data-kind="event" checked /> <span class="dot dot-event" aria-hidden="true"></span> Events</label>
+    <label class="legend-item"><input type="checkbox" data-kind="travel" checked /> <span class="dot dot-travel" aria-hidden="true"></span> Travels</label>
+    <label class="legend-item"><input type="checkbox" data-kind="lived" checked /> <span class="dot dot-lived" aria-hidden="true"></span> Lived</label>
+    <label class="legend-item"><input type="checkbox" data-kind="want-to-go" checked /> <span class="dot dot-want-to-go" aria-hidden="true"></span> Want to go</label>
+    <label class="legend-item"><input type="checkbox" data-kind="third-place" checked /> <span class="dot dot-third-place" aria-hidden="true"></span> Third places</label>
+    {import.meta.env.DEV && (
+      <button id="add-place" class="add-place-btn mono-label" type="button" title="Dev only: click the map to create a place file">+ add place</button>
+    )}
+    {import.meta.env.DEV && (
+      <form id="address-search-form" class="address-search" title="Dev only: geocode an address and jump the map there">
+        <input id="address-search-input" type="text" placeholder="search address…" />
+        <button type="submit" class="mono-label">search</button>
+      </form>
+    )}
+  </div>
+
+  <div class="map-frame">
+    <div id="map"></div>
+  </div>
+
+  <div id="photo-lightbox" class="photo-lightbox" aria-hidden="true">
+    <button type="button" class="photo-lightbox-close" aria-label="Close">&times;</button>
+    <img class="photo-lightbox-img" src="" alt="" />
+  </div>
+
+  <section>
+    <h2 class="mono-label section-label">timeline / {String(timelinePlaces.length).padStart(2, '0')} dated</h2>
+    <ul class="post-list">
+      {timelinePlaces.map((place) => (
+        <li class={`kind-${place.kind}`}>
+          <div class="post-main">
+            <strong>{place.name}</strong>
+            {place.isFuture && (
+              <span class="future-badge mono-label" data-sort-date={place.sortDate}>future</span>
+            )}
+            {import.meta.env.DEV && (
+              <button class="timeline-edit dev-btn mono-label" data-id={place.id} type="button">edit</button>
+            )}
+            <span class="mono-label post-date">
+              <span class={`dot dot-${place.kind}`} aria-hidden="true"></span>
+              {kindLabel(place.kind)} · {place.date}
+            </span>
+            {place.detail && <p class="post-desc">{place.detail}</p>}
+          </div>
+          {place.images[0] && (
+            <figure
+              class="post-cover"
+              data-images={JSON.stringify(place.images)}
+              data-files={place.imageFiles ? JSON.stringify(place.imageFiles) : undefined}
+              data-slug={place.imageFiles ? place.id : undefined}
+            >
+              <div class="post-cover-frame">
+                <img src={place.images[0].thumb} alt={`Photo from ${place.name}`} loading="lazy" />
+                {place.images.length > 1 && (
+                  <>
+                    <button type="button" class="post-cover-arrow post-cover-prev" aria-label="Previous photo">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>
+                    </button>
+                    <button type="button" class="post-cover-arrow post-cover-next" aria-label="Next photo">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+                    </button>
+                    <span class="post-cover-count mono-label">1 / {place.images.length}</span>
+                  </>
+                )}
+              </div>
+              {place.imageFiles && (
+                <div class="post-cover-reorder">
+                  <button type="button" class="post-cover-move-left dev-btn mono-label">‹ move</button>
+                  <button type="button" class="post-cover-move-right dev-btn mono-label">move ›</button>
+                </div>
+              )}
+            </figure>
+          )}
+        </li>
+      ))}
+    </ul>
+    {timelinePlaces.length === 0 && <p style="color: var(--color-text-dim);">No dated places yet.</p>}
+  </section>
+
+  <script type="application/json" id="places-data" set:html={placesJson} />
+  {noteRenders.map(({ id, Content }) => (
+    <template data-notes={id}><Content /></template>
+  ))}
+</BaseLayout>
+
+<script>
+  import L from 'leaflet';
+  import 'leaflet.markercluster';
+
+  type PlaceKind = 'event' | 'travel' | 'lived' | 'want-to-go' | 'third-place';
+  interface MapPlace {
+    id: string;
+    name: string;
+    kind: PlaceKind;
+    coords: [number, number];
+    date?: string;
+    sortDate: number | null; // ms-since-epoch, see parsePlaceDate in the frontmatter
+    detail?: string;
+    images: { thumb: string; full: string }[];
+    imageFiles?: string[]; // original filenames backing `images`, present in dev only
+    notes?: string; // raw markdown, present in dev only
+  }
+
+  const places: MapPlace[] = JSON.parse(document.getElementById('places-data')!.textContent!);
+
+  // Countdown text for a future `sortDate`, computed against the viewer's own
+  // clock at page-load time rather than baked in at build time — this page
+  // only rebuilds on a push, so a build-time countdown would silently go
+  // stale for however long it is until the next deploy. Returns null once
+  // the date is no longer in the future (by the viewer's clock).
+  function formatCountdown(sortDate: number): string | null {
+    const days = Math.ceil((sortDate - Date.now()) / 86400000);
+    if (days <= 0) return null;
+    if (days === 1) return 'tomorrow';
+    if (days < 14) return `in ${days} days`;
+    if (days < 60) return `in ${Math.round(days / 7)} weeks`;
+    if (days < 365) return `in ${Math.round(days / 30)} months`;
+    const years = Math.round((days / 365) * 10) / 10;
+    return `in ${years} year${years === 1 ? '' : 's'}`;
+  }
+
+  const map = L.map('map', { worldCopyJump: true, scrollWheelZoom: false });
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(map);
+
+  const markerIcon = (kind: PlaceKind) =>
+    L.divIcon({
+      className: 'place-marker',
+      html: `<span class="dot dot-${kind}"></span>`,
+      iconSize: [14, 14],
+      iconAnchor: [7, 7],
+      popupAnchor: [0, -10],
+    });
+
+  const esc = (s: string) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+  const kindLabel = (kind: PlaceKind) =>
+    kind === 'want-to-go' ? 'want to go' : kind === 'third-place' ? 'third place' : kind;
+  // widen the grid as photo count grows so thumbnails don't shrink to nothing
+  const popupImgCols = (count: number) => (count > 12 ? 4 : count > 6 ? 3 : 2);
+
+  // fullscreen photo lightbox, shared by every popup's photo grid
+  const lightbox = document.getElementById('photo-lightbox')!;
+  const lightboxImg = lightbox.querySelector<HTMLImageElement>('.photo-lightbox-img')!;
+  const openLightbox = (src: string, alt: string) => {
+    lightboxImg.src = src;
+    lightboxImg.alt = alt;
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+  };
+  const closeLightbox = () => {
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImg.src = '';
+  };
+  lightbox.querySelector('.photo-lightbox-close')?.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+  });
+  // popups are rebuilt from an HTML string each time they open, so delegate from a static ancestor
+  document.addEventListener('click', (e) => {
+    const wrap = (e.target as HTMLElement).closest('.popup-img-wrap');
+    const img = wrap?.querySelector<HTMLImageElement>('img');
+    if (img) openLightbox(img.dataset.full || img.src, img.alt);
+  });
+
+  interface PlaceMarkerOptions extends L.MarkerOptions {
+    kind: PlaceKind;
+  }
+
+  // one cluster group for all kinds so nearby dots merge across categories;
+  // the legend adds/removes each kind's markers from it
+  const clusters = L.markerClusterGroup({
+    maxClusterRadius: 48,
+    showCoverageOnHover: false,
+    iconCreateFunction: (cluster) => {
+      const count = cluster.getChildCount();
+      const kinds = new Set(
+        cluster.getAllChildMarkers().map((m) => (m.options as PlaceMarkerOptions).kind)
+      );
+      const kind = kinds.size === 1 ? [...kinds][0] : 'mixed';
+      // grow with the number of places inside, within reason
+      const size = Math.min(26 + (count - 2) * 3, 46);
+      return L.divIcon({
+        className: 'place-cluster',
+        html: `<span class="cluster-circle cluster-${kind}">${count}</span>`,
+        iconSize: [size, size],
+        iconAnchor: [size / 2, size / 2],
+      });
+    },
+  }).addTo(map);
+
+  const kindMarkers: Record<PlaceKind, L.Marker[]> = {
+    event: [],
+    travel: [],
+    lived: [],
+    'want-to-go': [],
+    'third-place': [],
+  };
+  const markersById: Record<string, L.Marker> = {};
+
+  for (const place of places) {
+    const countdown = place.sortDate != null ? formatCountdown(place.sortDate) : null;
+    const meta = [kindLabel(place.kind), place.date, countdown].filter(Boolean).join(' · ');
+    const notes =
+      document.querySelector<HTMLTemplateElement>(`template[data-notes="${CSS.escape(place.id)}"]`)
+        ?.innerHTML ?? '';
+    const imgs = place.images
+      .map(
+        ({ thumb, full }) => `
+        <span class="popup-img-wrap">
+          <img src="${esc(thumb)}" data-full="${esc(full)}" alt="${esc(place.name)}" loading="lazy" />
+          <button type="button" class="popup-img-expand" aria-label="Expand photo">
+            <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/></svg>
+          </button>
+        </span>`
+      )
+      .join('');
+    const imgCols = popupImgCols(place.images.length);
+
+    const html = `
+      <div class="place-popup" data-id="${esc(place.id)}">
+        <span class="popup-meta">${esc(meta)}</span>
+        <strong>${esc(place.name)}</strong>
+        ${place.detail ? `<em>${esc(place.detail)}</em>` : ''}
+        ${notes ? `<div class="popup-notes">${notes}</div>` : ''}
+        ${imgs ? `<div class="popup-imgs" style="grid-template-columns: repeat(${imgCols}, 1fr);">${imgs}</div>` : ''}
+      </div>`;
+
+    const options: PlaceMarkerOptions = {
+      icon: markerIcon(place.kind),
+      title: place.name,
+      kind: place.kind,
+    };
+    const marker = L.marker(place.coords, options).bindPopup(html, {
+      maxWidth: imgCols > 2 ? 320 : 280,
+      maxHeight: 420,
+    });
+    kindMarkers[place.kind].push(marker);
+    markersById[place.id] = marker;
+  }
+  clusters.addLayers(Object.values(kindMarkers).flat());
+
+  // fit the view to whatever markers exist
+  const bounds = L.latLngBounds(places.map((p) => p.coords));
+  if (bounds.isValid()) map.fitBounds(bounds.pad(0.2));
+  else map.setView([30, 0], 2);
+
+  // legend checkboxes add/remove each category's markers from the cluster group
+  document.querySelectorAll<HTMLInputElement>('.map-legend input[data-kind]').forEach((box) => {
+    box.addEventListener('change', () => {
+      const markers = kindMarkers[box.dataset.kind as PlaceKind];
+      box.checked ? clusters.addLayers(markers) : clusters.removeLayers(markers);
+    });
+  });
+
+  // --- dev-only: create and edit src/content/places/<slug>.md from the map ---
+  // (import.meta.env.DEV is statically false in builds, so none of this ships)
+  if (import.meta.env.DEV) {
+    const KINDS: PlaceKind[] = ['travel', 'event', 'third-place', 'lived', 'want-to-go'];
+
+    const formHtml = (heading: string, v: Partial<MapPlace>) => `
+      <form id="place-form" class="place-popup add-place-form">
+        <span class="popup-meta">${esc(heading)}</span>
+        <input name="name" placeholder="Name" required value="${esc(v.name ?? '')}" />
+        <select name="kind">
+          ${KINDS.map((k) => `<option value="${k}"${v.kind === k ? ' selected' : ''}>${kindLabel(k)}</option>`).join('')}
+        </select>
+        <input name="date" placeholder="Date (e.g. 2024)" value="${esc(v.date ?? '')}" />
+        <input name="detail" placeholder="Detail (artist, production…)" value="${esc(v.detail ?? '')}" />
+        <textarea name="notes" placeholder="Notes (markdown)" rows="3">${esc(v.notes ?? '')}</textarea>
+        <label class="add-file-label">photos <input type="file" name="photos" multiple accept="image/*" /></label>
+        <button type="submit">save place file</button>
+      </form>`;
+
+    // shared submit: POST the fields to `endpoint`, then upload any picked
+    // photos to src/content/places/<slug>/, where they auto-attach
+    const wireForm = (endpoint: string, extra: Record<string, unknown>) => {
+      document.getElementById('place-form')?.addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+        const form = ev.currentTarget as HTMLFormElement;
+        const fd = new FormData(form);
+        const photos = (fd.getAll('photos') as File[]).filter((f) => f.size > 0);
+        fd.delete('photos');
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...Object.fromEntries(fd), ...extra }),
+        });
+        if (!res.ok) {
+          const { error } = await res.json().catch(() => ({ error: res.statusText }));
+          alert(`Could not save place: ${error}`);
+          return;
+        }
+        const { file, slug } = await res.json();
+        for (const photo of photos) {
+          const up = await fetch(
+            `/__add-place/image?slug=${encodeURIComponent(slug)}&name=${encodeURIComponent(photo.name)}`,
+            { method: 'POST', body: photo }
+          );
+          if (!up.ok) {
+            const { error } = await up.json().catch(() => ({ error: up.statusText }));
+            alert(`Could not save photo ${photo.name}: ${error}`);
+          }
+        }
+        form.outerHTML = `<p class="popup-meta">saved ${esc(file)}${photos.length ? ` + ${photos.length} photo(s)` : ''} — reloading…</p>`;
+        setTimeout(() => location.reload(), 800);
+      });
+    };
+
+    // add: arm the button, then click the map
+    const btn = document.getElementById('add-place');
+    let arming = false;
+
+    btn?.addEventListener('click', () => {
+      arming = !arming;
+      btn.classList.toggle('armed', arming);
+      btn.textContent = arming ? 'click the map…' : '+ add place';
+      map.getContainer().style.cursor = arming ? 'crosshair' : '';
+    });
+
+    // shared by "click the map" and the address search below
+    const openAddFormAt = (latlng: L.LatLng) => {
+      const { lat, lng } = latlng;
+      L.popup({ maxWidth: 300, closeOnClick: false })
+        .setLatLng(latlng)
+        .setContent(formHtml(`new place · ${lat.toFixed(4)}, ${lng.toFixed(4)}`, {}))
+        .openOn(map);
+      wireForm('/__add-place', { coords: [lat, lng] });
+      arming = false;
+      btn?.classList.remove('armed');
+      if (btn) btn.textContent = '+ add place';
+      map.getContainer().style.cursor = '';
+    };
+
+    map.on('click', (e) => {
+      if (!arming) return;
+      openAddFormAt(e.latlng);
+    });
+
+    // address search: geocode client-side against Nominatim (same service
+    // src/lib/geocode.ts uses at build time, just called from the browser
+    // here instead), then jump the map there and open the add-place form —
+    // dev-only, like everything else in this block, so it never ships
+    const searchForm = document.getElementById('address-search-form') as HTMLFormElement | null;
+    const searchInput = document.getElementById('address-search-input') as HTMLInputElement | null;
+
+    searchForm?.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      const query = searchInput?.value.trim();
+      if (!query) return;
+
+      const submitBtn = searchForm.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'searching…';
+      }
+      try {
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`
+        );
+        const results: Array<{ lat: string; lon: string }> = res.ok ? await res.json() : [];
+        if (!results.length) {
+          alert(`No match for "${query}"`);
+          return;
+        }
+        const latlng = L.latLng(Number(results[0].lat), Number(results[0].lon));
+        map.setView(latlng, 13);
+        openAddFormAt(latlng);
+      } catch {
+        alert('Address search failed — check your connection.');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'search';
+        }
+      }
+    });
+
+    // edit: each marker popup gets a button that swaps in the pre-filled form
+    map.on('popupopen', (e) => {
+      const root = e.popup.getElement()?.querySelector<HTMLElement>('.place-popup[data-id]');
+      if (!root || root.querySelector('.popup-edit')) return;
+      const place = places.find((p) => p.id === root.dataset.id);
+      if (!place) return;
+      const edit = document.createElement('button');
+      edit.type = 'button';
+      edit.className = 'popup-edit mono-label';
+      edit.textContent = 'edit';
+      edit.addEventListener('click', (ev) => {
+        // setContent detaches this button mid-click; without stopPropagation
+        // the click bubbles to the map, which closes the popup (leaflet can't
+        // see the popup's disable-click flag through a detached parent chain)
+        ev.stopPropagation();
+        e.popup.setContent(formHtml(`edit · ${place.id}.md`, place));
+        wireForm('/__add-place/update', { slug: place.id });
+      });
+      root.appendChild(edit);
+    });
+
+    // timeline "edit" buttons: un-cluster the marker if needed, open its
+    // popup (which injects the .popup-edit button above), and jump straight
+    // into edit mode
+    document.querySelectorAll<HTMLButtonElement>('.timeline-edit').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const marker = markersById[btn.dataset.id ?? ''];
+        if (!marker) return;
+        document.getElementById('map')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        clusters.zoomToShowLayer(marker, () => {
+          marker.openPopup();
+          marker.getPopup()?.getElement()?.querySelector<HTMLButtonElement>('.popup-edit')?.click();
+        });
+      });
+    });
+  }
+
+  // timeline "future" badges: the server only knows a place is future as of
+  // build time, so it renders a generic placeholder carrying the real
+  // sortDate — fill in an actual countdown (or drop the badge if the
+  // viewer's own clock says it's no longer future) once this runs.
+  document.querySelectorAll<HTMLElement>('.future-badge[data-sort-date]').forEach((badge) => {
+    const sortDate = Number(badge.dataset.sortDate);
+    const countdown = formatCountdown(sortDate);
+    if (countdown) badge.textContent = countdown;
+    else badge.remove();
+  });
+
+  // timeline photo carousels: swap the cover img's src, wrap-around at the ends;
+  // clicking the image opens the same lightbox as the map popups
+  document.querySelectorAll<HTMLElement>('.post-cover[data-images]').forEach((fig) => {
+    const images: { thumb: string; full: string }[] = JSON.parse(fig.dataset.images ?? '[]');
+    const img = fig.querySelector('img');
+    if (!images.length || !img) return;
+    const counter = fig.querySelector('.post-cover-count');
+    let index = 0;
+    const show = (i: number) => {
+      index = (i + images.length) % images.length;
+      img.src = images[index].thumb;
+      if (counter) counter.textContent = `${index + 1} / ${images.length}`;
+    };
+    fig.querySelector('.post-cover-prev')?.addEventListener('click', () => show(index - 1));
+    fig.querySelector('.post-cover-next')?.addEventListener('click', () => show(index + 1));
+    img.addEventListener('click', () => openLightbox(images[index].full, img.alt));
+
+    // dev-only: "move" swaps the currently-shown photo with a neighbor and persists
+    // the new order by renaming files on disk (see /__add-place/reorder)
+    if (import.meta.env.DEV && fig.dataset.files && fig.dataset.slug) {
+      const files: string[] = JSON.parse(fig.dataset.files);
+      const slug = fig.dataset.slug;
+      const moveLeft = fig.querySelector<HTMLButtonElement>('.post-cover-move-left');
+      const moveRight = fig.querySelector<HTMLButtonElement>('.post-cover-move-right');
+      const move = async (to: number) => {
+        if (to < 0 || to >= files.length) return;
+        const reordered = [...files];
+        const [moved] = reordered.splice(index, 1);
+        reordered.splice(to, 0, moved);
+        if (moveLeft) moveLeft.disabled = true;
+        if (moveRight) moveRight.disabled = true;
+        try {
+          const res = await fetch('/__add-place/reorder', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ slug, files: reordered }),
+          });
+          if (!res.ok) throw new Error((await res.json().catch(() => null))?.error ?? 'reorder failed');
+          location.reload();
+        } catch (err) {
+          alert(err instanceof Error ? err.message : 'reorder failed');
+          if (moveLeft) moveLeft.disabled = false;
+          if (moveRight) moveRight.disabled = false;
+        }
+      };
+      moveLeft?.addEventListener('click', () => move(index - 1));
+      moveRight?.addEventListener('click', () => move(index + 1));
+    }
+  });
+</script>
+
+<style>
+  .section-label {
+    color: var(--color-highlight-bright);
+    border-bottom: 1px solid var(--color-hairline);
+    padding-bottom: var(--space-1);
+    margin: var(--space-4) 0 var(--space-3);
+    font-size: 0.7rem;
+    font-weight: 400;
+  }
+
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .post-list > li {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: 1.5rem 0 1.5rem 0.85rem;
+    border-bottom: 1px solid var(--color-hairline);
+    border-left: 3px solid transparent;
+  }
+  /* colored like the kind's dot on the map above */
+  .post-list > li.kind-event { border-left-color: var(--color-highlight-bright); }
+  .post-list > li.kind-travel { border-left-color: var(--color-accent-bright); }
+  .post-list > li.kind-lived { border-left-color: var(--color-dot-lived); }
+  .post-list > li.kind-want-to-go { border-left-color: var(--color-dot-want-to-go); }
+  .post-list > li.kind-third-place { border-left-color: var(--color-dot-third-place); }
+
+  .post-main { flex: 1; min-width: 0; }
+  .post-main strong { font-family: var(--font-display); font-size: 1.2rem; }
+  .post-date { display: block; margin-top: 0.3rem; }
+  .post-date .dot { margin-right: 0.4rem; vertical-align: middle; }
+  .post-desc { color: var(--color-text-dim); margin-top: 0.4rem; }
+
+  .future-badge {
+    color: var(--color-highlight-bright);
+    border: 1px dashed var(--color-highlight-bright);
+    padding: 0.1rem 0.4rem;
+    margin-left: 0.5rem;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .future-badge:hover {
+    background: var(--color-highlight-bright);
+    color: var(--color-bg);
+  }
+
+  .dev-btn {
+    background: none;
+    border: 1px dashed var(--color-hairline-bright);
+    color: var(--color-text-dim);
+    padding: 0.25rem 0.6rem;
+    cursor: pointer;
+  }
+  .dev-btn:hover { color: var(--color-highlight-bright); border-color: var(--color-highlight); }
+  .timeline-edit { margin-left: 0.6rem; padding: 0.1rem 0.45rem; }
+
+  .post-cover {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex-shrink: 0;
+    width: 200px;
+    margin: 0;
+  }
+  .post-cover-frame { position: relative; }
+  .post-cover img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+    border: 1px solid var(--color-hairline);
+    cursor: zoom-in;
+  }
+  .post-cover-reorder {
+    display: flex;
+    gap: 0.35rem;
+  }
+  .post-cover-reorder button {
+    flex: 1;
+    font-size: 0.6rem;
+    padding: 0.15rem 0.3rem;
+  }
+  .post-cover-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.6rem;
+    height: 1.6rem;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid var(--color-highlight);
+    color: var(--color-highlight);
+    padding: 0;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+  .post-cover-frame:hover .post-cover-arrow,
+  .post-cover-arrow:focus-visible {
+    opacity: 1;
+  }
+  .post-cover-prev { left: 0.3rem; }
+  .post-cover-next { right: 0.3rem; }
+  .post-cover-count {
+    position: absolute;
+    bottom: 0.3rem;
+    right: 0.3rem;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid var(--color-hairline-bright);
+    color: var(--color-text);
+    font-size: 0.6rem;
+    padding: 0.05rem 0.35rem;
+    pointer-events: none;
+  }
+
+  @media (max-width: 640px) {
+    .post-list > li { flex-direction: column; }
+    .post-cover { width: 100%; }
+    .post-cover img { height: 180px; }
+  }
+</style>
+
+<style is:global>
+  .map-frame {
+    border: 1px solid var(--color-hairline);
+    padding: 6px;
+  }
+  #map {
+    height: min(70vh, 640px);
+    background: var(--color-bg-inset);
+  }
+
+  /* darken OSM tiles to sit with the blueprint palette */
+  #map .leaflet-tile-pane {
+    filter: grayscale(0.4) invert(0.92) hue-rotate(185deg) brightness(0.85) contrast(0.9);
+  }
+
+  .map-legend {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    cursor: pointer;
+  }
+  .legend-item input { accent-color: var(--color-highlight); }
+
+  .add-place-btn {
+    margin-left: auto;
+    background: none;
+    border: 1px dashed var(--color-hairline-bright);
+    color: var(--color-text-dim);
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+  }
+  .add-place-btn:hover { color: var(--color-highlight-bright); border-color: var(--color-highlight); }
+  .add-place-btn.armed { color: var(--color-highlight-bright); border-color: var(--color-highlight); border-style: solid; }
+
+  .address-search { display: flex; gap: 0.4rem; }
+  .address-search input {
+    background: var(--color-bg-inset);
+    border: 1px dashed var(--color-hairline-bright);
+    color: var(--color-text);
+    font: inherit;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.5rem;
+    width: 180px;
+  }
+  .address-search input:focus { outline: none; border-color: var(--color-highlight-bright); }
+  .address-search button {
+    background: none;
+    border: 1px dashed var(--color-hairline-bright);
+    color: var(--color-text-dim);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+  }
+  .address-search button:hover { color: var(--color-highlight-bright); border-color: var(--color-highlight); }
+  .address-search button:disabled { opacity: 0.5; cursor: default; }
+
+  .dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-bg);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+  }
+  .dot-event { background: var(--color-highlight-bright); }
+  .dot-travel { background: var(--color-accent-bright); }
+  .dot-lived { background: var(--color-dot-lived); }
+  .dot-want-to-go { background: var(--color-dot-want-to-go); }
+
+  /* third places glow — cozy hangouts get a pulsing amber halo */
+  .dot-third-place {
+    background: var(--color-dot-third-place);
+    animation: dot-glow-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes dot-glow-pulse {
+    0%, 100% {
+      box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.4),
+        0 0 4px 1px var(--color-dot-third-place),
+        0 0 9px 3px color-mix(in srgb, var(--color-dot-third-place) 55%, transparent);
+    }
+    50% {
+      box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.4),
+        0 0 9px 3px var(--color-dot-third-place),
+        0 0 18px 7px color-mix(in srgb, var(--color-dot-third-place) 75%, transparent);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dot-third-place { animation: none; }
+  }
+
+  .place-marker { background: none; border: none; }
+  .place-marker .dot { width: 14px; height: 14px; }
+
+  /* clusters: a circle that grows with the number of places inside */
+  .place-cluster { background: none; border: none; }
+  .cluster-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--color-bg-elevated) 88%, transparent);
+    border: 1.5px solid currentColor;
+    box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 18%, transparent);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    line-height: 1;
+  }
+  .cluster-event { color: var(--color-highlight-bright); }
+  .cluster-travel { color: var(--color-accent-bright); }
+  .cluster-lived { color: var(--color-dot-lived); }
+  .cluster-want-to-go { color: var(--color-dot-want-to-go); }
+  .cluster-third-place { color: var(--color-dot-third-place); }
+  .cluster-mixed { color: var(--color-text); }
+
+  /* dark popups */
+  .leaflet-popup-content-wrapper,
+  .leaflet-popup-tip {
+    background: var(--color-bg-elevated);
+    color: var(--color-text);
+    border: 1px solid var(--color-hairline-bright);
+    border-radius: 4px;
+  }
+  .leaflet-container a.leaflet-popup-close-button { color: var(--color-text-dim); }
+
+  .place-popup { display: grid; gap: 0.35rem; }
+  .place-popup .popup-meta {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-highlight-bright);
+  }
+  .place-popup strong { font-family: var(--font-display); font-size: 1rem; }
+  .place-popup em { color: var(--color-text-dim); font-size: 0.85rem; }
+  .place-popup p { margin: 0; font-size: 0.85rem; color: var(--color-text-dim); }
+  .popup-notes { font-size: 0.85rem; color: var(--color-text-dim); }
+  .popup-notes :is(p, ul, ol) { margin: 0 0 0.35rem; }
+  .popup-imgs {
+    display: grid;
+    /* column count set inline per-popup, scaling with photo count (see popupImgCols) */
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+    margin-top: 0.25rem;
+  }
+  .popup-imgs img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 1px solid var(--color-hairline);
+    display: block;
+  }
+  .popup-img-wrap { position: relative; display: block; cursor: zoom-in; }
+  .popup-img-expand {
+    position: absolute;
+    top: 0.15rem;
+    right: 0.15rem;
+    width: 1.15rem;
+    height: 1.15rem;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid var(--color-highlight);
+    color: var(--color-highlight);
+    font-size: 0.7rem;
+    line-height: 1;
+    padding: 0;
+    cursor: zoom-in;
+    opacity: 0.7;
+    transition: opacity 0.15s ease;
+  }
+  .popup-img-wrap:hover .popup-img-expand,
+  .popup-img-expand:focus-visible {
+    opacity: 1;
+  }
+  /* a lone photo gets the full width at its natural aspect */
+  .popup-img-wrap:only-child { grid-column: 1 / -1; }
+  .popup-img-wrap:only-child img { aspect-ratio: auto; }
+
+  .photo-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem;
+    background: rgba(4, 6, 10, 0.9);
+  }
+  .photo-lightbox.is-open { display: flex; }
+  .photo-lightbox-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border: 1px solid var(--color-hairline-bright);
+  }
+  .photo-lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    background: none;
+    border: 1px solid var(--color-hairline-bright);
+    color: var(--color-text);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .photo-lightbox-close:hover { color: var(--color-highlight-bright); border-color: var(--color-highlight); }
+
+  .add-place-form input,
+  .add-place-form select,
+  .add-place-form textarea {
+    width: 100%;
+    background: var(--color-bg-inset);
+    border: 1px solid var(--color-hairline-bright);
+    color: var(--color-text);
+    font: inherit;
+    font-size: 0.85rem;
+    padding: 0.3rem 0.45rem;
+  }
+  .popup-edit {
+    justify-self: start;
+    margin-top: 0.25rem;
+    background: none;
+    border: 1px dashed var(--color-hairline-bright);
+    color: var(--color-text-dim);
+    padding: 0.15rem 0.5rem;
+    cursor: pointer;
+  }
+  .popup-edit:hover { color: var(--color-highlight-bright); border-color: var(--color-highlight); }
+
+  .add-place-form .add-file-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-dim);
+    display: grid;
+    gap: 0.25rem;
+  }
+  .add-place-form input[type='file'] { border-style: dashed; }
+  .add-place-form button {
+    background: var(--color-highlight);
+    border: none;
+    color: var(--color-bg);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.4rem 0.6rem;
+    cursor: pointer;
+  }
+  .add-place-form button:hover { background: var(--color-highlight-bright); }
+
+  .leaflet-control-attribution {
+    background: color-mix(in srgb, var(--color-bg) 80%, transparent) !important;
+    color: var(--color-text-faint) !important;
+  }
+  .leaflet-control-attribution a { color: var(--color-text-dim) !important; }
+</style>

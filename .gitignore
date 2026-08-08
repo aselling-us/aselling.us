@@ -1,0 +1,18 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+.cache/*
+!.cache/footnote-titles.json
+.env
+.env.*
+!.env.local.example
+secrets.txt
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+.claude/worktrees/

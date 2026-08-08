@@ -1,0 +1,153 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SubscribeForm from '../../components/SubscribeForm.astro';
+import { renderInlineMarkdown, stripMarkdown } from '../../lib/inline-markdown.mjs';
+import { readingTimeLabel } from '../../lib/reading-time.mjs';
+import { tagSlug } from '../../lib/tags.mjs';
+
+// Tells Astro which pages to generate at build time — one per post.
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => data.draft !== true);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<BaseLayout title={stripMarkdown(post.data.title)} description={post.data.description ? stripMarkdown(post.data.description) : undefined}>
+  <div class="post">
+    <span class="mono-label">
+      {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+      {' · '}
+      {readingTimeLabel(post.body)}
+    </span>
+    <h1 set:html={renderInlineMarkdown(post.data.title)} />
+    {post.data.tags && post.data.tags.length > 0 && (
+      <ul class="tag-list">
+        {post.data.tags.map((tag) => (
+          <li class="tag mono-label">
+            <a href={`/blog/tags/${tagSlug(tag)}`} set:html={renderInlineMarkdown(tag)} />
+          </li>
+        ))}
+      </ul>
+    )}
+    {post.data.cover && (
+      <figure class="post-cover">
+        <Image src={post.data.cover} alt={post.data.coverCaption ? stripMarkdown(post.data.coverCaption) : `Cover art for ${stripMarkdown(post.data.title)}`} width={720} />
+        {post.data.coverCaption && <figcaption class="mono-label" set:html={renderInlineMarkdown(post.data.coverCaption)} />}
+      </figure>
+    )}
+    <div class="prose">
+      <Content />
+    </div>
+
+    <SubscribeForm />
+  </div>
+</BaseLayout>
+
+<style>
+  .post {
+    max-width: 68ch;
+    margin: 0 auto;
+  }
+
+  .post-cover {
+    margin: var(--space-3) 0 0;
+  }
+  .post-cover img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--color-hairline);
+  }
+  .post-cover figcaption {
+    margin-top: 0.4rem;
+    text-transform: none;
+    letter-spacing: 0.04em;
+  }
+
+  .prose { margin-top: var(--space-3); }
+  .prose :global(p) { color: var(--color-text); }
+  .prose :global(img) {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: var(--space-3) auto;
+    border: 1px solid var(--color-hairline);
+  }
+  /* captioned inline images (markdown `![alt](src "caption")`) are wrapped
+     in a figure by rehype-image-captions.mjs — reset the img's own margin
+     so the figure owns the spacing instead */
+  .prose :global(figure) { margin: var(--space-3) auto; }
+  .prose :global(figure img) { margin: 0; }
+  .prose :global(figcaption) {
+    margin-top: 0.4rem;
+    text-align: center;
+    text-transform: none;
+    letter-spacing: 0.04em;
+  }
+  /* `==highlight==` markdown (remark-flexible-markers, see astro.config.mjs)
+     — gold, not blue, since blue is already the link color */
+  .prose :global(mark) {
+    background: var(--color-highlight-bright);
+    color: var(--color-bg);
+    padding: 0.05em 0.2em;
+    border-radius: 2px;
+  }
+  .prose :global(blockquote) {
+    position: relative;
+    margin: var(--space-3) 0;
+    padding: var(--space-2) var(--space-3);
+    border-left: 2px solid var(--color-highlight);
+    background: var(--color-bg-inset);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+  .prose :global(blockquote::before) {
+    content: '\201C';
+    position: absolute;
+    top: -0.1em;
+    left: var(--space-1);
+    font-family: var(--font-display);
+    font-style: normal;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--color-hairline-bright);
+  }
+  .prose :global(blockquote p) {
+    margin: 0 0 var(--space-1);
+    padding-left: var(--space-2);
+  }
+  .prose :global(blockquote p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .tag-list {
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0.8rem 0 0;
+  }
+  .tag a {
+    display: inline-block;
+    color: var(--color-accent-bright);
+    border: 1px solid var(--color-hairline-bright);
+    border-radius: 3px;
+    padding: 0.15rem 0.5rem;
+    text-decoration: none;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .tag a:hover {
+    color: var(--color-highlight-bright);
+    border-color: var(--color-highlight);
+  }
+</style>

@@ -1,0 +1,168 @@
+---
+// Client-side pager for a `<ul>`/`<ol>` grid whose `<li>` children each carry
+// a `data-index="N"` attribute (0-indexed position in the full list). Targets
+// #{gridId} by id, so it works for any grid shape (book covers, film
+// posters, ...) — the grid markup and item styling stay page-specific, only
+// the paging behavior and controls are shared here.
+//
+// Page size is responsive: `mobilePageSize` (default: same as `pageSize`)
+// applies at the same <=700px breakpoint the grids themselves use to drop to
+// fewer columns, so a mobile "page" stays a short scroll instead of the same
+// item count spread over far more rows than the desktop grid. Since the two
+// breakpoints can need different numbers of pages, the server renders enough
+// page-number buttons for whichever needs more (mobile, almost always) and
+// the client script hides the ones the current breakpoint doesn't need.
+interface Props {
+  itemCount: number;
+  gridId: string;
+  label: string;
+  pageSize: number;
+  mobilePageSize?: number;
+}
+
+const { itemCount, gridId, label, pageSize, mobilePageSize = pageSize } = Astro.props;
+const desktopPages = Math.ceil(itemCount / pageSize);
+const mobilePages = Math.ceil(itemCount / mobilePageSize);
+const maxPages = Math.max(desktopPages, mobilePages);
+---
+{maxPages > 1 && (
+  <>
+    <nav
+      class="pagination"
+      data-target={gridId}
+      data-page-size={pageSize}
+      data-mobile-page-size={mobilePageSize}
+      aria-label={label}
+    >
+      <button type="button" class="page-btn" data-page="prev" disabled>‹ prev</button>
+      {Array.from({ length: maxPages }, (_, i) => i + 1).map((n) => (
+        <button
+          type="button"
+          class:list={['page-btn', 'page-num', { 'is-active': n === 1, 'is-hidden': n > desktopPages }]}
+          data-page={n}
+          aria-current={n === 1 ? 'page' : undefined}
+        >{n}</button>
+      ))}
+      <button type="button" class="page-btn" data-page="next">next ›</button>
+    </nav>
+    {/* items beyond page 1 are marked is-hidden server-side so their images
+        never enter the browser's lazy-load candidate set before the script
+        below runs. Without JS, nothing toggles that class back off, so this
+        restores the full list rather than stranding it on page 1 with dead
+        pagination controls. */}
+    <noscript>
+      <style set:html={`#${gridId} > li.is-hidden { display: flex !important; }`} />
+    </noscript>
+  </>
+)}
+
+<script>
+  document.querySelectorAll<HTMLElement>('.pagination').forEach((nav) => {
+    const targetId = nav.dataset.target;
+    if (!targetId) return;
+    const list = document.getElementById(targetId);
+    if (!list) return;
+
+    const items = Array.from(list.querySelectorAll<HTMLLIElement>(':scope > li'));
+    const pageButtons = Array.from(nav.querySelectorAll<HTMLButtonElement>('.page-num'));
+    const prevBtn = nav.querySelector<HTMLButtonElement>('[data-page="prev"]');
+    const nextBtn = nav.querySelector<HTMLButtonElement>('[data-page="next"]');
+
+    const pageSize = Number(nav.dataset.pageSize) || items.length || 1;
+    const mobilePageSize = Number(nav.dataset.mobilePageSize) || pageSize;
+    const mobileQuery = window.matchMedia('(max-width: 700px)');
+
+    let effectivePageSize = pageSize;
+    let totalPages = 1;
+    let currentPage = 1;
+
+    const showPage = (page: number) => {
+      currentPage = Math.min(Math.max(page, 1), totalPages);
+      items.forEach((li) => {
+        const index = Number(li.dataset.index);
+        const itemPage = Math.floor(index / effectivePageSize) + 1;
+        li.classList.toggle('is-hidden', itemPage !== currentPage);
+      });
+      pageButtons.forEach((btn) => {
+        const isActive = Number(btn.dataset.page) === currentPage;
+        btn.classList.toggle('is-active', isActive);
+        if (isActive) btn.setAttribute('aria-current', 'page');
+        else btn.removeAttribute('aria-current');
+      });
+
+      // a disabled button can't hold focus -- browsers blur it immediately,
+      // dropping keyboard focus to <body>. Move focus to the now-active page
+      // button first so Tab/Shift+Tab continues from the pagination controls.
+      const activeEl = document.activeElement;
+      const focusTarget = pageButtons[currentPage - 1];
+      if (prevBtn) {
+        if (activeEl === prevBtn && currentPage === 1) focusTarget?.focus();
+        prevBtn.disabled = currentPage === 1;
+      }
+      if (nextBtn) {
+        if (activeEl === nextBtn && currentPage === totalPages) focusTarget?.focus();
+        nextBtn.disabled = currentPage === totalPages;
+      }
+    };
+
+    // re-derive page count/grouping for the breakpoint's page size, hide any
+    // page-number buttons the current breakpoint doesn't need, and re-clamp
+    // the current page before redrawing.
+    const recalculate = () => {
+      effectivePageSize = mobileQuery.matches ? mobilePageSize : pageSize;
+      totalPages = Math.max(1, Math.ceil(items.length / effectivePageSize));
+      nav.classList.toggle('is-hidden', totalPages <= 1);
+      pageButtons.forEach((btn) => {
+        btn.classList.toggle('is-hidden', Number(btn.dataset.page) > totalPages);
+      });
+      showPage(Math.min(currentPage, totalPages));
+    };
+
+    nav.addEventListener('click', (ev) => {
+      const btn = (ev.target as HTMLElement).closest<HTMLButtonElement>('button.page-btn');
+      if (!btn) return;
+      const val = btn.dataset.page;
+      if (val === 'prev') showPage(currentPage - 1);
+      else if (val === 'next') showPage(currentPage + 1);
+      else if (val) showPage(Number(val));
+      list.scrollIntoView({ block: 'nearest' });
+    });
+
+    mobileQuery.addEventListener('change', recalculate);
+    recalculate();
+  });
+</script>
+
+<style>
+  .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35rem;
+    margin-top: var(--space-3);
+  }
+  .page-btn {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    background: none;
+    color: var(--color-text-dim);
+    border: 1px solid var(--color-hairline);
+    padding: 0.25rem 0.6rem;
+    cursor: pointer;
+  }
+  .page-btn:hover:not(:disabled) { color: var(--color-highlight-bright); border-color: var(--color-highlight); }
+  .page-btn:disabled { opacity: 0.35; cursor: default; }
+  .page-num.is-active {
+    background: var(--color-highlight-bright);
+    border-color: var(--color-highlight-bright);
+    color: var(--color-bg);
+  }
+
+  @media (max-width: 700px) {
+    .page-btn {
+      padding: 0.4rem 0.75rem;
+      font-size: 0.72rem;
+    }
+  }
+</style>

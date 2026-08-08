@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { navItems } from '../lib/nav-items';
+---
+<BaseLayout title="Not Found" description="This page doesn't exist.">
+  <span class="mono-label">sheet / 404</span>
+
+  <div class="nf-hero">
+    <span class="nf-stamp mono-label" aria-hidden="true">not on file</span>
+    <h1 class="nf-num">404</h1>
+    <p class="lede">This sheet isn't in the set — the page moved, was renamed, or was never drafted.</p>
+    <a href="/" class="nf-home mono-label">&larr; back to the index</a>
+  </div>
+
+  <h2 class="mono-label section-label">index</h2>
+  <ul class="quick-links" role="list">
+    {navItems.map((item) => (
+      <li>
+        <a href={item.href} class="quick-link">
+          <span class="mono-label quick-link-n">{item.n}</span>
+          <span class="quick-link-label">{item.label}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
+
+<style>
+  .lede { color: var(--color-text-dim); }
+
+  .section-label {
+    color: var(--color-highlight-bright);
+    border-bottom: 1px solid var(--color-hairline);
+    padding-bottom: var(--space-1);
+    margin: var(--space-5) 0 var(--space-3);
+    font-size: 0.7rem;
+    font-weight: 400;
+    display: block;
+  }
+
+  .nf-hero {
+    position: relative;
+    margin-top: var(--space-3);
+    padding: var(--space-4) 0;
+    border-top: 1px solid var(--color-hairline);
+    border-bottom: 1px solid var(--color-hairline);
+    max-width: 48ch;
+  }
+
+  .nf-stamp {
+    position: absolute;
+    top: var(--space-3);
+    right: 0;
+    color: var(--color-highlight-bright);
+    border: 1px dashed var(--color-highlight-bright);
+    padding: 0.3rem 0.6rem;
+    transform: rotate(6deg);
+    opacity: 0.75;
+  }
+
+  .nf-num {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 12vw, 6.5rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: var(--color-text-faint);
+    margin: 0 0 var(--space-2);
+  }
+
+  .nf-home {
+    display: inline-block;
+    margin-top: var(--space-3);
+    color: var(--color-highlight-bright);
+    border: 1px solid var(--color-highlight-bright);
+    border-radius: 9999px;
+    padding: 0.35rem 1rem;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .nf-home:hover {
+    background: var(--color-highlight-bright);
+    color: var(--color-bg);
+  }
+
+  .quick-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: 0;
+    margin: 0;
+  }
+  .quick-link {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    border: 1px solid var(--color-hairline);
+    padding: 0.6rem 1rem;
+    min-width: 10rem;
+    color: var(--color-text);
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .quick-link:hover {
+    border-color: var(--color-highlight);
+    color: var(--color-highlight-bright);
+  }
+  .quick-link-n { color: var(--color-text-faint); }
+  .quick-link-label {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+  }
+
+  @media (max-width: 640px) {
+    .nf-stamp { position: static; display: inline-block; margin-bottom: var(--space-2); transform: rotate(-2deg); }
+    .quick-link { min-width: 100%; }
+  }
+</style>

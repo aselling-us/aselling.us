@@ -1,0 +1,316 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import github from '../../data/github.json';
+
+// snapshot written by `npm run fetch:media`; fetchedAt only changes when the repo list does
+// contributedRepos/contributedPrivateCount may be absent on an older snapshot written before those fields existed
+const { repos, contributions } = github;
+const contributedRepos = github.contributedRepos ?? [];
+const contributedPrivateCount = github.contributedPrivateCount ?? 0;
+const profileUrl = `https://github.com/${github.username}`;
+const updated = github.fetchedAt.slice(0, 16).replace('T', ' · ') + ' utc';
+
+const fmtDate = (iso: string | null) =>
+  iso
+    ? new Date(iso + 'T00:00:00Z').toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        timeZone: 'UTC',
+      })
+    : null;
+
+// contributions.days is chronological, Sunday-first, in complete 7-day weeks
+// (GitHub's calendar API guarantee) — chunk straight into grid columns.
+const weeks: { date: string; count: number }[][] = [];
+if (contributions) {
+  for (let i = 0; i < contributions.days.length; i += 7) {
+    weeks.push(contributions.days.slice(i, i + 7));
+  }
+}
+
+const maxCount = contributions ? Math.max(...contributions.days.map((d) => d.count), 1) : 1;
+const levelFor = (count: number) => {
+  if (count === 0) return 0;
+  const ratio = count / maxCount;
+  if (ratio <= 0.25) return 1;
+  if (ratio <= 0.5) return 2;
+  if (ratio <= 0.75) return 3;
+  return 4;
+};
+
+const monthLabel = (week: { date: string }[]) =>
+  new Date(week[0].date + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' });
+
+// only label a column when its month differs from the previous column's
+const monthOf = (week: { date: string }[]) => week[0].date.slice(0, 7);
+---
+<BaseLayout title="Doing" description="What I've been building, pulled from my GitHub repositories.">
+  <span class="mono-label">index / 02</span>
+  <h1>Doing</h1>
+  <p class="lede">
+    A set of personal projects or scraps of ideas. Public repos pulled from <a href={profileUrl} target="_blank" rel="noopener noreferrer">GitHub</a>, most recently pushed first.
+  </p>
+
+  {contributions && (
+    <section>
+      {/* total mirrors exactly what's shown on the public GitHub profile —
+          see the comment above fetchContributionCalendar in fetch-media.mjs
+          for how private contributions factor into that number */}
+      <h2 class="mono-label section-label">contributions / {contributions.total} in the last year</h2>
+      <div class="graph-scroll">
+        <div class="graph" style={`--weeks: ${weeks.length};`}>
+          <div class="graph-months" aria-hidden="true">
+            {weeks.map((week, i) => (
+              <span class="graph-month">{i === 0 || monthOf(week) !== monthOf(weeks[i - 1]) ? monthLabel(week) : ''}</span>
+            ))}
+          </div>
+          <div class="graph-grid">
+            {weeks.map((week) => (
+              <div class="graph-col">
+                {week.map((day) => (
+                  <span
+                    class:list={['graph-cell', `level-${levelFor(day.count)}`]}
+                    title={`${day.count} contribution${day.count === 1 ? '' : 's'} on ${fmtDate(day.date)}`}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div class="graph-legend mono-label">
+        <span>less</span>
+        <span class="graph-cell level-0" />
+        <span class="graph-cell level-1" />
+        <span class="graph-cell level-2" />
+        <span class="graph-cell level-3" />
+        <span class="graph-cell level-4" />
+        <span>more</span>
+      </div>
+    </section>
+  )}
+
+  <section>
+    <h2 class="mono-label section-label">repositories / {String(repos.length).padStart(2, '0')}</h2>
+    <ul class="repo-list">
+      {repos.map((repo) => (
+        <li class="repo">
+          <div class="repo-head">
+            <a class="repo-name" href={repo.link} target="_blank" rel="noopener noreferrer">{repo.name}</a>
+            {repo.homepage && (
+              <a class="repo-live mono-label" href={repo.homepage} target="_blank" rel="noopener noreferrer">live →</a>
+            )}
+          </div>
+          {repo.description && <p class="repo-desc">{repo.description}</p>}
+          <span class="mono-label repo-row">
+            {repo.language && <span class="repo-lang">{repo.language}</span>}
+            {repo.stars > 0 && <span class="repo-stars">★ {repo.stars}</span>}
+            {repo.pushedAt && <span>pushed / {fmtDate(repo.pushedAt)}</span>}
+          </span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {(contributedRepos.length > 0 || contributedPrivateCount > 0) && (
+    <section>
+      <h2 class="mono-label section-label">contributed to / {String(contributedRepos.length).padStart(2, '0')}</h2>
+      {contributedPrivateCount > 0 && (
+        <p class="private-note mono-label">
+          + {contributedPrivateCount} private repo{contributedPrivateCount === 1 ? '' : 's'} contributed to
+        </p>
+      )}
+      {contributedRepos.length > 0 && (
+        <ul class="repo-list">
+          {contributedRepos.map((repo) => (
+            <li class="repo">
+              <div class="repo-head">
+                <a class="repo-name" href={repo.link} target="_blank" rel="noopener noreferrer">{repo.owner}/{repo.name}</a>
+                <span class="repo-head-right">
+                  {repo.homepage && (
+                    <a class="repo-live mono-label" href={repo.homepage} target="_blank" rel="noopener noreferrer">live →</a>
+                  )}
+                  <span class="mono-label contributor-badge">contributor</span>
+                </span>
+              </div>
+              {repo.description && <p class="repo-desc">{repo.description}</p>}
+              <span class="mono-label repo-row">
+                {repo.language && <span class="repo-lang">{repo.language}</span>}
+                {repo.stars > 0 && <span class="repo-stars">★ {repo.stars} /</span>}
+                {/* commits is last-year commit count only, capped to the top 25
+                    repos by that count — see fetchContributionCalendar in
+                    fetch-media.mjs. Absent for older/PR-only contributions. */}
+                {repo.commits && <span>{repo.commits} commit{repo.commits === 1 ? '' : 's'}</span>}
+                {repo.pushedAt && <span>pushed / {fmtDate(repo.pushedAt)}</span>}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  )}
+
+  <footer class="data-footer">
+    <span class="mono-label">source / github api</span>
+    <span class="mono-label">most recent update / {updated}</span>
+  </footer>
+</BaseLayout>
+
+<style>
+  .lede { color: var(--color-text-dim); }
+  .lede a { color: var(--color-accent-bright); }
+  .lede a:hover { color: var(--color-highlight-bright); }
+
+  section { margin-top: var(--space-4); }
+
+  .section-label {
+    color: var(--color-highlight-bright);
+    border-bottom: 1px solid var(--color-hairline);
+    padding-bottom: var(--space-1);
+    margin: 0 0 var(--space-3);
+    font-size: 0.7rem;
+    font-weight: 400;
+  }
+
+  .private-note {
+    color: var(--color-text-faint);
+    margin: -0.5rem 0 var(--space-3);
+  }
+
+  .graph-scroll {
+    display: flex;
+    justify-content: safe center;
+    overflow-x: auto;
+    padding-bottom: var(--space-1);
+  }
+
+  .graph {
+    --cell: 11px;
+    --cell-gap: 3px;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: calc(var(--weeks) * (var(--cell) + var(--cell-gap)));
+  }
+
+  .graph-months {
+    display: grid;
+    grid-template-columns: repeat(var(--weeks), calc(var(--cell) + var(--cell-gap)));
+  }
+  .graph-month {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    color: var(--color-text-faint);
+    white-space: nowrap;
+  }
+
+  .graph-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: var(--cell);
+    gap: var(--cell-gap);
+  }
+  .graph-col {
+    display: grid;
+    grid-template-rows: repeat(7, var(--cell));
+    gap: var(--cell-gap);
+  }
+
+  .graph-cell {
+    width: var(--cell);
+    height: var(--cell);
+    display: inline-block;
+    border: 1px solid var(--color-hairline);
+  }
+  .level-0 { background: var(--color-bg-inset); }
+  .level-1 { background: color-mix(in srgb, var(--color-highlight) 25%, var(--color-bg-inset)); border-color: transparent; }
+  .level-2 { background: color-mix(in srgb, var(--color-highlight) 50%, var(--color-bg-inset)); border-color: transparent; }
+  .level-3 { background: color-mix(in srgb, var(--color-highlight) 80%, var(--color-bg-inset)); border-color: transparent; }
+  .level-4 { background: var(--color-highlight-bright); border-color: transparent; }
+
+  .graph-legend {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: var(--space-2);
+    color: var(--color-text-faint);
+  }
+  .graph-legend .graph-cell { width: 10px; height: 10px; }
+
+  .repo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-3);
+  }
+  .repo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    border: 1px solid var(--color-hairline);
+    background: var(--color-bg-elevated);
+    padding: var(--space-2);
+  }
+  .repo:hover { border-color: var(--color-highlight); }
+
+  .repo-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.3rem var(--space-2);
+  }
+  .repo-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--color-text);
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .repo-name:hover { color: var(--color-highlight-bright); }
+  .repo-live { color: var(--color-accent-bright); flex-shrink: 0; }
+  .repo-live:hover { color: var(--color-highlight-bright); }
+
+  .repo-head-right {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    flex-shrink: 0;
+  }
+  .contributor-badge {
+    color: var(--color-accent-bright);
+    border: 1px solid var(--color-accent-bright);
+    padding: 0.1rem 0.4rem;
+  }
+
+  .repo-desc {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--color-text-dim);
+  }
+
+  .repo-row {
+    display: flex;
+    gap: 0.6rem;
+    align-items: baseline;
+    flex-wrap: wrap;
+    color: var(--color-text-faint);
+  }
+  .repo-lang { color: var(--color-accent-bright); }
+  .repo-stars { color: var(--color-hairline); }
+
+  .data-footer {
+    margin-top: var(--space-5);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--color-hairline);
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+</style>
