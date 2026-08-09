@@ -1,7 +1,29 @@
 {
-  "fetchedAt": "2026-08-08T09:54:59.497Z",
+  "fetchedAt": "2026-08-09T09:57:09.856Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Insidious",
+      "year": 2010,
+      "link": "https://letterboxd.com/aselling/film/insidious/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/te/ew/lb/gd/urAaOffVaxQzRJ8X5Z0oDqOWAjl-0-600-0-900-crop.jpg?v=7016f25e4f",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-08",
+      "review": "this was not a fun watch in bed at night in an old creaky apartment\n\nwhat is with rose byrne having kids connected to heart rate monitors like get better kids\n\nwtf was that ending though"
+    },
+    {
+      "title": "28 Years Later: The Bone Temple",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/28-years-later-the-bone-temple/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/1/5/6/4/0/9/1156409-28-years-later-the-bone-temple-0-600-0-900-crop.jpg?v=131058c6ff",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-08",
+      "review": "Ralph Fiennes undressing to Girls on Film by Duran Duran was not on my 2026 cinema bingo card.\n\nGoing to tell my kids \"The Bone Temple\" was a frat house"
+    },
     {
       "title": "Romería",
       "year": 2025,
@@ -518,28 +540,6 @@
       "rewatch": false,
       "watchedDate": "2026-06-28",
       "review": "very heartwarming. a social commentary for sure, but also a nice comfort movie with romantic and societal aspects. The main character Toto is born from no where and is chosen as the one to bring restoration to a poor community. Enjoyed this lots."
-    },
-    {
-      "title": "Body Double",
-      "year": 1984,
-      "link": "https://letterboxd.com/aselling/film/body-double/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/5/2/4/1/p/jQW55uqRKvKYbtJSYTQqTCX1uE7-0-600-0-900-crop.jpg?v=97cf1b8d3a",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-06-26",
-      "review": "had no clue what I was talking into... and no clue what I am walking out of. every time I thought I knew what was going to happen, I didn't. people probably thought I was a bit strange sitting in the front row of an erotic thriller. \n\nall the more incredible.I'm a bartender, not a priest.had me dying. \n\nlesson learned:\ndon't let men own telescopes."
-    },
-    {
-      "title": "If I Had Legs I'd Kick You",
-      "year": 2025,
-      "link": "https://letterboxd.com/aselling/film/if-i-had-legs-id-kick-you/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/1/0/4/6/5/2/2/1046522-if-i-had-legs-id-kick-you-0-600-0-900-crop.jpg?v=831a0c76c9",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-06-25",
-      "review": "incredible film. never having children, never going to therapy."
     },
     {
       "title": "Oppenheimer",
