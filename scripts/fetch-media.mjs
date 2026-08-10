@@ -518,6 +518,31 @@ async function fetchFavoritesAndWatchlist() {
   }
 }
 
+// A CI runner's datacenter IP trips Letterboxd's Cloudflare check far more
+// often than a residential one does — when it does, every $$eval above finds
+// no matching DOM and comes back empty instead of throwing, so favorites,
+// watchlist, and diaryPosters all land on 0 in the same run. That combination
+// is the tell (a real account being empty on all three at once is
+// implausible), and it's exactly the case a brand-new diary entry can't
+// recover from via backfillPosters/previousPoster below — those only patch a
+// poster onto an entry that's still present, not conjure up one that was
+// never scraped. Retry with a fresh browser a few times before giving up;
+// a failed challenge on one attempt often just passes on the next.
+async function fetchFavoritesAndWatchlistWithRetry(maxAttempts = 3) {
+  let result = { favorites: [], watchlist: [], diaryPosters: new Map() };
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    result = await fetchFavoritesAndWatchlist();
+    const blocked = result.favorites.length === 0 && result.watchlist.length === 0 && result.diaryPosters.size === 0;
+    if (!blocked) return result;
+    if (attempt < maxAttempts) {
+      console.warn(`favorites/watchlist/diary posters: attempt ${attempt}/${maxAttempts} came back empty (likely Cloudflare-blocked), retrying...`);
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+    }
+  }
+  console.warn(`favorites/watchlist/diary posters: all ${maxAttempts} attempts came back empty, falling back to previous data`);
+  return result;
+}
+
 // --- write, preserving fetchedAt when content is unchanged -------------
 
 function writeSnapshot(file, data) {
@@ -555,7 +580,7 @@ const [
   fetchShelf('to-read'),
   fetchReadingProgress(),
   fetchFilms(),
-  fetchFavoritesAndWatchlist(),
+  fetchFavoritesAndWatchlistWithRetry(),
   fetchGithubRepos(),
   fetchContributionCalendar(),
   fetchContributedRepos(),
@@ -626,13 +651,22 @@ function backfillPosters(entries, previousEntries) {
   return entries.map((e) => (e.poster ? e : { ...e, poster: previousByLink.get(e.link) ?? null }));
 }
 
+// backfillPosters only patches a poster onto an entry that's still present —
+// it can't recover a list that came back completely empty because the whole
+// scrape got blocked (see fetchFavoritesAndWatchlistWithRetry above). Treat
+// an empty result as "unknown", not "cleared", and keep the last committed
+// list rather than wiping it.
+function withFallback(entries, previousEntries) {
+  return entries.length > 0 ? backfillPosters(entries, previousEntries) : (previousEntries ?? []);
+}
+
 writeSnapshot('goodreads.json', { fetchedAt, userId: GOODREADS_USER_ID, currentlyReading, toRead, read });
 writeSnapshot('letterboxd.json', {
   fetchedAt,
   username: LETTERBOXD_USER,
   films,
-  favorites: backfillPosters(favorites, previousLetterboxd?.favorites),
-  watchlist: backfillPosters(watchlist, previousLetterboxd?.watchlist),
+  favorites: withFallback(favorites, previousLetterboxd?.favorites),
+  watchlist: withFallback(watchlist, previousLetterboxd?.watchlist),
 });
 writeSnapshot('github.json', {
   fetchedAt,
