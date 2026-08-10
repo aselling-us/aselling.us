@@ -23,7 +23,7 @@ const { posts, showDevControls = false } = Astro.props;
   {posts.map((post) => (
     <li data-tags={JSON.stringify((post.data.tags ?? []).map((t) => t.toLowerCase()))}>
       <div class="post-main">
-        <a href={`/blog/${post.id}`} set:html={renderInlineMarkdown(post.data.title)} />
+        <a href={post.data.draft ? `/blog/draft/${post.id}` : `/blog/${post.id}`} set:html={renderInlineMarkdown(post.data.title)} />
         {showDevControls && post.data.draft && <span class="draft-badge mono-label">draft</span>}
         {showDevControls && (
           <button class="post-edit dev-btn mono-label" data-id={post.id} type="button">edit</button>
