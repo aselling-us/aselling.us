@@ -1,12 +1,23 @@
 {
-  "fetchedAt": "2026-08-09T09:57:09.856Z",
+  "fetchedAt": "2026-08-10T03:23:31.096Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Suspicion",
+      "year": 1941,
+      "link": "https://letterboxd.com/aselling/film/suspicion/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/5/2/8/1/p/w7FfVu8PitqBX6XvItcgWRzpR9e-0-600-0-900-crop.jpg?v=7f6c27c775",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-09",
+      "review": "this guy had worse pick up lines than guys i know today and somehow the still married him. Like why are we marrying who calls you \"Monkeyface\". \n\nHowever, for a 40s film (and my first Hitchcock!) this was quite impressive. Lots of cuts so I wonder how difficult it was to edit."
+    },
     {
       "title": "Insidious",
       "year": 2010,
       "link": "https://letterboxd.com/aselling/film/insidious/",
-      "poster": "https://a.ltrbxd.com/resized/sm/upload/te/ew/lb/gd/urAaOffVaxQzRJ8X5Z0oDqOWAjl-0-600-0-900-crop.jpg?v=7016f25e4f",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/6/5/5/6/p/wyW7absvZmdXaPjflIjacZgyy3U-0-600-0-900-crop.jpg?v=2729cff519",
       "rating": null,
       "liked": false,
       "rewatch": false,
@@ -17,7 +28,7 @@
       "title": "28 Years Later: The Bone Temple",
       "year": 2026,
       "link": "https://letterboxd.com/aselling/film/28-years-later-the-bone-temple/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/1/1/5/6/4/0/9/1156409-28-years-later-the-bone-temple-0-600-0-900-crop.jpg?v=131058c6ff",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/1/5/6/4/0/9/p/3zbEJRz7KbjYytn4cKEfUH6dOsj-0-600-0-900-crop.jpg?v=583a69e676",
       "rating": null,
       "liked": false,
       "rewatch": false,
@@ -28,7 +39,7 @@
       "title": "Romería",
       "year": 2025,
       "link": "https://letterboxd.com/aselling/film/romeria/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/1/0/6/9/0/3/7/1069037-romeria-0-600-0-900-crop.jpg?v=5268e5d224",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/0/6/9/0/3/7/p/jWtKPt6mXnwmdTRD1RuKSWsT1PH-0-600-0-900-crop.jpg?v=0c5249a823",
       "rating": null,
       "liked": true,
       "rewatch": false,
@@ -39,7 +50,7 @@
       "title": "One Night Only",
       "year": 2026,
       "link": "https://letterboxd.com/aselling/film/one-night-only-2026/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/1/3/1/1/6/7/7/1311677-one-night-only-2026-0-600-0-900-crop.jpg?v=9e18b23e11",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/3/1/1/6/7/7/p/uNyLeD7Dee8HsE01DzimLSdLj1F-0-600-0-900-crop.jpg?v=b21f6a72b6",
       "rating": null,
       "liked": true,
       "rewatch": false,
@@ -259,7 +270,7 @@
       "title": "The Odyssey",
       "year": 2026,
       "link": "https://letterboxd.com/aselling/film/the-odyssey-2026/1/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/2/5/5/3/9/4/p/bDkL24ydznDVkD30r4kLmbKCkIL-0-600-0-900-crop.jpg?v=c807d4b013",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/2/5/5/3/9/4/p/wzKVPug0hNwTcoZhra9iSjwOc65-0-600-0-900-crop.jpg?v=f5022f0ea9",
       "rating": null,
       "liked": true,
       "rewatch": true,
@@ -531,17 +542,6 @@
       "review": "came for Jesse Plemons, stayed for the landscape porn. \n\npretty shit and pretty racist. horses were great actors. feeling fake bc i couldn't finish it."
     },
     {
-      "title": "Miracle in Milan",
-      "year": 1951,
-      "link": "https://letterboxd.com/aselling/film/miracle-in-milan/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/2/1/7/6/9/21769-miracle-in-milan-0-600-0-900-crop.jpg?v=c658b97482",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-06-28",
-      "review": "very heartwarming. a social commentary for sure, but also a nice comfort movie with romantic and societal aspects. The main character Toto is born from no where and is chosen as the one to bring restoration to a poor community. Enjoyed this lots."
-    },
-    {
       "title": "Oppenheimer",
       "year": 2023,
       "link": "https://letterboxd.com/aselling/film/oppenheimer-2023/2/",
@@ -553,6 +553,152 @@
       "review": "Watched on Thursday June 19, 2025."
     }
   ],
-  "favorites": [],
-  "watchlist": []
+  "favorites": [
+    {
+      "title": "(500) Days of Summer",
+      "year": 2009,
+      "link": "https://letterboxd.com/film/500-days-of-summer/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/9/3/5/0/p/6h6nfckQgkvYBGd7BbXQcoaNDRW-0-600-0-900-crop.jpg?v=e6451fd68d"
+    },
+    {
+      "title": "Portrait of a Lady on Fire",
+      "year": 2019,
+      "link": "https://letterboxd.com/film/portrait-of-a-lady-on-fire/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/6/0/8/3/0/p/brYql72LnXNcecodypOlcc0ehCF-0-600-0-900-crop.jpg?v=98cc0adc4b"
+    },
+    {
+      "title": "Ferris Bueller's Day Off",
+      "year": 1986,
+      "link": "https://letterboxd.com/film/ferris-buellers-day-off/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/7/2/1/9/p/zACzLwjg8WqWh2tEKiee9w90Z7b-0-600-0-900-crop.jpg?v=2a3ea45b90"
+    },
+    {
+      "title": "Train Dreams",
+      "year": 2025,
+      "link": "https://letterboxd.com/film/train-dreams/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/1/2/5/3/8/3/p/Auo1FtIv7tZYWHR3o31OskGTnh7-0-600-0-900-crop.jpg?v=b7e593870c"
+    }
+  ],
+  "watchlist": [
+    {
+      "title": "Spider-Man: Into the Spider-Verse",
+      "year": 2018,
+      "link": "https://letterboxd.com/film/spider-man-into-the-spider-verse/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/2/5/1/9/4/3/251943-spider-man-into-the-spider-verse-0-600-0-900-crop.jpg?v=538fe0ada6"
+    },
+    {
+      "title": "Joker",
+      "year": 2019,
+      "link": "https://letterboxd.com/film/joker-2019/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/0/6/7/7/5/406775-joker-0-600-0-900-crop.jpg?v=e4ea7f98cc"
+    },
+    {
+      "title": "Spider-Man: Across the Spider-Verse",
+      "year": 2023,
+      "link": "https://letterboxd.com/film/spider-man-across-the-spider-verse/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/9/7/6/3/1/497631-spider-man-across-the-spider-verse-0-600-0-900-crop.jpg?v=f2acbf1b8a"
+    },
+    {
+      "title": "The Silence of the Lambs",
+      "year": 1991,
+      "link": "https://letterboxd.com/film/the-silence-of-the-lambs/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/7/8/2/51782-the-silence-of-the-lambs-0-600-0-900-crop.jpg?v=18d88bdff4"
+    },
+    {
+      "title": "The Shining",
+      "year": 1980,
+      "link": "https://letterboxd.com/film/the-shining/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/7s/m2/bw/d0/caoYMcjUamGoBVy65i1AHJBvdzw-0-600-0-900-crop.jpg?v=88d9d6cce4"
+    },
+    {
+      "title": "Spider-Man: No Way Home",
+      "year": 2021,
+      "link": "https://letterboxd.com/film/spider-man-no-way-home/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/6/0/7/8/7/560787-spider-man-no-way-home-0-600-0-900-crop.jpg?v=a336d4f40c"
+    },
+    {
+      "title": "The Godfather",
+      "year": 1972,
+      "link": "https://letterboxd.com/film/the-godfather/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/8/1/8/51818-the-godfather-0-600-0-900-crop.jpg?v=bca8b67402"
+    },
+    {
+      "title": "The Shawshank Redemption",
+      "year": 1994,
+      "link": "https://letterboxd.com/film/the-shawshank-redemption/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/7l/hn/46/uz/zGINvGjdlO6TJRu9wESQvWlOKVT-0-600-0-900-crop.jpg?v=8736d1c395"
+    },
+    {
+      "title": "Deadpool & Wolverine",
+      "year": 2024,
+      "link": "https://letterboxd.com/film/deadpool-wolverine/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/6/2/8/7/0/462870-deadpool-wolverine-0-600-0-900-crop.jpg?v=1aa778d2c6"
+    },
+    {
+      "title": "Inside Out 2",
+      "year": 2024,
+      "link": "https://letterboxd.com/film/inside-out-2-2024/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/9/2/1/5/7/8/921578-inside-out-2-0-600-0-900-crop.jpg?v=efa25e5cca"
+    },
+    {
+      "title": "Pride & Prejudice",
+      "year": 2005,
+      "link": "https://letterboxd.com/film/pride-prejudice/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/nq/jo/26/tn/dAC0hkYmz5ZOCHURZCyj9isPMPd-0-600-0-900-crop.jpg?v=b3dac3ffd7"
+    },
+    {
+      "title": "Past Lives",
+      "year": 2023,
+      "link": "https://letterboxd.com/film/past-lives/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/9/1/0/5/3/591053-past-lives-0-600-0-900-crop.jpg?v=c600b7854e"
+    },
+    {
+      "title": "Spider-Man: Homecoming",
+      "year": 2017,
+      "link": "https://letterboxd.com/film/spider-man-homecoming/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/2/4/2/7/1/0/242710-spider-man-homecoming-0-600-0-900-crop.jpg?v=61e8c57229"
+    },
+    {
+      "title": "No Country for Old Men",
+      "year": 2007,
+      "link": "https://letterboxd.com/film/no-country-for-old-men/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/dr/hr/pz/ez/ehLb2SQ3djlA1FrQKbP2WO3VH09-0-600-0-900-crop.jpg?v=6489920a92"
+    },
+    {
+      "title": "Mamma Mia!",
+      "year": 2008,
+      "link": "https://letterboxd.com/film/mamma-mia/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/10/5l/wu/jl/gOm2iMMbC6EonrFzmSQ8xvCa4Ei.jpg-0-600-0-900-crop.jpg?v=e49de6f770"
+    },
+    {
+      "title": "The Avengers",
+      "year": 2012,
+      "link": "https://letterboxd.com/film/the-avengers-2012/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/3/6/7/7/8/36778-the-avengers-2012-0-600-0-900-crop.jpg?v=d0e2add158"
+    },
+    {
+      "title": "Nope",
+      "year": 2022,
+      "link": "https://letterboxd.com/film/nope/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/6/8/2/5/4/7/682547-nope-0-600-0-900-crop.jpg?v=d6a6158cc3"
+    },
+    {
+      "title": "Spider-Man: Far From Home",
+      "year": 2019,
+      "link": "https://letterboxd.com/film/spider-man-far-from-home/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/3/6/2/9/7/7/362977-spider-man-far-from-home-0-600-0-900-crop.jpg?v=d139fbf2ae"
+    },
+    {
+      "title": "2001: A Space Odyssey",
+      "year": 1968,
+      "link": "https://letterboxd.com/film/2001-a-space-odyssey/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/9/8/7/51987-2001-a-space-odyssey-0-600-0-900-crop.jpg?v=a69c46a272"
+    },
+    {
+      "title": "Brokeback Mountain",
+      "year": 2005,
+      "link": "https://letterboxd.com/film/brokeback-mountain/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/9/0/9/51909-brokeback-mountain-0-600-0-900-crop.jpg?v=40ad2b59a0"
+    }
+  ]
 }
