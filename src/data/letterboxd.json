@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-08-10T03:23:31.096Z",
+  "fetchedAt": "2026-08-11T03:23:20.816Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "The Purge",
+      "year": 2013,
+      "link": "https://letterboxd.com/aselling/film/the-purge/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/1/8/1/1/0/p/x6hwbnR2nGacSzljqYaXY25w1Me-0-600-0-900-crop.jpg?v=1ad146e519",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-10",
+      "review": "regretfully I bought this in Blu-ray due to the sole casting of Ethan Hawke. \n\nsecond movie where a crime becomes legal for 12 hours in less than a week.\n\nalso why is this shot like shark tank like the music and the shots"
+    },
     {
       "title": "Suspicion",
       "year": 1941,
@@ -424,7 +435,7 @@
       "title": "The Invite",
       "year": 2026,
       "link": "https://letterboxd.com/aselling/film/the-invite-2026/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/8/5/4/8/3/1/854831-the-invite-2026-0-600-0-900-crop.jpg?v=ee72905e48",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/8/5/4/8/3/1/p/iIgyxguTm5viRqSTeKP1t04geR2-0-600-0-900-crop.jpg?v=aee270cf1a",
       "rating": null,
       "liked": true,
       "rewatch": false,
@@ -529,17 +540,6 @@
       "rewatch": false,
       "watchedDate": "2026-06-29",
       "review": "felt like an episode of Seinfeld. \n\nchoose life"
-    },
-    {
-      "title": "Hostiles",
-      "year": 2017,
-      "link": "https://letterboxd.com/aselling/film/hostiles-2017/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/1/9/5/5/3/p/wiJH5qp5O8mYmKbCuS57utOXa2M-0-600-0-900-crop.jpg?v=4bdc365569",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-06-28",
-      "review": "came for Jesse Plemons, stayed for the landscape porn. \n\npretty shit and pretty racist. horses were great actors. feeling fake bc i couldn't finish it."
     },
     {
       "title": "Oppenheimer",
