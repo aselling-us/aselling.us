@@ -1,7 +1,29 @@
 {
-  "fetchedAt": "2026-08-11T03:23:20.816Z",
+  "fetchedAt": "2026-08-13T05:45:57.555Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "The Conjuring 2",
+      "year": 2016,
+      "link": "https://letterboxd.com/aselling/film/the-conjuring-2/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/8/3/2/5/5/p/pbUZSZPfCAVT8rcHGVJpSNlW49Z-0-600-0-900-crop.jpg?v=7e006c6840",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-12",
+      "review": "this is as close to hell as i ever want to get.cuts to a London montage\n\nanyone who claims that this movie is overfilled with jumpscares or not a true horror movie is full of bloody Hokum, that is the entire point of this genre and James Wan did it justice. Patrick Wilson's Elvis impression sent shivers...\n\n86/100"
+    },
+    {
+      "title": "(500) Days of Summer",
+      "year": 2009,
+      "link": "https://letterboxd.com/aselling/film/500-days-of-summer/8/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/9/3/5/0/p/eQQ4ZLWrDwK3MsqaVKRjGqv29vd-0-600-0-900-crop.jpg?v=ddc869f63f",
+      "rating": null,
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-08-11",
+      "review": "had to make sure nothing changed since I last watched this 8 weeks ago."
+    },
     {
       "title": "The Purge",
       "year": 2013,
@@ -529,28 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-06-30",
       "review": "(500) Days of Sutter"
-    },
-    {
-      "title": "Trainspotting",
-      "year": 1996,
-      "link": "https://letterboxd.com/aselling/film/trainspotting/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/4/9/7/p/qKwvHNIdS6t3tCcqnzxVyf0Rt1O-0-600-0-900-crop.jpg?v=4af83b3df7",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-06-29",
-      "review": "felt like an episode of Seinfeld. \n\nchoose life"
-    },
-    {
-      "title": "Oppenheimer",
-      "year": 2023,
-      "link": "https://letterboxd.com/aselling/film/oppenheimer-2023/2/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/7/8/4/3/2/8/784328-oppenheimer-0-600-0-900-crop.jpg?v=e3c6e7a32c",
-      "rating": null,
-      "liked": true,
-      "rewatch": true,
-      "watchedDate": "2025-06-19",
-      "review": "Watched on Thursday June 19, 2025."
     }
   ],
   "favorites": [
