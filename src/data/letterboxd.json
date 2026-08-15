@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-08-13T05:45:57.555Z",
+  "fetchedAt": "2026-08-15T09:41:17.952Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Leviticus",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/leviticus-2026/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/4/3/7/6/2/2/1437622-leviticus-2026-0-600-0-900-crop.jpg?v=87cb79b6d2",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-14",
+      "review": ":(\nI had such high hopes for this. My only worry walking in was that it would be too short at a run time of 88 minutes.\n\nI fear I strongly was disappointed. I think the trailer made it seem like a twisted horror movie with extreme sound and jumpscares. Rather this seemed quite like a calming film with attempts to combine romance, erotic thriller, psychological horror, and religious horror. It was quite the copy paste of It Follows but extremely peaceful, a bit of kissing intermixed, and a SEVERE LACK of any music deserving of a horror film.\n\nRegarding the cinematography, it felt like the bulk of the movie was cuts every 10-20 seconds. As a long form shot enjoyer, this was extremely below my bar for horror movies. Pretty much no follow shots, either. Mainly utilized abrupt transitions from close to far shots. \n\nWith maybe only one abrupt jumpscare and a very short scene of violent blood, I am hesitant to call this even a horror movie. At least it was short; maybe I give it a rewatch in the future.\n\n34/100"
+    },
     {
       "title": "The Conjuring 2",
       "year": 2016,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-02",
       "review": "I didn't think you'd fall in love with me.I didn't either. I was only curious to know how it started. Now I know. Feelings can creep up just like that. I thought I was in control.don't fucking remind me. anyways movie was fire, didn't cry. insane that the same two songs played constantly. gave me motion sickness from the very strange camera angles and shots"
-    },
-    {
-      "title": "The Spectacular Now",
-      "year": 2013,
-      "link": "https://letterboxd.com/aselling/film/the-spectacular-now/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/1/7/5/8/1/p/tYDbDuZ3K4Xwp3cwtmZM6k53bwq-0-600-0-900-crop.jpg?v=bdd302dff4",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-06-30",
-      "review": "(500) Days of Sutter"
     }
   ],
   "favorites": [
