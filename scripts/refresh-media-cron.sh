@@ -14,6 +14,10 @@ cd "$(dirname "$0")/.."
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
+# Same story for gpg (commit.gpgsign is on): launchd's PATH doesn't include
+# Homebrew's bin dir, so `git commit` fails with "cannot run gpg" without this.
+export PATH="/opt/homebrew/bin:$PATH"
+
 npm run fetch:media
 
 if git diff --quiet -- src/data/goodreads.json src/data/letterboxd.json src/data/github.json; then
