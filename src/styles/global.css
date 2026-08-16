@@ -40,10 +40,12 @@
   --color-vine: #3f8f5f;
   --color-chain: #946b38;
 
-  /* -- color: places map dots (lived/want-to-go/third-place — event/travel reuse highlight/accent) -- */
+  /* -- color: places map dots (lived/want-to-go/third-place — travel reuses accent) -- */
   --color-dot-lived: #4f9e6f;
   --color-dot-want-to-go: #9b72d1;
   --color-dot-third-place: #e0973f;
+  /* fixed across all themes (not redefined per [data-theme] block on purpose) */
+  --color-dot-event: #baebf5;
 
   /* -- type -- */
   --font-display: 'Fraunces', Georgia, serif;
