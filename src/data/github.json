@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-15T16:00:03.710Z",
+  "fetchedAt": "2026-08-16T09:42:44.009Z",
   "username": "aselling-us",
   "repos": [
     {
@@ -10,7 +10,7 @@
       "language": "Astro",
       "stars": 0,
       "topics": [],
-      "pushedAt": "2026-08-15"
+      "pushedAt": "2026-08-16"
     },
     {
       "name": "resume",
@@ -84,36 +84,8 @@
     }
   ],
   "contributions": {
-    "total": 1286,
+    "total": 1295,
     "days": [
-      {
-        "date": "2025-08-10",
-        "count": 0
-      },
-      {
-        "date": "2025-08-11",
-        "count": 5
-      },
-      {
-        "date": "2025-08-12",
-        "count": 1
-      },
-      {
-        "date": "2025-08-13",
-        "count": 7
-      },
-      {
-        "date": "2025-08-14",
-        "count": 10
-      },
-      {
-        "date": "2025-08-15",
-        "count": 5
-      },
-      {
-        "date": "2025-08-16",
-        "count": 2
-      },
       {
         "date": "2025-08-17",
         "count": 0
@@ -1552,7 +1524,27 @@
       },
       {
         "date": "2026-08-11",
+        "count": 1
+      },
+      {
+        "date": "2026-08-12",
+        "count": 3
+      },
+      {
+        "date": "2026-08-13",
         "count": 0
+      },
+      {
+        "date": "2026-08-14",
+        "count": 0
+      },
+      {
+        "date": "2026-08-15",
+        "count": 4
+      },
+      {
+        "date": "2026-08-16",
+        "count": 1
       }
     ]
   },
@@ -1565,8 +1557,8 @@
       "homepage": "https://readers.kontinua.org/",
       "language": "TeX",
       "stars": 10,
-      "pushedAt": "2026-08-09",
-      "commits": 296
+      "pushedAt": "2026-08-14",
+      "commits": 297
     },
     {
       "name": "kontinuafoundation.github.io",
