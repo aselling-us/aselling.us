@@ -13,7 +13,7 @@ const posts = await getCollection('blog', ({ data }) => import.meta.env.DEV || d
 const tags = collectTags(posts);
 ---
 <BaseLayout title="Tags" description="Every tag used across the writing archive, largest first.">
-  <span class="mono-label">writing / tags</span>
+  <span class="mono-label"><a href="/blog">writing</a> / tags</span>
   <div class="title-row">
     <h1>Tags</h1>
     <p class="lede">Every tag across <a href="/blog">the writing archive</a> — {tags.length} in total, largest first.</p>

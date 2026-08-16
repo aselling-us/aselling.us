@@ -61,4 +61,20 @@ const career = defineCollection({
     }),
 });
 
-export const collections = { blog, places, career };
+// One markdown file per note about an in-progress personal project, shown
+// on /projects above the GitHub-imported sections. Manually authored —
+// unlike the repos below it, these aren't pulled from any API. `images` is
+// an ordered list of photos dropped next to the .md file (see the dev-only
+// editor in scripts/dev-edit-doing.mjs, which owns that field).
+const doing = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/doing' }),
+
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      date: z.date(),
+      images: z.array(image()).optional().default([]),
+    }),
+});
+
+export const collections = { blog, places, career, doing };

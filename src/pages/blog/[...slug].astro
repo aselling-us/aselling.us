@@ -10,13 +10,26 @@ import { tagSlug } from '../../lib/tags.mjs';
 // Tells Astro which pages to generate at build time — one per post.
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => data.draft !== true);
-  return posts.map((post) => ({
-    params: { slug: post.id },
-    props: { post },
-  }));
+
+  return posts.map((post) => {
+    // most recent other post sharing at least one tag (case-insensitive,
+    // same dedupe rule /blog's own tag filter uses) — posts is already
+    // draft-filtered above, so this can never surface a draft
+    const tags = new Set((post.data.tags ?? []).map((t) => t.toLowerCase()));
+    const related = tags.size
+      ? posts
+          .filter((p) => p.id !== post.id && (p.data.tags ?? []).some((t) => tags.has(t.toLowerCase())))
+          .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())[0]
+      : undefined;
+
+    return {
+      params: { slug: post.id },
+      props: { post, related },
+    };
+  });
 }
 
-const { post } = Astro.props;
+const { post, related } = Astro.props;
 const { Content } = await render(post);
 ---
 <BaseLayout title={stripMarkdown(post.data.title)} description={post.data.description ? stripMarkdown(post.data.description) : undefined}>
@@ -45,6 +58,18 @@ const { Content } = await render(post);
     <div class="prose">
       <Content />
     </div>
+
+    {related && (
+      <section class="related-post">
+        <span class="mono-label section-label">related</span>
+        <a class="related-link" href={`/blog/${related.id}`}>
+          <span class="related-title" set:html={renderInlineMarkdown(related.data.title)} />
+          <span class="mono-label related-date">
+            {related.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+          </span>
+        </a>
+      </section>
+    )}
 
     <SubscribeForm />
   </div>
@@ -157,4 +182,31 @@ const { Content } = await render(post);
     color: var(--color-highlight-bright);
     border-color: var(--color-highlight);
   }
+
+  .related-post {
+    margin-top: var(--space-4);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--color-hairline);
+  }
+  .related-post .section-label {
+    color: var(--color-highlight-bright);
+    font-size: 0.7rem;
+    font-weight: 400;
+    display: block;
+    margin-bottom: var(--space-1);
+  }
+  .related-link {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+  .related-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--color-accent-bright);
+  }
+  .related-link:hover .related-title { color: var(--color-highlight-bright); }
+  .related-date { color: var(--color-text-faint); flex-shrink: 0; }
 </style>
