@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-15T16:00:03.710Z",
+  "fetchedAt": "2026-08-17T09:58:08.525Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -26,6 +26,36 @@
     }
   ],
   "toRead": [
+    {
+      "title": "The 7 1/2 Deaths of Evelyn Hardcastle",
+      "author": "Stuart Turton",
+      "link": "https://www.goodreads.com/book/show/40914164",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1543386631l/40914164.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-08-17",
+      "review": null
+    },
+    {
+      "title": "The Seven Husbands of Evelyn Hugo",
+      "author": "Taylor Jenkins Reid",
+      "link": "https://www.goodreads.com/book/show/32620332",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1664458703l/32620332._SY475_.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-08-17",
+      "review": null
+    },
+    {
+      "title": "The Trouble With Being Born",
+      "author": "Emil M. Cioran",
+      "link": "https://www.goodreads.com/book/show/117564",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1348223420l/117564.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-08-16",
+      "review": null
+    },
     {
       "title": "Less Than Zero",
       "author": "Bret Easton Ellis",
