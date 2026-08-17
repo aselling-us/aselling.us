@@ -427,11 +427,16 @@ const timelinePlaces = mapPlaces
   if (bounds.isValid()) map.fitBounds(bounds.pad(0.2));
   else map.setView([30, 0], 2);
 
-  // legend checkboxes add/remove each category's markers from the cluster group
+  // legend checkboxes add/remove each category's markers from the cluster
+  // group, and show/hide that category's entries in the timeline list below
   document.querySelectorAll<HTMLInputElement>('.map-legend input[data-kind]').forEach((box) => {
     box.addEventListener('change', () => {
-      const markers = kindMarkers[box.dataset.kind as PlaceKind];
+      const kind = box.dataset.kind as PlaceKind;
+      const markers = kindMarkers[kind];
       box.checked ? clusters.addLayers(markers) : clusters.removeLayers(markers);
+      document.querySelectorAll<HTMLLIElement>(`.post-list > li.kind-${kind}`).forEach((li) => {
+        li.classList.toggle('is-hidden', !box.checked);
+      });
     });
   });
 
