@@ -45,7 +45,7 @@
   --color-dot-want-to-go: #9b72d1;
   --color-dot-third-place: #e0973f;
   /* fixed across all themes (not redefined per [data-theme] block on purpose) */
-  --color-dot-event: #baebf5;
+  --color-dot-event: #398fa0;
 
   /* -- type -- */
   --font-display: 'Fraunces', Georgia, serif;
