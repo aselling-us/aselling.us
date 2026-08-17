@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-08-16T16:00:00.496Z",
+  "fetchedAt": "2026-08-17T16:01:18.578Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Tenet",
+      "year": 2020,
+      "link": "https://letterboxd.com/aselling/film/tenet/1/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/0/6/0/3/2/p/d2LpeXs2XyPm2B7AxyIsHlE2ySc-0-600-0-900-crop.jpg?v=6d0ffb75e3",
+      "rating": null,
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-08-16",
+      "review": "fellas is it gay to know your work besties go-to drink before you even met him\n\nOne of Nolan's best paced films... He truly knows how to pair sound and intensity with the speed of a film. Sure, sometimes you have no clue what these people are saying — that is when you need to best focus on the visuals of the film.\n\nProud owner of TENET on Blu-ray.\n94/100"
+    },
     {
       "title": "Ferris Bueller's Day Off",
       "year": 1986,
@@ -540,17 +551,6 @@
       "rewatch": true,
       "watchedDate": "2026-07-03",
       "review": "i wish this would happen to me"
-    },
-    {
-      "title": "The Conjuring",
-      "year": 2013,
-      "link": "https://letterboxd.com/aselling/film/the-conjuring/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/0/6/2/6/2/p/q5S4KDDDv81ppc2tREzrcK7qxe2-0-600-0-900-crop.jpg?v=22f80e6c8c",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-07-02",
-      "review": "watched this alone at night in a old creaky house and i am genuinely more stressed and scared than the four times i watched obsession (2025). \n\nin other news, everyone in this movie is hot including masc les Joey King, Ron Livingston, Patrick Wilson, and both their lives. cinematography was amazing (especially with the bed scene and the little 360 rotation of the camera). definitely too many jumpscares that were well done. lights on and doors open bro"
     }
   ],
   "favorites": [
