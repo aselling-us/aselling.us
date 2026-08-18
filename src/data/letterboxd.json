@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-08-17T09:58:08.525Z",
+  "fetchedAt": "2026-08-18T09:49:15.269Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "mid90s",
+      "year": 2018,
+      "link": "https://letterboxd.com/aselling/film/mid90s/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/3/7/0/4/5/1/370451-mid90s-0-600-0-900-crop.jpg?v=75ec66cf80",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-17",
+      "review": "definition of a chill movie. there is a character named Fuckshit."
+    },
     {
       "title": "Tenet",
       "year": 2020,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-06",
       "review": "I'm Samantha James, Bitch!Anna Faris made this entirely shit movie bearable. No scene without her was bearable to watch. I love herrrr\n\nnot sure why I am watching a christmas movie in july tho. otw to 200!"
-    },
-    {
-      "title": "Up",
-      "year": 2009,
-      "link": "https://letterboxd.com/aselling/film/up/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/3/3/0/2/p/rydxyyzQNHRHE6wYehGxJEiTsMN-0-600-0-900-crop.jpg?v=99d9cc3c38",
-      "rating": null,
-      "liked": true,
-      "rewatch": true,
-      "watchedDate": "2026-07-03",
-      "review": "i wish this would happen to me"
     }
   ],
   "favorites": [
