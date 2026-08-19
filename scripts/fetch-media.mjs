@@ -356,24 +356,45 @@ async function fetchFilms() {
 // Resolves a batch of `{ slug, posterId, cacheBustingKey }` descriptors (any
 // of which may be null/missing — such entries just resolve to null) to their
 // final poster image URLs in one round trip.
+//
+// Deliberately NOT one Promise.all firing all N requests at once: a burst of
+// ~50 near-simultaneous same-origin fetches from one page trips Letterboxd's
+// Cloudflare protection partway through (seen as most of a page's rows
+// failing to resolve while the first handful succeed) — the same class of
+// bot-detection already documented above fetchFavoritesAndWatchlist for
+// reusing one browser context across page navigations. A small worker-pool
+// keeps only a few requests in flight at a time instead.
 async function resolvePosterUrls(page, items) {
   return page.evaluate(async (items) => {
-    return Promise.all(
-      items.map(async ({ slug, posterId, cacheBustingKey }) => {
-        if (!slug || !cacheBustingKey) return null;
-        const path = posterId
-          ? `/film/${slug}/poster/std/${posterId}/600/?k=${cacheBustingKey}`
-          : `/film/${slug}/poster/std/600/?k=${cacheBustingKey}`;
-        try {
-          const res = await fetch(path, { headers: { Accept: 'text/json, */*' } });
-          if (!res.ok) return null;
-          const data = await res.json();
-          return data.url ?? null;
-        } catch {
-          return null;
-        }
-      })
-    );
+    const CONCURRENCY = 4;
+    const results = new Array(items.length).fill(null);
+    let next = 0;
+
+    async function resolveOne(i) {
+      const { slug, posterId, cacheBustingKey } = items[i];
+      if (!slug || !cacheBustingKey) return null;
+      const path = posterId
+        ? `/film/${slug}/poster/std/${posterId}/600/?k=${cacheBustingKey}`
+        : `/film/${slug}/poster/std/600/?k=${cacheBustingKey}`;
+      try {
+        const res = await fetch(path, { headers: { Accept: 'text/json, */*' } });
+        if (!res.ok) return null;
+        const data = await res.json();
+        return data.url ?? null;
+      } catch {
+        return null;
+      }
+    }
+
+    async function worker() {
+      while (next < items.length) {
+        const i = next++;
+        results[i] = await resolveOne(i);
+      }
+    }
+
+    await Promise.all(Array.from({ length: Math.min(CONCURRENCY, items.length) }, worker));
+    return results;
   }, items);
 }
 
