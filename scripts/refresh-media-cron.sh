@@ -27,5 +27,16 @@ fi
 
 git add src/data/goodreads.json src/data/letterboxd.json src/data/github.json
 git commit -m "data: refresh goodreads/letterboxd/github snapshots"
-git push
+
+# refresh-media.yml (GitHub Actions) commits to these same 3 files on its own
+# schedule, so this can find origin has moved by push time. This fetch just
+# ran, so our side is always at least as fresh -- auto-merge preferring ours
+# on conflict instead of leaving the commit stranded unpushed (see commit
+# 822fb1e and its predecessors for how many times that happened by hand).
+if ! git push; then
+  git fetch origin
+  git merge -X ours origin/main -m "Merge remote-tracking branch 'origin/main'"
+  git push
+fi
+
 echo "$(date): pushed media refresh."
