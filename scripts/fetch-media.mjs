@@ -552,7 +552,17 @@ async function fetchFavoritesAndWatchlist() {
 async function fetchFavoritesAndWatchlistWithRetry(maxAttempts = 3) {
   let result = { favorites: [], watchlist: [], diaryPosters: new Map() };
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-    result = await fetchFavoritesAndWatchlist();
+    // a thrown error (e.g. page.goto timing out) is just as recoverable by
+    // retrying as an empty/Cloudflare-blocked result — without this, one
+    // network hiccup here crashes the whole script (this call sits inside
+    // the top-level Promise.all below) and blocks Goodreads/GitHub/RSS
+    // updates too, even though they have nothing to do with Letterboxd
+    try {
+      result = await fetchFavoritesAndWatchlist();
+    } catch (err) {
+      console.warn(`favorites/watchlist/diary posters: attempt ${attempt}/${maxAttempts} threw: ${err.message}`);
+      result = { favorites: [], watchlist: [], diaryPosters: new Map() };
+    }
     const blocked = result.favorites.length === 0 && result.watchlist.length === 0 && result.diaryPosters.size === 0;
     if (!blocked) return result;
     if (attempt < maxAttempts) {
