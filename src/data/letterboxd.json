@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-08-18T16:01:28.509Z",
+  "fetchedAt": "2026-08-20T00:27:19.243Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "The Conjuring: The Devil Made Me Do It",
+      "year": 2021,
+      "link": "https://letterboxd.com/aselling/film/the-conjuring-the-devil-made-me-do-it/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/5/6/7/2/3/p/WcL9ZWI8n1hTp6IoKPwM7dpkYJ-0-600-0-900-crop.jpg?v=e2ab3d2623",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-18",
+      "review": "they made david look like Paul Dano in Prisoners \n\nalso how did sarah catherine hook get signed up for this shit\n\"are... you saying... someone... did this... to us... on purpose\"\n\n31/100"
+    },
     {
       "title": "mid90s",
       "year": 2018,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-07",
       "review": "yeah this was a crazy one. Both as in it was crazy hard to understand and I am crazy passionate about this. \n\nsome movies are best experienced, not understood."
-    },
-    {
-      "title": "Just Friends",
-      "year": 2005,
-      "link": "https://letterboxd.com/aselling/film/just-friends/",
-      "poster": "https://a.ltrbxd.com/resized/sm/upload/lg/b2/3t/em/n7gZuqiRSjgIkyqDIiLZ20qRgoi-0-600-0-900-crop.jpg?v=1c13794080",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-07-06",
-      "review": "I'm Samantha James, Bitch!Anna Faris made this entirely shit movie bearable. No scene without her was bearable to watch. I love herrrr\n\nnot sure why I am watching a christmas movie in july tho. otw to 200!"
     }
   ],
   "favorites": [
