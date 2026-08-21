@@ -295,6 +295,43 @@ const timelinePlaces = mapPlaces
     return `in ${years} year${years === 1 ? '' : 's'}`;
   }
 
+  // Below 30 days out, the "future" badge swaps its text for a live
+  // DD:HH:MM:SS readout, ticking every second.
+  const THIRTY_DAYS_MS = 30 * 86400000;
+  const pad2 = (n: number) => String(n).padStart(2, '0');
+
+  function formatLiveCountdown(remainingMs: number): string {
+    const total = Math.max(0, Math.floor(remainingMs / 1000));
+    const d = Math.floor(total / 86400);
+    const h = Math.floor((total % 86400) / 3600);
+    const m = Math.floor((total % 3600) / 60);
+    const s = total % 60;
+    return `${pad2(d)}:${pad2(h)}:${pad2(m)}:${pad2(s)}`;
+  }
+
+  // self-rescheduling rather than setInterval: recheck once a minute while
+  // far out (cheap, no visible change needed), drop to a per-second tick
+  // only once inside the 30-day window, and stop rescheduling once it fires.
+  function scheduleFutureBadge(badge: HTMLElement, sortDate: number) {
+    const tick = () => {
+      const remaining = sortDate - Date.now();
+      if (remaining <= 0) {
+        badge.remove();
+        return;
+      }
+      if (remaining < THIRTY_DAYS_MS) {
+        badge.classList.add('future-badge-live');
+        badge.textContent = formatLiveCountdown(remaining);
+        setTimeout(tick, 1000);
+      } else {
+        badge.textContent = formatCountdown(sortDate);
+        setTimeout(tick, 60000);
+      }
+    };
+
+    tick();
+  }
+
   const map = L.map('map', { worldCopyJump: true, scrollWheelZoom: false });
 
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -605,10 +642,7 @@ const timelinePlaces = mapPlaces
   // sortDate — fill in an actual countdown (or drop the badge if the
   // viewer's own clock says it's no longer future) once this runs.
   document.querySelectorAll<HTMLElement>('.future-badge[data-sort-date]').forEach((badge) => {
-    const sortDate = Number(badge.dataset.sortDate);
-    const countdown = formatCountdown(sortDate);
-    if (countdown) badge.textContent = countdown;
-    else badge.remove();
+    scheduleFutureBadge(badge, Number(badge.dataset.sortDate));
   });
 
   // timeline photo carousels: swap the cover img's src, wrap-around at the ends;
@@ -709,6 +743,12 @@ const timelinePlaces = mapPlaces
   .future-badge:hover {
     background: var(--color-highlight-bright);
     color: var(--color-bg);
+  }
+
+  /* live DD:HH:MM:SS readout, swapped in under the 30-day mark; tabular-nums
+     keeps the digits from jittering the badge width as they tick */
+  .future-badge-live {
+    font-variant-numeric: tabular-nums;
   }
 
   .dev-btn {
