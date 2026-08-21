@@ -77,4 +77,29 @@ const doing = defineCollection({
     }),
 });
 
-export const collections = { blog, places, career, doing };
+// One markdown file per photo of a physical book — shelf photos, annotated
+// pages, marginalia. Shown on /books between "currently reading" and
+// "read". Manually authored, not pulled from Goodreads. One photo per
+// entry; `caption` is just enough to identify the book, not an excerpt
+// (see the dev-only editor in scripts/dev-edit-marginalia.mjs, which owns
+// the `image` field). `image` is optional in the schema — same reason
+// blog's `cover` and career's `logo` are — the entry is created before the
+// photo finishes uploading, so a build must survive a photo that never
+// made it; entries with no image just aren't rendered. `order` is the
+// carousel's display sequence (ascending) — independent of `date`, since
+// the whole point is to let it be rearranged by hand rather than always
+// falling out of chronological order; a new entry gets the next integer
+// after the current max, and the "move" buttons swap adjacent values.
+const marginalia = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/marginalia' }),
+
+  schema: ({ image }) =>
+    z.object({
+      date: z.date(),
+      caption: z.string().optional(),
+      image: image().optional(),
+      order: z.number(),
+    }),
+});
+
+export const collections = { blog, places, career, doing, marginalia };
