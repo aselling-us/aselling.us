@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-20T16:04:08.160Z",
+  "fetchedAt": "2026-08-21T09:52:52.298Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -26,6 +26,16 @@
     }
   ],
   "toRead": [
+    {
+      "title": "The Sea Close By",
+      "author": "Albert Camus",
+      "link": "https://www.goodreads.com/book/show/18280949",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1375559280l/18280949.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-08-21",
+      "review": null
+    },
     {
       "title": "The 7 1/2 Deaths of Evelyn Hardcastle",
       "author": "Stuart Turton",
