@@ -124,9 +124,13 @@ const fmtIsoDate = (iso: string | null) =>
                     <span class="currently-title">
                       {film.title}{film.year && <span class="currently-dim"> ({film.year})</span>}
                     </span>
-                    {film.watchedDate && (
-                      <span class="mono-label currently-date">{fmtIsoDate(film.watchedDate)}</span>
-                    )}
+                    <span class="mono-label currently-meta">
+                      {film.watchedDate && <span class="currently-date">{fmtIsoDate(film.watchedDate)}</span>}
+                      {film.liked && (
+                        <span class="liked" aria-label="Liked">♥</span>
+                      )}
+                      {film.rewatch && <span class="rewatch">rewatch</span>}
+                    </span>
                   </a>
                 </li>
               ))}
@@ -329,6 +333,24 @@ const fmtIsoDate = (iso: string | null) =>
   }
   .currently-link:hover .currently-title { color: var(--color-highlight-bright); }
   .currently-dim { color: var(--color-text-dim); font-size: 0.85em; }
+
+  .currently-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .liked { color: var(--color-highlight-bright); }
+  .rewatch {
+    color: var(--color-highlight-bright);
+    border: 1px solid var(--color-highlight-bright);
+    padding: 0.05rem 0.35rem;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .currently-link:hover .rewatch {
+    background: var(--color-highlight-bright);
+    color: var(--color-bg);
+  }
 
   .progress { display: block; }
   .progress-track {
