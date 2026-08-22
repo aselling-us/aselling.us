@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-08-20T00:27:19.243Z",
+  "fetchedAt": "2026-08-22T09:42:58.418Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "The Invite",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/the-invite-2026/1/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/8/5/4/8/3/1/854831-the-invite-2026-0-600-0-900-crop.jpg?v=ee72905e48",
+      "rating": null,
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-08-21",
+      "review": "next time you're in there, count the rings"
+    },
     {
       "title": "The Conjuring: The Devil Made Me Do It",
       "year": 2021,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-09",
       "review": "sequence of events surrounding this movie:\naww so gothic academica core\n*eats food*\nwhat the fuck\n*drinks water*\nwhat the fuck\n*falls asleep*\nwakes up to children screaming\n*brushes my teeth*\nare they gonna kiss??? is he getting groomed?\n*movie ends*\nwhat the fuck"
-    },
-    {
-      "title": "The Double Life of Véronique",
-      "year": 1991,
-      "link": "https://letterboxd.com/aselling/film/the-double-life-of-veronique/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/0/9/3/4/p/4NGhXBzN8yWuF1QDTjCJmrGH5mV-0-600-0-900-crop.jpg?v=20a78379db",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-07-07",
-      "review": "yeah this was a crazy one. Both as in it was crazy hard to understand and I am crazy passionate about this. \n\nsome movies are best experienced, not understood."
     }
   ],
   "favorites": [
