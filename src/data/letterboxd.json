@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-08-22T16:08:07.809Z",
+  "fetchedAt": "2026-08-24T05:47:10.521Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "The Nun",
+      "year": 2018,
+      "link": "https://letterboxd.com/aselling/film/the-nun-2018/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/7/1/8/4/2/p/k22mrmbKA3nDS82eYEyJkGlHx3v-0-600-0-900-crop.jpg?v=787a022c06",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-23",
+      "review": "hey sisters\n\n64/100"
+    },
     {
       "title": "The Invite",
       "year": 2026,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-10",
       "review": "incredible. laughed harder than I have in a long time. didnt even know what was happening half the time. ill say it again, incredible.\n\nstrikes and gutters\n\nedit: whoever said Scott Pilgrim for 40 year old white men was spot on"
-    },
-    {
-      "title": "The Innocents",
-      "year": 1961,
-      "link": "https://letterboxd.com/aselling/film/the-innocents/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/1/6/0/8/p/mneFlQAWdIV7q57lUEqUaRP76FJ-0-600-0-900-crop.jpg?v=379b6d3bb5",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-07-09",
-      "review": "sequence of events surrounding this movie:\naww so gothic academica core\n*eats food*\nwhat the fuck\n*drinks water*\nwhat the fuck\n*falls asleep*\nwakes up to children screaming\n*brushes my teeth*\nare they gonna kiss??? is he getting groomed?\n*movie ends*\nwhat the fuck"
     }
   ],
   "favorites": [
