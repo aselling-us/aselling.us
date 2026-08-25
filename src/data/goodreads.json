@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-24T07:19:26.306Z",
+  "fetchedAt": "2026-08-25T06:23:44.846Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -10,9 +10,7 @@
       "rating": 0,
       "readAt": null,
       "addedAt": "2026-07-18",
-      "review": null,
-      "currentPage": 134,
-      "totalPages": 320
+      "review": null
     },
     {
       "title": "The Secret History",
@@ -28,6 +26,16 @@
     }
   ],
   "toRead": [
+    {
+      "title": "One",
+      "author": "Richard Bach",
+      "link": "https://www.goodreads.com/book/show/265264",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1356137029l/265264.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-08-25",
+      "review": null
+    },
     {
       "title": "The Sea Close By",
       "author": "Albert Camus",

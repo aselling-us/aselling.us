@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-08-24T05:47:10.521Z",
+  "fetchedAt": "2026-08-25T06:23:44.846Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "The Bling Ring",
+      "year": 2013,
+      "link": "https://letterboxd.com/aselling/film/the-bling-ring/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/7/9/8/9/3/p/nTsoUG6RzpcefTOKK1GSAaemWOG-0-600-0-900-crop.jpg?v=5894941c44",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-24",
+      "review": "the statement \"based on a vanity fair article\" in the intro credits had me hooked. Coppola does it again; saw alot of Marie Antoinette (2006) in this. Emma Watson stole this well. only complaint was the color grading switching constantly. \n\n87/100"
+    },
     {
       "title": "The Nun",
       "year": 2018,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-11",
       "review": "Very similar concept to The Drama. Executed much better though. lot's of laughs lots of silent parts. Strong casting and so much energy, just like the rug."
-    },
-    {
-      "title": "The Big Lebowski",
-      "year": 1998,
-      "link": "https://letterboxd.com/aselling/film/the-big-lebowski/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/9/3/5/p/mLgQnC7uYaTlol87uH1gndqOXB3-0-600-0-900-crop.jpg?v=7801048f96",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-07-10",
-      "review": "incredible. laughed harder than I have in a long time. didnt even know what was happening half the time. ill say it again, incredible.\n\nstrikes and gutters\n\nedit: whoever said Scott Pilgrim for 40 year old white men was spot on"
     }
   ],
   "favorites": [
