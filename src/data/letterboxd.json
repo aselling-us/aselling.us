@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-08-25T06:23:44.846Z",
+  "fetchedAt": "2026-08-26T09:57:55.442Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "The Mummy",
+      "year": 1999,
+      "link": "https://letterboxd.com/aselling/film/the-mummy-1999/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/5i/du/2g/s8/6CweTLmngcPrsEH4G6RKvdwmQdC-0-600-0-900-crop.jpg?v=397ac4a555",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-25",
+      "review": "they skipped past that bookshelf incident way too fast"
+    },
     {
       "title": "The Bling Ring",
       "year": 2013,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-12",
       "review": "Not what I was expecting at all. Nihilistic in a way, but in a calming manner. As many have said, very art school. I believe entirely hand drawn though. Some parallels to Perfect Blue in a way. A lot of depressing future speculation."
-    },
-    {
-      "title": "The Invite",
-      "year": 2026,
-      "link": "https://letterboxd.com/aselling/film/the-invite-2026/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/8/5/4/8/3/1/p/iIgyxguTm5viRqSTeKP1t04geR2-0-600-0-900-crop.jpg?v=aee270cf1a",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-07-11",
-      "review": "Very similar concept to The Drama. Executed much better though. lot's of laughs lots of silent parts. Strong casting and so much energy, just like the rug."
     }
   ],
   "favorites": [
