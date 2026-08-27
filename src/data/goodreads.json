@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-08-26T09:57:55.442Z",
+  "fetchedAt": "2026-08-27T19:56:57.434Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -11,7 +11,7 @@
       "readAt": null,
       "addedAt": "2026-07-18",
       "review": null,
-      "currentPage": 156,
+      "currentPage": 213,
       "totalPages": 320
     },
     {
@@ -22,9 +22,7 @@
       "rating": 0,
       "readAt": null,
       "addedAt": "2026-05-19",
-      "review": null,
-      "currentPage": 136,
-      "totalPages": 559
+      "review": null
     }
   ],
   "toRead": [
