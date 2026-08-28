@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-08-26T09:57:55.442Z",
+  "fetchedAt": "2026-08-28T16:30:40.953Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "The Conjuring: Last Rites",
+      "year": 2025,
+      "link": "https://letterboxd.com/aselling/film/the-conjuring-last-rites/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/9/3/6/0/6/5/936065-the-conjuring-last-rites-0-600-0-900-crop.jpg?v=597eedcd06",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-27",
+      "review": "i actually loved this. big fan of movies that play with mirrors, like literally all the mirrors had such a flirty vibe. ughhh. huge come back for the conjuring \n\n85/100"
+    },
     {
       "title": "The Mummy",
       "year": 1999,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-13",
       "review": "For a space movie hater, I seem to cry at a lot of them. Very happy to have watched this in the theatre experience. In depth review here."
-    },
-    {
-      "title": "Jinsei",
-      "year": 2025,
-      "link": "https://letterboxd.com/aselling/film/jinsei/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/1/3/1/8/9/4/3/1318943-jinsei-0-600-0-900-crop.jpg?v=d657ba0839",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-07-12",
-      "review": "Not what I was expecting at all. Nihilistic in a way, but in a calming manner. As many have said, very art school. I believe entirely hand drawn though. Some parallels to Perfect Blue in a way. A lot of depressing future speculation."
     }
   ],
   "favorites": [
