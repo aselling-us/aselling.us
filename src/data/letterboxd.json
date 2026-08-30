@@ -1,7 +1,29 @@
 {
-  "fetchedAt": "2026-08-28T16:30:40.953Z",
+  "fetchedAt": "2026-08-30T14:25:57.893Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Annabelle: Creation",
+      "year": 2017,
+      "link": "https://letterboxd.com/aselling/film/annabelle-creation/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/3/3/0/7/9/0/330790-annabelle-creation-0-600-0-900-crop.jpg?v=6ef299dffd",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-29",
+      "review": "omg a doll needs a girls soul so scary\n\n\"what was that?\"\n\"who cares? run\"\n\nis crazy writing to speak out in a horror movie"
+    },
+    {
+      "title": "Sicario",
+      "year": 2015,
+      "link": "https://letterboxd.com/aselling/film/sicario-2015/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/9/7/6/2/8/197628-sicario-0-600-0-900-crop.jpg?v=06d4163bb2",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-29",
+      "review": "playing with wide scope large scale shots tickled my pickle"
+    },
     {
       "title": "The Conjuring: Last Rites",
       "year": 2025,
@@ -529,28 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-15",
       "review": "This review may contain spoilers.\n\nthe only bearable parts of this were when diane kruger stared off longingly at the battle she caused. but — film 199 of the year!!"
-    },
-    {
-      "title": "Sinister",
-      "year": 2012,
-      "link": "https://letterboxd.com/aselling/film/sinister/",
-      "poster": "https://a.ltrbxd.com/resized/sm/upload/e2/ry/mu/yc/hrRYY7FcRc46Ue7h9jcKiW1xqJ3-0-600-0-900-crop.jpg?v=c994fd880e",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-07-14",
-      "review": "genuinely one of the most terrifying horrors I have seen in a while. Hokum(2026) definitely took a lot of inspiration from this; I love the way horror directors blend mystery, thrillers, and often a literary aspect. Not a ghost story, not a mystery, not a horror movie, but something derivative of all three. I quite liked the idea of explaining a mystery through a set of old films. Similar to how Weapons used a set of intertwined characters to engage the viewer into the mystery aspect of it. The sound design and use of shadows really kept me on edge too. Only complaint is that the acting from characters outside of Ethan Hawke seemed quite subpar."
-    },
-    {
-      "title": "Arrival",
-      "year": 2016,
-      "link": "https://letterboxd.com/aselling/film/arrival-2016/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/2/5/7/4/2/6/p/ypNmhRafhV7aYkXogpgeXls1ReL-0-600-0-900-crop.jpg?v=34fdc8eddd",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-07-13",
-      "review": "For a space movie hater, I seem to cry at a lot of them. Very happy to have watched this in the theatre experience. In depth review here."
     }
   ],
   "favorites": [
