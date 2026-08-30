@@ -154,13 +154,23 @@ const kindLabel = (kind: MapPlace['kind']) =>
 
 const now = Date.now();
 
+// `sortDate` is 00:00 UTC of the day; events actually count down to 7pm on the
+// viewer's clock (see `countdownTarget` in the client script), which can be up
+// to ~a day past that UTC anchor depending on the viewer's zone. Keep the
+// "future" badge rendering across that window so the client can show the final
+// hours and remove it exactly on time, instead of the server dropping it early
+// (the client is already the authority on whether it's still future).
+const EVENT_COUNTDOWN_GRACE_MS = 36 * 3600000;
+const stillFuture = (kind: MapPlace['kind'], sortDate: number) =>
+  kind === 'event' ? sortDate + EVENT_COUNTDOWN_GRACE_MS > now : sortDate > now;
+
 // Chronological list of everything with a date — want-to-go entries lead
 // (they're the future plans), then the rest sorted most-recent-first.
 const timelinePlaces = mapPlaces
   .filter((p): p is MapPlace & { date: string } => Boolean(p.date))
   .map((p) => {
     const sortDate = p.sortDate ?? -Infinity;
-    return { ...p, sortDate, isFuture: sortDate > now };
+    return { ...p, sortDate, isFuture: stillFuture(p.kind, sortDate) };
   })
   .sort((a, b) => {
     const aWant = a.kind === 'want-to-go' ? 0 : 1;
@@ -207,7 +217,7 @@ const timelinePlaces = mapPlaces
           <div class="post-main">
             <strong>{place.name}</strong>
             {place.isFuture && (
-              <span class="future-badge mono-label" data-sort-date={place.sortDate}>future</span>
+              <span class="future-badge mono-label" data-sort-date={place.sortDate} data-kind={place.kind}>future</span>
             )}
             {import.meta.env.DEV && (
               <button class="timeline-edit dev-btn mono-label" data-id={place.id} type="button">edit</button>
@@ -279,14 +289,33 @@ const timelinePlaces = mapPlaces
 
   const places: MapPlace[] = JSON.parse(document.getElementById('places-data')!.textContent!);
 
-  // Countdown text for a future `sortDate`, computed against the viewer's own
-  // clock at page-load time rather than baked in at build time — this page
-  // only rebuilds on a push, so a build-time countdown would silently go
-  // stale for however long it is until the next deploy. Returns null once
-  // the date is no longer in the future (by the viewer's clock).
-  function formatCountdown(sortDate: number): string | null {
-    const days = Math.ceil((sortDate - Date.now()) / 86400000);
-    if (days <= 0) return null;
+  // `parsePlaceDate` anchors every date to 00:00 UTC on the day, which out on
+  // the US west coast is mid-afternoon the day *before* — so an event's
+  // countdown would hit zero (and the badge delete itself) hours before the
+  // show. Events start in the evening, so count them down to 7pm on the
+  // viewer's own clock that day instead. Non-events keep the day-start anchor.
+  // `sortDate` is 00:00 UTC of the day: read the calendar date back off it in
+  // UTC, then rebuild it at 19:00 in the viewer's local zone.
+  const EVENT_HOUR = 19;
+  function countdownTarget(sortDate: number, kind?: string | null): number {
+    if (kind !== 'event') return sortDate;
+    const d = new Date(sortDate);
+    return new Date(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), EVENT_HOUR).getTime();
+  }
+
+  // Countdown text for a future `target` (see countdownTarget), computed
+  // against the viewer's own clock at page-load time rather than baked in at
+  // build time — this page only rebuilds on a push, so a build-time countdown
+  // would silently go stale for however long it is until the next deploy.
+  // Returns null once the target is no longer in the future (by the viewer's
+  // clock).
+  function formatCountdown(target: number): string | null {
+    const ms = target - Date.now();
+    if (ms <= 0) return null;
+    const hours = ms / 3600000;
+    if (hours < 1) return 'soon';
+    if (hours < 24) return `in ${Math.round(hours)} hours`;
+    const days = Math.round(hours / 24);
     if (days === 1) return 'tomorrow';
     if (days < 14) return `in ${days} days`;
     if (days < 60) return `in ${Math.round(days / 7)} weeks`;
@@ -312,9 +341,9 @@ const timelinePlaces = mapPlaces
   // self-rescheduling rather than setInterval: recheck once a minute while
   // far out (cheap, no visible change needed), drop to a per-second tick
   // only once inside the 30-day window, and stop rescheduling once it fires.
-  function scheduleFutureBadge(badge: HTMLElement, sortDate: number) {
+  function scheduleFutureBadge(badge: HTMLElement, target: number) {
     const tick = () => {
-      const remaining = sortDate - Date.now();
+      const remaining = target - Date.now();
       if (remaining <= 0) {
         badge.remove();
         return;
@@ -324,7 +353,7 @@ const timelinePlaces = mapPlaces
         badge.textContent = formatLiveCountdown(remaining);
         setTimeout(tick, 1000);
       } else {
-        badge.textContent = formatCountdown(sortDate);
+        badge.textContent = formatCountdown(target);
         setTimeout(tick, 60000);
       }
     };
@@ -418,7 +447,8 @@ const timelinePlaces = mapPlaces
   const markersById: Record<string, L.Marker> = {};
 
   for (const place of places) {
-    const countdown = place.sortDate != null ? formatCountdown(place.sortDate) : null;
+    const countdown =
+      place.sortDate != null ? formatCountdown(countdownTarget(place.sortDate, place.kind)) : null;
     const meta = [kindLabel(place.kind), place.date, countdown].filter(Boolean).join(' · ');
     const notes =
       document.querySelector<HTMLTemplateElement>(`template[data-notes="${CSS.escape(place.id)}"]`)
@@ -642,7 +672,7 @@ const timelinePlaces = mapPlaces
   // sortDate — fill in an actual countdown (or drop the badge if the
   // viewer's own clock says it's no longer future) once this runs.
   document.querySelectorAll<HTMLElement>('.future-badge[data-sort-date]').forEach((badge) => {
-    scheduleFutureBadge(badge, Number(badge.dataset.sortDate));
+    scheduleFutureBadge(badge, countdownTarget(Number(badge.dataset.sortDate), badge.dataset.kind));
   });
 
   // timeline photo carousels: swap the cover img's src, wrap-around at the ends;

@@ -1,12 +1,23 @@
 {
-  "fetchedAt": "2026-08-26T09:57:55.442Z",
+  "fetchedAt": "2026-08-28T15:15:41.203Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "The Conjuring: Last Rites",
+      "year": 2025,
+      "link": "https://letterboxd.com/aselling/film/the-conjuring-last-rites/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/9/3/6/0/6/5/p/kb1EEHZmjUlZWJwknbTVaMq8sYJ-0-600-0-900-crop.jpg?v=72638579f9",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-27",
+      "review": "i actually loved this. big fan of movies that play with mirrors, like literally all the mirrors had such a flirty vibe. ughhh. huge come back for the conjuring \n\n85/100"
+    },
     {
       "title": "The Mummy",
       "year": 1999,
       "link": "https://letterboxd.com/aselling/film/the-mummy-1999/",
-      "poster": "https://a.ltrbxd.com/resized/sm/upload/5i/du/2g/s8/6CweTLmngcPrsEH4G6RKvdwmQdC-0-600-0-900-crop.jpg?v=397ac4a555",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/5/5/4/p/tmtDYVLxZiuQJ1TcmqcAbOmCwr-0-600-0-900-crop.jpg?v=df575384c0",
       "rating": null,
       "liked": false,
       "rewatch": false,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-13",
       "review": "For a space movie hater, I seem to cry at a lot of them. Very happy to have watched this in the theatre experience. In depth review here."
-    },
-    {
-      "title": "Jinsei",
-      "year": 2025,
-      "link": "https://letterboxd.com/aselling/film/jinsei/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/1/3/1/8/9/4/3/1318943-jinsei-0-600-0-900-crop.jpg?v=d657ba0839",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-07-12",
-      "review": "Not what I was expecting at all. Nihilistic in a way, but in a calming manner. As many have said, very art school. I believe entirely hand drawn though. Some parallels to Perfect Blue in a way. A lot of depressing future speculation."
     }
   ],
   "favorites": [
@@ -573,10 +573,10 @@
       "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/7/2/1/9/p/zACzLwjg8WqWh2tEKiee9w90Z7b-0-600-0-900-crop.jpg?v=2a3ea45b90"
     },
     {
-      "title": "Train Dreams",
-      "year": 2025,
-      "link": "https://letterboxd.com/film/train-dreams/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/1/2/5/3/8/3/p/Auo1FtIv7tZYWHR3o31OskGTnh7-0-600-0-900-crop.jpg?v=b7e593870c"
+      "title": "Trainspotting",
+      "year": 1996,
+      "link": "https://letterboxd.com/film/trainspotting/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/4/9/7/p/2JpQGSGX6SLbxlreJiOK6pQmRme-0-600-0-900-crop.jpg?v=60e0a8d61a"
     }
   ],
   "watchlist": [
