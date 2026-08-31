@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(npm run *)",
-      "Bash(curl -s http://localhost:4321/blog)",
-      "Bash(npx playwright *)"
-    ]
-  }
-}

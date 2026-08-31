@@ -16,3 +16,4 @@ secrets.txt
 /playwright/.cache/
 /playwright/.auth/
 .claude/worktrees/
+.claude/settings.local.json
