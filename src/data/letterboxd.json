@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-08-30T14:25:57.893Z",
+  "fetchedAt": "2026-08-31T17:04:32.852Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Hall Pass",
+      "year": 2011,
+      "link": "https://letterboxd.com/aselling/film/hall-pass/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/6/5/8/3/16583-hall-pass-0-600-0-900-crop.jpg?v=d27f952bc7",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-30",
+      "review": "Men\n\n“Are you guys sure Applebees is the best place to meet hot horny women”"
+    },
     {
       "title": "Annabelle: Creation",
       "year": 2017,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-16",
       "review": "This review may contain spoilers.\n\nDay 199 (I thought) of 2026. Opening Night of The Odyssey. Movie 200 of 2026.\n\nAnd what a film to see. I loved every minute of it. Soundtrack had me hooked from the minute it started. I was a bit shaky at first, but honestly once it got going I was so engaged. I cried. I laughed. I jumped. An experience for the decades. With a soundtrack inspired by Tenet and shots inspired by The Prestige, Nolan definitely did this justice. Dare I even say: christopher nolan horror movie... Potentially a longer review to come."
-    },
-    {
-      "title": "Troy",
-      "year": 2004,
-      "link": "https://letterboxd.com/aselling/film/troy/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/4/7/2/p/kWj4RJzZeJGeyGA3DVGQiNkUjkt-0-600-0-900-crop.jpg?v=5cc7e65d71",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-07-15",
-      "review": "This review may contain spoilers.\n\nthe only bearable parts of this were when diane kruger stared off longingly at the battle she caused. but — film 199 of the year!!"
     }
   ],
   "favorites": [
@@ -573,10 +573,10 @@
       "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/7/2/1/9/p/zACzLwjg8WqWh2tEKiee9w90Z7b-0-600-0-900-crop.jpg?v=2a3ea45b90"
     },
     {
-      "title": "Train Dreams",
-      "year": 2025,
-      "link": "https://letterboxd.com/film/train-dreams/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/1/2/5/3/8/3/p/Auo1FtIv7tZYWHR3o31OskGTnh7-0-600-0-900-crop.jpg?v=b7e593870c"
+      "title": "Trainspotting",
+      "year": 1996,
+      "link": "https://letterboxd.com/film/trainspotting/",
+      "poster": null
     }
   ],
   "watchlist": [

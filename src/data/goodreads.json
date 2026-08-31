@@ -1,19 +1,7 @@
 {
-  "fetchedAt": "2026-08-27T19:56:57.434Z",
+  "fetchedAt": "2026-08-31T17:04:32.852Z",
   "userId": "192886223",
   "currentlyReading": [
-    {
-      "title": "A World Without Email: Reimagining Work in an Age of Communication Overload",
-      "author": "Cal Newport",
-      "link": "https://www.goodreads.com/book/show/54326146",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1597016311l/54326146.jpg",
-      "rating": 0,
-      "readAt": null,
-      "addedAt": "2026-07-18",
-      "review": null,
-      "currentPage": 213,
-      "totalPages": 320
-    },
     {
       "title": "The Secret History",
       "author": "Donna Tartt",
@@ -26,6 +14,16 @@
     }
   ],
   "toRead": [
+    {
+      "title": "The Anxious Generation: How the Great Rewiring of Childhood Caused an Epidemic of Mental Illness",
+      "author": "Jonathan Haidt",
+      "link": "https://www.goodreads.com/book/show/171681821",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1711573377l/171681821._SY475_.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-08-30",
+      "review": null
+    },
     {
       "title": "One",
       "author": "Richard Bach",
@@ -858,6 +856,16 @@
     }
   ],
   "read": [
+    {
+      "title": "A World Without Email: Reimagining Work in an Age of Communication Overload",
+      "author": "Cal Newport",
+      "link": "https://www.goodreads.com/book/show/54326146",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1597016311l/54326146.jpg",
+      "rating": 4,
+      "readAt": "2026-08-30",
+      "addedAt": "2026-08-30",
+      "review": null
+    },
     {
       "title": "A Happy Death",
       "author": "Albert Camus",
