@@ -1,12 +1,12 @@
 {
-  "fetchedAt": "2026-08-31T17:04:32.852Z",
+  "fetchedAt": "2026-08-31T17:28:25.036Z",
   "username": "aselling",
   "films": [
     {
       "title": "Hall Pass",
       "year": 2011,
       "link": "https://letterboxd.com/aselling/film/hall-pass/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/1/6/5/8/3/16583-hall-pass-0-600-0-900-crop.jpg?v=d27f952bc7",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/6/5/8/3/p/dknAOstypoCvptUChZVLmEi5CW0-0-600-0-900-crop.jpg?v=85519b4e3e",
       "rating": null,
       "liked": false,
       "rewatch": false,
@@ -28,7 +28,7 @@
       "title": "Sicario",
       "year": 2015,
       "link": "https://letterboxd.com/aselling/film/sicario-2015/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/1/9/7/6/2/8/197628-sicario-0-600-0-900-crop.jpg?v=06d4163bb2",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/9/7/6/2/8/p/cbgSuptofEiugwbAUEa6XR8TenF-0-600-0-900-crop.jpg?v=5578f68eaa",
       "rating": null,
       "liked": false,
       "rewatch": false,
@@ -39,7 +39,7 @@
       "title": "The Conjuring: Last Rites",
       "year": 2025,
       "link": "https://letterboxd.com/aselling/film/the-conjuring-last-rites/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/9/3/6/0/6/5/936065-the-conjuring-last-rites-0-600-0-900-crop.jpg?v=597eedcd06",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/9/3/6/0/6/5/p/kb1EEHZmjUlZWJwknbTVaMq8sYJ-0-600-0-900-crop.jpg?v=72638579f9",
       "rating": null,
       "liked": true,
       "rewatch": false,
@@ -50,7 +50,7 @@
       "title": "The Mummy",
       "year": 1999,
       "link": "https://letterboxd.com/aselling/film/the-mummy-1999/",
-      "poster": "https://a.ltrbxd.com/resized/sm/upload/5i/du/2g/s8/6CweTLmngcPrsEH4G6RKvdwmQdC-0-600-0-900-crop.jpg?v=397ac4a555",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/5/5/4/p/tmtDYVLxZiuQJ1TcmqcAbOmCwr-0-600-0-900-crop.jpg?v=df575384c0",
       "rating": null,
       "liked": false,
       "rewatch": false,
@@ -576,7 +576,7 @@
       "title": "Trainspotting",
       "year": 1996,
       "link": "https://letterboxd.com/film/trainspotting/",
-      "poster": null
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/4/9/7/p/2JpQGSGX6SLbxlreJiOK6pQmRme-0-600-0-900-crop.jpg?v=60e0a8d61a"
     }
   ],
   "watchlist": [
