@@ -1,7 +1,19 @@
 {
-  "fetchedAt": "2026-08-31T17:28:25.036Z",
+  "fetchedAt": "2026-09-01T14:09:41.390Z",
   "userId": "192886223",
   "currentlyReading": [
+    {
+      "title": "The Shards",
+      "author": "Bret Easton Ellis",
+      "link": "https://www.goodreads.com/book/show/60880820",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1658241203l/60880820.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-09-01",
+      "review": null,
+      "currentPage": 16,
+      "totalPages": 608
+    },
     {
       "title": "The Secret History",
       "author": "Donna Tartt",
@@ -79,16 +91,6 @@
       "author": "Bret Easton Ellis",
       "link": "https://www.goodreads.com/book/show/9915",
       "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1750083768l/9915._SY475_.jpg",
-      "rating": 0,
-      "readAt": null,
-      "addedAt": "2026-08-14",
-      "review": null
-    },
-    {
-      "title": "The Shards",
-      "author": "Bret Easton Ellis",
-      "link": "https://www.goodreads.com/book/show/60880820",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1658241203l/60880820.jpg",
       "rating": 0,
       "readAt": null,
       "addedAt": "2026-08-14",
