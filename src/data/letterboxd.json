@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-08-31T17:28:25.036Z",
+  "fetchedAt": "2026-09-02T13:41:15.079Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Joker",
+      "year": 2019,
+      "link": "https://letterboxd.com/aselling/film/joker-2019/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/0/6/7/7/5/406775-joker-0-600-0-900-crop.jpg?v=e4ea7f98cc",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-01",
+      "review": "The Joaquin Phoenix run of Her, Napoleon, and Joker is light years ahead of any Timothee Chalamet or Tom Holland filmography in my professional opinion"
+    },
     {
       "title": "Hall Pass",
       "year": 2011,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-19",
       "review": "This review may contain spoilers.\n\nchoosing to believe that when i die i will become a cloud"
-    },
-    {
-      "title": "The Odyssey",
-      "year": 2026,
-      "link": "https://letterboxd.com/aselling/film/the-odyssey-2026/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/2/5/5/3/9/4/p/kyeasZIPTBiaq7mzZlWvGiSBu9M-0-600-0-900-crop.jpg?v=d7e2bf505c",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-07-16",
-      "review": "This review may contain spoilers.\n\nDay 199 (I thought) of 2026. Opening Night of The Odyssey. Movie 200 of 2026.\n\nAnd what a film to see. I loved every minute of it. Soundtrack had me hooked from the minute it started. I was a bit shaky at first, but honestly once it got going I was so engaged. I cried. I laughed. I jumped. An experience for the decades. With a soundtrack inspired by Tenet and shots inspired by The Prestige, Nolan definitely did this justice. Dare I even say: christopher nolan horror movie... Potentially a longer review to come."
     }
   ],
   "favorites": [
