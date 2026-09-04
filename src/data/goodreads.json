@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-01T14:09:41.390Z",
+  "fetchedAt": "2026-09-04T13:33:18.783Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -26,6 +26,16 @@
     }
   ],
   "toRead": [
+    {
+      "title": "The New Dark Ages: The Death of Reading and the Dawn of the Post-Literate Society",
+      "author": "James Marriott",
+      "link": "https://www.goodreads.com/book/show/244717250",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1774579311l/244717250._SX318_.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-09-04",
+      "review": null
+    },
     {
       "title": "The Anxious Generation: How the Great Rewiring of Childhood Caused an Epidemic of Mental Illness",
       "author": "Jonathan Haidt",
@@ -224,16 +234,6 @@
       "rating": 0,
       "readAt": null,
       "addedAt": "2026-06-26",
-      "review": null
-    },
-    {
-      "title": "The New Dark Ages: The Death of Reading and the Dawn of the Post-Literate Society",
-      "author": "James Marriott",
-      "link": "https://www.goodreads.com/book/show/244717250",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1774579311l/244717250._SX318_.jpg",
-      "rating": 0,
-      "readAt": null,
-      "addedAt": "2026-06-25",
       "review": null
     },
     {
