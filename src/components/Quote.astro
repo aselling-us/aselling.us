@@ -6,7 +6,7 @@ const { cite } = Astro.props;
 ---
 <blockquote class="quote">
   <slot />
-  {cite && <footer class="mono-label">{cite}</footer>}
+  {cite && <footer class="quote-cite">{cite}</footer>}
 </blockquote>
 
 <style>
@@ -27,7 +27,10 @@ const { cite } = Astro.props;
 
   .quote footer {
     margin-top: var(--space-1);
+    font-family: var(--font-quote-cite);
     font-style: normal;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
     color: var(--color-accent-bright);
   }
 </style>
