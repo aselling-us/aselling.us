@@ -51,8 +51,9 @@
   --font-display: 'Fraunces', Georgia, serif;
   --font-body: 'Inter', -apple-system, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
-  /* attribution line under a <Quote> (e.g. "— Friedrich Nietzsche") */
-  --font-quote-cite: 'Gentium Book Plus', Georgia, serif;
+  /* the .mono-label utility (nav, index markers, section labels, badges,
+     quote attributions, etc.) and other small annotation text */
+  --font-label: 'Gentium Book Plus', Georgia, serif;
 
   /* -- layout -- */
   --content-width: 780px;
@@ -227,10 +228,11 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
-/* utility: the small monospace "index" label used throughout
-   as a structural/annotation device (nav, section eyebrows) */
+/* utility: the small "index" label used throughout as a structural/
+   annotation device (nav, section eyebrows) — despite the name, no longer
+   monospace (see --font-label) */
 .mono-label {
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
   font-size: 0.7rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
