@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-04T13:33:18.783Z",
+  "fetchedAt": "2026-09-05T07:12:07.041Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -26,6 +26,26 @@
     }
   ],
   "toRead": [
+    {
+      "title": "Paris in Ruins: Love, War, and the Birth of Impressionism",
+      "author": "Sebastian Smee",
+      "link": "https://www.goodreads.com/book/show/205478787",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1713369197l/205478787.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-09-05",
+      "review": null
+    },
+    {
+      "title": "Automate Your Busywork: Do Less, Achieve More, and Save Your Brain for the Big Stuff",
+      "author": "Aytekin Tank",
+      "link": "https://www.goodreads.com/book/show/78294395",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1683576692l/78294395.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-09-05",
+      "review": null
+    },
     {
       "title": "The New Dark Ages: The Death of Reading and the Dawn of the Post-Literate Society",
       "author": "James Marriott",

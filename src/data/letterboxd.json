@@ -1,12 +1,12 @@
 {
-  "fetchedAt": "2026-09-02T13:41:15.079Z",
+  "fetchedAt": "2026-09-05T07:12:07.041Z",
   "username": "aselling",
   "films": [
     {
       "title": "Joker",
       "year": 2019,
       "link": "https://letterboxd.com/aselling/film/joker-2019/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/4/0/6/7/7/5/406775-joker-0-600-0-900-crop.jpg?v=e4ea7f98cc",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/0/6/7/7/5/p/4tLz5kIi4hCjYLMaPmBlN6pZNdF-0-600-0-900-crop.jpg?v=eb6efc37a0",
       "rating": null,
       "liked": true,
       "rewatch": false,
@@ -587,12 +587,6 @@
       "poster": "https://a.ltrbxd.com/resized/film-poster/2/5/1/9/4/3/251943-spider-man-into-the-spider-verse-0-600-0-900-crop.jpg?v=538fe0ada6"
     },
     {
-      "title": "Joker",
-      "year": 2019,
-      "link": "https://letterboxd.com/film/joker-2019/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/4/0/6/7/7/5/406775-joker-0-600-0-900-crop.jpg?v=e4ea7f98cc"
-    },
-    {
       "title": "Spider-Man: Across the Spider-Verse",
       "year": 2023,
       "link": "https://letterboxd.com/film/spider-man-across-the-spider-verse/",
@@ -699,6 +693,12 @@
       "year": 1968,
       "link": "https://letterboxd.com/film/2001-a-space-odyssey/",
       "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/9/8/7/51987-2001-a-space-odyssey-0-600-0-900-crop.jpg?v=a69c46a272"
+    },
+    {
+      "title": "Brokeback Mountain",
+      "year": 2005,
+      "link": "https://letterboxd.com/film/brokeback-mountain/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/9/0/9/51909-brokeback-mountain-0-600-0-900-crop.jpg?v=40ad2b59a0"
     }
   ]
 }
