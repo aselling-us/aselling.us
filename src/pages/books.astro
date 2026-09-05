@@ -126,8 +126,6 @@ const marginaliaDevJson = import.meta.env.DEV
                   </span>
                   {import.meta.env.DEV && (
                     <div class="marginalia-dev-row">
-                      <button class="marginalia-move dev-btn mono-label" data-id={entry.id} data-direction="left" type="button" disabled={i === 0}>‹ move</button>
-                      <button class="marginalia-move dev-btn mono-label" data-id={entry.id} data-direction="right" type="button" disabled={i === marginalia.length - 1}>move ›</button>
                       <button class="marginalia-edit dev-btn mono-label" data-id={entry.id} type="button">edit</button>
                     </div>
                   )}
@@ -146,6 +144,17 @@ const marginaliaDevJson = import.meta.env.DEV
               </>
             )}
           </div>
+          {import.meta.env.DEV && marginalia.length > 1 && (
+            <div class="marginalia-thumbs" data-reorder>
+              {marginalia.map((entry, i) => (
+                <div class="marginalia-thumb-item" data-key={entry.id}>
+                  <img class="marginalia-thumb" src={entry.data.image!.src} draggable="false" alt="" loading="lazy" />
+                  {i === 0 && <span class="thumb-cover-badge mono-label">cover</span>}
+                  <span class="thumb-num mono-label">{i + 1}</span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
@@ -201,6 +210,8 @@ const marginaliaDevJson = import.meta.env.DEV
 </script>
 
 <script>
+  import { wireDragReorder } from '../lib/dev-drag-reorder';
+
   // dev-only "marginalia" photo editor — import.meta.env.DEV is statically
   // false in builds, so none of this ships
   if (import.meta.env.DEV) {
@@ -397,28 +408,25 @@ const marginaliaDevJson = import.meta.env.DEV
       })
     );
 
-    document.querySelectorAll<HTMLButtonElement>('.marginalia-move').forEach((btn) =>
-      btn.addEventListener('click', async () => {
-        btn.disabled = true;
-        try {
-          const res = await fetch('/__edit-marginalia/reorder', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ slug: btn.dataset.id, direction: btn.dataset.direction }),
-          });
-          if (!res.ok) {
-            const { error } = await res.json().catch(() => ({ error: res.statusText }));
-            alert(`Could not reorder: ${error}`);
-            btn.disabled = false;
-            return;
-          }
-          location.reload();
-        } catch {
-          alert('Could not reorder: network error');
-          btn.disabled = false;
+    // drag a thumbnail in the strip below the carousel to reorder every
+    // entry (persisted as each one's `order` field — see /reorder)
+    wireDragReorder(document, '.marginalia-thumbs[data-reorder]', '.marginalia-thumb-item', async (_container, order) => {
+      try {
+        const res = await fetch('/__edit-marginalia/reorder', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ order }),
+        });
+        if (!res.ok) {
+          const { error } = await res.json().catch(() => ({ error: res.statusText }));
+          alert(`Could not reorder: ${error}`);
+          return;
         }
-      })
-    );
+        location.reload();
+      } catch {
+        alert('Could not reorder: network error');
+      }
+    });
   }
 </script>
 
@@ -626,7 +634,37 @@ const marginaliaDevJson = import.meta.env.DEV
     font-size: 0.6rem;
     padding: 0.15rem 0.4rem;
   }
-  .marginalia-move:disabled { opacity: 0.4; cursor: default; }
+  .marginalia-thumbs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+    /* .marginalia-frame's height is fixed (see its comment) so the photo
+       alone determines it — the caption and dev-row below the photo aren't
+       included and overflow past the frame's own bottom edge, so this can't
+       just clear the frame itself; it needs enough margin to clear that
+       overflowing caption/button too, or thumbnails land underneath them. */
+    margin-top: 3.5rem;
+  }
+  .marginalia-thumb-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1rem;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  .marginalia-thumb-item.is-dragging { opacity: 0.4; }
+  .marginalia-thumb {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    border: 1px solid var(--color-hairline);
+    display: block;
+  }
 
   .marginalia-arrow {
     position: absolute;

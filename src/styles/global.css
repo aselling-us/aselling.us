@@ -245,6 +245,37 @@ button:focus-visible {
    or Astro's per-component scope class raising that specificity further. */
 .is-hidden { display: none !important; }
 
+/* utility: dev-only drop-slot marker inserted by wireDragReorder
+   (src/lib/dev-drag-reorder.ts) while a thumbnail is being dragged */
+.drag-reorder-placeholder {
+  border: 1px dashed var(--color-hairline-bright);
+  box-sizing: border-box;
+}
+
+/* utility: dev-only position number under a reorderable thumbnail, and the
+   gold "cover" tag on whichever one is currently first — that's the photo
+   shown by default elsewhere (a place's initial carousel image, or the
+   marginalia carousel's initially-active slide) */
+.thumb-num {
+  font-size: 0.55rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-text-faint);
+}
+.thumb-cover-badge {
+  position: absolute;
+  top: -0.4rem;
+  right: -0.4rem;
+  font-size: 0.5rem;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  padding: 0.1rem 0.25rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-hairline-bright);
+  color: var(--color-hairline-bright);
+  pointer-events: none;
+}
+
 .wrap {
   max-width: var(--content-width);
   margin: 0 auto;

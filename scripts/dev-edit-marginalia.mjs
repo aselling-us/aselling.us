@@ -12,9 +12,11 @@
 // POST /__edit-marginalia/delete { slug }
 //   deletes an entry's <slug>.md plus its photo — there's no undo, the UI
 //   is expected to confirm() first
-// POST /__edit-marginalia/reorder { slug, direction }
-//   direction is 'left' or 'right' — swaps this entry's `order` with
-//   whichever adjacent entry (by current order) sits in that direction
+// POST /__edit-marginalia/reorder { order: string[] }
+//   the full set of entry slugs in their new display order (from dragging a
+//   thumbnail in the dev UI) — every slug must match an existing entry and
+//   none may be missing, since this rewrites every entry's `order` field to
+//   its 1-based position in the array
 // NOTE: loaded once at dev-server startup — restart `npm run dev` after edits.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -135,26 +137,22 @@ export function marginaliaEditHandler({ dir = path.resolve('src/content/marginal
         } catch {
           return reply(400, { error: 'invalid JSON' });
         }
-        const slug = slugify(String(p.slug ?? ''));
-        const direction = p.direction === 'left' ? -1 : p.direction === 'right' ? 1 : null;
-        if (direction === null) return reply(400, { error: 'direction must be "left" or "right"' });
+        const order = Array.isArray(p.order) ? p.order.map((s) => slugify(String(s))) : [];
 
         const ordered = readOrdered(dir);
-        const index = ordered.findIndex((e) => e.slug === slug);
-        if (index === -1) return reply(400, { error: `no entry file for slug "${slug}"` });
-        const neighborIndex = index + direction;
-        if (neighborIndex < 0 || neighborIndex >= ordered.length) return reply(200, { ok: true }); // already at that end
+        const actualSlugs = new Set(ordered.map((e) => e.slug));
+        if (order.length !== ordered.length || !order.every((s) => actualSlugs.has(s)))
+          return reply(400, { error: 'entry list does not match what is on disk — reload and try again' });
 
-        const a = ordered[index];
-        const b = ordered[neighborIndex];
-        for (const [entry, newOrder] of [[a, b.order], [b, a.order]]) {
-          const file = path.join(dir, `${entry.slug}.md`);
+        order.forEach((slug, i) => {
+          const newOrder = i + 1;
+          const file = path.join(dir, `${slug}.md`);
           const m = fs.readFileSync(file, 'utf8').match(FM_RE);
-          if (!m) continue;
+          if (!m) return;
           const lines = m[1].split(/\r?\n/);
           setLine(lines, 'order', newOrder);
           fs.writeFileSync(file, `---\n${lines.join('\n')}\n---\n${m[2]}`);
-        }
+        });
 
         reply(200, { ok: true });
       });

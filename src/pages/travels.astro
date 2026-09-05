@@ -229,12 +229,7 @@ const timelinePlaces = mapPlaces
             {place.detail && <p class="post-desc">{place.detail}</p>}
           </div>
           {place.images[0] && (
-            <figure
-              class="post-cover"
-              data-images={JSON.stringify(place.images)}
-              data-files={place.imageFiles ? JSON.stringify(place.imageFiles) : undefined}
-              data-slug={place.imageFiles ? place.id : undefined}
-            >
+            <figure class="post-cover" data-images={JSON.stringify(place.images)}>
               <div class="post-cover-frame">
                 <img src={place.images[0].thumb} alt={`Photo from ${place.name}`} loading="lazy" />
                 {place.images.length > 1 && (
@@ -250,9 +245,14 @@ const timelinePlaces = mapPlaces
                 )}
               </div>
               {place.imageFiles && (
-                <div class="post-cover-reorder">
-                  <button type="button" class="post-cover-move-left dev-btn mono-label">‹ move</button>
-                  <button type="button" class="post-cover-move-right dev-btn mono-label">move ›</button>
+                <div class="post-cover-thumbs" data-reorder data-slug={place.id}>
+                  {place.images.map((img, i) => (
+                    <div class="post-cover-thumb-item" data-key={place.imageFiles![i]}>
+                      <img class="post-cover-thumb" src={img.thumb} draggable="false" alt="" loading="lazy" />
+                      {i === 0 && <span class="thumb-cover-badge mono-label">cover</span>}
+                      <span class="thumb-num mono-label">{i + 1}</span>
+                    </div>
+                  ))}
                 </div>
               )}
             </figure>
@@ -272,6 +272,7 @@ const timelinePlaces = mapPlaces
 <script>
   import L from 'leaflet';
   import 'leaflet.markercluster';
+  import { wireDragReorder } from '../lib/dev-drag-reorder';
 
   type PlaceKind = 'event' | 'travel' | 'lived' | 'want-to-go' | 'third-place';
   interface MapPlace {
@@ -453,16 +454,18 @@ const timelinePlaces = mapPlaces
     const notes =
       document.querySelector<HTMLTemplateElement>(`template[data-notes="${CSS.escape(place.id)}"]`)
         ?.innerHTML ?? '';
+    const canReorderPopup = import.meta.env.DEV && place.imageFiles;
     const imgs = place.images
-      .map(
-        ({ thumb, full }) => `
-        <span class="popup-img-wrap">
-          <img src="${esc(thumb)}" data-full="${esc(full)}" alt="${esc(place.name)}" loading="lazy" />
+      .map(({ thumb, full }, i) => {
+        const key = canReorderPopup ? place.imageFiles![i] : null;
+        return `
+        <span class="popup-img-wrap"${key ? ` data-key="${esc(key)}"` : ''}>
+          <img src="${esc(thumb)}" data-full="${esc(full)}" alt="${esc(place.name)}" loading="lazy" draggable="false" />
           <button type="button" class="popup-img-expand" aria-label="Expand photo">
             <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/></svg>
           </button>
-        </span>`
-      )
+        </span>`;
+      })
       .join('');
     const imgCols = popupImgCols(place.images.length);
 
@@ -472,7 +475,7 @@ const timelinePlaces = mapPlaces
         <strong>${esc(place.name)}</strong>
         ${place.detail ? `<em>${esc(place.detail)}</em>` : ''}
         ${notes ? `<div class="popup-notes">${notes}</div>` : ''}
-        ${imgs ? `<div class="popup-imgs" style="grid-template-columns: repeat(${imgCols}, 1fr);">${imgs}</div>` : ''}
+        ${imgs ? `<div class="popup-imgs"${canReorderPopup ? ` data-reorder data-slug="${esc(place.id)}"` : ''} style="grid-template-columns: repeat(${imgCols}, 1fr);">${imgs}</div>` : ''}
       </div>`;
 
     const options: PlaceMarkerOptions = {
@@ -691,39 +694,33 @@ const timelinePlaces = mapPlaces
     fig.querySelector('.post-cover-prev')?.addEventListener('click', () => show(index - 1));
     fig.querySelector('.post-cover-next')?.addEventListener('click', () => show(index + 1));
     img.addEventListener('click', () => openLightbox(images[index].full, img.alt));
-
-    // dev-only: "move" swaps the currently-shown photo with a neighbor and persists
-    // the new order by renaming files on disk (see /__add-place/reorder)
-    if (import.meta.env.DEV && fig.dataset.files && fig.dataset.slug) {
-      const files: string[] = JSON.parse(fig.dataset.files);
-      const slug = fig.dataset.slug;
-      const moveLeft = fig.querySelector<HTMLButtonElement>('.post-cover-move-left');
-      const moveRight = fig.querySelector<HTMLButtonElement>('.post-cover-move-right');
-      const move = async (to: number) => {
-        if (to < 0 || to >= files.length) return;
-        const reordered = [...files];
-        const [moved] = reordered.splice(index, 1);
-        reordered.splice(to, 0, moved);
-        if (moveLeft) moveLeft.disabled = true;
-        if (moveRight) moveRight.disabled = true;
-        try {
-          const res = await fetch('/__add-place/reorder', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ slug, files: reordered }),
-          });
-          if (!res.ok) throw new Error((await res.json().catch(() => null))?.error ?? 'reorder failed');
-          location.reload();
-        } catch (err) {
-          alert(err instanceof Error ? err.message : 'reorder failed');
-          if (moveLeft) moveLeft.disabled = false;
-          if (moveRight) moveRight.disabled = false;
-        }
-      };
-      moveLeft?.addEventListener('click', () => move(index - 1));
-      moveRight?.addEventListener('click', () => move(index + 1));
-    }
   });
+
+  // dev-only: drag a thumbnail to a new spot in either gallery below — the
+  // timeline's thumbnail strip, or a map popup's photo grid (rebuilt from an
+  // HTML string each time it opens, which is why this listens on `document`
+  // rather than each container: see wireDragReorder's docstring) — and
+  // persist the new order by renaming files on disk (/__add-place/reorder
+  // expects the full file list, not just the two that moved).
+  if (import.meta.env.DEV) {
+    const persistOrder = async (container: HTMLElement, keys: string[]) => {
+      const slug = container.dataset.slug;
+      if (!slug || keys.some((k) => !k)) return;
+      try {
+        const res = await fetch('/__add-place/reorder', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug, files: keys }),
+        });
+        if (!res.ok) throw new Error((await res.json().catch(() => null))?.error ?? 'reorder failed');
+        location.reload();
+      } catch (err) {
+        alert(err instanceof Error ? err.message : 'reorder failed');
+      }
+    };
+    wireDragReorder(document, '.post-cover-thumbs[data-reorder]', '.post-cover-thumb-item', persistOrder);
+    wireDragReorder(document, '.popup-imgs[data-reorder]', '.popup-img-wrap[data-key]', persistOrder);
+  }
 </script>
 
 <style>
@@ -800,7 +797,7 @@ const timelinePlaces = mapPlaces
     margin: 0;
   }
   .post-cover-frame { position: relative; }
-  .post-cover img {
+  .post-cover-frame img {
     width: 100%;
     height: 140px;
     object-fit: cover;
@@ -808,14 +805,30 @@ const timelinePlaces = mapPlaces
     border: 1px solid var(--color-hairline);
     cursor: zoom-in;
   }
-  .post-cover-reorder {
+  .post-cover-thumbs {
     display: flex;
-    gap: 0.35rem;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.35rem;
   }
-  .post-cover-reorder button {
-    flex: 1;
-    font-size: 0.6rem;
-    padding: 0.15rem 0.3rem;
+  .post-cover-thumb-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1rem;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  .post-cover-thumb-item.is-dragging { opacity: 0.4; }
+  .post-cover-thumb {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    border: 1px solid var(--color-hairline);
+    display: block;
   }
   .post-cover-arrow {
     position: absolute;
@@ -854,7 +867,7 @@ const timelinePlaces = mapPlaces
   @media (max-width: 640px) {
     .post-list > li { flex-direction: column; }
     .post-cover { width: 100%; }
-    .post-cover img { height: 180px; }
+    .post-cover-frame img { height: 180px; }
   }
 </style>
 
@@ -1028,6 +1041,16 @@ const timelinePlaces = mapPlaces
     display: block;
   }
   .popup-img-wrap { position: relative; display: block; cursor: zoom-in; }
+  /* dev-only: reorderable popup grids show a drag cursor instead of the
+     usual zoom-in, and dim the photo being dragged */
+  .popup-imgs[data-reorder] .popup-img-wrap[data-key],
+  .popup-imgs[data-reorder] .popup-img-wrap[data-key] img {
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  .popup-img-wrap.is-dragging { opacity: 0.4; }
   .popup-img-expand {
     position: absolute;
     top: 0.15rem;
