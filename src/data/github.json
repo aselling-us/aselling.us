@@ -1,16 +1,16 @@
 {
-  "fetchedAt": "2026-09-06T12:53:39.440Z",
+  "fetchedAt": "2026-09-06T18:18:21.538Z",
   "username": "aselling-us",
   "repos": [
     {
-      "name": "CSC-4880",
-      "description": null,
-      "link": "https://github.com/aselling-us/CSC-4880",
+      "name": "resume",
+      "description": "A resume-generator based on a latex template from Overleaf. ",
+      "link": "https://github.com/aselling-us/resume",
       "homepage": null,
-      "language": "Python",
+      "language": "TeX",
       "stars": 0,
       "topics": [],
-      "pushedAt": "2026-09-05"
+      "pushedAt": "2026-09-06"
     },
     {
       "name": "aselling.us",
@@ -18,6 +18,16 @@
       "link": "https://github.com/aselling-us/aselling.us",
       "homepage": "http://aselling.us/",
       "language": "Astro",
+      "stars": 0,
+      "topics": [],
+      "pushedAt": "2026-09-06"
+    },
+    {
+      "name": "CSC-4880",
+      "description": null,
+      "link": "https://github.com/aselling-us/CSC-4880",
+      "homepage": null,
+      "language": "Python",
       "stars": 0,
       "topics": [],
       "pushedAt": "2026-09-05"
@@ -31,16 +41,6 @@
       "stars": 0,
       "topics": [],
       "pushedAt": "2026-08-31"
-    },
-    {
-      "name": "resume",
-      "description": "A resume-generator based on a latex template from Overleaf. ",
-      "link": "https://github.com/aselling-us/resume",
-      "homepage": null,
-      "language": "TeX",
-      "stars": 0,
-      "topics": [],
-      "pushedAt": "2026-08-04"
     },
     {
       "name": "csc-308-app",
