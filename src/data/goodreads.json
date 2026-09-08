@@ -1,7 +1,17 @@
 {
-  "fetchedAt": "2026-09-06T12:53:39.440Z",
+  "fetchedAt": "2026-09-08T13:39:03.359Z",
   "userId": "192886223",
   "currentlyReading": [
+    {
+      "title": "The Myth of Sisyphus",
+      "author": "Albert Camus",
+      "link": "https://www.goodreads.com/book/show/91950",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1347654509l/91950._SY475_.jpg",
+      "rating": 3,
+      "readAt": null,
+      "addedAt": "2026-09-08",
+      "review": null
+    },
     {
       "title": "The Shards",
       "author": "Bret Easton Ellis",
@@ -11,7 +21,7 @@
       "readAt": null,
       "addedAt": "2026-09-01",
       "review": null,
-      "currentPage": 16,
+      "currentPage": 40,
       "totalPages": 608
     },
     {
@@ -22,7 +32,9 @@
       "rating": 0,
       "readAt": null,
       "addedAt": "2026-05-19",
-      "review": null
+      "review": null,
+      "currentPage": 141,
+      "totalPages": 559
     }
   ],
   "toRead": [
@@ -1324,16 +1336,6 @@
       "link": "https://www.goodreads.com/book/show/1381",
       "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1711957706l/1381._SY475_.jpg",
       "rating": 5,
-      "readAt": null,
-      "addedAt": "2025-08-11",
-      "review": null
-    },
-    {
-      "title": "The Myth of Sisyphus",
-      "author": "Albert Camus",
-      "link": "https://www.goodreads.com/book/show/91950",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1347654509l/91950._SY475_.jpg",
-      "rating": 3,
       "readAt": null,
       "addedAt": "2025-08-11",
       "review": null
