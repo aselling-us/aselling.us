@@ -104,7 +104,7 @@
     }
   ],
   "contributions": {
-    "total": 1272,
+    "total": 1243,
     "days": [
       {
         "date": "2025-09-07",
@@ -1564,6 +1564,10 @@
       },
       {
         "date": "2026-09-06",
+        "count": 3
+      },
+      {
+        "date": "2026-09-07",
         "count": 0
       }
     ]
@@ -1577,8 +1581,8 @@
       "homepage": "https://readers.kontinua.org/",
       "language": "TeX",
       "stars": 10,
-      "pushedAt": "2026-08-18",
-      "commits": 271
+      "pushedAt": "2026-09-07",
+      "commits": 262
     },
     {
       "name": "kontinuafoundation.github.io",
@@ -1588,8 +1592,8 @@
       "homepage": "https://kontinuafoundation.github.io/",
       "language": "Svelte",
       "stars": 1,
-      "pushedAt": "2026-08-31",
-      "commits": 84
+      "pushedAt": "2026-09-07",
+      "commits": 83
     },
     {
       "name": "Ross-Resume",
