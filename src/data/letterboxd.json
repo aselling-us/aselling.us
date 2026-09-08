@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-09-06T12:53:39.440Z",
+  "fetchedAt": "2026-09-08T00:32:32.364Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Eyes Wide Shut",
+      "year": 1999,
+      "link": "https://letterboxd.com/aselling/film/eyes-wide-shut/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/7/1/7/51717-eyes-wide-shut-0-600-0-900-crop.jpg?v=7010402aeb",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-06",
+      "review": "Lots to say about this. So much to understand but the aestheticism of the entire thing made it a seductive experience. Give up your inquiries for they are rendered useless. Also technically a Christmas movie"
+    },
     {
       "title": "A Clockwork Orange",
       "year": 1971,
@@ -303,7 +314,7 @@
       "title": "I Want Your Sex",
       "year": 2026,
       "link": "https://letterboxd.com/aselling/film/i-want-your-sex/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/1/7/0/9/5/4/p/3sfCWge6znH0bu9nJs30DzwmCo1-0-600-0-900-crop.jpg?v=966820192c",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/1/7/0/9/5/4/1170954-i-want-your-sex-0-600-0-900-crop.jpg?v=c13a0c57b7",
       "rating": null,
       "liked": false,
       "rewatch": false,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-19",
       "review": "20 years of progress from this to the odyssey is truly present with Nolan's work"
-    },
-    {
-      "title": "The Odyssey: The Making of an Epic",
-      "year": 2026,
-      "link": "https://letterboxd.com/aselling/film/the-odyssey-the-making-of-an-epic/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/1/5/9/8/0/6/9/1598069-the-odyssey-the-making-of-an-epic-0-600-0-900-crop.jpg?v=9cf17d19d6",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-07-19",
-      "review": "They kept saying the term ambition, and I think it was one of the highest qualities of ambition ever delivered. A large scale film that can touch the darkest parts of your heart, just what the world needed to keep film alive....the rigging that they did to basically turn [Polyphemus's Cave] into a natural soundstage... I don't know any other director who would try it"
     }
   ],
   "favorites": [
