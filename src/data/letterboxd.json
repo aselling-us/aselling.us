@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-09-08T13:39:03.359Z",
+  "fetchedAt": "2026-09-10T13:36:51.618Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Beetlejuice",
+      "year": 1988,
+      "link": "https://letterboxd.com/aselling/film/beetlejuice/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/rs/wk/3i/nt/gWnW7vxm8yr01TVLQhL4aI02orp-0-600-0-900-crop.jpg?v=f8250fbc59",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-09",
+      "review": "I, too, would die for goth Winona Ryder."
+    },
     {
       "title": "After Hours",
       "year": 1985,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-20",
       "review": "watching this a day after a 15 hour flight day of plane hopping kept me in a state of surrealist, feverdreameqsue, PTSD hallucination. \n\nwhoever chose the name clear rivers deserves an emmy"
-    },
-    {
-      "title": "Flower",
-      "year": 2017,
-      "link": "https://letterboxd.com/aselling/film/flower-2017/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/5/5/1/8/3/p/cxcL9uC8CPMuBJlYDBgT2aqibX3-0-600-0-900-crop.jpg?v=2f5a554b0f",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-07-19",
-      "review": "part who knows of getting shitty hulu movies off my watch list. not great very 2000s in our developing era... like we dont need pixie girls in this day and age. \n\nwhat was Mark Scout's non-severed self doing in this??"
     }
   ],
   "favorites": [
