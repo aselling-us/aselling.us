@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-09-10T13:36:51.618Z",
+  "fetchedAt": "2026-09-12T09:04:52.072Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "The Exorcist",
+      "year": 1973,
+      "link": "https://letterboxd.com/aselling/film/the-exorcist/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/7/0/4/8/47048-the-exorcist-0-600-0-900-crop.jpg?v=897c9aa211",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-09-11",
+      "review": "Im sure this was quite a revolutionary film in the 70s but I did have some qualms with this. Overall though definitely deserved the best sound award or whatever it won. Pretty interesting effects too"
+    },
     {
       "title": "Beetlejuice",
       "year": 1988,
@@ -17,7 +28,7 @@
       "title": "After Hours",
       "year": 1985,
       "link": "https://letterboxd.com/aselling/film/after-hours/",
-      "poster": "https://a.ltrbxd.com/resized/sm/upload/2z/7c/vx/lo/qpr5tRmvyx4rbv1gKMKbW1v5JUC-0-600-0-900-crop.jpg?v=3f65cdcb25",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/5/8/4/2/p/6dstQOB1ARUoVpAFWYSjZMH1Ts2-0-600-0-900-crop.jpg?v=35ae2530f7",
       "rating": null,
       "liked": true,
       "rewatch": false,
@@ -540,17 +551,6 @@
       "rewatch": true,
       "watchedDate": "2026-07-20",
       "review": "RIP Albert Camus you would've loved Napoleon Dynamite"
-    },
-    {
-      "title": "Final Destination",
-      "year": 2000,
-      "link": "https://letterboxd.com/aselling/film/final-destination/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/7/0/6/8/p/nHwymSpcGmamYcXZmMyHcoXesUG-0-600-0-900-crop.jpg?v=4329d59e86",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-07-20",
-      "review": "watching this a day after a 15 hour flight day of plane hopping kept me in a state of surrealist, feverdreameqsue, PTSD hallucination. \n\nwhoever chose the name clear rivers deserves an emmy"
     }
   ],
   "favorites": [
