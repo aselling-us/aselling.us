@@ -3,7 +3,7 @@ name: "The Maine"
 kind: event
 coords: [37.66010, -121.89477]
 date: "3 July 2026"
-detail: "Alameda State Fair"
+detail: "Alameda County Fair, Pleasanton, California"
 ---
 
 Played some of my favorite songs:
