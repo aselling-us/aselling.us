@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-10T13:36:51.618Z",
+  "fetchedAt": "2026-09-14T15:55:14.686Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -20,9 +20,7 @@
       "rating": 0,
       "readAt": null,
       "addedAt": "2026-09-01",
-      "review": null,
-      "currentPage": 40,
-      "totalPages": 608
+      "review": null
     },
     {
       "title": "The Secret History",
@@ -33,11 +31,21 @@
       "readAt": null,
       "addedAt": "2026-05-19",
       "review": null,
-      "currentPage": 152,
+      "currentPage": 173,
       "totalPages": 559
     }
   ],
   "toRead": [
+    {
+      "title": "The Da Vinci Code (Robert Langdon, #2)",
+      "author": "Dan    Brown",
+      "link": "https://www.goodreads.com/book/show/55019161",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1597798677l/55019161._SY475_.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-09-14",
+      "review": null
+    },
     {
       "title": "A Clockwork Orange",
       "author": "Anthony Burgess",
