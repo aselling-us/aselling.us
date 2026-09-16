@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-14T15:55:14.686Z",
+  "fetchedAt": "2026-09-16T14:12:38.415Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -36,6 +36,16 @@
     }
   ],
   "toRead": [
+    {
+      "title": "Orality and Literacy: The Technologizing of the Word",
+      "author": "Walter J. Ong",
+      "link": "https://www.goodreads.com/book/show/164515",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1347510969l/164515.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-09-15",
+      "review": null
+    },
     {
       "title": "The Da Vinci Code (Robert Langdon, #2)",
       "author": "Dan    Brown",
