@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-09-12T09:04:52.072Z",
+  "fetchedAt": "2026-09-17T14:18:21.663Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Romeo + Juliet",
+      "year": 1996,
+      "link": "https://letterboxd.com/aselling/film/romeo-juliet-1996/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/6/4/7/51647-romeo-juliet-0-600-0-900-crop.jpg?v=bbd8155493",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-16",
+      "review": "Baz' direction is so noticable, and extremely here. It takes a ton to get used to but its a lot of fun once you get used to it. definitely `love is a battlefield`"
+    },
     {
       "title": "The Exorcist",
       "year": 1973,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-21",
       "review": "This review may contain spoilers.\n\nwhy did we un-emo our favorite diva Clear Rivers??"
-    },
-    {
-      "title": "Napoleon Dynamite",
-      "year": 2004,
-      "link": "https://letterboxd.com/aselling/film/napoleon-dynamite/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/7/8/6/7/p/gDHg9iZ6yeND3fbbP9kSNX6GjgH-0-600-0-900-crop.jpg?v=d2f9e8113c",
-      "rating": null,
-      "liked": true,
-      "rewatch": true,
-      "watchedDate": "2026-07-20",
-      "review": "RIP Albert Camus you would've loved Napoleon Dynamite"
     }
   ],
   "favorites": [
