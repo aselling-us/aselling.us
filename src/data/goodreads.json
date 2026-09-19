@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-16T14:12:38.415Z",
+  "fetchedAt": "2026-09-19T13:10:47.656Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -10,7 +10,9 @@
       "rating": 3,
       "readAt": null,
       "addedAt": "2026-09-08",
-      "review": null
+      "review": null,
+      "currentPage": 25,
+      "totalPages": 192
     },
     {
       "title": "The Shards",
@@ -20,7 +22,9 @@
       "rating": 0,
       "readAt": null,
       "addedAt": "2026-09-01",
-      "review": null
+      "review": null,
+      "currentPage": 65,
+      "totalPages": 608
     },
     {
       "title": "The Secret History",
@@ -30,9 +34,7 @@
       "rating": 0,
       "readAt": null,
       "addedAt": "2026-05-19",
-      "review": null,
-      "currentPage": 173,
-      "totalPages": 559
+      "review": null
     }
   ],
   "toRead": [
