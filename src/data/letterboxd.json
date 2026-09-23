@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-09-17T14:18:21.663Z",
+  "fetchedAt": "2026-09-23T14:15:10.861Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "The World, the Flesh and the Devil",
+      "year": 1959,
+      "link": "https://letterboxd.com/aselling/film/the-world-the-flesh-and-the-devil/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/9/0/6/9/49069-the-world-the-flesh-and-the-devil-0-600-0-900-crop.jpg?v=9b4a33aa24",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-22",
+      "review": "quite beautiful lowkey"
+    },
     {
       "title": "Romeo + Juliet",
       "year": 1996,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-21",
       "review": "This review may contain spoilers.\n\nRamona Flowers went from this Scott Pilgrim to predicting the lives of 2 dozen teens on a roller coaster. What a glow up.\n\nThat tanning bed scene was so stressful, and transitioned well into the funeral. RIP.\n\nTrain crash was comparable to the Incredible Animated one, insane. \n\nMost gory and terrifying one yet. Enjoyed it thoroughly. Reminded me hella of say cheese and die, a childhood favorite from Goosebumps."
-    },
-    {
-      "title": "Final Destination 2",
-      "year": 2003,
-      "link": "https://letterboxd.com/aselling/film/final-destination-2/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/7/2/3/7/p/3T2Jr8ZCLOT1FqGL4s0esdjipj6-0-600-0-900-crop.jpg?v=99f699746f",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-07-21",
-      "review": "This review may contain spoilers.\n\nwhy did we un-emo our favorite diva Clear Rivers??"
     }
   ],
   "favorites": [
