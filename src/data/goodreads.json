@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-22T14:03:04.133Z",
+  "fetchedAt": "2026-09-25T14:37:00.633Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -10,9 +10,7 @@
       "rating": 3,
       "readAt": null,
       "addedAt": "2026-09-08",
-      "review": null,
-      "currentPage": 25,
-      "totalPages": 192
+      "review": null
     },
     {
       "title": "The Shards",
@@ -38,6 +36,26 @@
     }
   ],
   "toRead": [
+    {
+      "title": "Steal Like an Artist: 10 Things Nobody Told You About Being Creative",
+      "author": "Austin Kleon",
+      "link": "https://www.goodreads.com/book/show/13099738",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1404576602l/13099738.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-09-25",
+      "review": null
+    },
+    {
+      "title": "Flow: The Psychology of Optimal Experience",
+      "author": "Mihály Csíkszentmihályi",
+      "link": "https://www.goodreads.com/book/show/66354",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1748892272l/66354._SY475_.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-09-24",
+      "review": null
+    },
     {
       "title": "Orality and Literacy: The Technologizing of the Word",
       "author": "Walter J. Ong",
