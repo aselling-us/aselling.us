@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-09-25T14:37:00.633Z",
+  "fetchedAt": "2026-09-26T13:45:17.688Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Resident Evil",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/resident-evil-2026/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/3/0/2/7/1/7/1302717-untitled-resident-evil-reboot-0-600-0-900-crop.jpg?v=a688bf1bc7",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-25",
+      "review": "This review may contain spoilers.\n\nGenuinely one of the best movies of 2026. Austin Abrams is meant to play the whiny idiot in every movie. Ans Zach Cregger delivered so well with every shot. Sound, shadows, continuous shot, everything. \n\nIn my eyes, just don't stop if you hit someone in your car, I wouldn't.\n\nAll of this coming from someone who has never played or barely heard of resident evil."
+    },
     {
       "title": "The Craft",
       "year": 1996,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-22",
       "review": "this is NOTHING to do with nihilism and a character named meursault >:("
-    },
-    {
-      "title": "The Odyssey",
-      "year": 2026,
-      "link": "https://letterboxd.com/aselling/film/the-odyssey-2026/1/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/2/5/5/3/9/4/p/wzKVPug0hNwTcoZhra9iSjwOc65-0-600-0-900-crop.jpg?v=f5022f0ea9",
-      "rating": null,
-      "liked": true,
-      "rewatch": true,
-      "watchedDate": "2026-07-21",
-      "review": "Powerful. I think that is the best way to describe this film. Powerful. It was only through immense power that this film was able to be executed. And, throughout it all, it is because of this power that The Odyssey captures you in its entirety for 3 hours.To burn the walls of Troy was to burn the world-entire. Including his homeNot once did I have an urge to pull out a phone or get up to pee, unlike the bulk of people walking around or on their phones. Nor did I bring my phone but that is a different story. The sheer power from the film, it's shots, the energy, and most notably, Goransson's soundtrack takes me to a completely different place. It brings me to tears to see a story and culture ingrained in me since childhood come to life. From Polyphemus to the Laestrygonians, to the Shades and the rage in Odysseus' return, every scene had an immense representation of power and scale, while also having emotional aspects which kept it grounded in humanity.\n\nThank you, Christopher Nolan, for keeping cinema alive.\n\nI would like to point out this line from Homer's original text, Alcinous speaking:Explain to us also what sorrow makes you weep as you listen to the tragic story of the Argives and the fall of Troy. The gods were responsible for that, weaving catastrophe into men's lives to make a song for future generations."
     }
   ],
   "favorites": [
