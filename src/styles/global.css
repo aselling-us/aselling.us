@@ -13,7 +13,7 @@
    directly in :root.
 =========================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Gentium+Book+Plus&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Archivo+Black&family=Gentium+Book+Plus&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
 
 :root {
   /* -- color: ground -- */
@@ -49,6 +49,8 @@
 
   /* -- type -- */
   --font-display: 'Fraunces', Georgia, serif;
+  /* h1 only -- h2/h3 and everything else styled off --font-display stay Fraunces */
+  --font-h1: 'Archivo Black', 'Inter', sans-serif;
   --font-body: 'Inter', -apple-system, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
   /* the .mono-label utility (nav, index markers, section labels, badges,
@@ -202,14 +204,20 @@ body {
 }
 
 h1, h2, h3 {
-  font-family: var(--font-display);
   font-weight: 500;
   line-height: 1.15;
   color: var(--color-text);
   margin: 0 0 var(--space-2);
 }
 
-h1 { font-size: clamp(2rem, 4vw, 3rem); }
+h2, h3 { font-family: var(--font-display); }
+
+h1 {
+  font-family: var(--font-h1);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
 h2 { font-size: clamp(1.4rem, 2.5vw, 1.9rem); }
 h3 { font-size: 1.25rem; }
 
