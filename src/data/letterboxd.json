@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-09-26T13:45:17.688Z",
+  "fetchedAt": "2026-09-28T09:59:13.252Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Primetime",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/primetime-2026/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/2/6/2/0/1/9/1262019-primetime-2026-0-600-0-900-crop.jpg?v=41640d6988",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-27",
+      "review": "“I’ll have a bud light”\n“Its on NBC”\n“Budweiser then”"
+    },
     {
       "title": "Resident Evil",
       "year": 2026,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-23",
       "review": "The Final Destination found dead in a ditch, replaced by F1 (2025). get brain rot dave franco out of here. It wasn't as bad as I expecting; some of the deaths were pretty good, but not the casting or acting. Too much cgi"
-    },
-    {
-      "title": "The Strangers",
-      "year": 2008,
-      "link": "https://letterboxd.com/aselling/film/the-strangers/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/6/0/1/0/p/8VN52K95Cywp60ppnuUxFvqh7TG-0-600-0-900-crop.jpg?v=79640dd96e",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-07-22",
-      "review": "this is NOTHING to do with nihilism and a character named meursault >:("
     }
   ],
   "favorites": [
@@ -593,6 +593,12 @@
       "poster": "https://a.ltrbxd.com/resized/film-poster/4/9/7/6/3/1/497631-spider-man-across-the-spider-verse-0-600-0-900-crop.jpg?v=f2acbf1b8a"
     },
     {
+      "title": "Spider-Man: No Way Home",
+      "year": 2021,
+      "link": "https://letterboxd.com/film/spider-man-no-way-home/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/6/0/7/8/7/560787-spider-man-no-way-home-0-600-0-900-crop.jpg?v=a336d4f40c"
+    },
+    {
       "title": "The Silence of the Lambs",
       "year": 1991,
       "link": "https://letterboxd.com/film/the-silence-of-the-lambs/",
@@ -603,12 +609,6 @@
       "year": 1980,
       "link": "https://letterboxd.com/film/the-shining/",
       "poster": "https://a.ltrbxd.com/resized/sm/upload/7s/m2/bw/d0/caoYMcjUamGoBVy65i1AHJBvdzw-0-600-0-900-crop.jpg?v=88d9d6cce4"
-    },
-    {
-      "title": "Spider-Man: No Way Home",
-      "year": 2021,
-      "link": "https://letterboxd.com/film/spider-man-no-way-home/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/5/6/0/7/8/7/560787-spider-man-no-way-home-0-600-0-900-crop.jpg?v=a336d4f40c"
     },
     {
       "title": "The Godfather",
@@ -629,10 +629,10 @@
       "poster": "https://a.ltrbxd.com/resized/film-poster/4/6/2/8/7/0/462870-deadpool-wolverine-0-600-0-900-crop.jpg?v=1aa778d2c6"
     },
     {
-      "title": "Inside Out 2",
-      "year": 2024,
-      "link": "https://letterboxd.com/film/inside-out-2-2024/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/9/2/1/5/7/8/921578-inside-out-2-0-600-0-900-crop.jpg?v=efa25e5cca"
+      "title": "Spider-Man: Homecoming",
+      "year": 2017,
+      "link": "https://letterboxd.com/film/spider-man-homecoming/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/2/4/2/7/1/0/242710-spider-man-homecoming-0-600-0-900-crop.jpg?v=61e8c57229"
     },
     {
       "title": "Pride & Prejudice",
@@ -641,22 +641,28 @@
       "poster": "https://a.ltrbxd.com/resized/sm/upload/nq/jo/26/tn/dAC0hkYmz5ZOCHURZCyj9isPMPd-0-600-0-900-crop.jpg?v=b3dac3ffd7"
     },
     {
-      "title": "Past Lives",
-      "year": 2023,
-      "link": "https://letterboxd.com/film/past-lives/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/5/9/1/0/5/3/591053-past-lives-0-600-0-900-crop.jpg?v=c600b7854e"
-    },
-    {
-      "title": "Spider-Man: Homecoming",
-      "year": 2017,
-      "link": "https://letterboxd.com/film/spider-man-homecoming/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/2/4/2/7/1/0/242710-spider-man-homecoming-0-600-0-900-crop.jpg?v=61e8c57229"
+      "title": "Inside Out 2",
+      "year": 2024,
+      "link": "https://letterboxd.com/film/inside-out-2-2024/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/9/2/1/5/7/8/921578-inside-out-2-0-600-0-900-crop.jpg?v=efa25e5cca"
     },
     {
       "title": "No Country for Old Men",
       "year": 2007,
       "link": "https://letterboxd.com/film/no-country-for-old-men/",
       "poster": "https://a.ltrbxd.com/resized/sm/upload/dr/hr/pz/ez/ehLb2SQ3djlA1FrQKbP2WO3VH09-0-600-0-900-crop.jpg?v=6489920a92"
+    },
+    {
+      "title": "Spider-Man: Far From Home",
+      "year": 2019,
+      "link": "https://letterboxd.com/film/spider-man-far-from-home/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/3/6/2/9/7/7/362977-spider-man-far-from-home-0-600-0-900-crop.jpg?v=d139fbf2ae"
+    },
+    {
+      "title": "Past Lives",
+      "year": 2023,
+      "link": "https://letterboxd.com/film/past-lives/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/9/1/0/5/3/591053-past-lives-0-600-0-900-crop.jpg?v=c600b7854e"
     },
     {
       "title": "Mamma Mia!",
@@ -671,22 +677,16 @@
       "poster": "https://a.ltrbxd.com/resized/film-poster/3/6/7/7/8/36778-the-avengers-2012-0-600-0-900-crop.jpg?v=d0e2add158"
     },
     {
-      "title": "Nope",
-      "year": 2022,
-      "link": "https://letterboxd.com/film/nope/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/6/8/2/5/4/7/682547-nope-0-600-0-900-crop.jpg?v=d6a6158cc3"
-    },
-    {
       "title": "Harry Potter and the Goblet of Fire",
       "year": 2005,
       "link": "https://letterboxd.com/film/harry-potter-and-the-goblet-of-fire/",
       "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/4/5/0/51450-harry-potter-and-the-goblet-of-fire-0-600-0-900-crop.jpg?v=6b5c9896c9"
     },
     {
-      "title": "Spider-Man: Far From Home",
-      "year": 2019,
-      "link": "https://letterboxd.com/film/spider-man-far-from-home/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/3/6/2/9/7/7/362977-spider-man-far-from-home-0-600-0-900-crop.jpg?v=d139fbf2ae"
+      "title": "Nope",
+      "year": 2022,
+      "link": "https://letterboxd.com/film/nope/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/6/8/2/5/4/7/682547-nope-0-600-0-900-crop.jpg?v=d6a6158cc3"
     },
     {
       "title": "2001: A Space Odyssey",

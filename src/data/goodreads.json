@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-25T14:37:00.633Z",
+  "fetchedAt": "2026-09-28T09:59:13.252Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -21,7 +21,7 @@
       "readAt": null,
       "addedAt": "2026-09-01",
       "review": null,
-      "currentPage": 65,
+      "currentPage": 109,
       "totalPages": 608
     },
     {
@@ -36,6 +36,16 @@
     }
   ],
   "toRead": [
+    {
+      "title": "Odd Thomas (Odd Thomas, #1)",
+      "author": "Dean Koontz",
+      "link": "https://www.goodreads.com/book/show/14995",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1388245669l/14995.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-09-27",
+      "review": null
+    },
     {
       "title": "Steal Like an Artist: 10 Things Nobody Told You About Being Creative",
       "author": "Austin Kleon",
