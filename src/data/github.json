@@ -1,7 +1,17 @@
 {
-  "fetchedAt": "2026-09-28T17:39:56.472Z",
+  "fetchedAt": "2026-09-29T15:52:35.893Z",
   "username": "aselling-us",
   "repos": [
+    {
+      "name": "MATH-3680",
+      "description": "My Projects / Notes for LaTeX course at Cal Poly with Dr. Sean Gasiorek.",
+      "link": "https://github.com/aselling-us/MATH-3680",
+      "homepage": null,
+      "language": "TeX",
+      "stars": 0,
+      "topics": [],
+      "pushedAt": "2026-09-28"
+    },
     {
       "name": "aselling.us",
       "description": "My website containing a portfolio of a variety of projects.",
@@ -41,16 +51,6 @@
       "stars": 0,
       "topics": [],
       "pushedAt": "2026-09-24"
-    },
-    {
-      "name": "MATH-3680",
-      "description": "My Projects / Notes for LaTeX course at Cal Poly with Dr. Sean Gasiorek.",
-      "link": "https://github.com/aselling-us/MATH-3680",
-      "homepage": null,
-      "language": "TeX",
-      "stars": 0,
-      "topics": [],
-      "pushedAt": "2026-09-21"
     },
     {
       "name": "resume",
@@ -104,7 +104,7 @@
     }
   ],
   "contributions": {
-    "total": 1227,
+    "total": 1231,
     "days": [
       {
         "date": "2025-09-28",
@@ -1568,7 +1568,11 @@
       },
       {
         "date": "2026-09-28",
-        "count": 2
+        "count": 6
+      },
+      {
+        "date": "2026-09-29",
+        "count": 0
       }
     ]
   },
@@ -1581,8 +1585,8 @@
       "homepage": "https://readers.kontinua.org/",
       "language": "TeX",
       "stars": 10,
-      "pushedAt": "2026-09-27",
-      "commits": 271
+      "pushedAt": "2026-09-28",
+      "commits": 274
     },
     {
       "name": "kontinuafoundation.github.io",
@@ -1592,7 +1596,7 @@
       "homepage": "https://kontinuafoundation.github.io/",
       "language": "Svelte",
       "stars": 1,
-      "pushedAt": "2026-09-25",
+      "pushedAt": "2026-09-28",
       "commits": 85
     },
     {
