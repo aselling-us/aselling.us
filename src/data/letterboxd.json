@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-09-28T09:59:13.252Z",
+  "fetchedAt": "2026-10-02T15:49:57.250Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "American Beauty",
+      "year": 1999,
+      "link": "https://letterboxd.com/aselling/film/american-beauty/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/2/7/0/3/2703-american-beauty-0-600-0-900-crop.jpg?v=30329dd752",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-01",
+      "review": "Felt like a coen the way there were a million interconnected stories. \n\nNot used to seeing kevin spacey with hair."
+    },
     {
       "title": "Primetime",
       "year": 2026,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-23",
       "review": "what the hell is this workplace environment?? just a few hr violationsDo you come with subtitlesbro holy ending"
-    },
-    {
-      "title": "The Final Destination",
-      "year": 2009,
-      "link": "https://letterboxd.com/aselling/film/the-final-destination/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/9/3/5/1/p/nTjwhUMPuSre7aZ2AYU5yfQM15y-0-600-0-900-crop.jpg?v=c0f0e2ade4",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-07-23",
-      "review": "The Final Destination found dead in a ditch, replaced by F1 (2025). get brain rot dave franco out of here. It wasn't as bad as I expecting; some of the deaths were pretty good, but not the casting or acting. Too much cgi"
     }
   ],
   "favorites": [
