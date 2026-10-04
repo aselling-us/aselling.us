@@ -1,7 +1,40 @@
 {
-  "fetchedAt": "2026-10-02T15:49:57.250Z",
+  "fetchedAt": "2026-10-04T14:48:15.638Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "The Shining",
+      "year": 1980,
+      "link": "https://letterboxd.com/aselling/film/the-shining/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/7s/m2/bw/d0/caoYMcjUamGoBVy65i1AHJBvdzw-0-600-0-900-crop.jpg?v=88d9d6cce4",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-03",
+      "review": "an instant favorite. surpassed every preexisting expectation I had for it, and more. barely took a breath during the last 30 minutes."
+    },
+    {
+      "title": "The Revenant",
+      "year": 2015,
+      "link": "https://letterboxd.com/aselling/film/the-revenant-2015/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/2/0/7/2/2/4/207224-the-revenant-0-600-0-900-crop.jpg?v=f51b30a589",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-10-03",
+      "review": "I normally don't do this, but I did not finish this one, but did give it a good try. I made it an hour in and watched up until a bit after the main starting event for this, but it was not not engaging. The shots were quite cool I suppose, very continuous, but the nature survival aspect was not for me."
+    },
+    {
+      "title": "O Brother, Where Art Thou?",
+      "year": 2000,
+      "link": "https://letterboxd.com/aselling/film/o-brother-where-art-thou/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/a0/sz/qf/mq/erBsxkzVwkXuvuzUBpVnNxxPYhO-0-600-0-900-crop.jpg?v=80375a32fa",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-10-03",
+      "review": "a (nearly) waterless odyssey\n\ni yearn to have the dialect of george clooney in this film"
+    },
     {
       "title": "American Beauty",
       "year": 1999,
@@ -518,39 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-25",
       "review": "a psychosexual feverdream of a film set in an abandoned house with max gore, some of the best cinematography, and a budget of $375,000 and director aged 21. Obsession and Backrooms got nothing on my guy Raimi"
-    },
-    {
-      "title": "Babygirl",
-      "year": 2024,
-      "link": "https://letterboxd.com/aselling/film/babygirl-2024/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/9/8/9/1/2/5/p/sr7ysBozEsVMIz0ISnRjOf1l8iT-0-600-0-900-crop.jpg?v=e82d7d2ab3",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-07-25",
-      "review": "had to do some genre whiplash after my horror binge. \n\nEsther-Rose McGregor somehow was the star of this film, though. I will die on that hill. \n\nAlso to note: the color grading in this was insane. and the soundtrack was perfect for the movies content...\n\nInteresting plot... I guess. holy manipulation. been there done that too many times"
-    },
-    {
-      "title": "Final Destination Bloodlines",
-      "year": 2025,
-      "link": "https://letterboxd.com/aselling/film/final-destination-bloodlines/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/0/2/6/2/2/p/wE0KItL32DNXY4BZnAQEicTR2cI-0-600-0-900-crop.jpg?v=68994f864d",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-07-23",
-      "review": "This review may contain spoilers.\n\ngenuinely this was so freaking good!! Richard Harmon absolutely crushes every scene he is in, incredible cinematography and color grading, some very unique deaths with insane irrational fears. The pan to the babies in the hospital was so funny but quite enjoyable\n\nI wish I had not missed this in theatres."
-    },
-    {
-      "title": "Final Destination 5",
-      "year": 2011,
-      "link": "https://letterboxd.com/aselling/film/final-destination-5/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/0/3/8/7/p/pkCKA0NQzNn2LM5flGjXGuoHZXL-0-600-0-900-crop.jpg?v=c7cf84c058",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-07-23",
-      "review": "what the hell is this workplace environment?? just a few hr violationsDo you come with subtitlesbro holy ending"
     }
   ],
   "favorites": [
