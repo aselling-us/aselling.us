@@ -1,12 +1,12 @@
 {
-  "fetchedAt": "2026-10-04T14:48:15.638Z",
+  "fetchedAt": "2026-10-08T05:05:03.462Z",
   "username": "aselling",
   "films": [
     {
       "title": "The Shining",
       "year": 1980,
       "link": "https://letterboxd.com/aselling/film/the-shining/",
-      "poster": "https://a.ltrbxd.com/resized/sm/upload/7s/m2/bw/d0/caoYMcjUamGoBVy65i1AHJBvdzw-0-600-0-900-crop.jpg?v=88d9d6cce4",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/4/3/2/p/4Zyk9d47uSk10GIEEwKjOLND3qx-0-600-0-900-crop.jpg?v=fe4929216f",
       "rating": null,
       "liked": true,
       "rewatch": false,
@@ -28,7 +28,7 @@
       "title": "O Brother, Where Art Thou?",
       "year": 2000,
       "link": "https://letterboxd.com/aselling/film/o-brother-where-art-thou/",
-      "poster": "https://a.ltrbxd.com/resized/sm/upload/a0/sz/qf/mq/erBsxkzVwkXuvuzUBpVnNxxPYhO-0-600-0-900-crop.jpg?v=80375a32fa",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/9/1/7/p/2YztYilviFCYcEtDAnrOstUWGie-0-600-0-900-crop.jpg?v=51162f4bbe",
       "rating": null,
       "liked": false,
       "rewatch": false,
@@ -39,7 +39,7 @@
       "title": "American Beauty",
       "year": 1999,
       "link": "https://letterboxd.com/aselling/film/american-beauty/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/2/7/0/3/2703-american-beauty-0-600-0-900-crop.jpg?v=30329dd752",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/2/7/0/3/p/xB9eO4pH1eI3MAXqku9wnTY4FQ1-0-600-0-900-crop.jpg?v=deea8bbc49",
       "rating": null,
       "liked": true,
       "rewatch": false,
@@ -50,7 +50,7 @@
       "title": "Primetime",
       "year": 2026,
       "link": "https://letterboxd.com/aselling/film/primetime-2026/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/1/2/6/2/0/1/9/1262019-primetime-2026-0-600-0-900-crop.jpg?v=41640d6988",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/2/6/2/0/1/9/p/rgQc0UmFsrhvbHxR4nKsVWo9fF3-0-600-0-900-crop.jpg?v=1a2eb51995",
       "rating": null,
       "liked": true,
       "rewatch": false,
@@ -61,7 +61,7 @@
       "title": "Resident Evil",
       "year": 2026,
       "link": "https://letterboxd.com/aselling/film/resident-evil-2026/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/1/3/0/2/7/1/7/1302717-untitled-resident-evil-reboot-0-600-0-900-crop.jpg?v=a688bf1bc7",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/3/0/2/7/1/7/p/dqpTqY3ch22sAYyq250lzzHVyDo-0-600-0-900-crop.jpg?v=7b3f5dba3a",
       "rating": null,
       "liked": true,
       "rewatch": false,
@@ -72,7 +72,7 @@
       "title": "The Craft",
       "year": 1996,
       "link": "https://letterboxd.com/aselling/film/the-craft/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/4/7/3/4/5/47345-the-craft-0-600-0-900-crop.jpg?v=d340df121c",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/7/3/4/5/p/qdYKYBArXneOsPYIX1EFzFtJz5C-0-600-0-900-crop.jpg?v=7b34a64a36",
       "rating": null,
       "liked": true,
       "rewatch": false,
@@ -83,7 +83,7 @@
       "title": "The World, the Flesh and the Devil",
       "year": 1959,
       "link": "https://letterboxd.com/aselling/film/the-world-the-flesh-and-the-devil/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/4/9/0/6/9/49069-the-world-the-flesh-and-the-devil-0-600-0-900-crop.jpg?v=9b4a33aa24",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/9/0/6/9/p/uMB51OAkdrAx7r1dztvLub6RyPJ-0-600-0-900-crop.jpg?v=bf99111fd0",
       "rating": null,
       "liked": true,
       "rewatch": false,
@@ -605,12 +605,6 @@
       "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/7/8/2/51782-the-silence-of-the-lambs-0-600-0-900-crop.jpg?v=18d88bdff4"
     },
     {
-      "title": "The Shining",
-      "year": 1980,
-      "link": "https://letterboxd.com/film/the-shining/",
-      "poster": "https://a.ltrbxd.com/resized/sm/upload/7s/m2/bw/d0/caoYMcjUamGoBVy65i1AHJBvdzw-0-600-0-900-crop.jpg?v=88d9d6cce4"
-    },
-    {
       "title": "The Godfather",
       "year": 1972,
       "link": "https://letterboxd.com/film/the-godfather/",
@@ -647,16 +641,16 @@
       "poster": "https://a.ltrbxd.com/resized/film-poster/9/2/1/5/7/8/921578-inside-out-2-0-600-0-900-crop.jpg?v=efa25e5cca"
     },
     {
-      "title": "No Country for Old Men",
-      "year": 2007,
-      "link": "https://letterboxd.com/film/no-country-for-old-men/",
-      "poster": "https://a.ltrbxd.com/resized/sm/upload/dr/hr/pz/ez/ehLb2SQ3djlA1FrQKbP2WO3VH09-0-600-0-900-crop.jpg?v=6489920a92"
-    },
-    {
       "title": "Spider-Man: Far From Home",
       "year": 2019,
       "link": "https://letterboxd.com/film/spider-man-far-from-home/",
       "poster": "https://a.ltrbxd.com/resized/film-poster/3/6/2/9/7/7/362977-spider-man-far-from-home-0-600-0-900-crop.jpg?v=d139fbf2ae"
+    },
+    {
+      "title": "No Country for Old Men",
+      "year": 2007,
+      "link": "https://letterboxd.com/film/no-country-for-old-men/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/dr/hr/pz/ez/ehLb2SQ3djlA1FrQKbP2WO3VH09-0-600-0-900-crop.jpg?v=6489920a92"
     },
     {
       "title": "Past Lives",
@@ -665,16 +659,16 @@
       "poster": "https://a.ltrbxd.com/resized/film-poster/5/9/1/0/5/3/591053-past-lives-0-600-0-900-crop.jpg?v=c600b7854e"
     },
     {
-      "title": "Mamma Mia!",
-      "year": 2008,
-      "link": "https://letterboxd.com/film/mamma-mia/",
-      "poster": "https://a.ltrbxd.com/resized/sm/upload/10/5l/wu/jl/gOm2iMMbC6EonrFzmSQ8xvCa4Ei.jpg-0-600-0-900-crop.jpg?v=e49de6f770"
-    },
-    {
       "title": "The Avengers",
       "year": 2012,
       "link": "https://letterboxd.com/film/the-avengers-2012/",
       "poster": "https://a.ltrbxd.com/resized/film-poster/3/6/7/7/8/36778-the-avengers-2012-0-600-0-900-crop.jpg?v=d0e2add158"
+    },
+    {
+      "title": "Mamma Mia!",
+      "year": 2008,
+      "link": "https://letterboxd.com/film/mamma-mia/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/10/5l/wu/jl/gOm2iMMbC6EonrFzmSQ8xvCa4Ei.jpg-0-600-0-900-crop.jpg?v=e49de6f770"
     },
     {
       "title": "Harry Potter and the Goblet of Fire",
@@ -699,6 +693,12 @@
       "year": 2005,
       "link": "https://letterboxd.com/film/brokeback-mountain/",
       "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/9/0/9/51909-brokeback-mountain-0-600-0-900-crop.jpg?v=40ad2b59a0"
+    },
+    {
+      "title": "Alien",
+      "year": 1979,
+      "link": "https://letterboxd.com/film/alien/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/8v/f1/qw/aa/bg7K6VtUG7Ew70gQj6SSroD5d4R-0-600-0-900-crop.jpg?v=a932f9e98e"
     }
   ]
 }

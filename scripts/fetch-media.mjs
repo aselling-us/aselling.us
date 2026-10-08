@@ -503,9 +503,22 @@ async function fetchDiaryPosters(page) {
   return posters;
 }
 
+// Playwright's bundled headless Chromium gets a Cloudflare "Just a moment..."
+// 403 on /watchlist/by/popular/ and the profile page even from a residential
+// IP, while the real Chrome install passes the very same URLs (verified
+// side by side) — so prefer system Chrome and only fall back to the bundled
+// build on machines that don't have it.
+async function launchBrowser(chromium) {
+  try {
+    return await chromium.launch({ channel: 'chrome' });
+  } catch {
+    return chromium.launch();
+  }
+}
+
 async function fetchFavoritesAndWatchlist() {
   const { chromium } = await import('playwright-core');
-  const browser = await chromium.launch();
+  const browser = await launchBrowser(chromium);
   try {
     const contextOptions = {
       userAgent:
