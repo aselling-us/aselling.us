@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Quote from '../../components/Quote.astro';
 import github from '../../data/github.json';
 
 // snapshot written by `npm run fetch:media`; fetchedAt only changes when the repo list does
@@ -77,6 +78,9 @@ const notesDevJson = import.meta.env.DEV
     A set of personal projects or scraps of ideas. Public repos pulled from <a href={profileUrl} target="_blank" rel="noopener noreferrer">GitHub</a>, most recently pushed first.
   </p>
 
+    <Quote cite="— Marcus Aurelius">
+  What are you afraid of losing,<br />when nothing in this world truly belongs to you?
+  </Quote>
   <section>
     <div class="section-header">
       <h2 class="mono-label section-label">notes / {String(notes.length).padStart(2, '0')}</h2>
@@ -113,7 +117,6 @@ const notesDevJson = import.meta.env.DEV
 
     {import.meta.env.DEV && <script type="application/json" id="doing-dev-data" set:html={notesDevJson} />}
   </section>
-
   {contributions && (
     <section>
       {/* total mirrors exactly what's shown on the public GitHub profile —
