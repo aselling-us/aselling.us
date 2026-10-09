@@ -1,9 +1,13 @@
 // Dev-only endpoints behind the "+ new note" / "edit" buttons on /projects's
 // "doing" notes section (mounted at /__edit-doing by scripts/dev-add-place.mjs
 // — never part of the built site).
-// POST /__edit-doing/save { slug?, title, date, body }
-//   with slug: rewrites the managed frontmatter fields (title, date) of an
-//   existing note, leaving `images` untouched, and replaces the body
+// POST /__edit-doing/save { slug?, title, startDate?, endDate?, draft?, body }
+//   at least one of startDate/endDate (YYYY-MM-DD) is required; with both,
+//   they're stored as YYYY-MM (a range is month precision only)
+//   with slug: rewrites the managed frontmatter fields (title, startDate,
+//   endDate, draft) of an existing note, leaving `images` untouched, and
+//   replaces the body (`draft: true` is written when set and the line
+//   removed when not; same for whichever date was left blank)
 //   without slug: creates src/content/doing/<slug-from-title>.md
 // POST /__edit-doing/image?slug=<slug>&name=<filename>  (raw image body)
 //   saves a photo as <slug>-<n>.<ext> next to the .md file and appends its
@@ -163,16 +167,27 @@ export function doingEditHandler({ dir = path.resolve('src/content/doing') } = {
       }
 
       const title = String(p.title ?? '').trim();
-      const date = String(p.date ?? '').trim();
+      const startDate = String(p.startDate ?? '').trim();
+      const endDate = String(p.endDate ?? '').trim();
       if (!title) return reply(400, { error: 'title is required' });
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return reply(400, { error: 'date must be YYYY-MM-DD' });
+      if (!startDate && !endDate) return reply(400, { error: 'a start date, an end date, or both is required' });
+      for (const [label, value] of [['startDate', startDate], ['endDate', endDate]])
+        if (value && !/^\d{4}-\d{2}-\d{2}$/.test(value)) return reply(400, { error: `${label} must be YYYY-MM-DD` });
+      if (startDate && endDate && startDate > endDate) return reply(400, { error: 'start date is after the end date' });
       const text = String(p.body ?? '').trim();
+
+      // a range keeps only the month (quoted so YAML leaves it a string); a
+      // lone date keeps its day, unquoted so YAML parses it as a date
+      const isRange = Boolean(startDate && endDate);
+      const dateValue = (v) => (!v ? undefined : isRange ? JSON.stringify(v.slice(0, 7)) : v);
 
       // managed fields; undefined value = remove the line entirely
       // `images` is intentionally not managed here — /image and /image/remove own that line
       const fields = [
         ['title', JSON.stringify(title)],
-        ['date', date], // unquoted so YAML parses it as a date
+        ['startDate', dateValue(startDate)],
+        ['endDate', dateValue(endDate)],
+        ['draft', p.draft ? 'true' : undefined],
       ];
 
       let slug, file;
@@ -191,7 +206,7 @@ export function doingEditHandler({ dir = path.resolve('src/content/doing') } = {
         slug = base;
         for (let i = 2; fs.existsSync(path.join(dir, `${slug}.md`)); i++) slug = `${base}-${i}`;
         file = path.join(dir, `${slug}.md`);
-        const fm = fields.map(([k, v]) => `${k}: ${v}`);
+        const fm = fields.filter(([, v]) => v !== undefined).map(([k, v]) => `${k}: ${v}`);
         fs.mkdirSync(dir, { recursive: true });
         fs.writeFileSync(file, `---\n${fm.join('\n')}\n---\n${text ? `\n${text}\n` : ''}`);
       }

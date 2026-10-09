@@ -65,16 +65,27 @@ const career = defineCollection({
 // on /projects above the GitHub-imported sections. Manually authored —
 // unlike the repos below it, these aren't pulled from any API. `images` is
 // an ordered list of photos dropped next to the .md file (see the dev-only
-// editor in scripts/dev-edit-doing.mjs, which owns that field).
+// editor in scripts/dev-edit-doing.mjs, which owns that field). `draft: true`
+// notes show (with a badge) in dev so they can be edited, but builds skip
+// them — same rule as blog posts. A note carries `startDate`, `endDate`, or
+// both: a lone date is shown to the day (`2026-03-15`), a start+end range
+// to the month only (`2026-03`, which the editor writes) — the page decides
+// the precision from which fields are present, not from the string's shape.
 const doing = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/doing' }),
 
   schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      date: z.date(),
-      images: z.array(image()).optional().default([]),
-    }),
+    z
+      .object({
+        title: z.string(),
+        startDate: z.coerce.date().optional(),
+        endDate: z.coerce.date().optional(),
+        draft: z.boolean().optional().default(false),
+        images: z.array(image()).optional().default([]),
+      })
+      .refine((n) => n.startDate || n.endDate, {
+        message: 'A note needs a `startDate`, an `endDate`, or both.',
+      }),
 });
 
 // One markdown file per photo of a physical book — shelf photos, annotated

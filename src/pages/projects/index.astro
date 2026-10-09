@@ -48,11 +48,26 @@ const monthLabel = (week: { date: string }[]) =>
 // only label a column when its month differs from the previous column's
 const monthOf = (week: { date: string }[]) => week[0].date.slice(0, 7);
 
+// a note has a start date, an end date, or both (see the "doing" schema):
+// newest first by whichever end of it is latest, shown as "Mar 2026 – Jun 2026"
+// for a range (month precision) or a full date for a lone one
+const noteSortDate = (d: { startDate?: Date; endDate?: Date }) => (d.endDate ?? d.startDate)!;
+const fmtNoteDate = (d: Date, withDay: boolean) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', ...(withDay && { day: 'numeric' }), timeZone: 'UTC' });
+const noteDates = ({ startDate, endDate }: { startDate?: Date; endDate?: Date }) => {
+  if (startDate && endDate) {
+    const [from, to] = [fmtNoteDate(startDate, false), fmtNoteDate(endDate, false)];
+    return from === to ? from : `${from} – ${to}`;
+  }
+  return fmtNoteDate((startDate ?? endDate)!, true);
+};
+
 // manually-authored notes on in-progress personal projects — see the
 // "doing" collection in content.config.ts and the dev-only editor in
-// scripts/dev-edit-doing.mjs, mounted at /__edit-doing
-const doingEntries = (await getCollection('doing')).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+// scripts/dev-edit-doing.mjs, mounted at /__edit-doing. Drafts are included
+// in dev so they can be edited; builds skip them (same rule as /blog).
+const doingEntries = (await getCollection('doing', ({ data }) => import.meta.env.DEV || data.draft !== true)).sort(
+  (a, b) => noteSortDate(b.data).valueOf() - noteSortDate(a.data).valueOf()
 );
 const notes = await Promise.all(
   doingEntries.map(async (entry) => ({ entry, Content: (await render(entry)).Content }))
@@ -64,7 +79,9 @@ const notesDevJson = import.meta.env.DEV
       notes.map(({ entry }) => ({
         id: entry.id,
         title: entry.data.title,
-        date: entry.data.date.toISOString().slice(0, 10),
+        startDate: entry.data.startDate?.toISOString().slice(0, 10) ?? '',
+        endDate: entry.data.endDate?.toISOString().slice(0, 10) ?? '',
+        draft: entry.data.draft,
         body: entry.body ?? '',
         images: entry.data.images.map((img) => img.src),
       }))
@@ -75,7 +92,7 @@ const notesDevJson = import.meta.env.DEV
   <!-- <span class="mono-label">index / 02</span> -->
   <h1>Doing</h1>
   <p class="lede">
-    A set of personal projects or scraps of ideas. Public repos pulled from <a href={profileUrl} target="_blank" rel="noopener noreferrer">GitHub</a>, most recently pushed first.
+    A set of personal projects or scraps of ideas: reation, art, programming, anything. Public repos pulled from <a href={profileUrl} target="_blank" rel="noopener noreferrer">GitHub</a>, most recently pushed first.
   </p>
 
     <Quote cite="— Marcus Aurelius">
@@ -96,8 +113,9 @@ const notesDevJson = import.meta.env.DEV
         <li class="note">
           <div class="note-head">
             <span class="mono-label note-date">
-              {entry.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })}
+              {noteDates(entry.data)}
             </span>
+            {import.meta.env.DEV && entry.data.draft && <span class="draft-badge mono-label">draft</span>}
             {import.meta.env.DEV && (
               <button class="note-edit dev-btn mono-label" data-id={entry.id} type="button">edit</button>
             )}
@@ -229,7 +247,9 @@ const notesDevJson = import.meta.env.DEV
     interface NoteData {
       id: string;
       title: string;
-      date: string;
+      startDate: string;
+      endDate: string;
+      draft: boolean;
       body: string;
       images: string[];
     }
@@ -248,7 +268,16 @@ const notesDevJson = import.meta.env.DEV
         <form id="note-form">
           <span class="mono-label">${note ? `edit · src/content/doing/${esc(note.id)}.md` : 'new note'}</span>
           <input name="title" placeholder="Title" required value="${esc(note?.title ?? '')}" />
-          <input name="date" type="date" required value="${esc(note?.date ?? new Date().toISOString().slice(0, 10))}" />
+          <div class="row">
+            <label class="mono-label date-label">start
+              <input name="startDate" type="date" value="${esc(note ? note.startDate : new Date().toISOString().slice(0, 10))}" />
+            </label>
+            <label class="mono-label date-label">end (optional)
+              <input name="endDate" type="date" value="${esc(note?.endDate ?? '')}" />
+            </label>
+          </div>
+          <span class="mono-label date-hint">one date shows the full day; with both, only the months are kept</span>
+          <label class="mono-label draft-toggle"><input type="checkbox" name="draft" ${note?.draft ? 'checked' : ''} /> draft</label>
           <textarea name="body" rows="8" placeholder="Notes (markdown)">${esc(note?.body ?? '')}</textarea>
           <div class="note-photos-edit" id="note-photos-edit">
             ${(note?.images ?? [])
@@ -335,7 +364,9 @@ const notesDevJson = import.meta.env.DEV
           body: JSON.stringify({
             slug: note?.id,
             title: fd.get('title'),
-            date: fd.get('date'),
+            startDate: fd.get('startDate'),
+            endDate: fd.get('endDate'),
+            draft: fd.get('draft') === 'on',
             body: fd.get('body'),
           }),
         });
@@ -562,6 +593,13 @@ const notesDevJson = import.meta.env.DEV
     gap: var(--space-2);
   }
   .note-date { color: var(--color-text-faint); }
+  .draft-badge {
+    color: var(--color-highlight-bright);
+    border: 1px dashed var(--color-highlight-bright);
+    padding: 0.1rem 0.4rem;
+    margin-right: auto;
+    margin-left: 0.5rem;
+  }
   .note-title {
     font-family: var(--font-display);
     font-size: 1.1rem;
@@ -629,6 +667,10 @@ const notesDevJson = import.meta.env.DEV
   }
   .note-editor textarea { font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.5; }
   .note-editor input[type='date'] { width: auto; }
+  .note-editor .date-label { display: grid; gap: 0.25rem; }
+  .note-editor .date-hint { color: var(--color-text-faint); }
+  .note-editor input[type='checkbox'] { width: auto; accent-color: var(--color-highlight); }
+  .note-editor .draft-toggle { display: flex; gap: 0.4rem; align-items: center; cursor: pointer; }
   .note-editor button[type='submit'] {
     background: var(--color-highlight);
     border: none;
