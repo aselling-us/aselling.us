@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-09-29T15:52:35.893Z",
+  "fetchedAt": "2026-10-10T15:23:36.936Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -36,6 +36,16 @@
     }
   ],
   "toRead": [
+    {
+      "title": "The Haunting of Hill House",
+      "author": "Shirley Jackson",
+      "link": "https://www.goodreads.com/book/show/89717",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1327871336l/89717._SY475_.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-10-10",
+      "review": null
+    },
     {
       "title": "Odd Thomas (Odd Thomas, #1)",
       "author": "Dean Koontz",
