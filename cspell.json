@@ -125,7 +125,8 @@
     "Voron",
     "watchlist",
     "Watchlist",
-    "Waterparks"
+    "Waterparks",
+    "Wldlfe"
   ],
   "ignoreRegExpList": ["/^import\\s.+from\\s+['\"].+['\"];?$/"]
 }
