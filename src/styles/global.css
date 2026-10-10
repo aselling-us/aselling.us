@@ -1,14 +1,13 @@
 /* ===========================================================
    DESIGN TOKENS
    Direction: technical drafting / blueprint document.
-   Dark ground, hairline gold rules, steel-blue accents,
-   monospace "index" labels used like drawing annotations.
+   Hairline rules, steel-blue accents, and monospace "index"
+   labels used like drawing annotations.
 
-   Default theme: caravaggio — near-black ground, a brick-red
-   highlight (sampled from the curtain in Judith Beheading
-   Holofernes), hairline rules in a dull gold (sampled from Mary
-   Magdalene's hair) and a muted teal-blue accent (sampled from
-   her drapery). Toggled via data-theme on <html> (slider in
+   Default theme: monet — an impressionist light variant with a
+   hazy blue-green ground (sky and water washes), lavender line
+   work, muted coral as the highlight (Antibes rooftops) and sage
+   as the vine color. Toggled via data-theme on <html> (slider in
    Nav); the default has no data-theme attribute and lives
    directly in :root.
 =========================================================== */
@@ -17,33 +16,33 @@
 
 :root {
   /* -- color: ground -- */
-  --color-bg: #120d0c;
-  --color-bg-elevated: #1a1312;
-  --color-bg-inset: #160f0f;
+  --color-bg: #e6ecea;
+  --color-bg-elevated: #f0f4f1;
+  --color-bg-inset: #dbe6e6;
 
   /* -- color: line work -- */
-  --color-hairline: #7e6a44;
-  --color-hairline-bright: #b4985f;
+  --color-hairline: #1d88f1;
+  --color-hairline-bright: #9ab6bc;
 
   /* -- color: accents -- */
-  --color-accent: #20696f;
-  --color-accent-bright: #45b2ba;
-  --color-highlight: #8a170f;
-  --color-highlight-bright: #e74438;
+  --color-accent: #6f9bb0;
+  --color-accent-bright: #3f6a86;
+  --color-highlight: #cf8871;
+  --color-highlight-bright: #96513c;
 
   /* -- color: text -- */
-  --color-text: #ece0dd;
-  --color-text-dim: #a18b91;
-  --color-text-faint: #6d5661;
+  --color-text: #3d4d4c;
+  --color-text-dim: #728583;
+  --color-text-faint: #9bb0ac;
 
   /* -- color: ornaments (vines, chains) -- */
-  --color-vine: #3f8f5f;
-  --color-chain: #946b38;
+  --color-vine: #7fa06a;
+  --color-chain: #b08a5f;
 
   /* -- color: places map dots (lived/want-to-go/third-place — travel reuses accent) -- */
-  --color-dot-lived: #4f9e6f;
-  --color-dot-want-to-go: #9b72d1;
-  --color-dot-third-place: #e0973f;
+  --color-dot-lived: #5f9e78;
+  --color-dot-want-to-go: #8f6fb0;
+  --color-dot-third-place: #c9922f;
   /* fixed across all themes (not redefined per [data-theme] block on purpose) */
   --color-dot-event: #398fa0;
 
@@ -143,41 +142,43 @@
 }
 
 /* ===========================================================
-   THEME: monet
-   Impressionist light variant — hazy blue-green ground (sky and
-   water washes), lavender line work, muted coral takes the
-   highlight role (Antibes rooftops), sage takes the vine role.
-   Toggled via data-theme on <html> (slider in Nav).
+   THEME: caravaggio
+   Near-black ground, a brick-red highlight (sampled from the
+   curtain in Judith Beheading Holofernes), hairline rules in a
+   dull gold (sampled from Mary Magdalene's hair) and a muted
+   teal-blue accent (sampled from her drapery). The first default,
+   now a named theme. Toggled via data-theme on <html> (slider in
+   Nav).
 =========================================================== */
-[data-theme='monet'] {
+[data-theme='caravaggio'] {
   /* -- color: ground -- */
-  --color-bg: #e6ecea;
-  --color-bg-elevated: #f0f4f1;
-  --color-bg-inset: #dbe6e6;
+  --color-bg: #120d0c;
+  --color-bg-elevated: #1a1312;
+  --color-bg-inset: #160f0f;
 
   /* -- color: line work -- */
-  --color-hairline: #c9d8da;
-  --color-hairline-bright: #9ab6bc;
+  --color-hairline: #7e6a44;
+  --color-hairline-bright: #b4985f;
 
   /* -- color: accents -- */
-  --color-accent: #6f9bb0;
-  --color-accent-bright: #3f6a86;
-  --color-highlight: #cf8871;
-  --color-highlight-bright: #96513c;
+  --color-accent: #20696f;
+  --color-accent-bright: #45b2ba;
+  --color-highlight: #8a170f;
+  --color-highlight-bright: #e74438;
 
   /* -- color: text -- */
-  --color-text: #3d4d4c;
-  --color-text-dim: #728583;
-  --color-text-faint: #9bb0ac;
+  --color-text: #ece0dd;
+  --color-text-dim: #a18b91;
+  --color-text-faint: #6d5661;
 
   /* -- color: ornaments (vines, chains) -- */
-  --color-vine: #7fa06a;
-  --color-chain: #b08a5f;
+  --color-vine: #3f8f5f;
+  --color-chain: #946b38;
 
-  /* -- color: places map dots (lived/want-to-go/third-place — event/travel reuse highlight/accent) -- */
-  --color-dot-lived: #5f9e78;
-  --color-dot-want-to-go: #8f6fb0;
-  --color-dot-third-place: #c9922f;
+  /* -- color: places map dots (lived/want-to-go/third-place — travel reuses accent) -- */
+  --color-dot-lived: #4f9e6f;
+  --color-dot-want-to-go: #9b72d1;
+  --color-dot-third-place: #e0973f;
 }
 
 * {
@@ -186,11 +187,11 @@
 
 html {
   background: var(--color-bg);
-  color-scheme: dark;
-}
-html[data-theme='sunset'],
-html[data-theme='monet'] {
   color-scheme: light;
+}
+html[data-theme='caravaggio'],
+html[data-theme='odyssey'] {
+  color-scheme: dark;
 }
 
 body {

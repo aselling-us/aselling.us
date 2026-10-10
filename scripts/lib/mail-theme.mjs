@@ -77,8 +77,8 @@ export function coverDataUri(mdFile, coverValue) {
   return `data:${mime};base64,${fs.readFileSync(absPath).toString('base64')}`;
 }
 
-// Mirrors the site's "caravaggio" theme, the default (src/styles/global.css
-// :root tokens): near-black ground, brick-red accent, hairline gold rule, teal accent, monospace annotations.
+// Mirrors the site's "caravaggio" theme (the [data-theme='caravaggio'] block in
+// src/styles/global.css; no longer the site default, but the email palette stays dark): near-black ground, brick-red accent, hairline gold rule, teal accent, monospace annotations.
 // Email clients don't load the site's web fonts or CSS custom properties, so
 // colors are hardcoded and fonts fall back to system serif/sans/mono stacks.
 export const EMAIL_THEME = {
