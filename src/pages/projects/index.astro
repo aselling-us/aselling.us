@@ -1,9 +1,14 @@
 ---
 import { getCollection, render } from 'astro:content';
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Quote from '../../components/Quote.astro';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import github from '../../data/github.json';
+
+// Font Awesome Free brand icon (CC BY 4.0, https://fontawesome.com/license/free),
+// inlined as an <svg> at build time rather than loading its stylesheet/webfont
+const [githubIconWidth, githubIconHeight, , , githubIconPath] = faGithub.icon as [number, number, string[], string, string];
 
 // snapshot written by `npm run fetch:media`; fetchedAt only changes when the repo list does
 // contributedRepos/contributedPrivateCount may be absent on an older snapshot written before those fields existed
@@ -70,7 +75,17 @@ const doingEntries = (await getCollection('doing', ({ data }) => import.meta.env
   (a, b) => noteSortDate(b.data).valueOf() - noteSortDate(a.data).valueOf()
 );
 const notes = await Promise.all(
-  doingEntries.map(async (entry) => ({ entry, Content: (await render(entry)).Content }))
+  doingEntries.map(async (entry) => ({
+    entry,
+    Content: (await render(entry)).Content,
+    // larger copy of each photo for the fullscreen viewer — reusing the 320px
+    // thumbnail there would get stretched to viewport size and look blurry
+    fullPhotos: await Promise.all(
+      entry.data.images.map(
+        async (img) => (await getImage({ src: img, width: Math.min(img.width, 1920), format: 'webp', quality: 82 })).src
+      )
+    ),
+  }))
 );
 
 // raw note data for the dev editor's pre-filled form; never built
@@ -109,7 +124,7 @@ const notesDevJson = import.meta.env.DEV
     {notes.length === 0 && <p class="empty-state">No notes yet.</p>}
 
     <ul class="note-list">
-      {notes.map(({ entry, Content }) => (
+      {notes.map(({ entry, Content, fullPhotos }) => (
         <li class="note">
           <div class="note-head">
             <span class="mono-label note-date">
@@ -124,8 +139,12 @@ const notesDevJson = import.meta.env.DEV
           <div class="prose"><Content /></div>
           {entry.data.images.length > 0 && (
             <ul class="note-photos">
-              {entry.data.images.map((img) => (
-                <li><Image src={img} alt="" width={320} /></li>
+              {entry.data.images.map((img, i) => (
+                <li>
+                  <button class="note-photo" type="button" data-full={fullPhotos[i]} aria-label="Expand photo">
+                    <Image src={img} alt="" width={320} />
+                  </button>
+                </li>
               ))}
             </ul>
           )}
@@ -135,6 +154,11 @@ const notesDevJson = import.meta.env.DEV
 
     {import.meta.env.DEV && <script type="application/json" id="doing-dev-data" set:html={notesDevJson} />}
   </section>
+
+  <div id="photo-lightbox" class="photo-lightbox" role="dialog" aria-modal="true" aria-label="Photo" aria-hidden="true">
+    <button type="button" class="photo-lightbox-close" aria-label="Close">&times;</button>
+    <img class="photo-lightbox-img" alt="" />
+  </div>
   {contributions && (
     <section>
       {/* total mirrors exactly what's shown on the public GitHub profile —
@@ -179,6 +203,9 @@ const notesDevJson = import.meta.env.DEV
     <ul class="repo-list">
       {repos.map((repo) => (
         <li class="repo">
+          <a class="repo-github" href={repo.link} target="_blank" rel="noopener noreferrer" aria-label={`${repo.name} on GitHub`}>
+            <svg viewBox={`0 0 ${githubIconWidth} ${githubIconHeight}`} aria-hidden="true"><path d={githubIconPath} fill="currentColor" /></svg>
+          </a>
           <div class="repo-head">
             <a class="repo-name" href={repo.link} target="_blank" rel="noopener noreferrer">{repo.name}</a>
             {repo.homepage && (
@@ -208,6 +235,9 @@ const notesDevJson = import.meta.env.DEV
         <ul class="repo-list">
           {contributedRepos.map((repo) => (
             <li class="repo">
+              <a class="repo-github" href={repo.link} target="_blank" rel="noopener noreferrer" aria-label={`${repo.owner}/${repo.name} on GitHub`}>
+                <svg viewBox={`0 0 ${githubIconWidth} ${githubIconHeight}`} aria-hidden="true"><path d={githubIconPath} fill="currentColor" /></svg>
+              </a>
               <div class="repo-head">
                 <a class="repo-name" href={repo.link} target="_blank" rel="noopener noreferrer">{repo.owner}/{repo.name}</a>
                 <span class="repo-head-right">
@@ -241,6 +271,37 @@ const notesDevJson = import.meta.env.DEV
 </BaseLayout>
 
 <script>
+  // fullscreen viewer for note photos, same overlay as the travels page's
+  // photo lightbox; focus moves to the close button and back to the photo
+  // that opened it, so keyboard users aren't dropped at the top of the page
+  const lightbox = document.getElementById('photo-lightbox')!;
+  const lightboxImg = lightbox.querySelector<HTMLImageElement>('.photo-lightbox-img')!;
+  const lightboxClose = lightbox.querySelector<HTMLButtonElement>('.photo-lightbox-close')!;
+  let lightboxTrigger: HTMLElement | null = null;
+  const closeLightbox = () => {
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImg.removeAttribute('src');
+    lightboxTrigger?.focus();
+    lightboxTrigger = null;
+  };
+  document.querySelectorAll<HTMLButtonElement>('.note-photo').forEach((btn) =>
+    btn.addEventListener('click', () => {
+      lightboxTrigger = btn;
+      lightboxImg.src = btn.dataset.full ?? '';
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      lightboxClose.focus();
+    })
+  );
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+  });
+
   // dev-only "doing" notes editor — import.meta.env.DEV is statically false
   // in builds, so none of this ships
   if (import.meta.env.DEV) {
@@ -491,6 +552,7 @@ const notesDevJson = import.meta.env.DEV
     gap: var(--space-3);
   }
   .repo {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
@@ -506,6 +568,7 @@ const notesDevJson = import.meta.env.DEV
     align-items: baseline;
     justify-content: space-between;
     gap: 0.3rem var(--space-2);
+    padding-right: 1.9rem; /* room for the corner GitHub logo (.repo-github) */
   }
   .repo-name {
     font-family: var(--font-display);
@@ -524,6 +587,15 @@ const notesDevJson = import.meta.env.DEV
     gap: 0.6rem;
     flex-shrink: 0;
   }
+  .repo-github {
+    position: absolute;
+    top: calc(var(--space-2) + 0.15rem);
+    right: var(--space-2);
+    display: block;
+    color: var(--color-text-faint);
+  }
+  .repo-github:hover { color: var(--color-highlight-bright); }
+  .repo-github svg { display: block; width: 1.15rem; height: 1.15rem; }
   .contributor-badge {
     color: var(--color-accent-bright);
     border: 1px solid var(--color-accent-bright);
@@ -621,6 +693,17 @@ const notesDevJson = import.meta.env.DEV
     padding: 0;
     margin: var(--space-2) 0 0;
   }
+  .note-photo {
+    display: block;
+    width: 100%;
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: zoom-in;
+  }
+  .note-photo:hover img,
+  .note-photo:focus-visible img { border-color: var(--color-highlight); }
+  .note-photo:focus-visible { outline: 1px solid var(--color-highlight-bright); outline-offset: 2px; }
   .note-photos img {
     width: 100%;
     height: 120px;
@@ -628,6 +711,40 @@ const notesDevJson = import.meta.env.DEV
     display: block;
     border: 1px solid var(--color-hairline);
   }
+
+  .photo-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem;
+    background: rgba(4, 6, 10, 0.9);
+  }
+  .photo-lightbox.is-open { display: flex; }
+  .photo-lightbox-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border: 1px solid var(--color-hairline-bright);
+  }
+  .photo-lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    background: none;
+    border: 1px solid var(--color-hairline-bright);
+    color: var(--color-text);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .photo-lightbox-close:hover { color: var(--color-highlight-bright); border-color: var(--color-highlight); }
 </style>
 
 <style is:global>
