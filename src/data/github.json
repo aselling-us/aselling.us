@@ -1,7 +1,17 @@
 {
-  "fetchedAt": "2026-10-10T15:23:36.936Z",
+  "fetchedAt": "2026-10-11T15:42:22.564Z",
   "username": "aselling-us",
   "repos": [
+    {
+      "name": "resume",
+      "description": "A resume-generator based on a latex template from Overleaf. ",
+      "link": "https://github.com/aselling-us/resume",
+      "homepage": null,
+      "language": "TeX",
+      "stars": 0,
+      "topics": [],
+      "pushedAt": "2026-10-10"
+    },
     {
       "name": "aselling.us",
       "description": "My website containing a portfolio of a variety of projects.",
@@ -53,16 +63,6 @@
       "pushedAt": "2026-09-24"
     },
     {
-      "name": "resume",
-      "description": "A resume-generator based on a latex template from Overleaf. ",
-      "link": "https://github.com/aselling-us/resume",
-      "homepage": null,
-      "language": "TeX",
-      "stars": 0,
-      "topics": [],
-      "pushedAt": "2026-09-06"
-    },
-    {
       "name": "Professional-References-Template",
       "description": null,
       "link": "https://github.com/aselling-us/Professional-References-Template",
@@ -104,36 +104,8 @@
     }
   ],
   "contributions": {
-    "total": 1247,
+    "total": 1250,
     "days": [
-      {
-        "date": "2025-10-05",
-        "count": 0
-      },
-      {
-        "date": "2025-10-06",
-        "count": 7
-      },
-      {
-        "date": "2025-10-07",
-        "count": 5
-      },
-      {
-        "date": "2025-10-08",
-        "count": 1
-      },
-      {
-        "date": "2025-10-09",
-        "count": 0
-      },
-      {
-        "date": "2025-10-10",
-        "count": 1
-      },
-      {
-        "date": "2025-10-11",
-        "count": 2
-      },
       {
         "date": "2025-10-12",
         "count": 2
@@ -1588,6 +1560,10 @@
       },
       {
         "date": "2026-10-10",
+        "count": 3
+      },
+      {
+        "date": "2026-10-11",
         "count": 0
       }
     ]
