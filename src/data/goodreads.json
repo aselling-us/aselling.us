@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-10T15:23:36.936Z",
+  "fetchedAt": "2026-10-12T19:04:04.701Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -10,7 +10,9 @@
       "rating": 3,
       "readAt": null,
       "addedAt": "2026-09-08",
-      "review": null
+      "review": null,
+      "currentPage": 32,
+      "totalPages": 192
     },
     {
       "title": "The Shards",
@@ -36,6 +38,16 @@
     }
   ],
   "toRead": [
+    {
+      "title": "An Unquiet Mind: A Memoir of Moods and Madness",
+      "author": "Kay Redfield Jamison",
+      "link": "https://www.goodreads.com/book/show/361459",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1350028748l/361459.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-10-12",
+      "review": null
+    },
     {
       "title": "The Haunting of Hill House",
       "author": "Shirley Jackson",
