@@ -7,6 +7,7 @@ import me from "../content/imgs/me.JPG";
 import letterboxd from '../data/letterboxd.json';
 import goodreads from '../data/goodreads.json';
 import { renderInlineMarkdown, stripMarkdown } from '../lib/inline-markdown.mjs';
+import { parsePlaceDate, EVENT_COUNTDOWN_GRACE_MS } from '../lib/place-date';
 
 // same draft rule as /blog: dev shows drafts (so they're editable there),
 // builds never do — re-sorted here rather than trusted to already be sorted,
@@ -24,6 +25,25 @@ const roles = await getCollection('career');
 const currentlyWorking = roles
   .filter((entry) => !entry.data.endDate)
   .sort((a, b) => b.data.startDate.localeCompare(a.data.startDate));
+
+// events that still have a countdown on /travels (see stillFuture there),
+// soonest first. `date` is a free-form string, so it goes through the same
+// parser /travels uses — new Date()/localeCompare would mis-handle ranges
+// and sort "15 January 2027" before "3 July 2026"
+const now = Date.now();
+const upcomingEvents = (await getCollection('places'))
+  .map((entry) => ({
+    entry,
+    sortDate: entry.data.date ? parsePlaceDate(entry.data.date) : null,
+  }))
+  .filter(
+    (e): e is typeof e & { sortDate: number } =>
+      e.entry.data.kind === 'event' &&
+      e.sortDate != null &&
+      e.sortDate + EVENT_COUNTDOWN_GRACE_MS > now,
+  )
+  .sort((a, b) => a.sortDate - b.sortDate)
+  .map((e) => e.entry);
 
 const fmtPostDate = (d: Date) =>
   d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
@@ -197,6 +217,22 @@ const fmtIsoDate = (iso: string | null) =>
             </ul>
           </div>
         )}
+
+        {upcomingEvents.length > 0 && (
+          <div class="currently-col currently-col-events">
+            <span class="mono-label item-label">upcoming events</span>
+            <ul class="currently-events">
+              {upcomingEvents.map((event) => (
+                <li class="currently-event">
+                  <a class="currently-link currently-event-link" href="/travels">
+                    <span class="currently-title">{event.data.name}</span>
+                    <span class="currently-dim">{event.data.date}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </section>
   )}
@@ -285,7 +321,7 @@ const fmtIsoDate = (iso: string | null) =>
     grid-template-columns: repeat(2, minmax(200px, 1fr));
     grid-template-areas:
       "watching reading"
-      "working  reading";
+      "working  events";
     align-items: start;
     gap: var(--space-4);
   }
@@ -295,12 +331,17 @@ const fmtIsoDate = (iso: string | null) =>
     grid-area: working;
     padding-top: var(--space-2);
   }
+  .currently-col-events {
+    grid-area: events;
+    padding-top: var(--space-2);
+  }
   @media (max-width: 500px) {
     .currently-grid {
       grid-template-columns: 1fr;
       grid-template-areas:
         "watching"
         "working"
+        "events"
         "reading";
     }
   }
@@ -398,6 +439,16 @@ const fmtIsoDate = (iso: string | null) =>
     align-items: center;
     gap: 0.6rem;
   }
+  .currently-events {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .currently-event-link { gap: 0.15rem; }
+  .currently-event-link:hover .currently-title { color: var(--color-highlight-bright); }
   .currently-job-link:hover .currently-title { color: var(--color-highlight-bright); }
   .currently-job-logo {
     flex-shrink: 0;
