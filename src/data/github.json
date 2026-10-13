@@ -1,7 +1,17 @@
 {
-  "fetchedAt": "2026-10-12T19:04:04.701Z",
+  "fetchedAt": "2026-10-13T16:57:35.210Z",
   "username": "aselling-us",
   "repos": [
+    {
+      "name": "aselling.us",
+      "description": "My website containing a portfolio of a variety of projects.",
+      "link": "https://github.com/aselling-us/aselling.us",
+      "homepage": "http://aselling.us/",
+      "language": "Astro",
+      "stars": 0,
+      "topics": [],
+      "pushedAt": "2026-10-13"
+    },
     {
       "name": "MATH-3680",
       "description": "My Projects / Notes for LaTeX course at Cal Poly with Dr. Sean Gasiorek.",
@@ -11,16 +21,6 @@
       "stars": 0,
       "topics": [],
       "pushedAt": "2026-10-12"
-    },
-    {
-      "name": "aselling.us",
-      "description": "My website containing a portfolio of a variety of projects.",
-      "link": "https://github.com/aselling-us/aselling.us",
-      "homepage": "http://aselling.us/",
-      "language": "Astro",
-      "stars": 0,
-      "topics": [],
-      "pushedAt": "2026-10-11"
     },
     {
       "name": "resume",
@@ -104,7 +104,7 @@
     }
   ],
   "contributions": {
-    "total": 1239,
+    "total": 1246,
     "days": [
       {
         "date": "2025-10-12",
@@ -1568,7 +1568,11 @@
       },
       {
         "date": "2026-10-12",
-        "count": 2
+        "count": 8
+      },
+      {
+        "date": "2026-10-13",
+        "count": 1
       }
     ]
   },
@@ -1582,7 +1586,7 @@
       "language": "TeX",
       "stars": 10,
       "pushedAt": "2026-10-12",
-      "commits": 274
+      "commits": 276
     },
     {
       "name": "kontinuafoundation.github.io",
@@ -1616,6 +1620,17 @@
       "stars": 1,
       "pushedAt": "2026-06-09",
       "commits": 285
+    },
+    {
+      "name": "2026-27",
+      "owner": "CPSECapstone",
+      "description": "Technology Presentations for 2026/2027",
+      "link": "https://github.com/CPSECapstone/2026-27",
+      "homepage": null,
+      "language": "Roff",
+      "stars": 0,
+      "pushedAt": "2026-10-12",
+      "commits": 2
     }
   ],
   "contributedPrivateCount": 3
