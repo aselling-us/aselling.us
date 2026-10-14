@@ -217,10 +217,10 @@ h1 {
   font-family: var(--font-h1);
   font-weight: 400;
   letter-spacing: -0.01em;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
 }
-h2 { font-size: clamp(1.4rem, 2.5vw, 1.9rem); }
-h3 { font-size: 1.25rem; }
+h2 { font-size: clamp(1.15rem, 2vw, 1.45rem); }
+h3 { font-size: 1.1rem; }
 
 p { margin: 0 0 var(--space-2); }
 
@@ -229,6 +229,35 @@ a {
   text-decoration: none;
 }
 a:hover { color: var(--color-highlight-bright); }
+
+/* markdown tables (the only <table>s on the site, rendered on several pages
+   with their own per-page .prose rules — so styled once here). The border is
+   a faint mix of the text color rather than a hairline token, so it stays
+   light on every theme's ground. Scrolls sideways instead of overflowing the
+   page when a wide table meets a narrow viewport. */
+table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: var(--space-3) 0;
+  font-size: 0.9rem;
+}
+th,
+td {
+  border: 1px solid color-mix(in srgb, var(--color-text) 20%, transparent);
+  padding: 0.35rem 0.7rem;
+}
+
+/* fenced code blocks (Shiki's <pre class="astro-code">): wrap long lines
+   instead of scrolling sideways. pre-wrap keeps the author's newlines and
+   indentation; overflow-wrap: anywhere then breaks otherwise-unbreakable runs
+   (long identifiers, template strings, URLs) at the box edge rather than
+   overflowing it. Shiki's inline overflow-x: auto stays as a backstop. */
+pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 
 /* keyboard focus visibility -- kept even though nav uses custom states */
 a:focus-visible,
