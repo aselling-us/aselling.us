@@ -2,7 +2,6 @@
 title: "3D Printed World Map"
 startDate: "2024-04"
 endDate: "2024-05"
-draft: true
 images: [./3d-printed-world-map-1.jpg, ./3d-printed-world-map-2.jpg, ./3d-printed-world-map-3.jpg, ./3d-printed-world-map-4.jpg, ./3d-printed-world-map-5.jpg, ./3d-printed-world-map-6.jpg]
 ---
 
