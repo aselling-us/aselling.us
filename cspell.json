@@ -106,6 +106,7 @@
     "résumé",
     "rewatch",
     "rewatches",
+    "Schaffer",
     "Segoe",
     "setext",
     "shoegaze",
@@ -117,6 +118,7 @@
     "superprism",
     "Tartt's",
     "TBLFM",
+    "Thom",
     "TMDB",
     "toread",
     "tracklist",
@@ -130,6 +132,7 @@
     "watchlist",
     "Watchlist",
     "Waterparks",
+    "Westwood",
     "Wldlfe"
   ],
   "ignoreRegExpList": ["/^import\\s.+from\\s+['\"].+['\"];?$/"]
