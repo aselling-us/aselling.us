@@ -1,7 +1,29 @@
 {
-  "fetchedAt": "2026-10-14T08:22:21.967Z",
+  "fetchedAt": "2026-10-17T12:59:05.849Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "The Big Lebowski",
+      "year": 1998,
+      "link": "https://letterboxd.com/aselling/film/the-big-lebowski/1/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/9/3/5/51935-the-big-lebowski-0-600-0-900-crop.jpg?v=5cd64defcf",
+      "rating": null,
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-10-16",
+      "review": "the car been through more shit than me on a monday afternoon"
+    },
+    {
+      "title": "Burn After Reading",
+      "year": 2008,
+      "link": "https://letterboxd.com/aselling/film/burn-after-reading/1/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/9/0/5/4/49054-burn-after-reading-0-600-0-900-crop.jpg?v=1a29d1c090",
+      "rating": null,
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-10-16",
+      "review": "jesus what a clusterfuck"
+    },
     {
       "title": "Resident Evil",
       "year": 2026,
@@ -529,28 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-27",
       "review": "I would argue a pretty good adaptation of Kafka's The Trial. The ambiguity of the whole situation was very well done and played off well. The large scales of the courtroom depicted in Kafka's writing were recreated beautifully. Leni's seductive nature was quite compelling, too. \n\nIg im doing this now:\n68/100"
-    },
-    {
-      "title": "Memento",
-      "year": 2000,
-      "link": "https://letterboxd.com/aselling/film/memento/1/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/9/7/3/p/rus76H0RlvNjOyD8D9GQLAgntHe-0-600-0-900-crop.jpg?v=0f036ed77d",
-      "rating": null,
-      "liked": true,
-      "rewatch": true,
-      "watchedDate": "2026-07-25",
-      "review": "RIP Leonard Shelby you would've loved twitter."
-    },
-    {
-      "title": "My Girl",
-      "year": 1991,
-      "link": "https://letterboxd.com/aselling/film/my-girl/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/9/5/2/4/p/wYS83KZGKJAWIeIPjiihJuaRWCk-0-600-0-900-crop.jpg?v=dd434589b8",
-      "rating": null,
-      "liked": true,
-      "rewatch": true,
-      "watchedDate": "2026-07-25",
-      "review": "“I think every time I see a climbing tree I’ll think of Thomas J.”\n“Memories are good, sweetheart.”I had forgotten how much this movie shaped who I am. Tells the story of a curious intellectual girl whose father works with death every day and experiences integral loss-driven events.\n\nBawled my eyes out. Laughed a ton. I haven't seen this in probably 10 years, but it was a core part of my childhoood. Stellar cast (especially Jamie Lee Curtis). Amazing summer-esque soundtrack. Think I'm going to replace Portrait of a Lady on Fire with this for a while at least."
     }
   ],
   "favorites": [
