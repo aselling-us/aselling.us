@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-10-18T07:28:59.645Z",
+  "fetchedAt": "2026-10-18T13:18:26.751Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Carrie",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/carrie-2026/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/6/1/8/1/6/8/1618168-carrie-2026-0-600-0-900-crop.jpg?v=bef2e5cffd",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-17",
+      "review": "a beautiful retelling of carrie, taking elements of our societal lives and placing them into the hands of a man who knows how to make you emotionally connected to every character in his work. foundational underline of words can hurt but social media and mob mentality can hurt worse. I enjoyed the addition of a spd through emaline. loved the final episode as always."
+    },
     {
       "title": "The Big Lebowski",
       "year": 1998,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-28",
       "review": "This review may contain spoilers.\n\nLaughably bad. Not what I expected at all. No thrills or horror, so mislabeled. Cringe-worthy script and acting. Could've been executed so much better.\nNot Trip Fontaine being the main character too. \n14/100"
-    },
-    {
-      "title": "The Trial",
-      "year": 1962,
-      "link": "https://letterboxd.com/aselling/film/the-trial/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/4/9/9/5/5/49955-the-trial-0-600-0-900-crop.jpg?v=aa8efe1e63",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-07-27",
-      "review": "I would argue a pretty good adaptation of Kafka's The Trial. The ambiguity of the whole situation was very well done and played off well. The large scales of the courtroom depicted in Kafka's writing were recreated beautifully. Leni's seductive nature was quite compelling, too. \n\nIg im doing this now:\n68/100"
     }
   ],
   "favorites": [
