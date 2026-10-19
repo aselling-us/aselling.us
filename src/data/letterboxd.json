@@ -1,12 +1,23 @@
 {
-  "fetchedAt": "2026-10-18T13:18:26.751Z",
+  "fetchedAt": "2026-10-19T04:32:34.222Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "The Lost Boys",
+      "year": 1987,
+      "link": "https://letterboxd.com/aselling/film/the-lost-boys/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/0/9/8/7/p/enFBXzn8xs5rdtSMC83AVWQ80FP-0-600-0-900-crop.jpg?v=71b8ca097a",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-18",
+      "review": "INSTANT top 5. the entire aesthetic ive needed in a movie. washing it down with a cold glass of Motley Crue and GnR."
+    },
     {
       "title": "Carrie",
       "year": 2026,
       "link": "https://letterboxd.com/aselling/film/carrie-2026/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/1/6/1/8/1/6/8/1618168-carrie-2026-0-600-0-900-crop.jpg?v=bef2e5cffd",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/6/1/8/1/6/8/p/5aVYFuwgAhv6KxdkC6F2CybgeIj-0-600-0-900-crop.jpg?v=e9e2ae6d0e",
       "rating": null,
       "liked": true,
       "rewatch": false,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-29",
       "review": "An unique and engaging commentation of a cult classic. Lots of throwbacks to the 1997 version. Very unique cinematography. Not sure why this was needed but at least it wasn't a flop. \n\nAnd somehow, I have both 28 years later rented on Blu Ray right now, so it's a Danny Boyle weekend."
-    },
-    {
-      "title": "Trap",
-      "year": 2024,
-      "link": "https://letterboxd.com/aselling/film/trap-2024/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/9/3/1/1/6/4/p/yDYwkZYawSTrhkndBJuPqddurgf-0-600-0-900-crop.jpg?v=044f1fbb5c",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-07-28",
-      "review": "This review may contain spoilers.\n\nLaughably bad. Not what I expected at all. No thrills or horror, so mislabeled. Cringe-worthy script and acting. Could've been executed so much better.\nNot Trip Fontaine being the main character too. \n14/100"
     }
   ],
   "favorites": [
@@ -561,10 +561,10 @@
       "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/9/3/5/0/p/6h6nfckQgkvYBGd7BbXQcoaNDRW-0-600-0-900-crop.jpg?v=e6451fd68d"
     },
     {
-      "title": "Portrait of a Lady on Fire",
-      "year": 2019,
-      "link": "https://letterboxd.com/film/portrait-of-a-lady-on-fire/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/6/0/8/3/0/p/brYql72LnXNcecodypOlcc0ehCF-0-600-0-900-crop.jpg?v=98cc0adc4b"
+      "title": "The Lost Boys",
+      "year": 1987,
+      "link": "https://letterboxd.com/film/the-lost-boys/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/0/9/8/7/p/enFBXzn8xs5rdtSMC83AVWQ80FP-0-600-0-900-crop.jpg?v=71b8ca097a"
     },
     {
       "title": "Ferris Bueller's Day Off",
