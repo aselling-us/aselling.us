@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-18T07:28:59.645Z",
+  "fetchedAt": "2026-10-19T16:28:35.654Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -22,9 +22,7 @@
       "rating": 0,
       "readAt": null,
       "addedAt": "2026-09-01",
-      "review": null,
-      "currentPage": 139,
-      "totalPages": 608
+      "review": null
     },
     {
       "title": "The Secret History",
@@ -38,6 +36,16 @@
     }
   ],
   "toRead": [
+    {
+      "title": "The Lost Boys",
+      "author": "Craig Shaw Gardner",
+      "link": "https://www.goodreads.com/book/show/329096",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1210284105l/329096.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-10-19",
+      "review": null
+    },
     {
       "title": "An Unquiet Mind: A Memoir of Moods and Madness",
       "author": "Kay Redfield Jamison",
