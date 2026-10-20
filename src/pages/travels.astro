@@ -29,11 +29,23 @@ interface MapPlace {
   sortDate: number | null;
   detail?: string;
   images: { thumb: string; full: string }[];
+  /** width / height of the timeline's cover frame, taken from the first image
+   *  and clamped (see COVER_RATIO_MIN/MAX) — undefined when there are no images */
+  coverRatio?: number;
   /** original filenames backing `images`, in the same order — dev only, for photo reordering */
   imageFiles?: string[];
   /** raw markdown body — only included in dev, for the edit form */
   notes?: string;
 }
+
+// The timeline cover frame takes the first image's proportions so a square
+// tour poster or portrait flyer shows whole instead of being cropped to a
+// fixed landscape box. Clamped so a very tall or very wide image can't blow
+// up (or flatten) the row; anything outside the range gets bars inside it.
+// The frame stays one size while the carousel flips through the other photos.
+const COVER_RATIO_MIN = 4 / 5;
+const COVER_RATIO_MAX = 1.6;
+const COVER_RATIO_FALLBACK = 200 / 140;
 
 const mapPlaces: MapPlace[] = [];
 const noteRenders: { id: string; Content: any }[] = [];
@@ -70,6 +82,11 @@ for (const entry of entries) {
   // reordering only supports plain folder-dropped photos, which is all places currently use
   const canReorder = import.meta.env.DEV && listed.length === 0 && folderImgs.length > 1;
 
+  const coverSrc = listed[0] ?? folderImgs[0];
+  const coverRatio = coverSrc
+    ? Math.min(COVER_RATIO_MAX, Math.max(COVER_RATIO_MIN, coverSrc.width / coverSrc.height)) || COVER_RATIO_FALLBACK
+    : undefined;
+
   if (entry.body?.trim()) {
     const { Content } = await render(entry);
     noteRenders.push({ id: entry.id, Content });
@@ -84,6 +101,7 @@ for (const entry of entries) {
     sortDate: entry.data.date ? parsePlaceDate(entry.data.date) : null,
     detail: entry.data.detail,
     images,
+    coverRatio,
     imageFiles: canReorder ? imageFiles : undefined,
     notes: import.meta.env.DEV ? (entry.body ?? '').trim() : undefined,
   });
@@ -165,7 +183,7 @@ const timelinePlaces = mapPlaces
           </div>
           {place.images[0] && (
             <figure class="post-cover" data-images={JSON.stringify(place.images)}>
-              <div class="post-cover-frame">
+              <div class="post-cover-frame" style={`aspect-ratio: ${place.coverRatio ?? COVER_RATIO_FALLBACK}`}>
                 <img src={place.images[0].thumb} alt={`Photo from ${place.name}`} loading="lazy" />
                 {place.images.length > 1 && (
                   <>
@@ -732,10 +750,18 @@ const timelinePlaces = mapPlaces
     margin: 0;
   }
   .post-cover-frame { position: relative; }
+  /* the frame's aspect-ratio is set inline from the cover image (see
+     coverRatio in the frontmatter); contain shows each photo whole, with the
+     inset tone filling any letterbox bars when later photos differ in shape */
   .post-cover-frame img {
+    /* out of flow so the image's own height can't stretch the frame past its
+       aspect-ratio (which is what makes the clamp hold for tall images) */
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: 140px;
-    object-fit: cover;
+    height: 100%;
+    object-fit: contain;
+    background: var(--color-bg-inset);
     display: block;
     border: 1px solid var(--color-hairline);
     cursor: zoom-in;
