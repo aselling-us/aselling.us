@@ -1,7 +1,17 @@
 {
-  "fetchedAt": "2026-10-19T16:28:35.654Z",
+  "fetchedAt": "2026-10-21T14:30:09.111Z",
   "userId": "192886223",
   "currentlyReading": [
+    {
+      "title": "The Invisible Man",
+      "author": "H.G. Wells",
+      "link": "https://www.goodreads.com/book/show/17184",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1630661776l/17184._SY475_.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-10-20",
+      "review": null
+    },
     {
       "title": "The Myth of Sisyphus",
       "author": "Albert Camus",
@@ -731,16 +741,6 @@
       "author": "H.G. Wells",
       "link": "https://www.goodreads.com/book/show/2493",
       "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1327942880l/2493.jpg",
-      "rating": 0,
-      "readAt": null,
-      "addedAt": "2025-08-19",
-      "review": null
-    },
-    {
-      "title": "The Invisible Man",
-      "author": "H.G. Wells",
-      "link": "https://www.goodreads.com/book/show/17184",
-      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1630661776l/17184._SY475_.jpg",
       "rating": 0,
       "readAt": null,
       "addedAt": "2025-08-19",

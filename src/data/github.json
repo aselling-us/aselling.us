@@ -1,16 +1,16 @@
 {
-  "fetchedAt": "2026-10-19T16:28:35.654Z",
+  "fetchedAt": "2026-10-21T14:30:09.111Z",
   "username": "aselling-us",
   "repos": [
     {
-      "name": "MATH-3680",
-      "description": "My Projects / Notes for LaTeX course at Cal Poly with Dr. Sean Gasiorek.",
-      "link": "https://github.com/aselling-us/MATH-3680",
+      "name": "CSC-3300",
+      "description": null,
+      "link": "https://github.com/aselling-us/CSC-3300",
       "homepage": null,
-      "language": "TeX",
+      "language": "Racket",
       "stars": 0,
       "topics": [],
-      "pushedAt": "2026-10-19"
+      "pushedAt": "2026-10-21"
     },
     {
       "name": "aselling.us",
@@ -20,17 +20,7 @@
       "language": "Astro",
       "stars": 0,
       "topics": [],
-      "pushedAt": "2026-10-19"
-    },
-    {
-      "name": "CSC-3300",
-      "description": null,
-      "link": "https://github.com/aselling-us/CSC-3300",
-      "homepage": null,
-      "language": "Racket",
-      "stars": 0,
-      "topics": [],
-      "pushedAt": "2026-10-17"
+      "pushedAt": "2026-10-20"
     },
     {
       "name": "resume",
@@ -40,7 +30,17 @@
       "language": "TeX",
       "stars": 0,
       "topics": [],
-      "pushedAt": "2026-10-10"
+      "pushedAt": "2026-10-19"
+    },
+    {
+      "name": "MATH-3680",
+      "description": "My Projects / Notes for LaTeX course at Cal Poly with Dr. Sean Gasiorek.",
+      "link": "https://github.com/aselling-us/MATH-3680",
+      "homepage": null,
+      "language": "TeX",
+      "stars": 0,
+      "topics": [],
+      "pushedAt": "2026-10-19"
     },
     {
       "name": "CSC-357",
@@ -104,7 +104,7 @@
     }
   ],
   "contributions": {
-    "total": 1253,
+    "total": 1262,
     "days": [
       {
         "date": "2025-10-19",
@@ -1568,7 +1568,15 @@
       },
       {
         "date": "2026-10-19",
-        "count": 3
+        "count": 4
+      },
+      {
+        "date": "2026-10-20",
+        "count": 7
+      },
+      {
+        "date": "2026-10-21",
+        "count": 1
       }
     ]
   },
@@ -1581,7 +1589,7 @@
       "homepage": "https://readers.kontinua.org/",
       "language": "TeX",
       "stars": 10,
-      "pushedAt": "2026-10-18",
+      "pushedAt": "2026-10-21",
       "commits": 277
     },
     {
@@ -1592,7 +1600,7 @@
       "homepage": "https://kontinuafoundation.github.io/",
       "language": "TeX",
       "stars": 1,
-      "pushedAt": "2026-10-19",
+      "pushedAt": "2026-10-20",
       "commits": 85
     },
     {
