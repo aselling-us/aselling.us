@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-21T14:30:09.111Z",
+  "fetchedAt": "2026-10-22T14:31:10.390Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -20,9 +20,7 @@
       "rating": 3,
       "readAt": null,
       "addedAt": "2026-09-08",
-      "review": null,
-      "currentPage": 32,
-      "totalPages": 192
+      "review": null
     },
     {
       "title": "The Shards",
