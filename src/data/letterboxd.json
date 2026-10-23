@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-10-19T04:32:34.222Z",
+  "fetchedAt": "2026-10-23T14:15:01.215Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Magnolia",
+      "year": 1999,
+      "link": "https://letterboxd.com/aselling/film/magnolia/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/7/2/8/51728-magnolia-0-600-0-900-crop.jpg?v=178b5e5c17",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-22",
+      "review": "captivating as fuck but also i wanna cry and die. also included tom cruise boosting the importance of a calendar and Julianne Moore looking at the camera more seductively than ever."
+    },
     {
       "title": "The Lost Boys",
       "year": 1987,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-30",
       "review": "i am genuinely concerned for Aaron Taylor-Johnsons irl kids. \n\n72/100"
-    },
-    {
-      "title": "T2 Trainspotting",
-      "year": 2017,
-      "link": "https://letterboxd.com/aselling/film/t2-trainspotting/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/3/1/4/2/5/p/mevm9URLR940bNwQOPZZh7zmB1l-0-600-0-900-crop.jpg?v=16a2a4b36e",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-07-29",
-      "review": "An unique and engaging commentation of a cult classic. Lots of throwbacks to the 1997 version. Very unique cinematography. Not sure why this was needed but at least it wasn't a flop. \n\nAnd somehow, I have both 28 years later rented on Blu Ray right now, so it's a Danny Boyle weekend."
     }
   ],
   "favorites": [
