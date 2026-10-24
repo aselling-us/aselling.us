@@ -18,11 +18,20 @@ export function countDrafts(draftsDir = path.join(root, 'src/content/blog/drafts
   return fs.readdirSync(draftsDir).filter((f) => f.endsWith('.md')).length;
 }
 
-// only rewrites the file when the number changed, so it never dirties git for nothing
+// only rewrites the file when the number changed, so it never dirties git for nothing.
+//
+// No drafts/ folder at all means this isn't the checkout that owns the drafts
+// (a fresh clone, a second checkout, or CI) — leave the committed count alone rather
+// than "correcting" it to 0. That mattered for real: refresh-media.yml's
+// `npm ci` installs the husky hook, so the bot's own `git commit` ran this
+// script in CI (no drafts/ there, it's gitignored) and committed count 0 over
+// the real number. Deleting a draft leaves the (empty) folder behind, so a
+// genuine drop to 0 still gets written.
 export function writeDraftCount({
-  draftsDir,
+  draftsDir = path.join(root, 'src/content/blog/drafts'),
   outFile = path.join(root, 'src/data/drafts.json'),
 } = {}) {
+  if (!fs.existsSync(draftsDir)) return false;
   const next = `${JSON.stringify({ count: countDrafts(draftsDir) }, null, 2)}\n`;
   const prev = fs.existsSync(outFile) ? fs.readFileSync(outFile, 'utf8') : '';
   if (prev === next) return false;
@@ -32,6 +41,10 @@ export function writeDraftCount({
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const changed = writeDraftCount();
-  console.log(`drafts: ${countDrafts()}${changed ? ' (src/data/drafts.json updated)' : ''}`);
+  if (!fs.existsSync(path.join(root, 'src/content/blog/drafts'))) {
+    console.log('drafts: no drafts/ folder here, committed count left as is');
+  } else {
+    const changed = writeDraftCount();
+    console.log(`drafts: ${countDrafts()}${changed ? ' (src/data/drafts.json updated)' : ''}`);
+  }
 }
