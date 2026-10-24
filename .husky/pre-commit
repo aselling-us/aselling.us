@@ -1,3 +1,7 @@
+# keep the public draft count in sync with the (gitignored) local drafts folder
+node scripts/count-drafts.mjs
+git add src/data/drafts.json
+
 staged=$(git diff --cached --name-only --diff-filter=ACM -- '*.md' '*.astro' '*.ts' '*.tsx' '*.js' '*.mjs' | grep -v '^src/data/' || true)
 
 if [ -n "$staged" ]; then

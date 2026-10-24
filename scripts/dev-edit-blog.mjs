@@ -1,9 +1,14 @@
 // Dev-only endpoints behind the blog editor on /blog (mounted at /__edit-blog
 // by scripts/dev-add-place.mjs — never part of the built site).
+// Drafts are written to src/content/blog/drafts/ (gitignored, so they never
+// reach the public repo); published posts to src/content/blog/. A post's
+// images always sit next to its .md. Saving with the draft box flipped moves
+// the .md and its images between the two folders, and every change rewrites
+// the committed draft count (scripts/count-drafts.mjs).
 // POST /__edit-blog/save { slug?, title, date, description?, tags?, draft?, coverCaption?, body }
 //   with slug: rewrites the managed frontmatter fields of an existing post,
 //   leaving anything else in the frontmatter untouched, and replaces the body
-//   without slug: creates src/content/blog/<slug-from-title>.md
+//   without slug: creates <slug-from-title>.md (in drafts/ if `draft`)
 // POST /__edit-blog/delete { slug }
 //   deletes a draft post's <slug>.md plus its cover/inline images — refuses
 //   (400) if the post isn't `draft: true`, so a published post (already
@@ -54,6 +59,7 @@ import remarkFootnoteTitles from './remark-footnote-titles.mjs';
 import remarkFlexibleMarkers from 'remark-flexible-markers';
 import rehypeImageCaptions from './rehype-image-captions.mjs';
 import { renderInlineMarkdown } from '../src/lib/inline-markdown.mjs';
+import { writeDraftCount } from './count-drafts.mjs';
 import {
   SITE_DOMAIN,
   createTransporter,
@@ -115,6 +121,25 @@ function setLine(lines, key, value) {
 }
 
 export function blogEditHandler({ dir = path.resolve('src/content/blog') } = {}) {
+  const draftsDir = path.join(dir, 'drafts');
+  // which folder a post currently lives in (undefined if there's no such post)
+  const locate = (slug) => [draftsDir, dir].find((d) => fs.existsSync(path.join(d, `${slug}.md`)));
+  // a post's files: its .md plus its cover/inline images, found by `<slug>-`
+  // prefix. Other posts' slugs are excluded so a slug that prefixes another
+  // (deleting "test" must not touch "test-post-cover.jpg", which belongs to
+  // "test-post") can't sweep up that post's images. Image extensions only,
+  // so this never matches another post's .md.
+  const postFiles = (base, slug) => {
+    const names = fs.readdirSync(base);
+    const otherSlugs = names.filter((f) => f.endsWith('.md') && f !== `${slug}.md`).map((f) => f.slice(0, -3));
+    const assets = names.filter(
+      (name) =>
+        name.startsWith(`${slug}-`) &&
+        IMAGE_EXTS.has(path.extname(name).toLowerCase()) &&
+        !otherSlugs.some((other) => other.length > slug.length && name.startsWith(`${other}-`))
+    );
+    return [`${slug}.md`, ...assets];
+  };
   return (req, res) => {
     const reply = (code, payload) => {
       res.statusCode = code;
@@ -130,18 +155,19 @@ export function blogEditHandler({ dir = path.resolve('src/content/blog') } = {})
       const ext = path.extname(original).toLowerCase();
       if (!IMAGE_EXTS.has(ext))
         return reply(400, { error: `unsupported image type "${ext || 'none'}" (HEIC? convert to jpg first)` });
-      const mdFile = path.join(dir, `${slug}.md`);
-      if (!fs.existsSync(mdFile)) return reply(400, { error: `no post file for slug "${slug}"` });
+      const base = locate(slug);
+      if (!base) return reply(400, { error: `no post file for slug "${slug}"` });
+      const mdFile = path.join(base, `${slug}.md`);
 
       const chunks = [];
       req.on('data', (c) => chunks.push(c));
       req.on('end', () => {
         // one cover per post: replace any previous one, whatever its extension
         for (const e of IMAGE_EXTS) {
-          const old = path.join(dir, `${slug}-cover${e}`);
+          const old = path.join(base, `${slug}-cover${e}`);
           if (e !== ext && fs.existsSync(old)) fs.unlinkSync(old);
         }
-        const file = path.join(dir, `${slug}-cover${ext}`);
+        const file = path.join(base, `${slug}-cover${ext}`);
         fs.writeFileSync(file, Buffer.concat(chunks));
 
         const m = fs.readFileSync(mdFile, 'utf8').match(FM_RE);
@@ -160,17 +186,17 @@ export function blogEditHandler({ dir = path.resolve('src/content/blog') } = {})
       const ext = path.extname(original).toLowerCase();
       if (!IMAGE_EXTS.has(ext))
         return reply(400, { error: `unsupported image type "${ext || 'none'}" (HEIC? convert to jpg first)` });
-      const mdFile = path.join(dir, `${slug}.md`);
-      if (!fs.existsSync(mdFile)) return reply(400, { error: `no post file for slug "${slug}"` });
+      const base = locate(slug);
+      if (!base) return reply(400, { error: `no post file for slug "${slug}"` });
 
       const stem = slugify(path.basename(original, path.extname(original))) || 'image';
       let filename = `${slug}-${stem}${ext}`;
-      for (let n = 2; fs.existsSync(path.join(dir, filename)); n++) filename = `${slug}-${stem}-${n}${ext}`;
+      for (let n = 2; fs.existsSync(path.join(base, filename)); n++) filename = `${slug}-${stem}-${n}${ext}`;
 
       const chunks = [];
       req.on('data', (c) => chunks.push(c));
       req.on('end', () => {
-        fs.writeFileSync(path.join(dir, filename), Buffer.concat(chunks));
+        fs.writeFileSync(path.join(base, filename), Buffer.concat(chunks));
         reply(200, { path: `./${filename}` });
       });
       return;
@@ -232,8 +258,9 @@ export function blogEditHandler({ dir = path.resolve('src/content/blog') } = {})
         const unsubscribe = buildUnsubscribeUrl(to);
 
         let coverPath, coverUrl;
+        const postDir = locate(slug) ?? dir;
         for (const ext of IMAGE_EXTS) {
-          const candidate = path.join(dir, `${slug}-cover${ext}`);
+          const candidate = path.join(postDir, `${slug}-cover${ext}`);
           if (fs.existsSync(candidate)) {
             coverPath = candidate;
             coverUrl = `cid:${TEST_EMAIL_COVER_CID}`;
@@ -289,34 +316,16 @@ export function blogEditHandler({ dir = path.resolve('src/content/blog') } = {})
           return reply(400, { error: 'invalid JSON' });
         }
         const slug = slugify(String(p.slug ?? ''));
-        const file = path.join(dir, `${slug}.md`);
-        if (!fs.existsSync(file)) return reply(400, { error: `no post file for slug "${slug}"` });
+        const base = locate(slug);
+        if (!base) return reply(400, { error: `no post file for slug "${slug}"` });
+        const file = path.join(base, `${slug}.md`);
 
         const m = fs.readFileSync(file, 'utf8').match(FM_RE);
         const isDraft = m ? /^draft:\s*true\s*$/m.test(m[1]) : false;
         if (!isDraft) return reply(400, { error: 'only draft posts can be deleted this way' });
 
-        // other posts' slugs, so cleaning up this slug's cover/inline images
-        // by filename prefix can't also sweep up another post's images when
-        // one slug happens to prefix another (e.g. deleting "test" must not
-        // touch "test-post-cover.jpg", which belongs to "test-post")
-        const otherSlugs = fs
-          .readdirSync(dir)
-          .filter((f) => f.endsWith('.md') && f !== `${slug}.md`)
-          .map((f) => f.slice(0, -3));
-
-        fs.unlinkSync(file);
-
-        // image files only — IMAGE_EXTS keeps this sweep from ever touching
-        // another post's .md (or anything else) even if its name happens to
-        // start with this slug plus a hyphen
-        const assetPrefix = `${slug}-`;
-        for (const name of fs.readdirSync(dir)) {
-          if (!name.startsWith(assetPrefix)) continue;
-          if (!IMAGE_EXTS.has(path.extname(name).toLowerCase())) continue;
-          if (otherSlugs.some((other) => other.length > slug.length && name.startsWith(`${other}-`))) continue;
-          fs.unlinkSync(path.join(dir, name));
-        }
+        for (const name of postFiles(base, slug)) fs.unlinkSync(path.join(base, name));
+        writeDraftCount({ draftsDir });
 
         reply(200, { ok: true });
       });
@@ -359,11 +368,20 @@ export function blogEditHandler({ dir = path.resolve('src/content/blog') } = {})
         ['coverCaption', caption ? JSON.stringify(caption) : undefined],
       ];
 
+      // drafts are written to the gitignored drafts/ folder, everything else to
+      // the published folder; flipping the draft box moves the post between them
+      const targetDir = p.draft ? draftsDir : dir;
+
       let slug, file;
       if (p.slug) {
         slug = slugify(String(p.slug));
-        file = path.join(dir, `${slug}.md`);
-        if (!fs.existsSync(file)) return reply(400, { error: `no post file for slug "${slug}"` });
+        const base = locate(slug);
+        if (!base) return reply(400, { error: `no post file for slug "${slug}"` });
+        if (base !== targetDir) {
+          fs.mkdirSync(targetDir, { recursive: true });
+          for (const name of postFiles(base, slug)) fs.renameSync(path.join(base, name), path.join(targetDir, name));
+        }
+        file = path.join(targetDir, `${slug}.md`);
 
         const m = fs.readFileSync(file, 'utf8').match(FM_RE);
         if (!m) return reply(400, { error: `${slug}.md has no frontmatter` });
@@ -373,12 +391,13 @@ export function blogEditHandler({ dir = path.resolve('src/content/blog') } = {})
       } else {
         const base = slugify(title);
         slug = base;
-        for (let i = 2; fs.existsSync(path.join(dir, `${slug}.md`)); i++) slug = `${base}-${i}`;
-        file = path.join(dir, `${slug}.md`);
+        for (let i = 2; locate(slug); i++) slug = `${base}-${i}`;
+        file = path.join(targetDir, `${slug}.md`);
         const fm = fields.filter(([, v]) => v !== undefined).map(([k, v]) => `${k}: ${v}`);
-        fs.mkdirSync(dir, { recursive: true });
+        fs.mkdirSync(targetDir, { recursive: true });
         fs.writeFileSync(file, `---\n${fm.join('\n')}\n---\n${text ? `\n${text}\n` : ''}`);
       }
+      writeDraftCount({ draftsDir });
       reply(200, { file: path.relative(process.cwd(), file), slug });
     });
   };

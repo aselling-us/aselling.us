@@ -4,6 +4,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import SubscribeForm from '../../components/SubscribeForm.astro';
 import PostList from '../../components/PostList.astro';
 import { renderInlineMarkdown } from '../../lib/inline-markdown.mjs';
+// drafts are gitignored (never in the public repo); this committed file is the
+// only trace of them — just a count, kept current by scripts/count-drafts.mjs
+import drafts from '../../data/drafts.json';
 
 // getCollection reads every .md file matched by the loader in content.config.ts
 // (in dev, drafts are included so they can be edited; builds still skip them)
@@ -56,6 +59,12 @@ const devJson = import.meta.env.DEV
       <button id="new-post" class="dev-btn mono-label" type="button" title="Dev only: writes src/content/blog/<slug>.md">+ new post</button>
     )}
   </div>
+
+  {drafts.count > 0 && (
+    <p class="mono-label drafts-note">
+      {drafts.count} {drafts.count === 1 ? 'draft' : 'drafts'} in progress
+    </p>
+  )}
 
   <SubscribeForm />
 
@@ -397,6 +406,7 @@ const devJson = import.meta.env.DEV
 </script>
 
 <style>
+  .drafts-note { margin: calc(var(--space-2) * -1) 0 var(--space-3); }
   .title-row {
     display: flex;
     align-items: baseline;

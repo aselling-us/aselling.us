@@ -2,7 +2,15 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 const blog = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
+  // src/content/blog/drafts/ is gitignored (see .gitignore) — drafts live there
+  // so they never reach the public repo. generateId strips that folder from the
+  // id so a draft's id/URL is the same plain slug it'll have once published
+  // (assumes the slugs are already lowercase-kebab, which the editor guarantees).
+  loader: glob({
+    pattern: '**/*.md',
+    base: './src/content/blog',
+    generateId: ({ entry }) => entry.replace(/^drafts\//, '').replace(/\.md$/, ''),
+  }),
 
   schema: ({ image }) =>
     z.object({

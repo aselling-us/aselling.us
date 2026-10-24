@@ -9,6 +9,11 @@ dist/
 !.env.local.example
 secrets.txt
 
+# Blog drafts live here, local-only, so they never reach the public repo.
+# Publishing a draft = moving its .md (and images) up into src/content/blog/.
+# src/data/drafts.json is the only committed trace: a count, no titles.
+src/content/blog/drafts/
+
 # Playwright
 /test-results/
 /playwright-report/
