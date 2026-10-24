@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-22T14:31:10.390Z",
+  "fetchedAt": "2026-10-24T13:19:46.665Z",
   "userId": "192886223",
   "currentlyReading": [
     {
@@ -44,6 +44,16 @@
     }
   ],
   "toRead": [
+    {
+      "title": "Art Thinking: How to Carve Out Creative Space in a World of Schedules, Budgets, and Bosses",
+      "author": "Amy Whitaker",
+      "link": "https://www.goodreads.com/book/show/27213161",
+      "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1462160373l/27213161.jpg",
+      "rating": 0,
+      "readAt": null,
+      "addedAt": "2026-10-24",
+      "review": null
+    },
     {
       "title": "The Lost Boys",
       "author": "Craig Shaw Gardner",
@@ -695,7 +705,7 @@
       "review": null
     },
     {
-      "title": "Ultralearning: Master Hard Skills, Outsmart the Competition, and Accelerate Your Career",
+      "title": "Ultralearning: The Essential Guide To Mastering Hard Skills And Future-Proofing Your Career",
       "author": "Scott H. Young",
       "link": "https://www.goodreads.com/book/show/44770129",
       "cover": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1554211384l/44770129._SY475_.jpg",
