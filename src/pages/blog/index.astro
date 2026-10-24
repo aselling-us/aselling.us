@@ -60,12 +60,6 @@ const devJson = import.meta.env.DEV
     )}
   </div>
 
-  {drafts.count > 0 && (
-    <p class="mono-label drafts-note">
-      {drafts.count} {drafts.count === 1 ? 'draft' : 'drafts'} in progress
-    </p>
-  )}
-
   <SubscribeForm />
 
   {tagOrder.length > 0 && (
@@ -80,7 +74,16 @@ const devJson = import.meta.env.DEV
     </>
   )}
 
-  <h2 class="mono-label section-label">posts / {String(posts.length).padStart(2, '0')}</h2>
+  <h2 class="mono-label section-label">
+    <span>posts / {String(posts.length).padStart(2, '0')}</span>
+
+  {drafts.count > 0 && (
+    <span class="mono-label drafts-note">
+      {drafts.count} {drafts.count === 1 ? 'draft' : 'drafts'} in progress
+    </span>
+  )}
+  </h2>
+    
   <PostList posts={posts} showDevControls={import.meta.env.DEV} />
 
   {posts.length === 0 && <p style="color: var(--color-text-dim);">No posts yet.</p>}
@@ -406,7 +409,7 @@ const devJson = import.meta.env.DEV
 </script>
 
 <style>
-  .drafts-note { margin: calc(var(--space-2) * -1) 0 var(--space-3); }
+  .drafts-note { margin-left: auto; }
   .title-row {
     display: flex;
     align-items: baseline;
@@ -420,7 +423,9 @@ const devJson = import.meta.env.DEV
     margin: var(--space-4) 0 var(--space-3);
     font-size: 0.7rem;
     font-weight: 400;
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
   }
 
   .tag-filter {
