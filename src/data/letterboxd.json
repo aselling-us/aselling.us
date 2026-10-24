@@ -1,12 +1,23 @@
 {
-  "fetchedAt": "2026-10-23T14:15:01.215Z",
+  "fetchedAt": "2026-10-24T04:54:00.759Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Videodrome",
+      "year": 1983,
+      "link": "https://letterboxd.com/aselling/film/videodrome/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/3/1/5/p/w5bqL9IiGIH0g4oq7ExFEq4KSl4-0-600-0-900-crop.jpg?v=46515b9456",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-10-23",
+      "review": "try not to say the name of the movie challenge"
+    },
     {
       "title": "Magnolia",
       "year": 1999,
       "link": "https://letterboxd.com/aselling/film/magnolia/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/7/2/8/51728-magnolia-0-600-0-900-crop.jpg?v=178b5e5c17",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/7/2/8/p/fhHWjePJtaoFQaWTNKAh7asm0N5-0-600-0-900-crop.jpg?v=cc6c350cb5",
       "rating": null,
       "liked": true,
       "rewatch": false,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-07-31",
       "review": "was afraid of a CIA movie and was unsettled for the first 20 minutes, but quickly turned around. saw alot of Fargo in this. Incredibly funny, maybe one of Brad Pitts best. stole the show. I liked the references to Meet Joe Black, similar Pitt energy. Very intense soundtrack. Overall incredible experience in the Palm. Cheers to Mike for making the place what it is."
-    },
-    {
-      "title": "28 Years Later",
-      "year": 2025,
-      "link": "https://letterboxd.com/aselling/film/28-years-later/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/9/9/2/7/8/6/992786-28-years-later-0-600-0-900-crop.jpg?v=014e09c066",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-07-30",
-      "review": "i am genuinely concerned for Aaron Taylor-Johnsons irl kids. \n\n72/100"
     }
   ],
   "favorites": [
