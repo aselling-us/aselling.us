@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-10-24T04:54:00.759Z",
+  "fetchedAt": "2026-10-26T16:07:27.748Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Solo Mio",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/solo-mio/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/1/7/4/3/2/2/1174322-solo-mio-0-600-0-900-crop.jpg?v=ba45be2924",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-25",
+      "review": "this was chill :)"
+    },
     {
       "title": "Videodrome",
       "year": 1983,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-08-01",
       "review": "watched this and then washed it down with a tall glass of you look pretty sad for a girl so in love.\n\n64/100"
-    },
-    {
-      "title": "Burn After Reading",
-      "year": 2008,
-      "link": "https://letterboxd.com/aselling/film/burn-after-reading/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/9/0/5/4/p/jdwSkQu3XirmX18MNj8CqFWsCk-0-600-0-900-crop.jpg?v=d6b1020bc1",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-07-31",
-      "review": "was afraid of a CIA movie and was unsettled for the first 20 minutes, but quickly turned around. saw alot of Fargo in this. Incredibly funny, maybe one of Brad Pitts best. stole the show. I liked the references to Meet Joe Black, similar Pitt energy. Very intense soundtrack. Overall incredible experience in the Palm. Cheers to Mike for making the place what it is."
     }
   ],
   "favorites": [
