@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-10-26T16:07:27.748Z",
+  "fetchedAt": "2026-10-30T15:56:15.240Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Hocus Pocus",
+      "year": 1993,
+      "link": "https://letterboxd.com/aselling/film/hocus-pocus/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/43/5h/8q/cg/vgtJwl5rmPyq0JQPNWd4NXbkGmd-0-600-0-900-crop.jpg?v=9e0fc85c24",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-10-28",
+      "review": "this was interesting i suppose. felt like a burton"
+    },
     {
       "title": "Solo Mio",
       "year": 2026,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-08-02",
       "review": "This review may contain spoilers.\n\na few dumb references I can relate this to\n\n(500) days of Wilde\n\nBabygirl on Steroids \n\ngone girl with a sex plot\n\nand, as Wilde put it, sex comedy summer (#TheInvite)\nso good and so bad\n\n69/100 for a sex joke"
-    },
-    {
-      "title": "Legally Blonde",
-      "year": 2001,
-      "link": "https://letterboxd.com/aselling/film/legally-blonde/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/7/5/8/6/p/iHk05dNfikGA1OweE6wtZJF2ExD-0-600-0-900-crop.jpg?v=20bdc55f28",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-08-01",
-      "review": "watched this and then washed it down with a tall glass of you look pretty sad for a girl so in love.\n\n64/100"
     }
   ],
   "favorites": [
