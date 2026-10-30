@@ -1,4 +1,6 @@
 // Snapshots Goodreads + Letterboxd RSS feeds into src/data/*.json.
+// NOTE: Goodreads retired its public RSS feeds; its fetch now fails soft (keeps
+// the last committed goodreads.json) until the source is replaced.
 // Run with `npm run fetch:media` (also run daily by .github/workflows/refresh-media.yml).
 // Like the geocode cache, the snapshots are committed so builds need no network.
 // `fetchedAt` is only bumped when feed content actually changes, so the
@@ -117,6 +119,31 @@ async function fetchReadingProgress() {
   return progress;
 }
 
+// Goodreads retired its public RSS feeds (list_rss and updates_rss now 404), so
+// every Goodreads request above fails until the source is replaced. One dead
+// source must not take the whole refresh down with it — the Letterboxd and
+// GitHub snapshots would freeze too, since this script dies before writing
+// anything — so a Goodreads failure resolves to null ("unknown", not "empty")
+// and the last committed goodreads.json is kept as is. All-or-nothing on
+// purpose: a partly-fetched shelf must never overwrite a complete one.
+async function fetchGoodreads() {
+  try {
+    const [read, rawCurrentlyReading, toRead, readingProgress] = await Promise.all([
+      fetchShelf('read'),
+      fetchShelf('currently-reading'),
+      fetchShelf('to-read'),
+      fetchReadingProgress(),
+    ]);
+    return { read, rawCurrentlyReading, toRead, readingProgress };
+  } catch (err) {
+    const msg = `goodreads: fetch failed (${err.message}); keeping the last committed snapshot`;
+    console.warn(msg);
+    // surfaces as an annotation on the Actions run page without failing the job
+    if (process.env.GITHUB_ACTIONS) console.log(`::warning title=Goodreads fetch failed::${msg}`);
+    return null;
+  }
+}
+
 // --- GitHub --------------------------------------------------------------
 
 async function fetchGithubRepos() {
@@ -124,6 +151,12 @@ async function fetchGithubRepos() {
     headers: {
       Accept: 'application/vnd.github+json',
       'User-Agent': 'aselling.us media snapshot (arjan.ellingson@gmail.com)',
+      // Unauthenticated calls share a 60/hr limit per IP, and Actions runners'
+      // shared IPs regularly exhaust it (403 "rate limit exceeded", which took
+      // the whole refresh down). A token lifts that to 5000/hr. It doesn't
+      // change what's returned: /users/:user/repos only ever lists public
+      // repos, so private ones can't leak into this committed snapshot.
+      ...(process.env.GH_CONTRIB_TOKEN ? { Authorization: `bearer ${process.env.GH_CONTRIB_TOKEN}` } : {}),
     },
   });
   if (!res.ok) throw new Error(`${res.status} ${res.statusText} for GitHub repos`);
@@ -609,20 +642,14 @@ function writeSnapshot(file, data) {
 const fetchedAt = new Date().toISOString();
 
 const [
-  read,
-  rawCurrentlyReading,
-  toRead,
-  readingProgress,
+  goodreads,
   rawFilms,
   { favorites, watchlist, diaryPosters },
   repos,
   fetchedCalendar,
   fetchedContributedRepos,
 ] = await Promise.all([
-  fetchShelf('read'),
-  fetchShelf('currently-reading'),
-  fetchShelf('to-read'),
-  fetchReadingProgress(),
+  fetchGoodreads(),
   fetchFilms(),
   fetchFavoritesAndWatchlistWithRetry(),
   fetchGithubRepos(),
@@ -630,15 +657,28 @@ const [
   fetchContributedRepos(),
 ]);
 
-const currentlyReading = rawCurrentlyReading.map((book) => {
-  const bookId = book.link.split('/').pop();
-  const progress = readingProgress.get(bookId);
-  return progress ? { ...book, ...progress } : book;
-});
-
-const byRecency = (a, b) => (b.readAt ?? b.addedAt ?? '').localeCompare(a.readAt ?? a.addedAt ?? '');
-read.sort(byRecency);
-toRead.sort((a, b) => (b.addedAt ?? '').localeCompare(a.addedAt ?? ''));
+let currentlyReading, toRead, read;
+if (goodreads) {
+  const { rawCurrentlyReading, readingProgress } = goodreads;
+  ({ read, toRead } = goodreads);
+  currentlyReading = rawCurrentlyReading.map((book) => {
+    const bookId = book.link.split('/').pop();
+    const progress = readingProgress.get(bookId);
+    return progress ? { ...book, ...progress } : book;
+  });
+  const byRecency = (a, b) => (b.readAt ?? b.addedAt ?? '').localeCompare(a.readAt ?? a.addedAt ?? '');
+  read.sort(byRecency);
+  toRead.sort((a, b) => (b.addedAt ?? '').localeCompare(a.addedAt ?? ''));
+} else {
+  // fetchGoodreads failed — carry the last committed lists through untouched, so
+  // writeSnapshot below sees "unchanged" and leaves goodreads.json (and its
+  // fetchedAt) exactly as it was
+  let previousGoodreads = null;
+  try {
+    previousGoodreads = JSON.parse(readFileSync(dataDir + 'goodreads.json', 'utf8'));
+  } catch {}
+  ({ currentlyReading = [], toRead = [], read = [] } = previousGoodreads ?? {});
+}
 repos.sort((a, b) => (b.pushedAt ?? '').localeCompare(a.pushedAt ?? ''));
 
 // The favorites/watchlist/diary poster resolution races Letterboxd's
