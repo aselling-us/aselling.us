@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-10-30T15:56:15.240Z",
+  "fetchedAt": "2026-11-01T16:00:35.141Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "The Substance",
+      "year": 2024,
+      "link": "https://letterboxd.com/aselling/film/the-substance/1/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/8/3/8/1/4/0/838140-the-substance-0-600-0-900-crop.jpg?v=ab9e1072f8",
+      "rating": null,
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-10-31",
+      "review": "i think there is so much to take away from this film. was alot less gross on the second watch. very enjoyable to notice all of the shining references. \n\nremember, you are one. you cannot escape yourself."
+    },
     {
       "title": "Hocus Pocus",
       "year": 1993,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-08-02",
       "review": "as is said in squid game,we are not horses, we are humans."
-    },
-    {
-      "title": "I Want Your Sex",
-      "year": 2026,
-      "link": "https://letterboxd.com/aselling/film/i-want-your-sex/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/1/1/7/0/9/5/4/1170954-i-want-your-sex-0-600-0-900-crop.jpg?v=c13a0c57b7",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-08-02",
-      "review": "This review may contain spoilers.\n\na few dumb references I can relate this to\n\n(500) days of Wilde\n\nBabygirl on Steroids \n\ngone girl with a sex plot\n\nand, as Wilde put it, sex comedy summer (#TheInvite)\nso good and so bad\n\n69/100 for a sex joke"
     }
   ],
   "favorites": [
