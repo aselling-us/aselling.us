@@ -36,6 +36,16 @@ describe('toBook', () => {
     });
   });
 
+  it('prefers the cover of the edition selected for the entry', () => {
+    const item = entry({ edition: { cachedImage: { url: 'https://assets.hardcover.app/edition.jpeg' } } });
+    expect(toBook(item).cover).toBe('https://assets.hardcover.app/edition.jpeg');
+  });
+
+  it('falls back to the book cover when the selected edition has no image', () => {
+    const item = entry({ edition: { cachedImage: null } });
+    expect(toBook(item).cover).toBe('https://assets.hardcover.app/a.jpeg');
+  });
+
   it('credits only "Author" contributors, not translators or editors', () => {
     const item = entry();
     item.book.cachedContributors = [

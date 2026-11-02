@@ -24,7 +24,8 @@ export function toBook(item) {
       .flatMap((contributor) => (contributor.author ? [contributor.author.name] : []))
       .join(', '),
     link: item.book.slug ? `https://hardcover.app/books/${item.book.slug}` : null,
-    cover: item.book.cachedImage?.url ?? null,
+    // the edition picked for this library entry, not the book's default cover
+    cover: item.edition?.cachedImage?.url ?? item.book.cachedImage?.url ?? null,
     releaseYear: item.book.releaseYear,
     rating: item.rating ?? 0,
     addedAt: item.dateAdded.slice(0, 10),
