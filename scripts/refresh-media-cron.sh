@@ -20,13 +20,13 @@ export PATH="/opt/homebrew/bin:$PATH"
 
 npm run fetch:media
 
-if git diff --quiet -- src/data/goodreads.json src/data/letterboxd.json src/data/github.json; then
+if git diff --quiet -- src/data/hardcover.json src/data/letterboxd.json src/data/github.json; then
   echo "$(date): no media changes."
   exit 0
 fi
 
-git add src/data/goodreads.json src/data/letterboxd.json src/data/github.json
-git commit -m "data: refresh goodreads/letterboxd/github snapshots"
+git add src/data/hardcover.json src/data/letterboxd.json src/data/github.json
+git commit -m "data: refresh hardcover/letterboxd/github snapshots"
 
 # refresh-media.yml (GitHub Actions) commits to these same 3 files on its own
 # schedule, so this can find origin has moved by push time. This fetch just

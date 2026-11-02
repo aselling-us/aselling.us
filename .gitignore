@@ -22,3 +22,6 @@ src/content/blog/drafts/
 /playwright/.auth/
 .claude/worktrees/
 .claude/settings.local.json
+
+# Local-only Claude Code project instructions
+CLAUDE.md

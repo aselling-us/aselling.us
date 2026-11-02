@@ -1,12 +1,12 @@
 {
-  "fetchedAt": "2026-11-01T16:00:35.141Z",
+  "fetchedAt": "2026-11-02T06:08:27.579Z",
   "username": "aselling",
   "films": [
     {
       "title": "The Substance",
       "year": 2024,
       "link": "https://letterboxd.com/aselling/film/the-substance/1/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/8/3/8/1/4/0/838140-the-substance-0-600-0-900-crop.jpg?v=ab9e1072f8",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/8/3/8/1/4/0/p/o7GFN0c1YvbnB0JmAb9aSoDDvdn-0-600-0-900-crop.jpg?v=515acb2d9a",
       "rating": null,
       "liked": true,
       "rewatch": true,
@@ -17,7 +17,7 @@
       "title": "Hocus Pocus",
       "year": 1993,
       "link": "https://letterboxd.com/aselling/film/hocus-pocus/",
-      "poster": "https://a.ltrbxd.com/resized/sm/upload/43/5h/8q/cg/vgtJwl5rmPyq0JQPNWd4NXbkGmd-0-600-0-900-crop.jpg?v=9e0fc85c24",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/6/2/2/9/p/jwOuMkY9Eb9XEje3fMae59zasP4-0-600-0-900-crop.jpg?v=4e51f5a666",
       "rating": null,
       "liked": false,
       "rewatch": false,
@@ -28,7 +28,7 @@
       "title": "Solo Mio",
       "year": 2026,
       "link": "https://letterboxd.com/aselling/film/solo-mio/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/1/1/7/4/3/2/2/1174322-solo-mio-0-600-0-900-crop.jpg?v=ba45be2924",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/1/7/4/3/2/2/p/AbWqSYUWOpuGjS23tXr3ohiJaHW-0-600-0-900-crop.jpg?v=9230c18cc0",
       "rating": null,
       "liked": true,
       "rewatch": false,

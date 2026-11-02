@@ -1,6 +1,4 @@
-// Snapshots Goodreads + Letterboxd RSS feeds into src/data/*.json.
-// NOTE: Goodreads retired its public RSS feeds; its fetch now fails soft (keeps
-// the last committed goodreads.json) until the source is replaced.
+// Snapshots Hardcover (reading shelves), Letterboxd (RSS + scrape) and GitHub into src/data/*.json.
 // Run with `npm run fetch:media` (also run daily by .github/workflows/refresh-media.yml).
 // Like the geocode cache, the snapshots are committed so builds need no network.
 // `fetchedAt` is only bumped when feed content actually changes, so the
@@ -9,7 +7,6 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-const GOODREADS_USER_ID = '192886223';
 const LETTERBOXD_USER = 'aselling';
 const GITHUB_USER = 'aselling-us';
 
@@ -56,90 +53,30 @@ async function fetchXml(url) {
 
 const items = (xml) => xml.match(/<item[\s>][\s\S]*?<\/item>/g) ?? [];
 
-// --- Goodreads ---------------------------------------------------------
+// --- Hardcover -----------------------------------------------------------
 
-function parseBook(item) {
-  const bookId = pick(item, 'book_id');
-  return {
-    title: pick(item, 'title'),
-    author: pick(item, 'author_name'),
-    link: `https://www.goodreads.com/book/show/${bookId}`,
-    cover: pick(item, 'book_large_image_url') || pick(item, 'book_image_url') || null,
-    rating: Number(pick(item, 'user_rating')) || 0,
-    readAt: toIsoDate(pick(item, 'user_read_at')),
-    addedAt: toIsoDate(pick(item, 'user_date_added')),
-    review: htmlToText(pick(item, 'user_review')) || null,
-  };
-}
-
-async function fetchShelf(shelf) {
-  const books = [];
-  const seen = new Set();
-  // list_rss serves up to 100 items per page
-  for (let page = 1; page <= 10; page++) {
-    const xml = await fetchXml(
-      `https://www.goodreads.com/review/list_rss/${GOODREADS_USER_ID}?shelf=${shelf}&page=${page}`
-    );
-    const pageItems = items(xml);
-    if (pageItems.length === 0) break;
-    const guids = pageItems.map((it) => pick(it, 'guid'));
-    if (seen.has(guids[0])) break; // page param exhausted/ignored
-    guids.forEach((g) => seen.add(g));
-    books.push(...pageItems.map(parseBook));
-    if (pageItems.length < 100) break;
+// Goodreads retired its public feeds, so the shelves come from Hardcover's API
+// instead (mapping + pagination live in scripts/lib/hardcover.mjs). Needs a
+// personal access token from hardcover.app/account/api in HARDCOVER_TOKEN
+// (repo secret in CI, .env.local locally). Every failure path resolves to null
+// ("unknown", not "empty") and the caller keeps the last committed
+// hardcover.json: one flaky source must not take the Letterboxd and GitHub
+// snapshots down with it, and the shelves are all-or-nothing on purpose — a
+// partly-fetched shelf must never overwrite a complete one.
+async function fetchHardcover() {
+  const token = process.env.HARDCOVER_TOKEN;
+  if (!token) {
+    console.log('hardcover: HARDCOVER_TOKEN not set, skipping');
+    return null;
   }
-  return books;
-}
-
-// The shelf feeds above carry no reading-progress data at all. Progress only
-// shows up in the user's activity/updates feed, as a `UserStatus` item
-// whenever Goodreads' "update progress" feature is used ("<name> is on page
-// X of Y of <title>"). Unlike list_rss this endpoint needs no API key. It
-// only carries the ~10 most recent activity items (mixed in with shelf
-// moves, comments, etc.), so a book with no recent progress update simply
-// won't have an entry here — that's expected, not a bug, and older progress
-// on a book naturally ages out as new activity pushes it off the feed.
-async function fetchReadingProgress() {
-  const xml = await fetchXml(`https://www.goodreads.com/user/updates_rss/${GOODREADS_USER_ID}`);
-  const progress = new Map();
-  for (const item of items(xml)) {
-    if (!pick(item, 'guid').startsWith('UserStatus')) continue;
-    const match = pick(item, 'title')
-      .replace(/\s+/g, ' ')
-      .trim()
-      .match(/is on page (\d+) of (\d+) of/i);
-    if (!match) continue;
-    const bookId = pick(item, 'description').match(/\/book\/show\/(\d+)/)?.[1];
-    if (!bookId) continue;
-    // feed is newest-first; keep only the first (most recent) status per book
-    if (!progress.has(bookId)) {
-      progress.set(bookId, { currentPage: Number(match[1]), totalPages: Number(match[2]) });
-    }
-  }
-  return progress;
-}
-
-// Goodreads retired its public RSS feeds (list_rss and updates_rss now 404), so
-// every Goodreads request above fails until the source is replaced. One dead
-// source must not take the whole refresh down with it — the Letterboxd and
-// GitHub snapshots would freeze too, since this script dies before writing
-// anything — so a Goodreads failure resolves to null ("unknown", not "empty")
-// and the last committed goodreads.json is kept as is. All-or-nothing on
-// purpose: a partly-fetched shelf must never overwrite a complete one.
-async function fetchGoodreads() {
   try {
-    const [read, rawCurrentlyReading, toRead, readingProgress] = await Promise.all([
-      fetchShelf('read'),
-      fetchShelf('currently-reading'),
-      fetchShelf('to-read'),
-      fetchReadingProgress(),
-    ]);
-    return { read, rawCurrentlyReading, toRead, readingProgress };
+    const { fetchHardcoverShelves } = await import('./lib/hardcover.mjs');
+    return await fetchHardcoverShelves(token);
   } catch (err) {
-    const msg = `goodreads: fetch failed (${err.message}); keeping the last committed snapshot`;
+    const msg = `hardcover: fetch failed (${err.message}); keeping the last committed snapshot`;
     console.warn(msg);
     // surfaces as an annotation on the Actions run page without failing the job
-    if (process.env.GITHUB_ACTIONS) console.log(`::warning title=Goodreads fetch failed::${msg}`);
+    if (process.env.GITHUB_ACTIONS) console.log(`::warning title=Hardcover fetch failed::${msg}`);
     return null;
   }
 }
@@ -601,7 +538,7 @@ async function fetchFavoritesAndWatchlistWithRetry(maxAttempts = 3) {
     // a thrown error (e.g. page.goto timing out) is just as recoverable by
     // retrying as an empty/Cloudflare-blocked result — without this, one
     // network hiccup here crashes the whole script (this call sits inside
-    // the top-level Promise.all below) and blocks Goodreads/GitHub/RSS
+    // the top-level Promise.all below) and blocks Hardcover/GitHub/RSS
     // updates too, even though they have nothing to do with Letterboxd
     try {
       result = await fetchFavoritesAndWatchlist();
@@ -642,14 +579,14 @@ function writeSnapshot(file, data) {
 const fetchedAt = new Date().toISOString();
 
 const [
-  goodreads,
+  hardcover,
   rawFilms,
   { favorites, watchlist, diaryPosters },
   repos,
   fetchedCalendar,
   fetchedContributedRepos,
 ] = await Promise.all([
-  fetchGoodreads(),
+  fetchHardcover(),
   fetchFilms(),
   fetchFavoritesAndWatchlistWithRetry(),
   fetchGithubRepos(),
@@ -657,28 +594,14 @@ const [
   fetchContributedRepos(),
 ]);
 
-let currentlyReading, toRead, read;
-if (goodreads) {
-  const { rawCurrentlyReading, readingProgress } = goodreads;
-  ({ read, toRead } = goodreads);
-  currentlyReading = rawCurrentlyReading.map((book) => {
-    const bookId = book.link.split('/').pop();
-    const progress = readingProgress.get(bookId);
-    return progress ? { ...book, ...progress } : book;
-  });
-  const byRecency = (a, b) => (b.readAt ?? b.addedAt ?? '').localeCompare(a.readAt ?? a.addedAt ?? '');
-  read.sort(byRecency);
-  toRead.sort((a, b) => (b.addedAt ?? '').localeCompare(a.addedAt ?? ''));
-} else {
-  // fetchGoodreads failed — carry the last committed lists through untouched, so
-  // writeSnapshot below sees "unchanged" and leaves goodreads.json (and its
-  // fetchedAt) exactly as it was
-  let previousGoodreads = null;
-  try {
-    previousGoodreads = JSON.parse(readFileSync(dataDir + 'goodreads.json', 'utf8'));
-  } catch {}
-  ({ currentlyReading = [], toRead = [], read = [] } = previousGoodreads ?? {});
-}
+// fetchHardcover returned null (no token, or the fetch failed) — carry the last
+// committed shelves through untouched, so writeSnapshot below sees "unchanged"
+// and leaves hardcover.json (and its fetchedAt) exactly as it was
+let previousHardcover = null;
+try {
+  previousHardcover = JSON.parse(readFileSync(dataDir + 'hardcover.json', 'utf8'));
+} catch {}
+const shelves = hardcover ?? previousHardcover;
 repos.sort((a, b) => (b.pushedAt ?? '').localeCompare(a.pushedAt ?? ''));
 
 // The favorites/watchlist/diary poster resolution races Letterboxd's
@@ -744,7 +667,18 @@ function withFallback(entries, previousEntries) {
   return entries.length > 0 ? backfillPosters(entries, previousEntries) : (previousEntries ?? []);
 }
 
-writeSnapshot('goodreads.json', { fetchedAt, userId: GOODREADS_USER_ID, currentlyReading, toRead, read });
+// explicit key order (not a spread of `shelves`) so a freshly-fetched snapshot
+// and the carried-over one stringify identically for writeSnapshot's diff
+if (shelves) {
+  writeSnapshot('hardcover.json', {
+    fetchedAt,
+    userId: shelves.userId,
+    username: shelves.username,
+    current: shelves.current,
+    wantToRead: shelves.wantToRead,
+    read: shelves.read,
+  });
+}
 writeSnapshot('letterboxd.json', {
   fetchedAt,
   username: LETTERBOXD_USER,
@@ -761,5 +695,5 @@ writeSnapshot('github.json', {
   contributedPrivateCount,
 });
 console.log(
-  `${read.length} read, ${currentlyReading.length} currently reading, ${toRead.length} to read, ${films.length} films, ${favorites.length} favorites, ${watchlist.length} watchlist, ${repos.length} repos, ${contributedRepos.length} contributed repos, ${contributedPrivateCount} private`
+  `${shelves?.read.length ?? 0} read, ${shelves?.current.length ?? 0} currently reading, ${shelves?.wantToRead.length ?? 0} to read, ${films.length} films, ${favorites.length} favorites, ${watchlist.length} watchlist, ${repos.length} repos, ${contributedRepos.length} contributed repos, ${contributedPrivateCount} private`
 );

@@ -1,0 +1,1434 @@
+{
+  "fetchedAt": "2026-11-02T06:08:27.579Z",
+  "userId": 192647,
+  "username": "aselling",
+  "current": [
+    {
+      "title": "The Invisible Man",
+      "author": "H. G. Wells",
+      "link": "https://hardcover.app/books/the-invisible-man",
+      "cover": "https://assets.hardcover.app/edition/22973329/ac6f1edb9e39ab98149a8d59c0369fd8c421d6e6.jpeg",
+      "releaseYear": 1897,
+      "rating": 0,
+      "addedAt": "2025-08-19",
+      "startedAt": "2026-10-20",
+      "currentPage": 156,
+      "totalPages": 208
+    },
+    {
+      "title": "The Shards",
+      "author": "Bret Easton Ellis",
+      "link": "https://hardcover.app/books/the-shards",
+      "cover": "https://assets.hardcover.app/edition/30588777/9820e4e34f676131ea39a673d619ba7f68972880.jpeg",
+      "releaseYear": 2022,
+      "rating": 0,
+      "addedAt": "2026-08-13",
+      "startedAt": "2026-08-31"
+    },
+    {
+      "title": "The Myth of Sisyphus",
+      "author": "Albert Camus",
+      "link": "https://hardcover.app/books/the-myth-of-sisyphus",
+      "cover": "https://assets.hardcover.app/external_data/48503761/f6334fc1456e9d9b5043c833710aae40fa83d4f1.jpeg",
+      "releaseYear": 1942,
+      "rating": 3,
+      "addedAt": "2025-08-11",
+      "startedAt": "2026-08-11",
+      "currentPage": 26,
+      "totalPages": 192
+    },
+    {
+      "title": "The Secret History",
+      "author": "Donna Tartt",
+      "link": "https://hardcover.app/books/the-secret-history",
+      "cover": "https://assets.hardcover.app/edition/30823800/10a85a6a452e60500f4a545a7d86ae824e030144.jpeg",
+      "releaseYear": 1992,
+      "rating": 0,
+      "addedAt": "2026-05-18",
+      "startedAt": "2026-05-18",
+      "currentPage": 170,
+      "totalPages": 578
+    }
+  ],
+  "wantToRead": [
+    {
+      "title": "Art Thinking: How to Carve Out Creative Space in a World of Schedules, Budgets, and Bosses",
+      "author": "Amy Whitaker",
+      "link": "https://hardcover.app/books/art-thinking-how-to-carve-out-creative-space-in-a-world-of-schedules-budgets-and-bosses",
+      "cover": "https://assets.hardcover.app/external_data/60061190/66cf64e14c1eea28838654d73d629dd43dc0654f.jpeg",
+      "releaseYear": 2016,
+      "rating": 0,
+      "addedAt": "2026-10-23"
+    },
+    {
+      "title": "The Lost Boys",
+      "author": "Craig Shaw Gardner, Janice Fischer, James Jeremias",
+      "link": "https://hardcover.app/books/the-lost-boys",
+      "cover": "https://assets.hardcover.app/external_data/60823877/7bc7b0dcb698c862d960a32ad9ddae4c6e2b1983.jpeg",
+      "releaseYear": null,
+      "rating": 0,
+      "addedAt": "2026-10-18"
+    },
+    {
+      "title": "An Unquiet Mind: A Memoir of Moods and Madness",
+      "author": "Kay Redfield Jamison",
+      "link": "https://hardcover.app/books/an-unquiet-mind",
+      "cover": "https://assets.hardcover.app/edition/6738789/b73a3aefd660378eb2454769afc2f8d57528b2a2.jpeg",
+      "releaseYear": 1995,
+      "rating": 0,
+      "addedAt": "2026-10-11"
+    },
+    {
+      "title": "The Haunting of Hill House",
+      "author": "Shirley Jackson",
+      "link": "https://hardcover.app/books/the-haunting-of-hill-house",
+      "cover": "https://assets.hardcover.app/editions/30198567/8749762103567356.jpg",
+      "releaseYear": 1959,
+      "rating": 0,
+      "addedAt": "2026-10-09"
+    },
+    {
+      "title": "Odd Thomas",
+      "author": "Dean Koontz",
+      "link": "https://hardcover.app/books/odd-thomas",
+      "cover": "https://assets.hardcover.app/external_data/4425350/177561fcab1a23cfb49b64b4f60c050be9294435.jpeg",
+      "releaseYear": 2003,
+      "rating": 0,
+      "addedAt": "2026-09-27"
+    },
+    {
+      "title": "Flow",
+      "author": "Mihaly Csikszentmihalyi",
+      "link": "https://hardcover.app/books/flow-1990",
+      "cover": "https://assets.hardcover.app/external_data/60010806/4e2b3b7bea75aecfbb03c180c60aefe04647bfa8.jpeg",
+      "releaseYear": 1990,
+      "rating": 0,
+      "addedAt": "2026-09-24"
+    },
+    {
+      "title": "Steal Like an Artist",
+      "author": "Austin Kleon",
+      "link": "https://hardcover.app/books/steal-like-an-artist",
+      "cover": "https://assets.hardcover.app/edition/30406906/f9795a41fc6e688ff97f5bffab3c82472ccead76.jpeg",
+      "releaseYear": 2012,
+      "rating": 0,
+      "addedAt": "2026-09-24"
+    },
+    {
+      "title": "The Rhetorics of Feminism: Readings in Contemporary Cultural Theory and the Popular Press",
+      "author": "Lynne Pearce",
+      "link": "https://hardcover.app/books/the-rhetorics-of-feminism",
+      "cover": "https://assets.hardcover.app/edition/14163790/4272606-L.jpg",
+      "releaseYear": 2003,
+      "rating": 0,
+      "addedAt": "2026-09-15"
+    },
+    {
+      "title": "The Da Vinci Code",
+      "author": "Dan Brown",
+      "link": "https://hardcover.app/books/the-da-vinci-code",
+      "cover": "https://assets.hardcover.app/editions/30400169/2520023766251547.jpeg",
+      "releaseYear": 2003,
+      "rating": 0,
+      "addedAt": "2026-09-13"
+    },
+    {
+      "title": "A Clockwork Orange",
+      "author": "Anthony Burgess",
+      "link": "https://hardcover.app/books/a-clockwork-orange",
+      "cover": "https://assets.hardcover.app/edition/24599945/a18266d2-3500-4641-99b3-035c7dc55d2a.jpg",
+      "releaseYear": 1962,
+      "rating": 0,
+      "addedAt": "2026-09-05"
+    },
+    {
+      "title": "Automate Your Busywork: Do Less, Achieve More, and Save Your Brain for the Big Stuff",
+      "author": "Aytekin Tank",
+      "link": "https://hardcover.app/books/automate-your-busywork-do-less-achieve-more-and-save-your-brain-for-the-big-stuff",
+      "cover": "https://assets.hardcover.app/external_data/61030409/c96522fc91ca86e9ebc4ad4abcac25f7b53aa8a0.jpeg",
+      "releaseYear": 2023,
+      "rating": 0,
+      "addedAt": "2026-09-04"
+    },
+    {
+      "title": "Paris in Ruins: Love, War, and the Birth of Impressionism",
+      "author": "Sebastian Smee",
+      "link": "https://hardcover.app/books/paris-in-ruins",
+      "cover": "https://assets.hardcover.app/external_data/60486663/d87e33f96a78ed26c501b7ee7d655b958af9273b.jpeg",
+      "releaseYear": 2024,
+      "rating": 0,
+      "addedAt": "2026-09-04"
+    },
+    {
+      "title": "The Anxious Generation: How the Great Rewiring of Childhood is Causing an Epidemic of Mental Illness",
+      "author": "Jonathan Haidt",
+      "link": "https://hardcover.app/books/the-anxious-generation",
+      "cover": "https://assets.hardcover.app/edition/31203575/c710ce5f09da9937e5c5bd30bf6619088ffdb7ac.jpeg",
+      "releaseYear": 2024,
+      "rating": 0,
+      "addedAt": "2026-08-30"
+    },
+    {
+      "title": "One",
+      "author": "Richard Bach, Joan Stoliar",
+      "link": "https://hardcover.app/books/one-1988",
+      "cover": "https://assets.hardcover.app/external_data/26693401/756c228fa095fa5f51614f245a8e45c9dfb38fd1.jpeg",
+      "releaseYear": 1988,
+      "rating": 0,
+      "addedAt": "2026-08-24"
+    },
+    {
+      "title": "The Sea Close By",
+      "author": "Albert Camus",
+      "link": "https://hardcover.app/books/the-sea-close-by",
+      "cover": "https://assets.hardcover.app/external_data/60308524/09afa72aefd4f98145880d17ef4a5d772b847a71.jpeg",
+      "releaseYear": 1954,
+      "rating": 0,
+      "addedAt": "2026-08-20"
+    },
+    {
+      "title": "The 7 1/2 Deaths of Evelyn Hardcastle",
+      "author": "Stuart Turton",
+      "link": "https://hardcover.app/books/the-7-1-2-deaths-of-evelyn-hardcastle",
+      "cover": "https://assets.hardcover.app/edition/30385617/30dc1a93-b2a9-4499-a0be-f5ae3641bc05.png",
+      "releaseYear": 2001,
+      "rating": 0,
+      "addedAt": "2026-08-16"
+    },
+    {
+      "title": "The Trouble with Being Born",
+      "author": "Emil M. Cioran",
+      "link": "https://hardcover.app/books/the-trouble-with-being-born",
+      "cover": "https://assets.hardcover.app/external_data/46770050/40a732dd27179c4202ed6ccaba1507ef8a812047.jpeg",
+      "releaseYear": 1973,
+      "rating": 0,
+      "addedAt": "2026-08-16"
+    },
+    {
+      "title": "Less Than Zero",
+      "author": "Bret Easton Ellis",
+      "link": "https://hardcover.app/books/less-than-zero",
+      "cover": "https://assets.hardcover.app/edition/22180560/e5532f54276d16b6725f55e7342cd7cbe1de7022.jpeg",
+      "releaseYear": 1985,
+      "rating": 0,
+      "addedAt": "2026-08-13"
+    },
+    {
+      "title": "The Thomas Crown Affair",
+      "author": "Evan Lee Heyman",
+      "link": "https://hardcover.app/books/the-thomas-crown-affair",
+      "cover": "https://assets.hardcover.app/edition/32150375/c796e238d268fdf167d298d5cf9e13cc784aaff3.jpeg",
+      "releaseYear": 1968,
+      "rating": 0,
+      "addedAt": "2026-08-04"
+    },
+    {
+      "title": "A Brief History of Intelligence: Evolution, AI, and the Five Breakthroughs That Made Our Brains",
+      "author": "Max Solomon Bennett",
+      "link": "https://hardcover.app/books/a-brief-history-of-intelligence",
+      "cover": "https://assets.hardcover.app/external_data/61698937/a492c4393d52980be733acfe061e2a477da7c02b.jpeg",
+      "releaseYear": 2023,
+      "rating": 0,
+      "addedAt": "2026-07-29"
+    },
+    {
+      "title": "Notebooks, 1935-1951",
+      "author": "Albert Camus",
+      "link": "https://hardcover.app/books/notebooks-1935-1951",
+      "cover": "https://assets.hardcover.app/edition/30436363/813274-L.jpg",
+      "releaseYear": 1972,
+      "rating": 0,
+      "addedAt": "2026-07-26"
+    },
+    {
+      "title": "The Meaning of Your Life: Finding Purpose in an Age of Emptiness",
+      "author": "Arthur C. Brooks",
+      "link": "https://hardcover.app/books/the-meaning-of-your-life",
+      "cover": "https://assets.hardcover.app/edition/32606248/5f11f3a2501763d103110dee1b70446c7f473368.jpeg",
+      "releaseYear": 2026,
+      "rating": 0,
+      "addedAt": "2026-07-15"
+    },
+    {
+      "title": "Babylonia",
+      "author": "Costanza Casati",
+      "link": "https://hardcover.app/books/babylonia-2024",
+      "cover": "https://assets.hardcover.app/editions/31548240/023f6693-2c1a-49b5-ae8e-d8feede91e0a.jpeg",
+      "releaseYear": 2024,
+      "rating": 0,
+      "addedAt": "2026-07-12"
+    },
+    {
+      "title": "The Power of Moving On: How To Let Go and Live The Life You Want",
+      "author": "John Purkiss",
+      "link": "https://hardcover.app/books/the-power-of-moving-on",
+      "cover": "https://assets.hardcover.app/external_data/4513609/1747c32049b506ab62238a54981b3956cd57d14f.jpeg",
+      "releaseYear": 2026,
+      "rating": 0,
+      "addedAt": "2026-07-12"
+    },
+    {
+      "title": "The Great Good Place: Cafes, Coffee Shops, Bookstores, Bars, Hair Salons, and Other Hangouts at the Heart of a Community",
+      "author": "Ray Oldenburg",
+      "link": "https://hardcover.app/books/the-great-good-place",
+      "cover": "https://assets.hardcover.app/edition/30419275/6d3b3c054d1716c724ef2aaae2c44a6632743603.jpeg",
+      "releaseYear": 1989,
+      "rating": 0,
+      "addedAt": "2026-07-07"
+    },
+    {
+      "title": "The Age of Extraction: How Tech Platforms Conquered the Economy and Threaten Our Future Prosperity",
+      "author": "Tim Wu",
+      "link": "https://hardcover.app/books/the-age-of-extraction",
+      "cover": "https://assets.hardcover.app/external_data/1226224/7c2c1726f0a9b0bf5fa2d019bd6d1002d7b3275a.jpeg",
+      "releaseYear": 2025,
+      "rating": 0,
+      "addedAt": "2026-07-06"
+    },
+    {
+      "title": "The Way of Excellence: A Guide to True Greatness and Deep Satisfaction in a Chaotic World",
+      "author": "Brad Stulberg",
+      "link": "https://hardcover.app/books/the-way-of-excellence",
+      "cover": "https://assets.hardcover.app/external_data/2049792/43a9e404b01ecb77e65b31a8ea70d2c2c4fe291c.jpeg",
+      "releaseYear": 2026,
+      "rating": 0,
+      "addedAt": "2026-07-05"
+    },
+    {
+      "title": "Hearts and Minds",
+      "author": "Amanda Craig",
+      "link": "https://hardcover.app/books/hearts-and-minds-2009",
+      "cover": "https://assets.hardcover.app/edition/30875292/49655553e8717fdb390f5dfa77133f5708be4f65.jpeg",
+      "releaseYear": 2009,
+      "rating": 0,
+      "addedAt": "2026-07-02"
+    },
+    {
+      "title": "A Marriage at Sea",
+      "author": "Sophie Elmhirst",
+      "link": "https://hardcover.app/books/a-marriage-at-sea",
+      "cover": "https://assets.hardcover.app/edition/32032434/87ceabb8fc73f1dc6a0ae775c9ee6f5bdf589b8f.jpeg",
+      "releaseYear": 2024,
+      "rating": 0,
+      "addedAt": "2026-06-28"
+    },
+    {
+      "title": "The Invisible Life of Addie LaRue",
+      "author": "V. E. Schwab",
+      "link": "https://hardcover.app/books/the-invisible-life-of-addie-larue",
+      "cover": "https://assets.hardcover.app/edition/9887800/25a0234922dc176711a9f418e70af29bc5a6153c.jpeg",
+      "releaseYear": 2020,
+      "rating": 0,
+      "addedAt": "2026-06-25"
+    },
+    {
+      "title": "The New Dark Ages: The End of Reading and the Dawn of a Post-Literate Society",
+      "author": "James Marriott",
+      "link": "https://hardcover.app/books/the-new-dark-ages-the-end-of-reading-and-the-dawn-of-a-post-literate-society-2026",
+      "cover": "https://assets.hardcover.app/edition/33126855/29c9cb7d-ea32-4117-92ad-e17db87a4066.jpg",
+      "releaseYear": 2026,
+      "rating": 0,
+      "addedAt": "2026-06-24"
+    },
+    {
+      "title": "Piranesi",
+      "author": "Susanna Clarke",
+      "link": "https://hardcover.app/books/piranesi",
+      "cover": "https://assets.hardcover.app/editions/30480426/ec301cb7-b118-48fd-aa3a-5d336e61c182.jpg",
+      "releaseYear": 2019,
+      "rating": 0,
+      "addedAt": "2026-06-11"
+    },
+    {
+      "title": "Either/Or",
+      "author": "Soren Kierkegaard",
+      "link": "https://hardcover.app/books/either-or",
+      "cover": "https://assets.hardcover.app/edition/30400981/99d46f7ca82f0fc00f69a125f41aae4121e315cd.jpeg",
+      "releaseYear": 1843,
+      "rating": 0,
+      "addedAt": "2026-05-31"
+    },
+    {
+      "title": "The War of Art: Break Through the Blocks and Win Your Inner Creative Battles",
+      "author": "Steven Pressfield",
+      "link": "https://hardcover.app/books/the-war-of-art",
+      "cover": "https://assets.hardcover.app/edition/11122496/896a32c47ec2a79f8b9bb6e0fffefddb1f7359ec.jpeg",
+      "releaseYear": 2002,
+      "rating": 0,
+      "addedAt": "2026-05-21"
+    },
+    {
+      "title": "Tuesdays with Morrie: An Old Man, a Young Man and Life's Greatest Lesson",
+      "author": "Mitch Albom",
+      "link": "https://hardcover.app/books/tuesdays-with-morrie",
+      "cover": "https://assets.hardcover.app/edition/21935346/abcbdbb2dbc148ec14784f0c527b936931f1d9cb.jpeg",
+      "releaseYear": 1990,
+      "rating": 0,
+      "addedAt": "2026-05-21"
+    },
+    {
+      "title": "Die, My Love",
+      "author": "Ariana Harwicz",
+      "link": "https://hardcover.app/books/die-my-love-d070e9c2-ae87-47a6-ba0c-78039ecd582f",
+      "cover": "https://assets.hardcover.app/edition/30621666/30c1c11d6190b5f1e64cd25a0ce8a7afb4299d1c.jpeg",
+      "releaseYear": 2012,
+      "rating": 0,
+      "addedAt": "2026-05-18"
+    },
+    {
+      "title": "Regretting You",
+      "author": "Colleen Hoover",
+      "link": "https://hardcover.app/books/regretting-you",
+      "cover": "https://assets.hardcover.app/edition/30382709/143ac0d49e8756dfe09872beb6ab7c7f6d76aa74.jpeg",
+      "releaseYear": 2019,
+      "rating": 0,
+      "addedAt": "2026-05-18"
+    },
+    {
+      "title": "The Old Man and the Sea",
+      "author": "Ernest Hemingway",
+      "link": "https://hardcover.app/books/the-old-man-and-the-sea",
+      "cover": "https://assets.hardcover.app/external_data/4515554/808cf20566ea53d4113d3094a4d8e95425ad03a9.jpeg",
+      "releaseYear": 1952,
+      "rating": 0,
+      "addedAt": "2026-04-22"
+    },
+    {
+      "title": "The Virgin Suicides",
+      "author": "Jeffrey Eugenides",
+      "link": "https://hardcover.app/books/the-virgin-suicides",
+      "cover": "https://assets.hardcover.app/edition/30401510/61ea21fe9cdd1f429fb1c97b037556a2138af052.jpeg",
+      "releaseYear": 1993,
+      "rating": 0,
+      "addedAt": "2026-04-20"
+    },
+    {
+      "title": "The Employees",
+      "author": "Olga Ravn, Martin Aitken",
+      "link": "https://hardcover.app/books/the-employees",
+      "cover": "https://assets.hardcover.app/edition/32358205/95c151b56c73ab29aa37acf62dbefc259969f8a2.jpeg",
+      "releaseYear": 2018,
+      "rating": 0,
+      "addedAt": "2026-04-05"
+    },
+    {
+      "title": "Between a Rock and a Hard Place",
+      "author": "Aron Ralston",
+      "link": "https://hardcover.app/books/between-a-rock-and-a-hard-place-2004",
+      "cover": "https://assets.hardcover.app/edition/30634870/479305-L.jpg",
+      "releaseYear": 2004,
+      "rating": 0,
+      "addedAt": "2026-03-26"
+    },
+    {
+      "title": "Thus Spoke Zarathustra",
+      "author": "Friedrich Nietzsche, Stephen J. Metcalf",
+      "link": "https://hardcover.app/books/thus-spoke-zarathustra",
+      "cover": "https://assets.hardcover.app/external_data/33691647/dbb4117faacb8087756a158cb6f5e040e9630609.jpeg",
+      "releaseYear": 1883,
+      "rating": 0,
+      "addedAt": "2026-03-24"
+    },
+    {
+      "title": "To Photograph Is to Learn How to Die: An Essay with Digressions",
+      "author": "Tim Carpenter",
+      "link": "https://hardcover.app/books/to-photograph-is-to-learn-how-to-die",
+      "cover": "https://assets.hardcover.app/edition/30852713/c510158ab18b3cf1b37e0e60c5907f91d58b7d73.jpeg",
+      "releaseYear": 2022,
+      "rating": 0,
+      "addedAt": "2026-03-23"
+    },
+    {
+      "title": "The Lost Painting",
+      "author": "Jonathan Harr",
+      "link": "https://hardcover.app/books/the-lost-painting",
+      "cover": "https://assets.hardcover.app/edition/26839401/759280-L.jpg",
+      "releaseYear": 2005,
+      "rating": 0,
+      "addedAt": "2026-03-16"
+    },
+    {
+      "title": "The Perks of Being a Wallflower",
+      "author": "Stephen Chbosky",
+      "link": "https://hardcover.app/books/the-perks-of-being-a-wallflower",
+      "cover": "https://assets.hardcover.app/edition/6205525/8c3a7c27ba02822d3083c1cca67081c35d702c18.jpeg",
+      "releaseYear": 1999,
+      "rating": 0,
+      "addedAt": "2026-03-11"
+    },
+    {
+      "title": "Better Than the Movies",
+      "author": "Lynn Painter",
+      "link": "https://hardcover.app/books/better-than-the-movies",
+      "cover": "https://assets.hardcover.app/edition/30399962/80174e2f8877d18ff3e1ecebbc10bae09e41468d.jpeg",
+      "releaseYear": 2021,
+      "rating": 0,
+      "addedAt": "2026-03-08"
+    },
+    {
+      "title": "Atonement",
+      "author": "Ian McEwan",
+      "link": "https://hardcover.app/books/atonement",
+      "cover": "https://assets.hardcover.app/edition/2353854/9596d304-7678-48c2-b244-bd448c5285cc.jpg",
+      "releaseYear": 2001,
+      "rating": 0,
+      "addedAt": "2026-03-01"
+    },
+    {
+      "title": "Shatter Me",
+      "author": "Tahereh Mafi",
+      "link": "https://hardcover.app/books/shatter-me",
+      "cover": "https://assets.hardcover.app/editions/30460178/627316130272577.jpg",
+      "releaseYear": 2011,
+      "rating": 0,
+      "addedAt": "2026-03-01"
+    },
+    {
+      "title": "Little Women",
+      "author": "Louisa May Alcott",
+      "link": "https://hardcover.app/books/little-women",
+      "cover": "https://assets.hardcover.app/edition/26091088/6c8ca035efb9e9dbed40a7f45c64aaa924c2b578.jpeg",
+      "releaseYear": 1868,
+      "rating": 0,
+      "addedAt": "2026-02-19"
+    },
+    {
+      "title": "American Prometheus: The Triumph and Tragedy of J. Robert Oppenheimer",
+      "author": "Kai Bird, Martin J. Sherwin",
+      "link": "https://hardcover.app/books/american-prometheus",
+      "cover": "https://assets.hardcover.app/edition/2189631/bfd65dcebade660209f5aa14e01bbe774f0f5a24.jpeg",
+      "releaseYear": 2005,
+      "rating": 0,
+      "addedAt": "2026-01-05"
+    },
+    {
+      "title": "Mona's Eyes",
+      "author": "Thomas Schlesser",
+      "link": "https://hardcover.app/books/monas-eyes",
+      "cover": "https://assets.hardcover.app/edition/31889858/59e75cf3db1b61ccc40f87dc79a9fbad3504d1f1.jpeg",
+      "releaseYear": 2024,
+      "rating": 0,
+      "addedAt": "2025-12-26"
+    },
+    {
+      "title": "What If? Serious Scientific Answers to Absurd Hypothetical Questions",
+      "author": "Randall Munroe",
+      "link": "https://hardcover.app/books/what-if-serious-scientific-answers-to-absurd-hypothetical-questions",
+      "cover": "https://assets.hardcover.app/edition/6690325/3e171478-ac40-4d1f-a646-d51b3193abd3.jpg",
+      "releaseYear": 2014,
+      "rating": 0,
+      "addedAt": "2025-11-20"
+    },
+    {
+      "title": "Diary of an Oxygen Thief",
+      "author": "Anonymous Anonymous",
+      "link": "https://hardcover.app/books/diary-of-an-oxygen-thief",
+      "cover": "https://assets.hardcover.app/external_data/59649669/0c5479a0b6b2ad46e4a687d701a5c0fccc8fe36c.jpeg",
+      "releaseYear": 2006,
+      "rating": 0,
+      "addedAt": "2025-11-10"
+    },
+    {
+      "title": "The Maniac",
+      "author": "Benjamín Labatut",
+      "link": "https://hardcover.app/books/the-maniac",
+      "cover": "https://assets.hardcover.app/external_data/61460765/7c95659db3cdcc393048d2ec3cc1549bc7b0c701.jpeg",
+      "releaseYear": 2023,
+      "rating": 0,
+      "addedAt": "2025-11-05"
+    },
+    {
+      "title": "Letters to a Young Poet",
+      "author": "Rainer Maria Rilke",
+      "link": "https://hardcover.app/books/letters-to-a-young-poet",
+      "cover": "https://assets.hardcover.app/external_data/2250298/d18530f427b835e183db36e75ec780d10478c831.jpeg",
+      "releaseYear": 1929,
+      "rating": 0,
+      "addedAt": "2025-10-27"
+    },
+    {
+      "title": "Bad Things Happened in This Room",
+      "author": "Marie Still",
+      "link": "https://hardcover.app/books/bad-things-happened-in-this-room",
+      "cover": "https://assets.hardcover.app/edition/32021629/9d00722b56ba5f3c17cc06b3c3802c1aa598c510.jpeg",
+      "releaseYear": 2025,
+      "rating": 0,
+      "addedAt": "2025-09-15"
+    },
+    {
+      "title": "The Count of Monte Cristo",
+      "author": "Alexandre Dumas",
+      "link": "https://hardcover.app/books/the-count-of-monte-cristo",
+      "cover": "https://assets.hardcover.app/edition/22062767/3432f1033b04d23e47edea3a864bb956f3b6346e.jpeg",
+      "releaseYear": 1846,
+      "rating": 0,
+      "addedAt": "2025-09-15"
+    },
+    {
+      "title": "Beat the Dealer: A Winning Strategy for the Game of Twenty-One",
+      "author": "Edward O. Thorp",
+      "link": "https://hardcover.app/books/beat-the-dealer",
+      "cover": "https://assets.hardcover.app/edition/31436049/5b51bb5d00815fac30a72c5821760eacc843b666.jpeg",
+      "releaseYear": 1966,
+      "rating": 0,
+      "addedAt": "2025-09-04"
+    },
+    {
+      "title": "Designing Your Life: How to Build a Well-Lived, Joyful Life",
+      "author": "Bill Burnett, Dave Evans",
+      "link": "https://hardcover.app/books/designing-your-life",
+      "cover": "https://assets.hardcover.app/external_data/24955354/943e984f3f20d96224cfafc22e662046ad08b302.jpeg",
+      "releaseYear": 2013,
+      "rating": 0,
+      "addedAt": "2025-09-04"
+    },
+    {
+      "title": "Exile and the Kingdom",
+      "author": "Albert Camus",
+      "link": "https://hardcover.app/books/exile-and-the-kingdom",
+      "cover": "https://assets.hardcover.app/external_data/681971/c75cd7f065cbc80ff236b597db89578d4a080dda.jpeg",
+      "releaseYear": 1950,
+      "rating": 0,
+      "addedAt": "2025-08-29"
+    },
+    {
+      "title": "The Fall",
+      "author": "Albert Camus",
+      "link": "https://hardcover.app/books/the-fall-1956",
+      "cover": "https://assets.hardcover.app/editions/5035607/0aabe67f-11f5-4610-a62c-4494dcde3dce.jpg",
+      "releaseYear": 1956,
+      "rating": 0,
+      "addedAt": "2025-08-29"
+    },
+    {
+      "title": "The First Man",
+      "author": "Albert Camus",
+      "link": "https://hardcover.app/books/the-first-man",
+      "cover": "https://assets.hardcover.app/external_data/41346872/2a08e1f13e596fecf2c34f0518dcf21eb9f17548.jpeg",
+      "releaseYear": 1994,
+      "rating": 0,
+      "addedAt": "2025-08-29"
+    },
+    {
+      "title": "The Rebel",
+      "author": "Albert Camus",
+      "link": "https://hardcover.app/books/the-rebel-1951",
+      "cover": "https://assets.hardcover.app/edition/30572777/04d42309-fb36-4486-bbb7-eba9c5bf9ef0.jpg",
+      "releaseYear": 1951,
+      "rating": 0,
+      "addedAt": "2025-08-29"
+    },
+    {
+      "title": "Fight Club",
+      "author": "Chuck Palahniuk",
+      "link": "https://hardcover.app/books/fight-club",
+      "cover": "https://assets.hardcover.app/editions/14379830/9291375278274024-81GH0MPAUIL._SL1500_.jpg",
+      "releaseYear": 1996,
+      "rating": 0,
+      "addedAt": "2025-08-23"
+    },
+    {
+      "title": "Man's Search for Meaning",
+      "author": "Viktor E. Frankl",
+      "link": "https://hardcover.app/books/mans-search-for-meaning",
+      "cover": "https://assets.hardcover.app/edition/30443934/9e06b9cfae5eb17e4d071c9caaeda029fcf353df.jpeg",
+      "releaseYear": 1946,
+      "rating": 0,
+      "addedAt": "2025-08-23"
+    },
+    {
+      "title": "Nausea",
+      "author": "Jean-Paul Sartre",
+      "link": "https://hardcover.app/books/nausea",
+      "cover": "https://assets.hardcover.app/external_data/59586835/935955286ddd2e891f63e1844181c4f98316c426.jpeg",
+      "releaseYear": 1938,
+      "rating": 0,
+      "addedAt": "2025-08-23"
+    },
+    {
+      "title": "Ultralearning: Accelerate Your Career, Master Hard Skills and Outsmart the Competition",
+      "author": "Scott H. Young",
+      "link": "https://hardcover.app/books/ultralearning",
+      "cover": "https://assets.hardcover.app/editions/30401699/3634111573124026.jpg",
+      "releaseYear": 2019,
+      "rating": 0,
+      "addedAt": "2025-08-22"
+    },
+    {
+      "title": "The Time Machine",
+      "author": "H. G. Wells",
+      "link": "https://hardcover.app/books/the-time-machine",
+      "cover": "https://assets.hardcover.app/external_data/1369765/e33e2b4de400a166a9c5febb34a8b6396a8acd1d.jpeg",
+      "releaseYear": 1895,
+      "rating": 0,
+      "addedAt": "2025-08-19"
+    },
+    {
+      "title": "The Time Machine/The Invisible Man",
+      "author": "H. G. Wells",
+      "link": "https://hardcover.app/books/the-time-machine-the-invisible-man-d828afc7-8745-48c2-918d-363310c7ceef",
+      "cover": "https://assets.hardcover.app/external_data/4092436/13c9a872454c5346df3edf00301baa580dbdfc0a.jpeg",
+      "releaseYear": 2007,
+      "rating": 0,
+      "addedAt": "2025-08-19"
+    },
+    {
+      "title": "The War of the Worlds",
+      "author": "H. G. Wells",
+      "link": "https://hardcover.app/books/the-war-of-the-worlds",
+      "cover": "https://assets.hardcover.app/external_data/510523/5234b3cc37b46e79732c37d3954c1d1e38defa60.jpeg",
+      "releaseYear": 1898,
+      "rating": 0,
+      "addedAt": "2025-08-19"
+    },
+    {
+      "title": "The 4-Hour Workweek: Escape 9-5, Live Anywhere, and Join the New Rich",
+      "author": "Timothy Ferriss",
+      "link": "https://hardcover.app/books/the-4-hour-workweek-escape-9-5-live-anywhere-and-join-the-new-rich-2006",
+      "cover": "https://assets.hardcover.app/book_mappings/7332608/cb944ca756b6ee7eaf4e42c79f70ddbe95203229.jpeg",
+      "releaseYear": 2006,
+      "rating": 0,
+      "addedAt": "2025-08-18"
+    },
+    {
+      "title": "The Death of Ivan Ilyich",
+      "author": "Leo Tolstoy",
+      "link": "https://hardcover.app/books/the-death-of-ivan-ilyich-new-translation-1886",
+      "cover": "https://assets.hardcover.app/external_data/4264054/6941cf4c83f8ad85aaa9f355efadebd68d0c6e2e.jpeg",
+      "releaseYear": 1886,
+      "rating": 0,
+      "addedAt": "2025-08-18"
+    },
+    {
+      "title": "The Gambler",
+      "author": "Fyodor Dostoevsky",
+      "link": "https://hardcover.app/books/the-gambler",
+      "cover": "https://assets.hardcover.app/external_data/40705256/d0d71b8265383a2cfbb9ce5d6a6f506ca637a1be.jpeg",
+      "releaseYear": 1862,
+      "rating": 0,
+      "addedAt": "2025-08-15"
+    },
+    {
+      "title": "The Idiot",
+      "author": "Fyodor Dostoevsky",
+      "link": "https://hardcover.app/books/the-idiot-trans-by-david-mcduff-1869",
+      "cover": "https://assets.hardcover.app/external_data/59712308/c8e6624235ad9a4794eea4ba87001913bcd80a76.jpeg",
+      "releaseYear": 1869,
+      "rating": 0,
+      "addedAt": "2025-08-15"
+    },
+    {
+      "title": "The Plague",
+      "author": "Albert Camus",
+      "link": "https://hardcover.app/books/the-plague",
+      "cover": "https://assets.hardcover.app/edition/2707798/7be060fefe972fcc6c85a3a65649d64d2517ad03.jpeg",
+      "releaseYear": 1947,
+      "rating": 0,
+      "addedAt": "2025-08-14"
+    },
+    {
+      "title": "A Tale of Two Cities",
+      "author": "Charles Dickens",
+      "link": "https://hardcover.app/books/a-tale-of-two-cities",
+      "cover": "https://assets.hardcover.app/external_data/3881302/18e9aec7e58e22dd1325485fe61c7faec64f6358.jpeg",
+      "releaseYear": 1859,
+      "rating": 0,
+      "addedAt": "2025-08-11"
+    },
+    {
+      "title": "Anna Karenina",
+      "author": "Leo Tolstoy",
+      "link": "https://hardcover.app/books/anna-karenina",
+      "cover": "https://assets.hardcover.app/edition/3813596/28ed3bc40c30477f1497369fdd8cccadca401293.jpeg",
+      "releaseYear": 1878,
+      "rating": 0,
+      "addedAt": "2025-08-11"
+    },
+    {
+      "title": "Caroline Kepnes You Series 4 Books Collection Set",
+      "author": "Caroline Kepnes",
+      "link": "https://hardcover.app/books/caroline-kepnes-you-series-4-books-collection-set",
+      "cover": "https://assets.hardcover.app/external_data/4513610/fa05ffabd3a361620577e772fa5de90a6269b0d9.jpeg",
+      "releaseYear": 2019,
+      "rating": 0,
+      "addedAt": "2025-08-11"
+    },
+    {
+      "title": "Deep Work: Rules for Focused Success in a Distracted World",
+      "author": "Cal Newport",
+      "link": "https://hardcover.app/books/deep-work",
+      "cover": "https://assets.hardcover.app/external_data/43295845/f4a8749dd530cd3f34b4cb00d225aca590487218.jpeg",
+      "releaseYear": 2016,
+      "rating": 0,
+      "addedAt": "2025-08-11"
+    },
+    {
+      "title": "For You and Only You",
+      "author": "Caroline Kepnes",
+      "link": "https://hardcover.app/books/for-you-and-only-you",
+      "cover": "https://assets.hardcover.app/external_data/59859555/b71289b1cbaedf7982daf70761f4e729da057c20.jpeg",
+      "releaseYear": 2023,
+      "rating": 0,
+      "addedAt": "2025-08-11"
+    },
+    {
+      "title": "Getting Things Done: The Art of Stress-Free Productivity",
+      "author": "David    Allen",
+      "link": "https://hardcover.app/books/getting-things-done",
+      "cover": "https://assets.hardcover.app/edition/23863441/a426cd6b-da89-4126-a5b3-97a2a9e35df5.jpg",
+      "releaseYear": 2001,
+      "rating": 0,
+      "addedAt": "2025-08-11"
+    },
+    {
+      "title": "Hidden Bodies",
+      "author": "Caroline Kepnes",
+      "link": "https://hardcover.app/books/hidden-bodies",
+      "cover": "https://assets.hardcover.app/edition/7411773/f4628ce453f09347847754d2b1d05bd985e6531c.jpeg",
+      "releaseYear": 2016,
+      "rating": 0,
+      "addedAt": "2025-08-11"
+    },
+    {
+      "title": "Never Eat Alone: And Other Secrets to Success, One Relationship at a Time",
+      "author": "Keith Ferrazzi, Tahl Raz",
+      "link": "https://hardcover.app/books/never-eat-alone",
+      "cover": "https://assets.hardcover.app/external_data/3931551/c34b5ab9c99b343af2fe03f0403c33565e680467.jpeg",
+      "releaseYear": 2005,
+      "rating": 0,
+      "addedAt": "2025-08-11"
+    },
+    {
+      "title": "Slow Productivity: The Lost Art of Accomplishment Without Burnout",
+      "author": "Cal Newport",
+      "link": "https://hardcover.app/books/slow-productivity",
+      "cover": "https://assets.hardcover.app/external_data/60702703/983bb1e60d94ccec2e4f80c90715b93ffaccdc04.jpeg",
+      "releaseYear": 2024,
+      "rating": 0,
+      "addedAt": "2025-08-11"
+    },
+    {
+      "title": "So Good They Can't Ignore You: Why Skills Trump Passion in the Quest for Work You Love",
+      "author": "Cal Newport",
+      "link": "https://hardcover.app/books/so-good-they-cant-ignore-you",
+      "cover": "https://assets.hardcover.app/external_data/28471514/05ddb8834c0cefa6cd65fa8a8b3ea72bab9a4c09.jpeg",
+      "releaseYear": 2012,
+      "rating": 0,
+      "addedAt": "2025-08-11"
+    },
+    {
+      "title": "Start With Why: How Great Leaders Inspire Everyone To Take Action",
+      "author": "Simon Sinek",
+      "link": "https://hardcover.app/books/start-with-why",
+      "cover": "https://assets.hardcover.app/external_data/510213/570cdfb618632c217459c24dccbaf7d7f513ab71.jpeg",
+      "releaseYear": 2009,
+      "rating": 0,
+      "addedAt": "2025-08-11"
+    },
+    {
+      "title": "The Art of Frugal Hedonism",
+      "author": "Annie Raser-Rowland, Adam Grubb",
+      "link": "https://hardcover.app/books/the-art-of-frugal-hedonism",
+      "cover": "https://assets.hardcover.app/edition/30396000/content.jpeg",
+      "releaseYear": 2016,
+      "rating": 0,
+      "addedAt": "2025-08-11"
+    },
+    {
+      "title": "The Brothers Karamazov",
+      "author": "Fyodor Dostoevsky",
+      "link": "https://hardcover.app/books/the-brothers-karamazov",
+      "cover": "https://assets.hardcover.app/edition/31370986/f057a871e6635e92341a5d3c47840dd16a91c543.jpeg",
+      "releaseYear": 1879,
+      "rating": 0,
+      "addedAt": "2025-08-11"
+    },
+    {
+      "title": "The Subtle Art of Not Giving a F*ck: A Counterintuitive Approach to Living a Good Life",
+      "author": "Mark Manson",
+      "link": "https://hardcover.app/books/the-subtle-art-of-not-giving-a-f-ck",
+      "cover": "https://assets.hardcover.app/external_data/39792230/703e1ead0915ce19bc07da55049957ed22605b5d.jpeg",
+      "releaseYear": 2016,
+      "rating": 0,
+      "addedAt": "2025-08-11"
+    },
+    {
+      "title": "This Is Strategy",
+      "author": "Seth Godin",
+      "link": "https://hardcover.app/books/this-is-strategy",
+      "cover": "https://assets.hardcover.app/edition/31599512/0ae265fb7df5c60e9f1fcedb442a40a45725ed39.jpeg",
+      "releaseYear": 2024,
+      "rating": 0,
+      "addedAt": "2025-08-11"
+    },
+    {
+      "title": "Walden",
+      "author": "Henry David Thoreau",
+      "link": "https://hardcover.app/books/walden",
+      "cover": "https://assets.hardcover.app/external_data/37168858/2ae624ba7bce24b7bcb621002ad9f9a31ccc9b8f.jpeg",
+      "releaseYear": 1849,
+      "rating": 0,
+      "addedAt": "2025-08-11"
+    },
+    {
+      "title": "You",
+      "author": "Caroline Kepnes",
+      "link": "https://hardcover.app/books/you",
+      "cover": "https://assets.hardcover.app/edition/30500627/037617234bea8375d95d916ff6df6a664d42c3e7.jpeg",
+      "releaseYear": 2014,
+      "rating": 0,
+      "addedAt": "2025-08-11"
+    },
+    {
+      "title": "You Love Me",
+      "author": "Caroline Kepnes",
+      "link": "https://hardcover.app/books/you-love-me",
+      "cover": "https://assets.hardcover.app/external_data/60126846/436ce56f2f953edd35c2e02409fbbc8cca6be14e.jpeg",
+      "releaseYear": 2016,
+      "rating": 0,
+      "addedAt": "2025-08-11"
+    }
+  ],
+  "read": [
+    {
+      "title": "A World Without Email: Reimagining Work in an Age of Communication Overload",
+      "author": "Cal Newport",
+      "link": "https://hardcover.app/books/a-world-without-email",
+      "cover": "https://assets.hardcover.app/external_data/59507856/9993bda1eafd0a66f4a94051e08182abecc4e2c6.jpeg",
+      "releaseYear": 2021,
+      "rating": 4,
+      "addedAt": "2025-08-11",
+      "readAt": "2026-08-30"
+    },
+    {
+      "title": "A Happy Death",
+      "author": "Albert Camus",
+      "link": "https://hardcover.app/books/a-happy-death",
+      "cover": "https://assets.hardcover.app/edition/30435764/68a0a9677d647960f446ebc9ad34dfc3910d332e.jpeg",
+      "releaseYear": 1971,
+      "rating": 4,
+      "addedAt": "2025-08-12",
+      "readAt": "2026-08-09"
+    },
+    {
+      "title": "Hiking with Nietzsche: On Becoming Who You Are",
+      "author": "John Kaag",
+      "link": "https://hardcover.app/books/hiking-with-nietzsche-on-becoming-who-you-are",
+      "cover": "https://assets.hardcover.app/edition/27038157/417cd2350e26c29ae7b81d22f375706662cda811.jpeg",
+      "releaseYear": 2018,
+      "rating": 2,
+      "addedAt": "2026-03-18",
+      "readAt": "2026-07-10"
+    },
+    {
+      "title": "The Art Thief: A True Story of Love, Crime, and a Dangerous Obsession",
+      "author": "Michael Finkel",
+      "link": "https://hardcover.app/books/the-art-thief-a-true-story-of-love-crime-and-a-dangerous-obsession",
+      "cover": "https://assets.hardcover.app/external_data/61917984/26a3b9f9113b859303673ec099d14a89e0167bd6.jpeg",
+      "releaseYear": 2023,
+      "rating": 5,
+      "addedAt": "2026-03-16",
+      "readAt": "2026-06-28"
+    },
+    {
+      "title": "Notes from Underground",
+      "author": "Fyodor Dostoevsky",
+      "link": "https://hardcover.app/books/notes-from-underground-notes-from-underground-1864",
+      "cover": "https://assets.hardcover.app/edition/28244794/aef0025870dc301dc70429511975fd80f758ef6b.jpeg",
+      "releaseYear": 1864,
+      "rating": 4,
+      "addedAt": "2025-08-11",
+      "readAt": "2026-03-17"
+    },
+    {
+      "title": "Train Dreams",
+      "author": "Denis Johnson",
+      "link": "https://hardcover.app/books/train-dreams",
+      "cover": "https://assets.hardcover.app/external_data/46795366/c74d61b546fd30692fa6250c964df0fa3d6462c6.jpeg",
+      "releaseYear": 2002,
+      "rating": 4,
+      "addedAt": "2026-01-11",
+      "readAt": "2026-02-16"
+    },
+    {
+      "title": "Wuthering Heights",
+      "author": "Emily Brontë",
+      "link": "https://hardcover.app/books/wuthering-heights",
+      "cover": "https://assets.hardcover.app/external_data/4267399/1b604fb711d4277282628e58e599a5fc3425cf77.jpeg",
+      "releaseYear": 1847,
+      "rating": 4,
+      "addedAt": "2025-08-11",
+      "readAt": "2026-02-12"
+    },
+    {
+      "title": "Into the Sun",
+      "author": "C. F. Ramuz",
+      "link": "https://hardcover.app/books/into-the-sun-2025",
+      "cover": "https://assets.hardcover.app/external_data/2049121/53e50576867d2ef9324f833c0c58f26962c73e59.jpeg",
+      "releaseYear": 2025,
+      "rating": 3,
+      "addedAt": "2025-12-22",
+      "readAt": "2026-01-31"
+    },
+    {
+      "title": "The Prestige",
+      "author": "Christopher Priest",
+      "link": "https://hardcover.app/books/the-prestige",
+      "cover": "https://assets.hardcover.app/edition/15137587/5aace558-ea16-4b03-b964-cb40fe45efef.jpg",
+      "releaseYear": 1995,
+      "rating": 5,
+      "addedAt": "2025-10-30",
+      "readAt": "2025-11-28"
+    },
+    {
+      "title": "Becoming a Data Head: How to Think, Speak, and Understand Data Science, Statistics, and Machine Learning",
+      "author": "Alex J. Gutman, Jordan Goldmeier",
+      "link": "https://hardcover.app/books/becoming-a-data-head",
+      "cover": "https://assets.hardcover.app/external_data/60928856/9bdf2fde03a8c9579f6d36dc39defc4c6c3ed468.jpeg",
+      "releaseYear": 2021,
+      "rating": 5,
+      "addedAt": "2025-08-13",
+      "readAt": "2025-08-27"
+    },
+    {
+      "title": "The Four Agreements: A Practical Guide to Personal Freedom",
+      "author": "Miguel Ruiz",
+      "link": "https://hardcover.app/books/the-four-agreements",
+      "cover": "https://assets.hardcover.app/external_data/31930157/94078f5c59fcf01c535a639d63ecaf20d5ed0cc5.jpeg",
+      "releaseYear": 1997,
+      "rating": 3,
+      "addedAt": "2025-08-11",
+      "readAt": "2025-08-11"
+    },
+    {
+      "title": "The Metamorphosis",
+      "author": "Franz Kafka",
+      "link": "https://hardcover.app/books/the-metamorphosis",
+      "cover": "https://assets.hardcover.app/edition/6343685/704cd849182f0351406e03434d2968ade757fde0.jpeg",
+      "releaseYear": 1915,
+      "rating": 4,
+      "addedAt": "2025-08-11",
+      "readAt": "2025-06-30"
+    },
+    {
+      "title": "1984",
+      "author": "George Orwell",
+      "link": "https://hardcover.app/books/1984",
+      "cover": "https://assets.hardcover.app/edition/29258002/fb69559e-7c34-40cb-8518-3ef4898b830c.jpg",
+      "releaseYear": 1949,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": "2025-03-01"
+    },
+    {
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "link": "https://hardcover.app/books/the-great-gatsby",
+      "cover": "https://assets.hardcover.app/edition/20216419/2a81c52c-7cf2-4477-9bfc-726d0c69f43e.jpg",
+      "releaseYear": 1925,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": "2024-02-01"
+    },
+    {
+      "title": "Cod: A Biography of the Fish that Changed the World",
+      "author": "Mark Kurlansky",
+      "link": "https://hardcover.app/books/cod-a-biography-of-the-fish-that-changed-the-world",
+      "cover": "https://assets.hardcover.app/edition/30394669/4936f55342c1217ddc5b60eba6fd7248066ce7f4.jpeg",
+      "releaseYear": 1997,
+      "rating": 0,
+      "addedAt": "2026-05-16",
+      "readAt": null
+    },
+    {
+      "title": "V for Vendetta",
+      "author": "Alan Moore",
+      "link": "https://hardcover.app/books/v-for-vendetta",
+      "cover": "https://assets.hardcover.app/editions/13065679/1687472402469130-A1GQ8YsGz2L._SL1500_.jpg",
+      "releaseYear": 1990,
+      "rating": 0,
+      "addedAt": "2026-03-13",
+      "readAt": null
+    },
+    {
+      "title": "How to Take Smart Notes: One Simple Technique to Boost Writing, Learning and Thinking",
+      "author": "Sönke Ahrens",
+      "link": "https://hardcover.app/books/how-to-take-smart-notes",
+      "cover": "https://assets.hardcover.app/external_data/61089766/120512e84976d321952cd1f92fb7c9fb846af07f.jpeg",
+      "releaseYear": 2017,
+      "rating": 0,
+      "addedAt": "2025-10-20",
+      "readAt": null
+    },
+    {
+      "title": "1984 / Animal Farm",
+      "author": "George Orwell",
+      "link": "https://hardcover.app/books/1984-animal-farm-1945",
+      "cover": "https://assets.hardcover.app/edition/8002868/2c8e3821-6dc4-4bd3-84c2-298c2d686540.png",
+      "releaseYear": 1945,
+      "rating": 0,
+      "addedAt": "2025-09-04",
+      "readAt": null
+    },
+    {
+      "title": "Focus: The Hidden Driver of Excellence",
+      "author": "Daniel Goleman",
+      "link": "https://hardcover.app/books/focus-the-hidden-driver-of-excellence",
+      "cover": "https://assets.hardcover.app/external_data/60097265/f252d34bf1449b62d7af23668e2512e815902027.jpeg",
+      "releaseYear": 2013,
+      "rating": 3,
+      "addedAt": "2025-09-04",
+      "readAt": null
+    },
+    {
+      "title": "The Metamorphosis / The Trial",
+      "author": "Franz Kafka",
+      "link": "https://hardcover.app/books/the-metamorphosis-the-trial",
+      "cover": "https://assets.hardcover.app/edition/14969346/277593ca3b2c6939b6f905c0788e7a60c07899a0.jpeg",
+      "releaseYear": 1960,
+      "rating": 0,
+      "addedAt": "2025-09-04",
+      "readAt": null
+    },
+    {
+      "title": "The Lion, the Witch and the Wardrobe",
+      "author": "C. S. Lewis",
+      "link": "https://hardcover.app/books/the-lion-the-witch-and-the-wardrobe",
+      "cover": "https://assets.hardcover.app/editions/30400082/2444907221007209.jpg",
+      "releaseYear": 1950,
+      "rating": 4,
+      "addedAt": "2025-08-16",
+      "readAt": null
+    },
+    {
+      "title": "Paradise Lost",
+      "author": "John Milton",
+      "link": "https://hardcover.app/books/paradise-lost",
+      "cover": "https://assets.hardcover.app/editions/3757554/1919948996411096.jpg",
+      "releaseYear": 1667,
+      "rating": 5,
+      "addedAt": "2025-08-15",
+      "readAt": null
+    },
+    {
+      "title": "Sense and Sensibility",
+      "author": "Jane Austen",
+      "link": "https://hardcover.app/books/sense-and-sensibility",
+      "cover": "https://assets.hardcover.app/edition/30513733/cbdb636a49f5ef75069c46c47ad14d16e4cec323.jpeg",
+      "releaseYear": 1811,
+      "rating": 2,
+      "addedAt": "2025-08-15",
+      "readAt": null
+    },
+    {
+      "title": "The Prince",
+      "author": "Niccolò Machiavelli",
+      "link": "https://hardcover.app/books/the-prince",
+      "cover": "https://assets.hardcover.app/external_data/4233354/a47e09ed334187fbc812e0e8f38c94cd46ece94a.jpeg",
+      "releaseYear": 1513,
+      "rating": 3,
+      "addedAt": "2025-08-15",
+      "readAt": null
+    },
+    {
+      "title": "The prologue to the Canterbury tales",
+      "author": "Geoffrey Chaucer",
+      "link": "https://hardcover.app/books/the-prologue-to-the-canterbury-tales",
+      "cover": "https://assets.hardcover.app/external_data/28439509/8fca8b727cbec68576b12bbd30272d43a6ccbbf6.jpeg",
+      "releaseYear": 1372,
+      "rating": 4,
+      "addedAt": "2025-08-15",
+      "readAt": null
+    },
+    {
+      "title": "Utopia",
+      "author": "Thomas More",
+      "link": "https://hardcover.app/books/utopia-utopia-1516",
+      "cover": "https://assets.hardcover.app/external_data/4500353/fdec6858a65ae5e027a799ce285a8839aeccd0f1.jpeg",
+      "releaseYear": 1516,
+      "rating": 4,
+      "addedAt": "2025-08-15",
+      "readAt": null
+    },
+    {
+      "title": "Calculus Made Easy",
+      "author": "Silvanus Phillips Thompson",
+      "link": "https://hardcover.app/books/calculus-made-easy",
+      "cover": "https://assets.hardcover.app/external_data/3914387/49740a838609350145c75bcbd4d6d95539b7dfad.jpeg",
+      "releaseYear": 1910,
+      "rating": 4,
+      "addedAt": "2025-08-14",
+      "readAt": null
+    },
+    {
+      "title": "Calculus: Early Transcendentals",
+      "author": "James Stewart",
+      "link": "https://hardcover.app/books/calculus-early-transcendentals",
+      "cover": "https://assets.hardcover.app/external_data/2434044/29d3a14ef50f4e19aef7a0effb252eeedf3bd981.jpeg",
+      "releaseYear": 1995,
+      "rating": 4,
+      "addedAt": "2025-08-14",
+      "readAt": null
+    },
+    {
+      "title": "Charlotte's Web",
+      "author": "E.B. White",
+      "link": "https://hardcover.app/books/charlottes-web",
+      "cover": "https://assets.hardcover.app/book_mappings/7332584/eb90639b8db1d26ef1de81c8233d4fecdd7dd800.jpeg",
+      "releaseYear": 1952,
+      "rating": 5,
+      "addedAt": "2025-08-14",
+      "readAt": null
+    },
+    {
+      "title": "How to Prevent the Next Pandemic",
+      "author": "Bill Gates",
+      "link": "https://hardcover.app/books/how-to-prevent-the-next-pandemic",
+      "cover": "https://assets.hardcover.app/edition/30420677/3028736716e44919343b67841655b0065e0e0f15.jpeg",
+      "releaseYear": 2022,
+      "rating": 3,
+      "addedAt": "2025-08-14",
+      "readAt": null
+    },
+    {
+      "title": "The Adventures of Huckleberry Finn",
+      "author": "Mark Twain",
+      "link": "https://hardcover.app/books/the-adventures-of-huckleberry-finn",
+      "cover": "https://assets.hardcover.app/book_mappings/7332398/99b9f279609386e778f1fc36051d8a002f04ca81.jpeg",
+      "releaseYear": 1885,
+      "rating": 4,
+      "addedAt": "2025-08-14",
+      "readAt": null
+    },
+    {
+      "title": "The Complete Chronicles of Narnia",
+      "author": "C. S. Lewis",
+      "link": "https://hardcover.app/books/the-complete-chronicles-of-narnia",
+      "cover": "https://assets.hardcover.app/external_data/4096279/3579d5cec25ee3510801631c073170b2993e7274.jpeg",
+      "releaseYear": 1956,
+      "rating": 4,
+      "addedAt": "2025-08-14",
+      "readAt": null
+    },
+    {
+      "title": "The Giving Tree",
+      "author": "Shel Silverstein",
+      "link": "https://hardcover.app/books/the-giving-tree",
+      "cover": "https://assets.hardcover.app/edition/31488792/206b01f4-6696-43c0-adfb-0e9a2cd3beaa.jpg",
+      "releaseYear": 1964,
+      "rating": 4,
+      "addedAt": "2025-08-14",
+      "readAt": null
+    },
+    {
+      "title": "American Psycho",
+      "author": "Bret Easton Ellis",
+      "link": "https://hardcover.app/books/american-psycho",
+      "cover": "https://assets.hardcover.app/edition/30483142/34fc972fa61b658b63bc11a10eadfbf4808cdc09.jpeg",
+      "releaseYear": 1991,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "Animal Farm",
+      "author": "George Orwell",
+      "link": "https://hardcover.app/books/animal-farm",
+      "cover": "https://assets.hardcover.app/edition/22658835/7019472-L.jpg",
+      "releaseYear": 1945,
+      "rating": 4,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "Atomic habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+      "author": "James Clear",
+      "link": "https://hardcover.app/books/atomic-habits",
+      "cover": "https://assets.hardcover.app/edition/12605395/629717fe-df46-40b8-8529-dca0323bf699.jpg",
+      "releaseYear": 2018,
+      "rating": 4,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "Beowulf",
+      "author": "",
+      "link": "https://hardcover.app/books/beowulf",
+      "cover": "https://assets.hardcover.app/edition/25007163/c26fbb7071f17003b831bf092145f2c82ce3bdcd.jpeg",
+      "releaseYear": 950,
+      "rating": 3,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "Brave New World",
+      "author": "Aldous Huxley",
+      "link": "https://hardcover.app/books/brave-new-world",
+      "cover": "https://assets.hardcover.app/edition/3299811/3e542fb1d6aed92c0f4e9cd0ac9b2f6892ca97a3.jpeg",
+      "releaseYear": 1932,
+      "rating": 2,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "Building a Second Brain: A Proven Method to Organize Your Digital Life and Unlock Your Creative Potential",
+      "author": "Tiago Forte",
+      "link": "https://hardcover.app/books/building-a-second-brain",
+      "cover": "https://assets.hardcover.app/edition/30438341/13d2a91b-fec3-492b-b839-05ca3127b670.jpg",
+      "releaseYear": 2022,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "Crime and Punishment",
+      "author": "Fyodor Dostoevsky",
+      "link": "https://hardcover.app/books/crime-and-punishment",
+      "cover": "https://assets.hardcover.app/external_data/59475385/9c9502c01ade50819522f5d1bf1918c7ea174627.jpeg",
+      "releaseYear": 1866,
+      "rating": 4,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "Dante",
+      "author": "Robin Kirkpatrick",
+      "link": "https://hardcover.app/books/dante-by-robin-kirkpatrick",
+      "cover": "https://assets.hardcover.app/books/313529/358287-L.jpg",
+      "releaseYear": null,
+      "rating": 4,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "Digital Minimalism: Choosing a Focused Life in a Noisy World",
+      "author": "Cal Newport",
+      "link": "https://hardcover.app/books/digital-minimalism",
+      "cover": "https://assets.hardcover.app/external_data/59340601/d5cda8f52cd8e844683d4a762edebd859a32c853.jpeg",
+      "releaseYear": 2019,
+      "rating": 4,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "Don Quixote",
+      "author": "Miguel de Cervantes Saavedra",
+      "link": "https://hardcover.app/books/don-quixote",
+      "cover": "https://assets.hardcover.app/external_data/2891165/b57ed3d8c948e0f767a6820f239aea1a3ac72a1a.jpeg",
+      "releaseYear": 1605,
+      "rating": 2,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "Effortless: Make It Easier to Do What Matters Most",
+      "author": "Greg McKeown",
+      "link": "https://hardcover.app/books/effortless",
+      "cover": "https://assets.hardcover.app/external_data/47671297/c1808d8e6d785b67fcc0c098cc9137c2a7f49ae7.jpeg",
+      "releaseYear": 2021,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "Essentialism: The Disciplined Pursuit Of Less",
+      "author": "Greg McKeown",
+      "link": "https://hardcover.app/books/essentialism",
+      "cover": "https://assets.hardcover.app/book_mappings/7332543/49e97d3c85d756c9a823901d1a04c0cc2aab2007.jpeg",
+      "releaseYear": 2011,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "Fahrenheit 451",
+      "author": "Ray Bradbury",
+      "link": "https://hardcover.app/books/fahrenheit-451",
+      "cover": "https://assets.hardcover.app/edition/6336191/3d353406f14fd36043a8bdfb8c3288f90ee4f96c.jpeg",
+      "releaseYear": 1963,
+      "rating": 4,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "No Longer Human",
+      "author": "Osamu Dazai",
+      "link": "https://hardcover.app/books/no-longer-human",
+      "cover": "https://assets.hardcover.app/editions/15248233/9349133283420308.jpg",
+      "releaseYear": 1948,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "Tender Is the Night",
+      "author": "F. Scott Fitzgerald",
+      "link": "https://hardcover.app/books/tender-is-the-night",
+      "cover": "https://assets.hardcover.app/external_data/59939171/cb8b530059fa9de814c2c9f0e66c2b6b4633c7d7.jpeg",
+      "releaseYear": 1933,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "The Iliad",
+      "author": "Homer",
+      "link": "https://hardcover.app/books/the-iliad",
+      "cover": "https://assets.hardcover.app/editions/30427811/9420789400127984.jpg",
+      "releaseYear": 801,
+      "rating": 4,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "The Odyssey",
+      "author": "Homer",
+      "link": "https://hardcover.app/books/the-odyssey",
+      "cover": "https://assets.hardcover.app/edition/6114921/6cf9eff4-26ad-4dba-9aee-99ccd22ed73f.jpg",
+      "releaseYear": -700,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "The Picture of Dorian Gray",
+      "author": "Oscar Wilde",
+      "link": "https://hardcover.app/books/the-picture-of-dorian-gray",
+      "cover": "https://assets.hardcover.app/edition/25403534/25aad411adf5c70ceab52ba339ea701564cb93d6.jpeg",
+      "releaseYear": 1890,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "The Stranger",
+      "author": "Albert Camus",
+      "link": "https://hardcover.app/books/the-stranger",
+      "cover": "https://assets.hardcover.app/edition/15655608/419742-L.jpg",
+      "releaseYear": 1942,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "The Trial",
+      "author": "Franz Kafka",
+      "link": "https://hardcover.app/books/the-trial",
+      "cover": "https://assets.hardcover.app/edition/30738162/8140099c-e36f-4279-a914-d5156141079b.jpeg",
+      "releaseYear": 1925,
+      "rating": 4,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    },
+    {
+      "title": "White Nights",
+      "author": "Fyodor Dostoevsky",
+      "link": "https://hardcover.app/books/white-nights",
+      "cover": "https://assets.hardcover.app/external_data/4200304/61369e3c5c978d2ede4e215cfaba582cc7961024.jpeg",
+      "releaseYear": 1848,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": null
+    }
+  ]
+}

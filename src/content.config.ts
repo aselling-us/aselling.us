@@ -98,7 +98,7 @@ const doing = defineCollection({
 
 // One markdown file per photo of a physical book — shelf photos, annotated
 // pages, marginalia. Shown on /books between "currently reading" and
-// "read". Manually authored, not pulled from Goodreads. One photo per
+// "read". Manually authored, not pulled from Hardcover. One photo per
 // entry; `caption` is just enough to identify the book, not an excerpt
 // (see the dev-only editor in scripts/dev-edit-marginalia.mjs, which owns
 // the `image` field). `image` is optional in the schema — same reason

@@ -5,7 +5,7 @@ import { Image } from "astro:assets";
 import { getCollection } from 'astro:content';
 import me from "../content/imgs/me.JPG";
 import letterboxd from '../data/letterboxd.json';
-import goodreads from '../data/goodreads.json';
+import hardcover from '../data/hardcover.json';
 import { renderInlineMarkdown, stripMarkdown } from '../lib/inline-markdown.mjs';
 import { parsePlaceDate, EVENT_COUNTDOWN_GRACE_MS } from '../lib/place-date';
 
@@ -17,8 +17,8 @@ const latestPost = posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valu
 
 // letterboxd diary is already re-sorted most-recent-first by fetch-media.mjs
 const recentFilms = letterboxd.films.slice(0, 4);
-// goodreads currently-reading shelf, most recently added first
-const currentlyReading = goodreads.currentlyReading;
+// hardcover currently-reading shelf, most recently started first
+const currentlyReading = hardcover.current;
 
 // career entries with no endDate are current roles (see src/content.config.ts)
 const roles = await getCollection('career');
