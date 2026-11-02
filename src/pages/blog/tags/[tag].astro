@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PostList from '../../../components/PostList.astro';
+import { renderInlineMarkdown, stripMarkdown } from '../../../lib/inline-markdown.mjs';
+import { collectTags } from '../../../lib/tags.mjs';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => import.meta.env.DEV || data.draft !== true);
+  const tags = collectTags(posts);
+  return tags.map((tag) => ({
+    params: { tag: tag.slug },
+    props: { label: tag.label, posts: tag.posts },
+  }));
+}
+
+const { label, posts } = Astro.props;
+const sorted = posts.slice().sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<BaseLayout
+  title={`Tag · ${stripMarkdown(label)}`}
+  description={`${sorted.length} post${sorted.length === 1 ? '' : 's'} tagged "${stripMarkdown(label)}."`}
+>
+  <span class="mono-label"><a href="/blog/tags">writing / tags</a> / <span set:html={renderInlineMarkdown(label)} /></span>
+  <div class="title-row">
+    <h1 set:html={renderInlineMarkdown(label)} />
+    <p class="lede">{sorted.length} post{sorted.length === 1 ? '' : 's'} tagged this way.</p>
+  </div>
+
+  <PostList posts={sorted} />
+
+  <p class="back-link"><a href="/blog/tags">&larr; all tags</a></p>
+</BaseLayout>
+
+<style>
+  .title-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+  }
+  .lede { color: var(--color-text-dim); }
+
+  .back-link {
+    margin-top: var(--space-3);
+  }
+  .back-link a {
+    color: var(--color-text-dim);
+  }
+  .back-link a:hover {
+    color: var(--color-highlight-bright);
+  }
+</style>

@@ -1,0 +1,44 @@
+name: Send reference request notifications
+
+# Polls the blog-subscribe Cloudflare Worker (see worker/) for pending
+# "Request Professional References" submissions from the career page and
+# emails the site owner about each one, using the same SMTP credentials as
+# the other subscription-related notifications.
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (log pending requests, but do not send)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: send-reference-requests
+  cancel-in-progress: false
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Send pending reference-request notifications
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_FROM: ${{ secrets.MAIL_FROM }}
+          MAIL_REPLY_TO: ${{ secrets.MAIL_REPLY_TO }}
+          WORKER_URL: ${{ vars.WORKER_URL }}
+          SYNC_SECRET: ${{ secrets.SYNC_SECRET }}
+        run: npm run notify:references -- ${{ github.event.inputs.dry_run == 'true' && '--dry-run' || '' }}

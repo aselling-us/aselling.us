@@ -1,0 +1,884 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image, getImage } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Quote from '../../components/Quote.astro';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import github from '../../data/github.json';
+
+// Font Awesome Free brand icon (CC BY 4.0, https://fontawesome.com/license/free),
+// inlined as an <svg> at build time rather than loading its stylesheet/webfont
+const [githubIconWidth, githubIconHeight, , , githubIconPath] = faGithub.icon as [number, number, string[], string, string];
+
+// snapshot written by `npm run fetch:media`; fetchedAt only changes when the repo list does
+// contributedRepos/contributedPrivateCount may be absent on an older snapshot written before those fields existed
+const { repos, contributions } = github;
+const contributedRepos = github.contributedRepos ?? [];
+const contributedPrivateCount = github.contributedPrivateCount ?? 0;
+const profileUrl = `https://github.com/${github.username}`;
+const updated = github.fetchedAt.slice(0, 16).replace('T', ' · ') + ' utc';
+
+const fmtDate = (iso: string | null) =>
+  iso
+    ? new Date(iso + 'T00:00:00Z').toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        timeZone: 'UTC',
+      })
+    : null;
+
+// contributions.days is chronological, Sunday-first, in complete 7-day weeks
+// (GitHub's calendar API guarantee) — chunk straight into grid columns.
+const weeks: { date: string; count: number }[][] = [];
+if (contributions) {
+  for (let i = 0; i < contributions.days.length; i += 7) {
+    weeks.push(contributions.days.slice(i, i + 7));
+  }
+}
+
+const maxCount = contributions ? Math.max(...contributions.days.map((d) => d.count), 1) : 1;
+const levelFor = (count: number) => {
+  if (count === 0) return 0;
+  const ratio = count / maxCount;
+  if (ratio <= 0.25) return 1;
+  if (ratio <= 0.5) return 2;
+  if (ratio <= 0.75) return 3;
+  return 4;
+};
+
+const monthLabel = (week: { date: string }[]) =>
+  new Date(week[0].date + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' });
+
+// only label a column when its month differs from the previous column's
+const monthOf = (week: { date: string }[]) => week[0].date.slice(0, 7);
+
+// a note has a start date, an end date, or both (see the "doing" schema):
+// newest first by whichever end of it is latest, shown as "Mar 2026 – Jun 2026"
+// for a range (month precision) or a full date for a lone one
+const noteSortDate = (d: { startDate?: Date; endDate?: Date }) => (d.endDate ?? d.startDate)!;
+const fmtNoteDate = (d: Date, withDay: boolean) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', ...(withDay && { day: 'numeric' }), timeZone: 'UTC' });
+const noteDates = ({ startDate, endDate }: { startDate?: Date; endDate?: Date }) => {
+  if (startDate && endDate) {
+    const [from, to] = [fmtNoteDate(startDate, false), fmtNoteDate(endDate, false)];
+    return from === to ? from : `${from} – ${to}`;
+  }
+  return fmtNoteDate((startDate ?? endDate)!, true);
+};
+
+// manually-authored notes on in-progress personal projects — see the
+// "doing" collection in content.config.ts and the dev-only editor in
+// scripts/dev-edit-doing.mjs, mounted at /__edit-doing. Drafts are included
+// in dev so they can be edited; builds skip them (same rule as /blog).
+const doingEntries = (await getCollection('doing', ({ data }) => import.meta.env.DEV || data.draft !== true)).sort(
+  (a, b) => noteSortDate(b.data).valueOf() - noteSortDate(a.data).valueOf()
+);
+const notes = await Promise.all(
+  doingEntries.map(async (entry) => ({
+    entry,
+    Content: (await render(entry)).Content,
+    // larger copy of each photo for the fullscreen viewer — reusing the 320px
+    // thumbnail there would get stretched to viewport size and look blurry
+    fullPhotos: await Promise.all(
+      entry.data.images.map(
+        async (img) => (await getImage({ src: img, width: Math.min(img.width, 1920), format: 'webp', quality: 82 })).src
+      )
+    ),
+  }))
+);
+
+// raw note data for the dev editor's pre-filled form; never built
+const notesDevJson = import.meta.env.DEV
+  ? JSON.stringify(
+      notes.map(({ entry }) => ({
+        id: entry.id,
+        title: entry.data.title,
+        startDate: entry.data.startDate?.toISOString().slice(0, 10) ?? '',
+        endDate: entry.data.endDate?.toISOString().slice(0, 10) ?? '',
+        draft: entry.data.draft,
+        body: entry.body ?? '',
+        images: entry.data.images.map((img) => img.src),
+      }))
+    ).replace(/</g, '\\u003c')
+  : '';
+---
+<BaseLayout title="Doing" description="What I've been building, pulled from my GitHub repositories.">
+  <!-- <span class="mono-label">index / 02</span> -->
+  <h1>Doing</h1>
+  <p class="lede">
+    A set of personal projects or scraps of ideas: creation, art, programming, anything. Public repos pulled from <a href={profileUrl} target="_blank" rel="noopener noreferrer">GitHub</a>, most recently pushed first.
+  </p>
+
+    <Quote cite="— Marcus Aurelius">
+  What are you afraid of losing,<br />when nothing in this world truly belongs to you?
+  </Quote>
+  <section>
+    <div class="section-header">
+      <h2 class="mono-label section-label">notes / {String(notes.length).padStart(2, '0')}</h2>
+      {import.meta.env.DEV && (
+        <button id="new-note" class="dev-btn mono-label" type="button" title="Dev only: writes src/content/doing/<slug>.md">+ new note</button>
+      )}
+    </div>
+
+    {notes.length === 0 && <p class="empty-state">No notes yet.</p>}
+
+    <ul class="note-list">
+      {notes.map(({ entry, Content, fullPhotos }) => (
+        <li class="note">
+          <div class="note-head">
+            <span class="mono-label note-date">
+              {noteDates(entry.data)}
+            </span>
+            {import.meta.env.DEV && entry.data.draft && <span class="draft-badge mono-label">draft</span>}
+            {import.meta.env.DEV && (
+              <button class="note-edit dev-btn mono-label" data-id={entry.id} type="button">edit</button>
+            )}
+          </div>
+          <h3 class="note-title">{entry.data.title}</h3>
+          <div class="prose"><Content /></div>
+          {entry.data.images.length > 0 && (
+            <ul class="note-photos">
+              {entry.data.images.map((img, i) => (
+                <li>
+                  <button class="note-photo" type="button" data-full={fullPhotos[i]} aria-label="Expand photo">
+                    <Image src={img} alt="" width={320} />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+
+    {import.meta.env.DEV && <script type="application/json" id="doing-dev-data" set:html={notesDevJson} />}
+  </section>
+
+  <div id="photo-lightbox" class="photo-lightbox" role="dialog" aria-modal="true" aria-label="Photo" aria-hidden="true">
+    <button type="button" class="photo-lightbox-close" aria-label="Close">&times;</button>
+    <img class="photo-lightbox-img" alt="" />
+  </div>
+  {contributions && (
+    <section>
+      {/* total mirrors exactly what's shown on the public GitHub profile —
+          see the comment above fetchContributionCalendar in fetch-media.mjs
+          for how private contributions factor into that number */}
+      <h2 class="mono-label section-label">contributions / {contributions.total} in the last year</h2>
+      <div class="graph-scroll">
+        <div class="graph" style={`--weeks: ${weeks.length};`}>
+          <div class="graph-months" aria-hidden="true">
+            {weeks.map((week, i) => (
+              <span class="graph-month">{i === 0 || monthOf(week) !== monthOf(weeks[i - 1]) ? monthLabel(week) : ''}</span>
+            ))}
+          </div>
+          <div class="graph-grid">
+            {weeks.map((week) => (
+              <div class="graph-col">
+                {week.map((day) => (
+                  <span
+                    class:list={['graph-cell', `level-${levelFor(day.count)}`]}
+                    title={`${day.count} contribution${day.count === 1 ? '' : 's'} on ${fmtDate(day.date)}`}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div class="graph-legend mono-label">
+        <span>less</span>
+        <span class="graph-cell level-0" />
+        <span class="graph-cell level-1" />
+        <span class="graph-cell level-2" />
+        <span class="graph-cell level-3" />
+        <span class="graph-cell level-4" />
+        <span>more</span>
+      </div>
+    </section>
+  )}
+
+  <section>
+    <h2 class="mono-label section-label">repositories / {String(repos.length).padStart(2, '0')}</h2>
+    <ul class="repo-list">
+      {repos.map((repo) => (
+        <li class="repo">
+          <a class="repo-github" href={repo.link} target="_blank" rel="noopener noreferrer" aria-label={`${repo.name} on GitHub`}>
+            <svg viewBox={`0 0 ${githubIconWidth} ${githubIconHeight}`} aria-hidden="true"><path d={githubIconPath} fill="currentColor" /></svg>
+          </a>
+          <div class="repo-head">
+            <a class="repo-name" href={repo.link} target="_blank" rel="noopener noreferrer">{repo.name}</a>
+            {repo.homepage && (
+              <a class="repo-live mono-label" href={repo.homepage} target="_blank" rel="noopener noreferrer">live →</a>
+            )}
+          </div>
+          {repo.description && <p class="repo-desc">{repo.description}</p>}
+          <span class="mono-label repo-row">
+            {repo.language && <span class="repo-lang">{repo.language}</span>}
+            {repo.stars > 0 && <span class="repo-stars">★ {repo.stars}</span>}
+            {repo.pushedAt && <span>pushed / {fmtDate(repo.pushedAt)}</span>}
+          </span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {(contributedRepos.length > 0 || contributedPrivateCount > 0) && (
+    <section>
+      <h2 class="mono-label section-label">contributed to / {String(contributedRepos.length).padStart(2, '0')}</h2>
+      {contributedPrivateCount > 0 && (
+        <p class="private-note mono-label">
+          + {contributedPrivateCount} private repo{contributedPrivateCount === 1 ? '' : 's'} contributed to
+        </p>
+      )}
+      {contributedRepos.length > 0 && (
+        <ul class="repo-list">
+          {contributedRepos.map((repo) => (
+            <li class="repo">
+              <a class="repo-github" href={repo.link} target="_blank" rel="noopener noreferrer" aria-label={`${repo.owner}/${repo.name} on GitHub`}>
+                <svg viewBox={`0 0 ${githubIconWidth} ${githubIconHeight}`} aria-hidden="true"><path d={githubIconPath} fill="currentColor" /></svg>
+              </a>
+              <div class="repo-head">
+                <a class="repo-name" href={repo.link} target="_blank" rel="noopener noreferrer">{repo.owner}/{repo.name}</a>
+                <span class="repo-head-right">
+                  {repo.homepage && (
+                    <a class="repo-live mono-label" href={repo.homepage} target="_blank" rel="noopener noreferrer">live →</a>
+                  )}
+                  <span class="mono-label contributor-badge">contributor</span>
+                </span>
+              </div>
+              {repo.description && <p class="repo-desc">{repo.description}</p>}
+              <span class="mono-label repo-row">
+                {repo.language && <span class="repo-lang">{repo.language}</span>}
+                {repo.stars > 0 && <span class="repo-stars">★ {repo.stars} /</span>}
+                {/* commits is last-year commit count only, capped to the top 25
+                    repos by that count — see fetchContributionCalendar in
+                    fetch-media.mjs. Absent for older/PR-only contributions. */}
+                {repo.commits && <span>{repo.commits} commit{repo.commits === 1 ? '' : 's'}</span>}
+                {repo.pushedAt && <span>pushed / {fmtDate(repo.pushedAt)}</span>}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  )}
+
+  <footer class="data-footer">
+    <span class="mono-label">source / github api</span>
+    <span class="mono-label">most recent update / {updated}</span>
+  </footer>
+</BaseLayout>
+
+<script>
+  // fullscreen viewer for note photos, same overlay as the travels page's
+  // photo lightbox; focus moves to the close button and back to the photo
+  // that opened it, so keyboard users aren't dropped at the top of the page
+  const lightbox = document.getElementById('photo-lightbox')!;
+  const lightboxImg = lightbox.querySelector<HTMLImageElement>('.photo-lightbox-img')!;
+  const lightboxClose = lightbox.querySelector<HTMLButtonElement>('.photo-lightbox-close')!;
+  let lightboxTrigger: HTMLElement | null = null;
+  const closeLightbox = () => {
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImg.removeAttribute('src');
+    lightboxTrigger?.focus();
+    lightboxTrigger = null;
+  };
+  document.querySelectorAll<HTMLButtonElement>('.note-photo').forEach((btn) =>
+    btn.addEventListener('click', () => {
+      lightboxTrigger = btn;
+      lightboxImg.src = btn.dataset.full ?? '';
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      lightboxClose.focus();
+    })
+  );
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+  });
+
+  // dev-only "doing" notes editor — import.meta.env.DEV is statically false
+  // in builds, so none of this ships
+  if (import.meta.env.DEV) {
+    interface NoteData {
+      id: string;
+      title: string;
+      startDate: string;
+      endDate: string;
+      draft: boolean;
+      body: string;
+      images: string[];
+    }
+
+    const notes: NoteData[] = JSON.parse(
+      document.getElementById('doing-dev-data')?.textContent ?? '[]'
+    );
+    const esc = (s: string) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+
+    const dialog = document.createElement('dialog');
+    dialog.className = 'note-editor';
+    document.body.append(dialog);
+
+    const open = (note?: NoteData) => {
+      dialog.innerHTML = `
+        <form id="note-form">
+          <span class="mono-label">${note ? `edit · src/content/doing/${esc(note.id)}.md` : 'new note'}</span>
+          <input name="title" placeholder="Title" required value="${esc(note?.title ?? '')}" />
+          <div class="row">
+            <label class="mono-label date-label">start
+              <input name="startDate" type="date" value="${esc(note ? note.startDate : new Date().toISOString().slice(0, 10))}" />
+            </label>
+            <label class="mono-label date-label">end (optional)
+              <input name="endDate" type="date" value="${esc(note?.endDate ?? '')}" />
+            </label>
+          </div>
+          <span class="mono-label date-hint">one date shows the full day; with both, only the months are kept</span>
+          <label class="mono-label draft-toggle"><input type="checkbox" name="draft" ${note?.draft ? 'checked' : ''} /> draft</label>
+          <textarea name="body" rows="8" placeholder="Notes (markdown)">${esc(note?.body ?? '')}</textarea>
+          <div class="note-photos-edit" id="note-photos-edit">
+            ${(note?.images ?? [])
+              .map(
+                (src, i) => `
+              <div class="note-photo-thumb">
+                <img src="${esc(src)}" />
+                <button type="button" class="note-photo-remove" data-index="${i}" title="Remove photo">×</button>
+              </div>`
+              )
+              .join('')}
+          </div>
+          <label class="mono-label add-photos-label" title="Upload one or more photos">
+            + add photos
+            <input type="file" name="photos" accept="image/*" multiple />
+          </label>
+          <div class="row">
+            <button type="submit">save note</button>
+            <button type="button" id="note-cancel">cancel</button>
+            ${note ? '<button type="button" id="note-delete" class="danger-btn">delete note</button>' : ''}
+          </div>
+        </form>`;
+      dialog.showModal();
+
+      document.getElementById('note-cancel')?.addEventListener('click', () => dialog.close());
+
+      document.getElementById('note-delete')?.addEventListener('click', async () => {
+        if (!note) return;
+        const ok = confirm(`Permanently delete "${note.title}"?\n\nThis deletes src/content/doing/${note.id}.md (and any photos) and can't be undone.`);
+        if (!ok) return;
+
+        const button = document.getElementById('note-delete') as HTMLButtonElement;
+        button.disabled = true;
+        button.textContent = 'deleting…';
+        try {
+          const res = await fetch('/__edit-doing/delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ slug: note.id }),
+          });
+          if (!res.ok) {
+            const { error } = await res.json().catch(() => ({ error: res.statusText }));
+            alert(`Could not delete note: ${error}`);
+            button.disabled = false;
+            button.textContent = 'delete note';
+            return;
+          }
+          location.reload();
+        } catch {
+          alert('Could not delete note: network error');
+          button.disabled = false;
+          button.textContent = 'delete note';
+        }
+      });
+
+      document.getElementById('note-photos-edit')?.addEventListener('click', async (ev) => {
+        const btn = (ev.target as HTMLElement).closest<HTMLButtonElement>('.note-photo-remove');
+        if (!btn || !note) return;
+        btn.disabled = true;
+        const res = await fetch('/__edit-doing/image/remove', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug: note.id, index: Number(btn.dataset.index) }),
+        });
+        if (!res.ok) {
+          const { error } = await res.json().catch(() => ({ error: res.statusText }));
+          alert(`Could not remove photo: ${error}`);
+          btn.disabled = false;
+          return;
+        }
+        location.reload();
+      });
+
+      // photos picked in the form (whether this is a new or existing note)
+      // are uploaded right after the note itself saves, once a slug exists —
+      // same order of operations as the blog editor's cover-image upload
+      document.getElementById('note-form')?.addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+        const fd = new FormData(ev.currentTarget as HTMLFormElement);
+        const photos = fd.getAll('photos').filter((f): f is File => f instanceof File && f.size > 0);
+        const res = await fetch('/__edit-doing/save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            slug: note?.id,
+            title: fd.get('title'),
+            startDate: fd.get('startDate'),
+            endDate: fd.get('endDate'),
+            draft: fd.get('draft') === 'on',
+            body: fd.get('body'),
+          }),
+        });
+        if (!res.ok) {
+          const { error } = await res.json().catch(() => ({ error: res.statusText }));
+          alert(`Could not save note: ${error}`);
+          return;
+        }
+        const { slug } = await res.json();
+        for (const file of photos) {
+          const up = await fetch(
+            `/__edit-doing/image?slug=${encodeURIComponent(slug)}&name=${encodeURIComponent(file.name)}`,
+            { method: 'POST', body: file }
+          );
+          if (!up.ok) {
+            const { error } = await up.json().catch(() => ({ error: up.statusText }));
+            alert(`Note saved, but "${file.name}" failed to upload: ${error}`);
+          }
+        }
+        location.reload();
+      });
+    };
+
+    document.getElementById('new-note')?.addEventListener('click', () => open());
+    document.querySelectorAll<HTMLButtonElement>('.note-edit').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        const note = notes.find((n) => n.id === btn.dataset.id);
+        if (note) open(note);
+      })
+    );
+  }
+</script>
+
+<style>
+  .lede { color: var(--color-text-dim); }
+  .lede a { color: var(--color-accent-bright); }
+  .lede a:hover { color: var(--color-highlight-bright); }
+
+  section { margin-top: var(--space-4); }
+
+  .section-label {
+    color: var(--color-highlight-bright);
+    border-bottom: 1px solid var(--color-hairline);
+    padding-bottom: var(--space-1);
+    margin: 0 0 var(--space-3);
+    font-size: 0.7rem;
+    font-weight: 400;
+  }
+
+  .private-note {
+    color: var(--color-text-faint);
+    margin: -0.5rem 0 var(--space-3);
+  }
+
+  .graph-scroll {
+    display: flex;
+    justify-content: safe center;
+    overflow-x: auto;
+    padding-bottom: var(--space-1);
+  }
+
+  .graph {
+    --cell: 11px;
+    --cell-gap: 3px;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: calc(var(--weeks) * (var(--cell) + var(--cell-gap)));
+  }
+
+  .graph-months {
+    display: grid;
+    grid-template-columns: repeat(var(--weeks), calc(var(--cell) + var(--cell-gap)));
+  }
+  .graph-month {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    color: var(--color-text-faint);
+    white-space: nowrap;
+  }
+
+  .graph-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: var(--cell);
+    gap: var(--cell-gap);
+  }
+  .graph-col {
+    display: grid;
+    grid-template-rows: repeat(7, var(--cell));
+    gap: var(--cell-gap);
+  }
+
+  .graph-cell {
+    width: var(--cell);
+    height: var(--cell);
+    display: inline-block;
+    border: 1px solid var(--color-hairline);
+  }
+  .level-0 { background: var(--color-bg-inset); }
+  .level-1 { background: color-mix(in srgb, var(--color-highlight) 25%, var(--color-bg-inset)); border-color: transparent; }
+  .level-2 { background: color-mix(in srgb, var(--color-highlight) 50%, var(--color-bg-inset)); border-color: transparent; }
+  .level-3 { background: color-mix(in srgb, var(--color-highlight) 80%, var(--color-bg-inset)); border-color: transparent; }
+  .level-4 { background: var(--color-highlight-bright); border-color: transparent; }
+
+  .graph-legend {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: var(--space-2);
+    color: var(--color-text-faint);
+  }
+  .graph-legend .graph-cell { width: 10px; height: 10px; }
+
+  .repo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-3);
+  }
+  .repo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    border: 1px solid var(--color-hairline);
+    background: var(--color-bg-elevated);
+    padding: var(--space-2);
+  }
+  .repo:hover { border-color: var(--color-highlight); }
+
+  .repo-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.3rem var(--space-2);
+    padding-right: 1.9rem; /* room for the corner GitHub logo (.repo-github) */
+  }
+  .repo-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--color-text);
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .repo-name:hover { color: var(--color-highlight-bright); }
+  .repo-live { color: var(--color-accent-bright); flex-shrink: 0; }
+  .repo-live:hover { color: var(--color-highlight-bright); }
+
+  .repo-head-right {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    flex-shrink: 0;
+  }
+  .repo-github {
+    position: absolute;
+    top: calc(var(--space-2) + 0.15rem);
+    right: var(--space-2);
+    display: block;
+    color: var(--color-text-faint);
+  }
+  .repo-github:hover { color: var(--color-highlight-bright); }
+  .repo-github svg { display: block; width: 1.15rem; height: 1.15rem; }
+  .contributor-badge {
+    color: var(--color-accent-bright);
+    border: 1px solid var(--color-accent-bright);
+    padding: 0.1rem 0.4rem;
+  }
+
+  .repo-desc {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--color-text-dim);
+  }
+
+  .repo-row {
+    display: flex;
+    gap: 0.6rem;
+    align-items: baseline;
+    flex-wrap: wrap;
+    color: var(--color-text-faint);
+  }
+  .repo-lang { color: var(--color-accent-bright); }
+  .repo-stars { color: var(--color-hairline); }
+
+  .data-footer {
+    margin-top: var(--space-5);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--color-hairline);
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--color-hairline);
+    padding-bottom: var(--space-1);
+    margin: 0 0 var(--space-3);
+  }
+  .section-header .section-label { border-bottom: none; padding-bottom: 0; margin: 0; }
+
+  .empty-state { color: var(--color-text-dim); }
+
+  .note-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .note {
+    border: 1px solid var(--color-hairline);
+    background: var(--color-bg-elevated);
+    padding: var(--space-3);
+  }
+  .note:hover { border-color: var(--color-highlight); }
+
+  .note-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+  .note-date { color: var(--color-text-faint); }
+  .draft-badge {
+    color: var(--color-highlight-bright);
+    border: 1px dashed var(--color-highlight-bright);
+    padding: 0.1rem 0.4rem;
+    margin-right: auto;
+    margin-left: 0.5rem;
+  }
+  /* a note's title outranks everything inside it — the page h1 (1.6–2.25rem)
+     and the h2s in its body (≤1.45rem) — so its clamp() is the h1's scaled up,
+     which keeps it larger at every viewport width. Same weight/font, tight
+     tracking. */
+  .note-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+    margin: 0.3rem 0 0;
+  }
+
+  .note .prose { margin-top: 0.5rem; }
+  .note .prose :global(p) { color: var(--color-text-dim); margin: 0.5rem 0; }
+  .note .prose :global(a) { color: var(--color-accent-bright); }
+  .note .prose :global(a:hover) { color: var(--color-highlight-bright); }
+
+  .note-photos {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--space-2);
+    padding: 0;
+    margin: var(--space-2) 0 0;
+  }
+  .note-photo {
+    display: block;
+    width: 100%;
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: zoom-in;
+  }
+  .note-photo:hover img,
+  .note-photo:focus-visible img { border-color: var(--color-highlight); }
+  .note-photo:focus-visible { outline: 1px solid var(--color-highlight-bright); outline-offset: 2px; }
+  .note-photos img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    display: block;
+    border: 1px solid var(--color-hairline);
+  }
+
+  .photo-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem;
+    background: rgba(4, 6, 10, 0.9);
+  }
+  .photo-lightbox.is-open { display: flex; }
+  .photo-lightbox-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border: 1px solid var(--color-hairline-bright);
+  }
+  .photo-lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    background: none;
+    border: 1px solid var(--color-hairline-bright);
+    color: var(--color-text);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .photo-lightbox-close:hover { color: var(--color-highlight-bright); border-color: var(--color-highlight); }
+</style>
+
+<style is:global>
+  /* dev-only editor (dialog is created by script, so styles must be global) */
+  .dev-btn {
+    background: none;
+    border: 1px dashed var(--color-hairline-bright);
+    color: var(--color-text-dim);
+    padding: 0.25rem 0.6rem;
+    cursor: pointer;
+  }
+  .dev-btn:hover { color: var(--color-highlight-bright); border-color: var(--color-highlight); }
+  .note-edit { margin-left: 0.5rem; padding: 0.1rem 0.45rem; }
+
+  .note-editor {
+    width: min(720px, 95vw);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--color-bg-elevated);
+    color: var(--color-text);
+    border: 1px solid var(--color-hairline-bright);
+    border-radius: 4px;
+    padding: var(--space-3);
+  }
+  .note-editor::backdrop { background: rgba(10, 13, 18, 0.75); }
+  .note-editor form { display: grid; gap: 0.6rem; }
+  .note-editor .row { display: flex; gap: 0.6rem; }
+  .note-editor input,
+  .note-editor textarea {
+    width: 100%;
+    background: var(--color-bg-inset);
+    border: 1px solid var(--color-hairline-bright);
+    color: var(--color-text);
+    font: inherit;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.55rem;
+  }
+  .note-editor textarea { font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.5; }
+  .note-editor input[type='date'] { width: auto; }
+  .note-editor .date-label { display: grid; gap: 0.25rem; }
+  .note-editor .date-hint { color: var(--color-text-faint); }
+  .note-editor input[type='checkbox'] { width: auto; accent-color: var(--color-highlight); }
+  .note-editor .draft-toggle { display: flex; gap: 0.4rem; align-items: center; cursor: pointer; }
+  .note-editor button[type='submit'] {
+    background: var(--color-highlight);
+    border: none;
+    color: var(--color-bg);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.45rem 0.7rem;
+    cursor: pointer;
+  }
+  .note-editor button[type='submit']:hover { background: var(--color-highlight-bright); }
+  .note-editor #note-cancel {
+    background: none;
+    border: 1px solid var(--color-hairline-bright);
+    color: var(--color-text-dim);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.45rem 0.7rem;
+    cursor: pointer;
+  }
+  .note-editor #note-cancel:hover { color: var(--color-highlight-bright); border-color: var(--color-highlight); }
+
+  /* deliberately distinct from cancel/submit above: colored (not dim) at
+     rest and pushed to the far end of the row, so it reads as destructive
+     and isn't next to the buttons someone actually wants */
+  .note-editor .danger-btn {
+    background: none;
+    border: 1px solid var(--color-highlight-bright);
+    color: var(--color-highlight-bright);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.45rem 0.7rem;
+    cursor: pointer;
+    margin-left: auto;
+  }
+  .note-editor .danger-btn:hover { background: var(--color-highlight-bright); color: var(--color-bg); }
+  .note-editor .danger-btn:disabled { opacity: 0.5; cursor: default; }
+
+  .note-photos-edit {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .note-photo-thumb {
+    position: relative;
+    width: 72px;
+    height: 72px;
+  }
+  .note-photo-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border: 1px solid var(--color-hairline-bright);
+  }
+  .note-photo-remove {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 18px;
+    height: 18px;
+    line-height: 1;
+    padding: 0;
+    border-radius: 50%;
+    background: var(--color-highlight-bright);
+    color: var(--color-bg);
+    border: none;
+    font-size: 0.75rem;
+    cursor: pointer;
+  }
+  .note-photo-remove:disabled { opacity: 0.5; cursor: default; }
+
+  .add-photos-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    width: fit-content;
+    border: 1px dashed var(--color-hairline-bright);
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+  }
+  .add-photos-label:hover { color: var(--color-highlight-bright); border-color: var(--color-highlight); }
+  .add-photos-label input[type='file'] { display: none; }
+</style>

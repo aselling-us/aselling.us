@@ -1,0 +1,704 @@
+{
+  "fetchedAt": "2026-11-02T06:08:27.579Z",
+  "username": "aselling",
+  "films": [
+    {
+      "title": "The Substance",
+      "year": 2024,
+      "link": "https://letterboxd.com/aselling/film/the-substance/1/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/8/3/8/1/4/0/p/o7GFN0c1YvbnB0JmAb9aSoDDvdn-0-600-0-900-crop.jpg?v=515acb2d9a",
+      "rating": null,
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-10-31",
+      "review": "i think there is so much to take away from this film. was alot less gross on the second watch. very enjoyable to notice all of the shining references. \n\nremember, you are one. you cannot escape yourself."
+    },
+    {
+      "title": "Hocus Pocus",
+      "year": 1993,
+      "link": "https://letterboxd.com/aselling/film/hocus-pocus/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/6/2/2/9/p/jwOuMkY9Eb9XEje3fMae59zasP4-0-600-0-900-crop.jpg?v=4e51f5a666",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-10-28",
+      "review": "this was interesting i suppose. felt like a burton"
+    },
+    {
+      "title": "Solo Mio",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/solo-mio/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/1/7/4/3/2/2/p/AbWqSYUWOpuGjS23tXr3ohiJaHW-0-600-0-900-crop.jpg?v=9230c18cc0",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-25",
+      "review": "this was chill :)"
+    },
+    {
+      "title": "Videodrome",
+      "year": 1983,
+      "link": "https://letterboxd.com/aselling/film/videodrome/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/3/1/5/p/w5bqL9IiGIH0g4oq7ExFEq4KSl4-0-600-0-900-crop.jpg?v=46515b9456",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-10-23",
+      "review": "try not to say the name of the movie challenge"
+    },
+    {
+      "title": "Magnolia",
+      "year": 1999,
+      "link": "https://letterboxd.com/aselling/film/magnolia/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/7/2/8/p/fhHWjePJtaoFQaWTNKAh7asm0N5-0-600-0-900-crop.jpg?v=cc6c350cb5",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-22",
+      "review": "captivating as fuck but also i wanna cry and die. also included tom cruise boosting the importance of a calendar and Julianne Moore looking at the camera more seductively than ever."
+    },
+    {
+      "title": "The Lost Boys",
+      "year": 1987,
+      "link": "https://letterboxd.com/aselling/film/the-lost-boys/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/0/9/8/7/p/enFBXzn8xs5rdtSMC83AVWQ80FP-0-600-0-900-crop.jpg?v=71b8ca097a",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-18",
+      "review": "INSTANT top 5. the entire aesthetic ive needed in a movie. washing it down with a cold glass of Motley Crue and GnR."
+    },
+    {
+      "title": "Carrie",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/carrie-2026/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/6/1/8/1/6/8/p/5aVYFuwgAhv6KxdkC6F2CybgeIj-0-600-0-900-crop.jpg?v=e9e2ae6d0e",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-17",
+      "review": "a beautiful retelling of carrie, taking elements of our societal lives and placing them into the hands of a man who knows how to make you emotionally connected to every character in his work. foundational underline of words can hurt but social media and mob mentality can hurt worse. I enjoyed the addition of a spd through emaline. loved the final episode as always."
+    },
+    {
+      "title": "The Big Lebowski",
+      "year": 1998,
+      "link": "https://letterboxd.com/aselling/film/the-big-lebowski/1/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/9/3/5/p/3HXu7aEjiZjJFQQruTCij5yhHAJ-0-600-0-900-crop.jpg?v=dd1e3cd2ed",
+      "rating": null,
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-10-16",
+      "review": "the car been through more shit than me on a monday afternoon"
+    },
+    {
+      "title": "Burn After Reading",
+      "year": 2008,
+      "link": "https://letterboxd.com/aselling/film/burn-after-reading/1/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/9/0/5/4/p/AtdSavNWZgwmtD3Xz3rQdLk0UnO-0-600-0-900-crop.jpg?v=90b167b4ef",
+      "rating": null,
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-10-16",
+      "review": "jesus what a clusterfuck"
+    },
+    {
+      "title": "Resident Evil",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/resident-evil-2026/1/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/3/0/2/7/1/7/p/qku2uWSoJ9amQV5MWo1Eek29iji-0-600-0-900-crop.jpg?v=d519ab046d",
+      "rating": null,
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-10-13",
+      "review": "first viewing was for the jumpscares, second viewing was for the comedic relief and cinematography appreciation. \n\ngenuinely the best intro prologue / cold open sequence ive ever seen"
+    },
+    {
+      "title": "The Shining",
+      "year": 1980,
+      "link": "https://letterboxd.com/aselling/film/the-shining/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/4/3/2/p/4Zyk9d47uSk10GIEEwKjOLND3qx-0-600-0-900-crop.jpg?v=fe4929216f",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-03",
+      "review": "an instant favorite. surpassed every preexisting expectation I had for it, and more. barely took a breath during the last 30 minutes."
+    },
+    {
+      "title": "The Revenant",
+      "year": 2015,
+      "link": "https://letterboxd.com/aselling/film/the-revenant-2015/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/2/0/7/2/2/4/207224-the-revenant-0-600-0-900-crop.jpg?v=f51b30a589",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-10-03",
+      "review": "I normally don't do this, but I did not finish this one, but did give it a good try. I made it an hour in and watched up until a bit after the main starting event for this, but it was not not engaging. The shots were quite cool I suppose, very continuous, but the nature survival aspect was not for me."
+    },
+    {
+      "title": "O Brother, Where Art Thou?",
+      "year": 2000,
+      "link": "https://letterboxd.com/aselling/film/o-brother-where-art-thou/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/9/1/7/p/2YztYilviFCYcEtDAnrOstUWGie-0-600-0-900-crop.jpg?v=51162f4bbe",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-10-03",
+      "review": "a (nearly) waterless odyssey\n\ni yearn to have the dialect of george clooney in this film"
+    },
+    {
+      "title": "American Beauty",
+      "year": 1999,
+      "link": "https://letterboxd.com/aselling/film/american-beauty/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/2/7/0/3/p/xB9eO4pH1eI3MAXqku9wnTY4FQ1-0-600-0-900-crop.jpg?v=deea8bbc49",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-01",
+      "review": "Felt like a coen the way there were a million interconnected stories. \n\nNot used to seeing kevin spacey with hair."
+    },
+    {
+      "title": "Primetime",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/primetime-2026/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/2/6/2/0/1/9/1262019-primetime-2026-0-600-0-900-crop.jpg?v=41640d6988",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-27",
+      "review": "“I’ll have a bud light”\n“Its on NBC”\n“Budweiser then”"
+    },
+    {
+      "title": "Resident Evil",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/resident-evil-2026/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/3/0/2/7/1/7/p/dqpTqY3ch22sAYyq250lzzHVyDo-0-600-0-900-crop.jpg?v=7b3f5dba3a",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-25",
+      "review": "This review may contain spoilers.\n\nGenuinely one of the best movies of 2026. Austin Abrams is meant to play the whiny idiot in every movie. Ans Zach Cregger delivered so well with every shot. Sound, shadows, continuous shot, everything. \n\nIn my eyes, just don't stop if you hit someone in your car, I wouldn't.\n\nAll of this coming from someone who has never played or barely heard of resident evil."
+    },
+    {
+      "title": "The Craft",
+      "year": 1996,
+      "link": "https://letterboxd.com/aselling/film/the-craft/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/7/3/4/5/p/qdYKYBArXneOsPYIX1EFzFtJz5C-0-600-0-900-crop.jpg?v=7b34a64a36",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-24",
+      "review": "I LOVE movies about outcast groups of alt depressed girls committing nonserious crimes. Holy fuck this was so hot. \n\nSame vibes as Jennifers Body and Heathers. I wanna see practical magic next"
+    },
+    {
+      "title": "The World, the Flesh and the Devil",
+      "year": 1959,
+      "link": "https://letterboxd.com/aselling/film/the-world-the-flesh-and-the-devil/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/9/0/6/9/p/uMB51OAkdrAx7r1dztvLub6RyPJ-0-600-0-900-crop.jpg?v=bf99111fd0",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-22",
+      "review": "quite beautiful lowkey"
+    },
+    {
+      "title": "Romeo + Juliet",
+      "year": 1996,
+      "link": "https://letterboxd.com/aselling/film/romeo-juliet-1996/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/6/4/7/p/5OtrvCVYRhtbYcZb25wk6aQSuzs-0-600-0-900-crop.jpg?v=412d5b6ca3",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-16",
+      "review": "Baz' direction is so noticable, and extremely here. It takes a ton to get used to but its a lot of fun once you get used to it. definitely `love is a battlefield`"
+    },
+    {
+      "title": "The Exorcist",
+      "year": 1973,
+      "link": "https://letterboxd.com/aselling/film/the-exorcist/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/7/0/4/8/p/4Afhno6y4Ux4I3ps0uZTmYQCKc4-0-600-0-900-crop.jpg?v=fd6670a366",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-09-11",
+      "review": "Im sure this was quite a revolutionary film in the 70s but I did have some qualms with this. Overall though definitely deserved the best sound award or whatever it won. Pretty interesting effects too"
+    },
+    {
+      "title": "Beetlejuice",
+      "year": 1988,
+      "link": "https://letterboxd.com/aselling/film/beetlejuice/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/9/5/3/0/p/4va3Qym5PdvKK9zyayu39Jy9puC-0-600-0-900-crop.jpg?v=7c374b86a7",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-09",
+      "review": "I, too, would die for goth Winona Ryder."
+    },
+    {
+      "title": "After Hours",
+      "year": 1985,
+      "link": "https://letterboxd.com/aselling/film/after-hours/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/5/8/4/2/p/6dstQOB1ARUoVpAFWYSjZMH1Ts2-0-600-0-900-crop.jpg?v=35ae2530f7",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-07",
+      "review": "I had a girl like Marcy in my life. Gotta drop em as fast as possible. Also, good to recall here the famous how I Met your mother quote Nothing good happens after 2am. incredible, and I mean incredible, usage of Chekhov’s gun\n\n86/100"
+    },
+    {
+      "title": "Eyes Wide Shut",
+      "year": 1999,
+      "link": "https://letterboxd.com/aselling/film/eyes-wide-shut/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/7/1/7/p/1vY5jd68cMuQM6f4PvOlXmdjeF8-0-600-0-900-crop.jpg?v=10373bbbcc",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-06",
+      "review": "Lots to say about this. So much to understand but the aestheticism of the entire thing made it a seductive experience. Give up your inquiries for they are rendered useless. Also technically a Christmas movie"
+    },
+    {
+      "title": "A Clockwork Orange",
+      "year": 1971,
+      "link": "https://letterboxd.com/aselling/film/a-clockwork-orange/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/8/6/7/p/sk6jCkPtwtEBT0ezwsdmbhTFnDW-0-600-0-900-crop.jpg?v=2b9bdec9a5",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-05",
+      "review": "i will never hear classical Beethoven the same. definitely uncomfortable, definitely a fav. liked a lot of the second half of this a lot more.FOOOOOOD ALLLLRRRRIGGHHTTTTTT??"
+    },
+    {
+      "title": "Joker",
+      "year": 2019,
+      "link": "https://letterboxd.com/aselling/film/joker-2019/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/0/6/7/7/5/p/4tLz5kIi4hCjYLMaPmBlN6pZNdF-0-600-0-900-crop.jpg?v=eb6efc37a0",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-01",
+      "review": "The Joaquin Phoenix run of Her, Napoleon, and Joker is light years ahead of any Timothee Chalamet or Tom Holland filmography in my professional opinion"
+    },
+    {
+      "title": "Hall Pass",
+      "year": 2011,
+      "link": "https://letterboxd.com/aselling/film/hall-pass/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/6/5/8/3/p/dknAOstypoCvptUChZVLmEi5CW0-0-600-0-900-crop.jpg?v=85519b4e3e",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-30",
+      "review": "Men\n\n“Are you guys sure Applebees is the best place to meet hot horny women”"
+    },
+    {
+      "title": "Annabelle: Creation",
+      "year": 2017,
+      "link": "https://letterboxd.com/aselling/film/annabelle-creation/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/3/3/0/7/9/0/330790-annabelle-creation-0-600-0-900-crop.jpg?v=6ef299dffd",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-29",
+      "review": "omg a doll needs a girls soul so scary\n\n\"what was that?\"\n\"who cares? run\"\n\nis crazy writing to speak out in a horror movie"
+    },
+    {
+      "title": "Sicario",
+      "year": 2015,
+      "link": "https://letterboxd.com/aselling/film/sicario-2015/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/9/7/6/2/8/p/cbgSuptofEiugwbAUEa6XR8TenF-0-600-0-900-crop.jpg?v=5578f68eaa",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-29",
+      "review": "playing with wide scope large scale shots tickled my pickle"
+    },
+    {
+      "title": "The Conjuring: Last Rites",
+      "year": 2025,
+      "link": "https://letterboxd.com/aselling/film/the-conjuring-last-rites/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/9/3/6/0/6/5/p/kb1EEHZmjUlZWJwknbTVaMq8sYJ-0-600-0-900-crop.jpg?v=72638579f9",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-27",
+      "review": "i actually loved this. big fan of movies that play with mirrors, like literally all the mirrors had such a flirty vibe. ughhh. huge come back for the conjuring \n\n85/100"
+    },
+    {
+      "title": "The Mummy",
+      "year": 1999,
+      "link": "https://letterboxd.com/aselling/film/the-mummy-1999/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/5/5/4/p/tmtDYVLxZiuQJ1TcmqcAbOmCwr-0-600-0-900-crop.jpg?v=df575384c0",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-25",
+      "review": "they skipped past that bookshelf incident way too fast"
+    },
+    {
+      "title": "The Bling Ring",
+      "year": 2013,
+      "link": "https://letterboxd.com/aselling/film/the-bling-ring/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/7/9/8/9/3/p/nTsoUG6RzpcefTOKK1GSAaemWOG-0-600-0-900-crop.jpg?v=5894941c44",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-24",
+      "review": "the statement \"based on a vanity fair article\" in the intro credits had me hooked. Coppola does it again; saw alot of Marie Antoinette (2006) in this. Emma Watson stole this well. only complaint was the color grading switching constantly. \n\n87/100"
+    },
+    {
+      "title": "The Nun",
+      "year": 2018,
+      "link": "https://letterboxd.com/aselling/film/the-nun-2018/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/7/1/8/4/2/p/k22mrmbKA3nDS82eYEyJkGlHx3v-0-600-0-900-crop.jpg?v=787a022c06",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-23",
+      "review": "hey sisters\n\n64/100"
+    },
+    {
+      "title": "The Invite",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/the-invite-2026/1/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/8/5/4/8/3/1/p/caA6Lc69jrznKM4ostdwTkmd3pz-0-600-0-900-crop.jpg?v=3a0cf4ca4c",
+      "rating": null,
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-08-21",
+      "review": "next time you're in there, count the rings"
+    },
+    {
+      "title": "The Conjuring: The Devil Made Me Do It",
+      "year": 2021,
+      "link": "https://letterboxd.com/aselling/film/the-conjuring-the-devil-made-me-do-it/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/5/6/7/2/3/p/WcL9ZWI8n1hTp6IoKPwM7dpkYJ-0-600-0-900-crop.jpg?v=e2ab3d2623",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-18",
+      "review": "they made david look like Paul Dano in Prisoners \n\nalso how did sarah catherine hook get signed up for this shit\n\"are... you saying... someone... did this... to us... on purpose\"\n\n31/100"
+    },
+    {
+      "title": "mid90s",
+      "year": 2018,
+      "link": "https://letterboxd.com/aselling/film/mid90s/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/7/0/4/5/1/p/kC12onatWuaYlsfu490cO6o5lax-0-600-0-900-crop.jpg?v=51951cea3a",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-17",
+      "review": "definition of a chill movie. there is a character named Fuckshit."
+    },
+    {
+      "title": "Tenet",
+      "year": 2020,
+      "link": "https://letterboxd.com/aselling/film/tenet/1/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/0/6/0/3/2/p/d2LpeXs2XyPm2B7AxyIsHlE2ySc-0-600-0-900-crop.jpg?v=6d0ffb75e3",
+      "rating": null,
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-08-16",
+      "review": "fellas is it gay to know your work besties go-to drink before you even met him\n\nOne of Nolan's best paced films... He truly knows how to pair sound and intensity with the speed of a film. Sure, sometimes you have no clue what these people are saying — that is when you need to best focus on the visuals of the film.\n\nProud owner of TENET on Blu-ray.\n94/100"
+    },
+    {
+      "title": "Ferris Bueller's Day Off",
+      "year": 1986,
+      "link": "https://letterboxd.com/aselling/film/ferris-buellers-day-off/2/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/7/2/1/9/p/zACzLwjg8WqWh2tEKiee9w90Z7b-0-600-0-900-crop.jpg?v=2a3ea45b90",
+      "rating": null,
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-08-15",
+      "review": "My best friend's sister's boyfriend's brother's girlfriend heard from this guy who knows this kid who's going with the girl who saw Ferris pass out at 31 Flavors last night.Thank you, Simone.No problem, whatsoever"
+    },
+    {
+      "title": "Leviticus",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/leviticus-2026/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/4/3/7/6/2/2/p/nm1GXDe9riIWZzTvvS4za5aPwmY-0-600-0-900-crop.jpg?v=4d83fb2ab7",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-14",
+      "review": ":(\nI had such high hopes for this. My only worry walking in was that it would be too short at a run time of 88 minutes.\n\nI fear I strongly was disappointed. I think the trailer made it seem like a twisted horror movie with extreme sound and jumpscares. Rather this seemed quite like a calming film with attempts to combine romance, erotic thriller, psychological horror, and religious horror. It was quite the copy paste of It Follows but extremely peaceful, a bit of kissing intermixed, and a SEVERE LACK of any music deserving of a horror film.\n\nRegarding the cinematography, it felt like the bulk of the movie was cuts every 10-20 seconds. As a long form shot enjoyer, this was extremely below my bar for horror movies. Pretty much no follow shots, either. Mainly utilized abrupt transitions from close to far shots. \n\nWith maybe only one abrupt jumpscare and a very short scene of violent blood, I am hesitant to call this even a horror movie. At least it was short; maybe I give it a rewatch in the future.\n\n34/100"
+    },
+    {
+      "title": "The Conjuring 2",
+      "year": 2016,
+      "link": "https://letterboxd.com/aselling/film/the-conjuring-2/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/8/3/2/5/5/p/pbUZSZPfCAVT8rcHGVJpSNlW49Z-0-600-0-900-crop.jpg?v=7e006c6840",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-12",
+      "review": "this is as close to hell as i ever want to get.cuts to a London montage\n\nanyone who claims that this movie is overfilled with jumpscares or not a true horror movie is full of bloody Hokum, that is the entire point of this genre and James Wan did it justice. Patrick Wilson's Elvis impression sent shivers...\n\n86/100"
+    },
+    {
+      "title": "(500) Days of Summer",
+      "year": 2009,
+      "link": "https://letterboxd.com/aselling/film/500-days-of-summer/8/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/9/3/5/0/p/eQQ4ZLWrDwK3MsqaVKRjGqv29vd-0-600-0-900-crop.jpg?v=ddc869f63f",
+      "rating": null,
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-08-11",
+      "review": "had to make sure nothing changed since I last watched this 8 weeks ago."
+    },
+    {
+      "title": "The Purge",
+      "year": 2013,
+      "link": "https://letterboxd.com/aselling/film/the-purge/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/1/8/1/1/0/p/x6hwbnR2nGacSzljqYaXY25w1Me-0-600-0-900-crop.jpg?v=1ad146e519",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-10",
+      "review": "regretfully I bought this in Blu-ray due to the sole casting of Ethan Hawke. \n\nsecond movie where a crime becomes legal for 12 hours in less than a week.\n\nalso why is this shot like shark tank like the music and the shots"
+    },
+    {
+      "title": "Suspicion",
+      "year": 1941,
+      "link": "https://letterboxd.com/aselling/film/suspicion/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/5/2/8/1/p/w7FfVu8PitqBX6XvItcgWRzpR9e-0-600-0-900-crop.jpg?v=7f6c27c775",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-09",
+      "review": "this guy had worse pick up lines than guys i know today and somehow the still married him. Like why are we marrying who calls you \"Monkeyface\". \n\nHowever, for a 40s film (and my first Hitchcock!) this was quite impressive. Lots of cuts so I wonder how difficult it was to edit."
+    },
+    {
+      "title": "Insidious",
+      "year": 2010,
+      "link": "https://letterboxd.com/aselling/film/insidious/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/6/5/5/6/p/wyW7absvZmdXaPjflIjacZgyy3U-0-600-0-900-crop.jpg?v=2729cff519",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-08",
+      "review": "this was not a fun watch in bed at night in an old creaky apartment\n\nwhat is with rose byrne having kids connected to heart rate monitors like get better kids\n\nwtf was that ending though"
+    },
+    {
+      "title": "28 Years Later: The Bone Temple",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/28-years-later-the-bone-temple/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/1/5/6/4/0/9/p/3zbEJRz7KbjYytn4cKEfUH6dOsj-0-600-0-900-crop.jpg?v=583a69e676",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-08",
+      "review": "Ralph Fiennes undressing to Girls on Film by Duran Duran was not on my 2026 cinema bingo card.\n\nGoing to tell my kids \"The Bone Temple\" was a frat house"
+    },
+    {
+      "title": "Romería",
+      "year": 2025,
+      "link": "https://letterboxd.com/aselling/film/romeria/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/0/6/9/0/3/7/p/jWtKPt6mXnwmdTRD1RuKSWsT1PH-0-600-0-900-crop.jpg?v=0c5249a823",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-07",
+      "review": "This was such a beautiful film. What really stood out was the color grading, immaculate blending of colors on the screen with a bit of shading to make them stand out a bit more. Even the night time shots for the shadows had such a bright undertone to them. \n\nI think it was quite the interesting, but really fitting choice to have the same actress play Marina and her mother. Beautiful flashback \"rebellion\" sequence. Glad she finally found her home 🩵🌊"
+    },
+    {
+      "title": "One Night Only",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/one-night-only-2026/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/3/1/1/6/7/7/p/uNyLeD7Dee8HsE01DzimLSdLj1F-0-600-0-900-crop.jpg?v=b21f6a72b6",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-06",
+      "review": "me n who me n who me n who me n who me n who me n who me n who me n who me n who\n\n91/100"
+    },
+    {
+      "title": "Waves",
+      "year": 2019,
+      "link": "https://letterboxd.com/aselling/film/waves-2019/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/6/2/5/7/3/p/wsIgcL28ElAlU2briIII6QiNyyD-0-600-0-900-crop.jpg?v=79ac8a7d34",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-05",
+      "review": "a24 delivers again. incredible dual narrative of how love and loss affects all differently. talk about the color grading on this, and soundtrack by the same guys on Challengers. I liked the aspect ratio alteration a ton.You have to take a leap of faiththat's all anything is, a leap of faith. \n\n77/100"
+    },
+    {
+      "title": "Nuremberg",
+      "year": 2025,
+      "link": "https://letterboxd.com/aselling/film/nuremberg-2025/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/0/9/8/7/8/2/1098782-nuremberg-2025-0-600-0-900-crop.jpg?v=954f98ffb4",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-04",
+      "review": "don't take this the wrong way but I never wanna see you againah yes, fuck you respectfully"
+    },
+    {
+      "title": "The Hateful Eight",
+      "year": 2015,
+      "link": "https://letterboxd.com/aselling/film/the-hateful-eight/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/9/7/0/1/2/p/jpWHM7rZ6QnvbQFm8ZqQMiYZUx9-0-600-0-900-crop.jpg?v=cf42958898",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-03",
+      "review": "This review may contain spoilers.\n\nThe Invite (2026) but racist and bloody"
+    },
+    {
+      "title": "Gladiator",
+      "year": 2000,
+      "link": "https://letterboxd.com/aselling/film/gladiator-2000/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/9/5/2/p/8VzEjOeuUfi7jygbJz02B8V5Ti5-0-600-0-900-crop.jpg?v=db753eb215",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-02",
+      "review": "as is said in squid game,we are not horses, we are humans."
+    }
+  ],
+  "favorites": [
+    {
+      "title": "(500) Days of Summer",
+      "year": 2009,
+      "link": "https://letterboxd.com/film/500-days-of-summer/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/9/3/5/0/p/6h6nfckQgkvYBGd7BbXQcoaNDRW-0-600-0-900-crop.jpg?v=e6451fd68d"
+    },
+    {
+      "title": "The Lost Boys",
+      "year": 1987,
+      "link": "https://letterboxd.com/film/the-lost-boys/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/0/9/8/7/p/enFBXzn8xs5rdtSMC83AVWQ80FP-0-600-0-900-crop.jpg?v=71b8ca097a"
+    },
+    {
+      "title": "Ferris Bueller's Day Off",
+      "year": 1986,
+      "link": "https://letterboxd.com/film/ferris-buellers-day-off/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/7/2/1/9/p/zACzLwjg8WqWh2tEKiee9w90Z7b-0-600-0-900-crop.jpg?v=2a3ea45b90"
+    },
+    {
+      "title": "Resident Evil",
+      "year": 2026,
+      "link": "https://letterboxd.com/film/resident-evil-2026/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/3/0/2/7/1/7/p/dqpTqY3ch22sAYyq250lzzHVyDo-0-600-0-900-crop.jpg?v=7b3f5dba3a"
+    }
+  ],
+  "watchlist": [
+    {
+      "title": "Spider-Man: Into the Spider-Verse",
+      "year": 2018,
+      "link": "https://letterboxd.com/film/spider-man-into-the-spider-verse/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/2/5/1/9/4/3/251943-spider-man-into-the-spider-verse-0-600-0-900-crop.jpg?v=538fe0ada6"
+    },
+    {
+      "title": "Spider-Man: Across the Spider-Verse",
+      "year": 2023,
+      "link": "https://letterboxd.com/film/spider-man-across-the-spider-verse/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/9/7/6/3/1/497631-spider-man-across-the-spider-verse-0-600-0-900-crop.jpg?v=f2acbf1b8a"
+    },
+    {
+      "title": "Spider-Man: No Way Home",
+      "year": 2021,
+      "link": "https://letterboxd.com/film/spider-man-no-way-home/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/6/0/7/8/7/560787-spider-man-no-way-home-0-600-0-900-crop.jpg?v=a336d4f40c"
+    },
+    {
+      "title": "The Silence of the Lambs",
+      "year": 1991,
+      "link": "https://letterboxd.com/film/the-silence-of-the-lambs/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/7/8/2/51782-the-silence-of-the-lambs-0-600-0-900-crop.jpg?v=18d88bdff4"
+    },
+    {
+      "title": "The Godfather",
+      "year": 1972,
+      "link": "https://letterboxd.com/film/the-godfather/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/8/1/8/51818-the-godfather-0-600-0-900-crop.jpg?v=bca8b67402"
+    },
+    {
+      "title": "The Shawshank Redemption",
+      "year": 1994,
+      "link": "https://letterboxd.com/film/the-shawshank-redemption/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/7l/hn/46/uz/zGINvGjdlO6TJRu9wESQvWlOKVT-0-600-0-900-crop.jpg?v=8736d1c395"
+    },
+    {
+      "title": "Deadpool & Wolverine",
+      "year": 2024,
+      "link": "https://letterboxd.com/film/deadpool-wolverine/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/6/2/8/7/0/462870-deadpool-wolverine-0-600-0-900-crop.jpg?v=1aa778d2c6"
+    },
+    {
+      "title": "Spider-Man: Homecoming",
+      "year": 2017,
+      "link": "https://letterboxd.com/film/spider-man-homecoming/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/2/4/2/7/1/0/242710-spider-man-homecoming-0-600-0-900-crop.jpg?v=61e8c57229"
+    },
+    {
+      "title": "Pride & Prejudice",
+      "year": 2005,
+      "link": "https://letterboxd.com/film/pride-prejudice/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/nq/jo/26/tn/dAC0hkYmz5ZOCHURZCyj9isPMPd-0-600-0-900-crop.jpg?v=b3dac3ffd7"
+    },
+    {
+      "title": "Inside Out 2",
+      "year": 2024,
+      "link": "https://letterboxd.com/film/inside-out-2-2024/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/9/2/1/5/7/8/921578-inside-out-2-0-600-0-900-crop.jpg?v=efa25e5cca"
+    },
+    {
+      "title": "Spider-Man: Far From Home",
+      "year": 2019,
+      "link": "https://letterboxd.com/film/spider-man-far-from-home/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/3/6/2/9/7/7/362977-spider-man-far-from-home-0-600-0-900-crop.jpg?v=d139fbf2ae"
+    },
+    {
+      "title": "No Country for Old Men",
+      "year": 2007,
+      "link": "https://letterboxd.com/film/no-country-for-old-men/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/dr/hr/pz/ez/ehLb2SQ3djlA1FrQKbP2WO3VH09-0-600-0-900-crop.jpg?v=6489920a92"
+    },
+    {
+      "title": "The Avengers",
+      "year": 2012,
+      "link": "https://letterboxd.com/film/the-avengers-2012/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/3/6/7/7/8/36778-the-avengers-2012-0-600-0-900-crop.jpg?v=d0e2add158"
+    },
+    {
+      "title": "Past Lives",
+      "year": 2023,
+      "link": "https://letterboxd.com/film/past-lives/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/9/1/0/5/3/591053-past-lives-0-600-0-900-crop.jpg?v=c600b7854e"
+    },
+    {
+      "title": "Mamma Mia!",
+      "year": 2008,
+      "link": "https://letterboxd.com/film/mamma-mia/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/10/5l/wu/jl/gOm2iMMbC6EonrFzmSQ8xvCa4Ei.jpg-0-600-0-900-crop.jpg?v=e49de6f770"
+    },
+    {
+      "title": "Harry Potter and the Goblet of Fire",
+      "year": 2005,
+      "link": "https://letterboxd.com/film/harry-potter-and-the-goblet-of-fire/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/4/5/0/51450-harry-potter-and-the-goblet-of-fire-0-600-0-900-crop.jpg?v=6b5c9896c9"
+    },
+    {
+      "title": "Nope",
+      "year": 2022,
+      "link": "https://letterboxd.com/film/nope/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/6/8/2/5/4/7/682547-nope-0-600-0-900-crop.jpg?v=d6a6158cc3"
+    },
+    {
+      "title": "2001: A Space Odyssey",
+      "year": 1968,
+      "link": "https://letterboxd.com/film/2001-a-space-odyssey/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/9/8/7/51987-2001-a-space-odyssey-0-600-0-900-crop.jpg?v=a69c46a272"
+    },
+    {
+      "title": "Brokeback Mountain",
+      "year": 2005,
+      "link": "https://letterboxd.com/film/brokeback-mountain/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/9/0/9/51909-brokeback-mountain-0-600-0-900-crop.jpg?v=40ad2b59a0"
+    },
+    {
+      "title": "Alien",
+      "year": 1979,
+      "link": "https://letterboxd.com/film/alien/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/8v/f1/qw/aa/bg7K6VtUG7Ew70gQj6SSroD5d4R-0-600-0-900-crop.jpg?v=a932f9e98e"
+    }
+  ]
+}
