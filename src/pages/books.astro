@@ -1,28 +1,36 @@
 ---
-import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Quote from '../components/Quote.astro';
-import BookGrid from '../components/BookGrid.astro';
-import { renderInlineMarkdown, stripMarkdown } from '../lib/inline-markdown.mjs';
-import hardcover from '../data/hardcover.json';
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Quote from "../components/Quote.astro";
+import BookGrid from "../components/BookGrid.astro";
+import {
+  renderInlineMarkdown,
+  stripMarkdown,
+} from "../lib/inline-markdown.mjs";
+import hardcover from "../data/hardcover.json";
 
 // snapshot written by `node src/lib/hardcover.ts`
 const { current: currentlyReading, wantToRead: toRead, read } = hardcover;
 const profileUrl = `https://hardcover.app/@${hardcover.username}`;
 const readShelfUrl = `${profileUrl}/books/read`;
 const toReadShelfUrl = `${profileUrl}/books/want-to-read`;
-const updated = hardcover.fetchedAt.slice(0, 16).replace('T', ' · ') + ' utc';
+const updated = hardcover.fetchedAt.slice(0, 16).replace("T", " · ") + " utc";
 
 const fmtDate = (iso: string | null) =>
   iso
-    ? new Date(iso + 'T00:00:00Z').toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        timeZone: 'UTC',
+    ? new Date(iso + "T00:00:00Z").toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        timeZone: "UTC",
       })
     : null;
+
+type CurrentBook = (typeof currentlyReading)[number];
+const pct = (book: CurrentBook) =>
+  Math.round((book.currentPage / book.totalPages) * 100);
+const left = (book: CurrentBook) => book.totalPages - book.currentPage;
 
 // 7 columns × 2 rows per page — matches the fixed 7-column grid in BookGrid.
 // Mobile drops to a 2-column grid (see BookGrid's <=700px breakpoint), so
@@ -36,7 +44,7 @@ const MOBILE_PAGE_SIZE = 6;
 // scripts/dev-edit-marginalia.mjs, mounted at /__edit-marginalia. Entries
 // with no image (a photo that never finished uploading) are dropped rather
 // than shown broken.
-const marginalia = (await getCollection('marginalia'))
+const marginalia = (await getCollection("marginalia"))
   .filter((entry) => entry.data.image)
   .sort((a, b) => a.data.order - b.data.order);
 
@@ -46,140 +54,304 @@ const marginaliaDevJson = import.meta.env.DEV
       marginalia.map((entry) => ({
         id: entry.id,
         date: entry.data.date.toISOString().slice(0, 10),
-        caption: entry.data.caption ?? '',
+        caption: entry.data.caption ?? "",
         hasImage: Boolean(entry.data.image),
-      }))
-    ).replace(/</g, '\\u003c')
-  : '';
+      })),
+    ).replace(/</g, "\\u003c")
+  : "";
 ---
-<BaseLayout title="Reading" description="Books I've read, pulled from my Hardcover shelves.">
+
+<BaseLayout
+  title="Reading"
+  description="Books I've read, pulled from my Hardcover shelves."
+>
   <!-- <span class="mono-label">index / 04</span> -->
   <h1>Reading</h1>
   <p class="lede">
-    Pulled from my <a href={profileUrl} target="_blank" rel="noopener noreferrer">Hardcover shelves</a>.
+    Pulled from my <a
+      href={profileUrl}
+      target="_blank"
+      rel="noopener noreferrer">Hardcover shelves</a
+    >.
   </p>
   <Quote cite="— Albert Camus">
-    You will never be able to experience everything. So, please, do poetical justice to your soul and simply experience yourself.
+    You will never be able to experience everything. So, please, do poetical
+    justice to your soul and simply experience yourself.
   </Quote>
 
   <div class="reading-row">
-  {currentlyReading.length > 0 && (
-    <section>
-      <h2 class="mono-label section-label">currently reading / {String(currentlyReading.length).padStart(2, '0')}</h2>
-      <ul class="current-list">
-        {currentlyReading.map((book) => (
-          <li class="current-item">
-            {book.cover && (
-              <a href={book.link} target="_blank" rel="noopener noreferrer">
-                <img class="current-cover" src={book.cover} alt={`Cover of ${book.title}`} loading="lazy" referrerpolicy="no-referrer" />
-              </a>
+    {
+      currentlyReading.length > 0 && (
+        <section>
+          <h2 class="mono-label section-label">
+            currently reading /{" "}
+            {String(currentlyReading.length).padStart(2, "0")}
+          </h2>
+          <ul class="current-list">
+            {currentlyReading.map((book) => (
+              <li class="current-item">
+                {book.cover && (
+                  <a href={book.link} target="_blank" rel="noopener noreferrer">
+                    <img
+                      class="current-cover"
+                      src={book.cover}
+                      alt={`Cover of ${book.title}`}
+                      loading="lazy"
+                      referrerpolicy="no-referrer"
+                    />
+                  </a>
+                )}
+                <div>
+                  <a
+                    class="book-title"
+                    href={book.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {book.title}
+                  </a>
+                  <span class="book-author">{book.author}</span>
+                  {book.startedAt && (
+                    <span class="mono-label">
+                      started / {fmtDate(book.startedAt)}
+                    </span>
+                  )}
+                                
+                  {book.currentPage && book.totalPages && (
+                    <div
+                      class="progress"
+                      role="progressbar"
+                      aria-label={`Reading progress for ${book.title}`}
+                      aria-valuemin="0"
+                      aria-valuemax={book.totalPages}
+                      aria-valuenow={book.currentPage}
+                      style={`--p: ${pct(book)}`}
+                    >
+                      <div class="progress-scale">
+                        <div class="progress-fill" />
+                        <div class="progress-head">
+                          <span class="progress-pct">{pct(book)}%</span>
+                        </div>
+                      </div>
+                      <div class="progress-meta">
+                        <span class="mono-label">page {book.currentPage} / {book.totalPages}</span>
+                        <span class="mono-label">{left(book) === 0 ? 'finished' : `${left(book)} left`}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      (marginalia.length > 0 || import.meta.env.DEV) && (
+        <section>
+          <div class="section-header">
+            <h2 class="mono-label section-label">
+              From The Margins / {String(marginalia.length).padStart(2, "0")}
+            </h2>
+            {import.meta.env.DEV && (
+              <button
+                id="new-marginalia"
+                class="dev-btn mono-label"
+                type="button"
+                title="Dev only: writes src/content/marginalia/<slug>.md"
+              >
+                + add photo
+              </button>
             )}
-            <div>
-              <a class="book-title" href={book.link} target="_blank" rel="noopener noreferrer">{book.title}</a>
-              <span class="book-author">{book.author}</span>
-              {book.startedAt && <span class="mono-label">started / {fmtDate(book.startedAt)}</span>}
-              {book.currentPage && book.totalPages && (
-                <div class="progress">
-                  <div class="progress-track">
-                    <div class="progress-fill" style={`width: ${Math.round((book.currentPage / book.totalPages) * 100)}%`} />
-                  </div>
-                  <span class="mono-label progress-label">page {book.currentPage} / {book.totalPages}</span>
+          </div>
+
+          {marginalia.length === 0 && <p class="empty-state">No photos yet.</p>}
+
+          {marginalia.length > 0 && (
+            <div class="marginalia-carousel">
+              <div class="marginalia-frame">
+                <ul class="marginalia-slides">
+                  {marginalia.map((entry, i) => (
+                    <li
+                      class:list={[
+                        "marginalia-slide",
+                        { "is-active": i === 0 },
+                      ]}
+                    >
+                      <div class="marginalia-photo-box">
+                        <a
+                          href={entry.data.image!.src}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Image
+                            src={entry.data.image!}
+                            alt={
+                              entry.data.caption
+                                ? stripMarkdown(entry.data.caption)
+                                : "Photo of a book"
+                            }
+                            width={480}
+                            class="marginalia-photo"
+                          />
+                        </a>
+                      </div>
+                      <span class="marginalia-caption mono-label">
+                        {entry.data.date.toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                          timeZone: "UTC",
+                        })}
+                        {entry.data.caption && (
+                          <>
+                            {" · "}
+                            <span
+                              set:html={renderInlineMarkdown(
+                                entry.data.caption,
+                              )}
+                            />
+                          </>
+                        )}
+                      </span>
+                      {import.meta.env.DEV && (
+                        <div class="marginalia-dev-row">
+                          <button
+                            class="marginalia-edit dev-btn mono-label"
+                            data-id={entry.id}
+                            type="button"
+                          >
+                            edit
+                          </button>
+                        </div>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                {marginalia.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      class="marginalia-arrow marginalia-prev"
+                      aria-label="Previous photo"
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M15 6l-6 6 6 6" />
+                      </svg>
+                    </button>
+                    <button
+                      type="button"
+                      class="marginalia-arrow marginalia-next"
+                      aria-label="Next photo"
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M9 6l6 6-6 6" />
+                      </svg>
+                    </button>
+                    <span class="marginalia-count mono-label">
+                      1 / {marginalia.length}
+                    </span>
+                  </>
+                )}
+              </div>
+              {import.meta.env.DEV && marginalia.length > 1 && (
+                <div class="marginalia-thumbs" data-reorder>
+                  {marginalia.map((entry, i) => (
+                    <div class="marginalia-thumb-item" data-key={entry.id}>
+                      <img
+                        class="marginalia-thumb"
+                        src={entry.data.image!.src}
+                        draggable="false"
+                        alt=""
+                        loading="lazy"
+                      />
+                      {i === 0 && (
+                        <span class="thumb-cover-badge mono-label">cover</span>
+                      )}
+                      <span class="thumb-num mono-label">{i + 1}</span>
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
-          </li>
-        ))}
-      </ul>
-    </section>
-  )}
-
-  {(marginalia.length > 0 || import.meta.env.DEV) && (
-    <section>
-      <div class="section-header">
-        <h2 class="mono-label section-label">From The Margins / {String(marginalia.length).padStart(2, '0')}</h2>
-        {import.meta.env.DEV && (
-          <button id="new-marginalia" class="dev-btn mono-label" type="button" title="Dev only: writes src/content/marginalia/<slug>.md">+ add photo</button>
-        )}
-      </div>
-
-      {marginalia.length === 0 && <p class="empty-state">No photos yet.</p>}
-
-      {marginalia.length > 0 && (
-        <div class="marginalia-carousel">
-          <div class="marginalia-frame">
-            <ul class="marginalia-slides">
-              {marginalia.map((entry, i) => (
-                <li class:list={['marginalia-slide', { 'is-active': i === 0 }]}>
-                  <div class="marginalia-photo-box">
-                    <a href={entry.data.image!.src} target="_blank" rel="noopener noreferrer">
-                      <Image src={entry.data.image!} alt={entry.data.caption ? stripMarkdown(entry.data.caption) : 'Photo of a book'} width={480} class="marginalia-photo" />
-                    </a>
-                  </div>
-                  <span class="marginalia-caption mono-label">
-                    {entry.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })}
-                    {entry.data.caption && (
-                      <>
-                        {' · '}
-                        <span set:html={renderInlineMarkdown(entry.data.caption)} />
-                      </>
-                    )}
-                  </span>
-                  {import.meta.env.DEV && (
-                    <div class="marginalia-dev-row">
-                      <button class="marginalia-edit dev-btn mono-label" data-id={entry.id} type="button">edit</button>
-                    </div>
-                  )}
-                </li>
-              ))}
-            </ul>
-            {marginalia.length > 1 && (
-              <>
-                <button type="button" class="marginalia-arrow marginalia-prev" aria-label="Previous photo">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>
-                </button>
-                <button type="button" class="marginalia-arrow marginalia-next" aria-label="Next photo">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
-                </button>
-                <span class="marginalia-count mono-label">1 / {marginalia.length}</span>
-              </>
-            )}
-          </div>
-          {import.meta.env.DEV && marginalia.length > 1 && (
-            <div class="marginalia-thumbs" data-reorder>
-              {marginalia.map((entry, i) => (
-                <div class="marginalia-thumb-item" data-key={entry.id}>
-                  <img class="marginalia-thumb" src={entry.data.image!.src} draggable="false" alt="" loading="lazy" />
-                  {i === 0 && <span class="thumb-cover-badge mono-label">cover</span>}
-                  <span class="thumb-num mono-label">{i + 1}</span>
-                </div>
-              ))}
-            </div>
           )}
-        </div>
-      )}
 
-      {import.meta.env.DEV && <script type="application/json" id="marginalia-dev-data" set:html={marginaliaDevJson} />}
-    </section>
-  )}
+          {import.meta.env.DEV && (
+            <script
+              type="application/json"
+              id="marginalia-dev-data"
+              set:html={marginaliaDevJson}
+            />
+          )}
+        </section>
+      )
+    }
   </div>
 
   <section>
     <h2 class="mono-label section-label">
-      read / {String(read.length).padStart(2, '0')}
-      <a class="shelf-link" href={readShelfUrl} target="_blank" rel="noopener noreferrer">view on Hardcover →</a>
+      read / {String(read.length).padStart(2, "0")}
+      <a
+        class="shelf-link"
+        href={readShelfUrl}
+        target="_blank"
+        rel="noopener noreferrer">view on Hardcover →</a
+      >
     </h2>
-    <BookGrid books={read} gridId="read-grid" paginationLabel="Read shelf pages" pageSize={PAGE_SIZE} mobilePageSize={MOBILE_PAGE_SIZE} showMeta fmtDate={fmtDate} />
+    <BookGrid
+      books={read}
+      gridId="read-grid"
+      paginationLabel="Read shelf pages"
+      pageSize={PAGE_SIZE}
+      mobilePageSize={MOBILE_PAGE_SIZE}
+      showMeta
+      fmtDate={fmtDate}
+    />
   </section>
 
-  {toRead.length > 0 && (
-    <section>
-      <h2 class="mono-label section-label">
-        want to read / {String(toRead.length).padStart(2, '0')}
-        <a class="shelf-link" href={toReadShelfUrl} target="_blank" rel="noopener noreferrer">view on Hardcover →</a>
-      </h2>
-      <BookGrid books={toRead} gridId="toread-grid" paginationLabel="Want to read shelf pages" pageSize={PAGE_SIZE} mobilePageSize={MOBILE_PAGE_SIZE} />
-    </section>
-  )}
+  {
+    toRead.length > 0 && (
+      <section>
+        <h2 class="mono-label section-label">
+          want to read / {String(toRead.length).padStart(2, "0")}
+          <a
+            class="shelf-link"
+            href={toReadShelfUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            view on Hardcover →
+          </a>
+        </h2>
+        <BookGrid
+          books={toRead}
+          gridId="toread-grid"
+          paginationLabel="Want to read shelf pages"
+          pageSize={PAGE_SIZE}
+          mobilePageSize={MOBILE_PAGE_SIZE}
+        />
+      </section>
+    )
+  }
 
   <footer class="data-footer">
     <span class="mono-label">source / hardcover api</span>
@@ -191,26 +363,37 @@ const marginaliaDevJson = import.meta.env.DEV
   // marginalia carousel — cycles through entries (each has exactly one
   // photo), unlike /travels' per-place carousel which cycles through one
   // place's multiple photos. A real public feature, not dev-only.
-  document.querySelectorAll<HTMLElement>('.marginalia-carousel').forEach((carousel) => {
-    const slides = Array.from(carousel.querySelectorAll<HTMLElement>('.marginalia-slide'));
-    if (slides.length < 2) return;
-    const counter = carousel.querySelector('.marginalia-count');
-    let index = Math.max(slides.findIndex((s) => s.classList.contains('is-active')), 0);
+  document
+    .querySelectorAll<HTMLElement>(".marginalia-carousel")
+    .forEach((carousel) => {
+      const slides = Array.from(
+        carousel.querySelectorAll<HTMLElement>(".marginalia-slide"),
+      );
+      if (slides.length < 2) return;
+      const counter = carousel.querySelector(".marginalia-count");
+      let index = Math.max(
+        slides.findIndex((s) => s.classList.contains("is-active")),
+        0,
+      );
 
-    const show = (i: number) => {
-      slides[index].classList.remove('is-active');
-      index = (i + slides.length) % slides.length;
-      slides[index].classList.add('is-active');
-      if (counter) counter.textContent = `${index + 1} / ${slides.length}`;
-    };
+      const show = (i: number) => {
+        slides[index].classList.remove("is-active");
+        index = (i + slides.length) % slides.length;
+        slides[index].classList.add("is-active");
+        if (counter) counter.textContent = `${index + 1} / ${slides.length}`;
+      };
 
-    carousel.querySelector('.marginalia-prev')?.addEventListener('click', () => show(index - 1));
-    carousel.querySelector('.marginalia-next')?.addEventListener('click', () => show(index + 1));
-  });
+      carousel
+        .querySelector(".marginalia-prev")
+        ?.addEventListener("click", () => show(index - 1));
+      carousel
+        .querySelector(".marginalia-next")
+        ?.addEventListener("click", () => show(index + 1));
+    });
 </script>
 
 <script>
-  import { wireDragReorder } from '../lib/dev-drag-reorder';
+  import { wireDragReorder } from "../lib/dev-drag-reorder";
 
   // dev-only "marginalia" photo editor — import.meta.env.DEV is statically
   // false in builds, so none of this ships
@@ -223,9 +406,10 @@ const marginaliaDevJson = import.meta.env.DEV
     }
 
     const entries: MarginaliaData[] = JSON.parse(
-      document.getElementById('marginalia-dev-data')?.textContent ?? '[]'
+      document.getElementById("marginalia-dev-data")?.textContent ?? "[]",
     );
-    const esc = (s: string) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+    const esc = (s: string) =>
+      s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 
     // Best-effort JPEG EXIF DateTimeOriginal reader — no library, just
     // enough of the JPEG/TIFF/EXIF segment format to find one tag. Returns
@@ -239,8 +423,9 @@ const marginaliaDevJson = import.meta.env.DEV
 
       const readTagAscii = (entryOffset: number): string | null => {
         const valueOffset = tiffStart + u32(entryOffset + 8);
-        let str = '';
-        for (let j = 0; j < 19; j++) str += String.fromCharCode(view.getUint8(valueOffset + j));
+        let str = "";
+        for (let j = 0; j < 19; j++)
+          str += String.fromCharCode(view.getUint8(valueOffset + j));
         const m = str.match(/^(\d{4}):(\d{2}):(\d{2})/);
         return m ? `${m[1]}-${m[2]}-${m[3]}` : null;
       };
@@ -303,138 +488,177 @@ const marginaliaDevJson = import.meta.env.DEV
       return null;
     }
 
-    const dialog = document.createElement('dialog');
-    dialog.className = 'marginalia-editor';
+    const dialog = document.createElement("dialog");
+    dialog.className = "marginalia-editor";
     document.body.append(dialog);
 
     const open = (entry?: MarginaliaData) => {
       dialog.innerHTML = `
         <form id="marginalia-form">
-          <span class="mono-label">${entry ? `edit · src/content/marginalia/${esc(entry.id)}.md` : 'new photo'}</span>
+          <span class="mono-label">${entry ? `edit · src/content/marginalia/${esc(entry.id)}.md` : "new photo"}</span>
           <input id="marginalia-date-input" name="date" type="date" required value="${esc(entry?.date ?? new Date().toISOString().slice(0, 10))}" />
-          <input name="caption" placeholder="Caption (optional, markdown ok) — e.g. book title" value="${esc(entry?.caption ?? '')}" />
-          <label class="mono-label photo-label">photo ${entry?.hasImage ? '(leave empty to keep current)' : ''}
-            <input id="marginalia-photo-input" type="file" name="photo" accept="image/*" ${entry ? '' : 'required'} />
+          <input name="caption" placeholder="Caption (optional, markdown ok) — e.g. book title" value="${esc(entry?.caption ?? "")}" />
+          <label class="mono-label photo-label">photo ${entry?.hasImage ? "(leave empty to keep current)" : ""}
+            <input id="marginalia-photo-input" type="file" name="photo" accept="image/*" ${entry ? "" : "required"} />
           </label>
           <div class="row">
             <button type="submit">save photo</button>
             <button type="button" id="marginalia-cancel">cancel</button>
-            ${entry ? '<button type="button" id="marginalia-delete" class="danger-btn">delete</button>' : ''}
+            ${entry ? '<button type="button" id="marginalia-delete" class="danger-btn">delete</button>' : ""}
           </div>
         </form>`;
       dialog.showModal();
 
-      document.getElementById('marginalia-cancel')?.addEventListener('click', () => dialog.close());
+      document
+        .getElementById("marginalia-cancel")
+        ?.addEventListener("click", () => dialog.close());
 
       // best-effort: prefill the date from the photo's own EXIF metadata
       // once it's picked, rather than leaving it on today's date
-      document.getElementById('marginalia-photo-input')?.addEventListener('change', async (ev) => {
-        const file = (ev.currentTarget as HTMLInputElement).files?.[0];
-        if (!file) return;
-        const date = await readExifDate(file);
-        if (date) {
-          const dateInput = document.getElementById('marginalia-date-input') as HTMLInputElement;
-          dateInput.value = date;
-        }
-      });
+      document
+        .getElementById("marginalia-photo-input")
+        ?.addEventListener("change", async (ev) => {
+          const file = (ev.currentTarget as HTMLInputElement).files?.[0];
+          if (!file) return;
+          const date = await readExifDate(file);
+          if (date) {
+            const dateInput = document.getElementById(
+              "marginalia-date-input",
+            ) as HTMLInputElement;
+            dateInput.value = date;
+          }
+        });
 
-      document.getElementById('marginalia-delete')?.addEventListener('click', async () => {
-        if (!entry) return;
-        const ok = confirm(`Permanently delete this photo${entry.caption ? ` ("${entry.caption}")` : ''}?\n\nThis deletes src/content/marginalia/${entry.id}.md and its photo and can't be undone.`);
-        if (!ok) return;
+      document
+        .getElementById("marginalia-delete")
+        ?.addEventListener("click", async () => {
+          if (!entry) return;
+          const ok = confirm(
+            `Permanently delete this photo${entry.caption ? ` ("${entry.caption}")` : ""}?\n\nThis deletes src/content/marginalia/${entry.id}.md and its photo and can't be undone.`,
+          );
+          if (!ok) return;
 
-        const button = document.getElementById('marginalia-delete') as HTMLButtonElement;
-        button.disabled = true;
-        button.textContent = 'deleting…';
-        try {
-          const res = await fetch('/__edit-marginalia/delete', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ slug: entry.id }),
+          const button = document.getElementById(
+            "marginalia-delete",
+          ) as HTMLButtonElement;
+          button.disabled = true;
+          button.textContent = "deleting…";
+          try {
+            const res = await fetch("/__edit-marginalia/delete", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ slug: entry.id }),
+            });
+            if (!res.ok) {
+              const { error } = await res
+                .json()
+                .catch(() => ({ error: res.statusText }));
+              alert(`Could not delete: ${error}`);
+              button.disabled = false;
+              button.textContent = "delete";
+              return;
+            }
+            location.reload();
+          } catch {
+            alert("Could not delete: network error");
+            button.disabled = false;
+            button.textContent = "delete";
+          }
+        });
+
+      document
+        .getElementById("marginalia-form")
+        ?.addEventListener("submit", async (ev) => {
+          ev.preventDefault();
+          const fd = new FormData(ev.currentTarget as HTMLFormElement);
+          const photo = fd.get("photo") as File | null;
+          const res = await fetch("/__edit-marginalia/save", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              slug: entry?.id,
+              date: fd.get("date"),
+              caption: fd.get("caption"),
+            }),
           });
           if (!res.ok) {
-            const { error } = await res.json().catch(() => ({ error: res.statusText }));
-            alert(`Could not delete: ${error}`);
-            button.disabled = false;
-            button.textContent = 'delete';
+            const { error } = await res
+              .json()
+              .catch(() => ({ error: res.statusText }));
+            alert(`Could not save: ${error}`);
+            return;
+          }
+          const { slug } = await res.json();
+          if (photo && photo.size > 0) {
+            const up = await fetch(
+              `/__edit-marginalia/image?slug=${encodeURIComponent(slug)}&name=${encodeURIComponent(photo.name)}`,
+              { method: "POST", body: photo },
+            );
+            if (!up.ok) {
+              const { error } = await up
+                .json()
+                .catch(() => ({ error: up.statusText }));
+              alert(`Saved, but the photo failed: ${error}`);
+            }
+          }
+          location.reload();
+        });
+    };
+
+    document
+      .getElementById("new-marginalia")
+      ?.addEventListener("click", () => open());
+    document
+      .querySelectorAll<HTMLButtonElement>(".marginalia-edit")
+      .forEach((btn) =>
+        btn.addEventListener("click", () => {
+          const entry = entries.find((e) => e.id === btn.dataset.id);
+          if (entry) open(entry);
+        }),
+      );
+
+    // drag a thumbnail in the strip below the carousel to reorder every
+    // entry (persisted as each one's `order` field — see /reorder)
+    wireDragReorder(
+      document,
+      ".marginalia-thumbs[data-reorder]",
+      ".marginalia-thumb-item",
+      async (_container, order) => {
+        try {
+          const res = await fetch("/__edit-marginalia/reorder", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ order }),
+          });
+          if (!res.ok) {
+            const { error } = await res
+              .json()
+              .catch(() => ({ error: res.statusText }));
+            alert(`Could not reorder: ${error}`);
             return;
           }
           location.reload();
         } catch {
-          alert('Could not delete: network error');
-          button.disabled = false;
-          button.textContent = 'delete';
+          alert("Could not reorder: network error");
         }
-      });
-
-      document.getElementById('marginalia-form')?.addEventListener('submit', async (ev) => {
-        ev.preventDefault();
-        const fd = new FormData(ev.currentTarget as HTMLFormElement);
-        const photo = fd.get('photo') as File | null;
-        const res = await fetch('/__edit-marginalia/save', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            slug: entry?.id,
-            date: fd.get('date'),
-            caption: fd.get('caption'),
-          }),
-        });
-        if (!res.ok) {
-          const { error } = await res.json().catch(() => ({ error: res.statusText }));
-          alert(`Could not save: ${error}`);
-          return;
-        }
-        const { slug } = await res.json();
-        if (photo && photo.size > 0) {
-          const up = await fetch(
-            `/__edit-marginalia/image?slug=${encodeURIComponent(slug)}&name=${encodeURIComponent(photo.name)}`,
-            { method: 'POST', body: photo }
-          );
-          if (!up.ok) {
-            const { error } = await up.json().catch(() => ({ error: up.statusText }));
-            alert(`Saved, but the photo failed: ${error}`);
-          }
-        }
-        location.reload();
-      });
-    };
-
-    document.getElementById('new-marginalia')?.addEventListener('click', () => open());
-    document.querySelectorAll<HTMLButtonElement>('.marginalia-edit').forEach((btn) =>
-      btn.addEventListener('click', () => {
-        const entry = entries.find((e) => e.id === btn.dataset.id);
-        if (entry) open(entry);
-      })
+      },
     );
-
-    // drag a thumbnail in the strip below the carousel to reorder every
-    // entry (persisted as each one's `order` field — see /reorder)
-    wireDragReorder(document, '.marginalia-thumbs[data-reorder]', '.marginalia-thumb-item', async (_container, order) => {
-      try {
-        const res = await fetch('/__edit-marginalia/reorder', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ order }),
-        });
-        if (!res.ok) {
-          const { error } = await res.json().catch(() => ({ error: res.statusText }));
-          alert(`Could not reorder: ${error}`);
-          return;
-        }
-        location.reload();
-      } catch {
-        alert('Could not reorder: network error');
-      }
-    });
   }
 </script>
 
 <style>
-  .lede { color: var(--color-text-dim); }
-  .lede a { color: var(--color-accent-bright); }
-  .lede a:hover { color: var(--color-highlight-bright); }
-  section { margin-top: var(--space-4); }
+  .lede {
+    color: var(--color-text-dim);
+  }
+  .lede a {
+    color: var(--color-accent-bright);
+  }
+  .lede a:hover {
+    color: var(--color-highlight-bright);
+  }
+  section {
+    margin-top: var(--space-4);
+  }
 
   .reading-row {
     display: grid;
@@ -443,7 +667,9 @@ const marginaliaDevJson = import.meta.env.DEV
     gap: var(--space-4);
     margin-top: var(--space-4);
   }
-  .reading-row section { margin-top: 0; }
+  .reading-row section {
+    margin-top: 0;
+  }
   @media (max-width: 960px) {
     .reading-row {
       grid-template-columns: 1fr;
@@ -467,7 +693,9 @@ const marginaliaDevJson = import.meta.env.DEV
     color: var(--color-text-faint);
     font-weight: 400;
   }
-  .shelf-link:hover { color: var(--color-accent-bright); }
+  .shelf-link:hover {
+    color: var(--color-accent-bright);
+  }
 
   .current-list {
     list-style: none;
@@ -506,7 +734,9 @@ const marginaliaDevJson = import.meta.env.DEV
     min-width: 0;
   }
 
-  .current-item a:hover .current-cover { border-color: var(--color-highlight); }
+  .current-item a:hover .current-cover {
+    border-color: var(--color-highlight);
+  }
 
   .book-title {
     font-family: var(--font-display);
@@ -514,14 +744,117 @@ const marginaliaDevJson = import.meta.env.DEV
     line-height: 1.3;
     color: var(--color-text);
   }
-  .book-title:hover { color: var(--color-highlight-bright); }
+  .book-title:hover {
+    color: var(--color-highlight-bright);
+  }
 
   .book-author {
     font-size: 0.8rem;
     color: var(--color-text-dim);
   }
 
-  .progress { margin-top: 0.15rem; }
+  .progress {
+    margin-top: 0.3rem;
+    padding: 1.25rem 4px 0; /* room for the number above the bar */
+  }
+  /* 1px baseline with a tick at each end, like a dimension line */
+  .progress-scale {
+    position: relative;
+    height: 3px;
+    background: linear-gradient(
+        var(--color-hairline-bright),
+        var(--color-hairline-bright)
+      )
+      center / 100% 1px no-repeat;
+  }
+  .progress-scale::before,
+  .progress-scale::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    width: 1px;
+    height: 9px;
+    background: var(--color-hairline-bright);
+  }
+  .progress-scale::before {
+    left: 0;
+  }
+  .progress-scale::after {
+    right: 0;
+  }
+  .progress-fill {
+    height: 100%;
+    width: calc(var(--p) * 1%);
+    background: var(--color-highlight-bright);
+    animation: progress-grow 0.9s cubic-bezier(0.22, 0.8, 0.3, 1) backwards;
+  }
+  /* zero-size anchor at the leading edge; the diamond and the number hang off it */
+  .progress-head {
+    position: absolute;
+    top: 50%;
+    left: calc(var(--p) * 1%);
+    animation: progress-head 0.9s cubic-bezier(0.22, 0.8, 0.3, 1) backwards;
+  }
+  .progress-head::before {
+    content: "";
+    position: absolute;
+    top: -4.5px;
+    left: -4.5px;
+    width: 9px;
+    height: 9px;
+    box-sizing: border-box;
+    transform: rotate(45deg);
+    background: var(--color-bg-elevated);
+    border: 1.5px solid var(--color-highlight-bright);
+  }
+  /* translateX(-p%) keeps the number inside the bar at both ends */
+  .progress-pct {
+    position: absolute;
+    bottom: 9px;
+    left: 0;
+    transform: translateX(calc(var(--p) * -1%));
+    white-space: nowrap;
+    line-height: 1;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-highlight-bright);
+    animation: progress-pct 0.9s cubic-bezier(0.22, 0.8, 0.3, 1) backwards;
+  }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 0.7rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .progress-fill,
+    .progress-head,
+    .progress-pct {
+      animation: none;
+    }
+  }
+
+  @keyframes progress-grow {
+    from {
+      width: 0;
+    }
+  }
+  @keyframes progress-head {
+    from {
+      left: 0;
+    }
+  }
+  @keyframes progress-pct {
+    from {
+      transform: translateX(0);
+    }
+  }
+
+  .progress {
+    margin-top: 0.15rem;
+  }
   .progress-track {
     height: 3px;
     background: var(--color-hairline);
@@ -552,7 +885,12 @@ const marginaliaDevJson = import.meta.env.DEV
     padding-bottom: var(--space-1);
     margin: 0 0 var(--space-3);
   }
-  .section-header .section-label { border-bottom: none; padding-bottom: 0; margin: 0; padding-right: 6.5rem; }
+  .section-header .section-label {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin: 0;
+    padding-right: 6.5rem;
+  }
   /* taken out of flow so its own (taller-than-text) height can't stretch
      .section-header and push its border-bottom out of line with the plain
      h2.section-label used elsewhere — this button only ever exists here */
@@ -563,7 +901,9 @@ const marginaliaDevJson = import.meta.env.DEV
     transform: translateY(-50%);
   }
 
-  .empty-state { color: var(--color-text-dim); }
+  .empty-state {
+    color: var(--color-text-dim);
+  }
 
   .marginalia-carousel {
     max-width: 420px;
@@ -583,7 +923,9 @@ const marginaliaDevJson = import.meta.env.DEV
     padding: 0;
     margin: 0;
   }
-  .marginalia-slide { display: none; }
+  .marginalia-slide {
+    display: none;
+  }
   .marginalia-slide.is-active {
     display: flex;
     flex-direction: column;
@@ -598,13 +940,19 @@ const marginaliaDevJson = import.meta.env.DEV
        technique as the contribution graph on /projects) rather than a flat
        --color-accent, so the fill reads as "this theme's frame," not a
        stark, same-everywhere accent pop */
-    background: color-mix(in srgb, var(--color-accent) 22%, var(--color-bg-inset));
+    background: color-mix(
+      in srgb,
+      var(--color-accent) 22%,
+      var(--color-bg-inset)
+    );
     border: 1px solid var(--color-hairline);
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .marginalia-photo-box:hover { border-color: var(--color-highlight); }
+  .marginalia-photo-box:hover {
+    border-color: var(--color-highlight);
+  }
   .marginalia-photo {
     max-width: 100%;
     /* not max-height: 100% — the <a> wrapper between this and
@@ -656,7 +1004,9 @@ const marginaliaDevJson = import.meta.env.DEV
     user-select: none;
     -webkit-user-drag: none;
   }
-  .marginalia-thumb-item.is-dragging { opacity: 0.4; }
+  .marginalia-thumb-item.is-dragging {
+    opacity: 0.4;
+  }
   .marginalia-thumb {
     width: 36px;
     height: 36px;
@@ -682,9 +1032,15 @@ const marginaliaDevJson = import.meta.env.DEV
     transition: opacity 0.15s ease;
   }
   .marginalia-frame:hover .marginalia-arrow,
-  .marginalia-arrow:focus-visible { opacity: 1; }
-  .marginalia-prev { left: 0.3rem; }
-  .marginalia-next { right: 0.3rem; }
+  .marginalia-arrow:focus-visible {
+    opacity: 1;
+  }
+  .marginalia-prev {
+    left: 0.3rem;
+  }
+  .marginalia-next {
+    right: 0.3rem;
+  }
   .marginalia-count {
     position: absolute;
     bottom: 0.3rem;
@@ -706,7 +1062,10 @@ const marginaliaDevJson = import.meta.env.DEV
     padding: 0.25rem 0.6rem;
     cursor: pointer;
   }
-  .dev-btn:hover { color: var(--color-highlight-bright); border-color: var(--color-highlight); }
+  .dev-btn:hover {
+    color: var(--color-highlight-bright);
+    border-color: var(--color-highlight);
+  }
 
   .marginalia-editor {
     width: min(480px, 95vw);
@@ -718,9 +1077,17 @@ const marginaliaDevJson = import.meta.env.DEV
     border-radius: 4px;
     padding: var(--space-3);
   }
-  .marginalia-editor::backdrop { background: rgba(10, 13, 18, 0.75); }
-  .marginalia-editor form { display: grid; gap: 0.6rem; }
-  .marginalia-editor .row { display: flex; gap: 0.6rem; }
+  .marginalia-editor::backdrop {
+    background: rgba(10, 13, 18, 0.75);
+  }
+  .marginalia-editor form {
+    display: grid;
+    gap: 0.6rem;
+  }
+  .marginalia-editor .row {
+    display: flex;
+    gap: 0.6rem;
+  }
   .marginalia-editor input {
     width: 100%;
     background: var(--color-bg-inset);
@@ -730,10 +1097,17 @@ const marginaliaDevJson = import.meta.env.DEV
     font-size: 0.9rem;
     padding: 0.4rem 0.55rem;
   }
-  .marginalia-editor input[type='date'] { width: auto; }
-  .marginalia-editor .photo-label { display: grid; gap: 0.25rem; }
-  .marginalia-editor input[type='file'] { border-style: dashed; }
-  .marginalia-editor button[type='submit'] {
+  .marginalia-editor input[type="date"] {
+    width: auto;
+  }
+  .marginalia-editor .photo-label {
+    display: grid;
+    gap: 0.25rem;
+  }
+  .marginalia-editor input[type="file"] {
+    border-style: dashed;
+  }
+  .marginalia-editor button[type="submit"] {
     background: var(--color-highlight);
     border: none;
     color: var(--color-bg);
@@ -744,7 +1118,9 @@ const marginaliaDevJson = import.meta.env.DEV
     padding: 0.45rem 0.7rem;
     cursor: pointer;
   }
-  .marginalia-editor button[type='submit']:hover { background: var(--color-highlight-bright); }
+  .marginalia-editor button[type="submit"]:hover {
+    background: var(--color-highlight-bright);
+  }
   .marginalia-editor #marginalia-cancel {
     background: none;
     border: 1px solid var(--color-hairline-bright);
@@ -756,7 +1132,10 @@ const marginaliaDevJson = import.meta.env.DEV
     padding: 0.45rem 0.7rem;
     cursor: pointer;
   }
-  .marginalia-editor #marginalia-cancel:hover { color: var(--color-highlight-bright); border-color: var(--color-highlight); }
+  .marginalia-editor #marginalia-cancel:hover {
+    color: var(--color-highlight-bright);
+    border-color: var(--color-highlight);
+  }
 
   /* deliberately distinct from cancel/submit above: colored (not dim) at
      rest and pushed to the far end of the row, so it reads as destructive
@@ -773,6 +1152,12 @@ const marginaliaDevJson = import.meta.env.DEV
     cursor: pointer;
     margin-left: auto;
   }
-  .marginalia-editor .danger-btn:hover { background: var(--color-highlight-bright); color: var(--color-bg); }
-  .marginalia-editor .danger-btn:disabled { opacity: 0.5; cursor: default; }
+  .marginalia-editor .danger-btn:hover {
+    background: var(--color-highlight-bright);
+    color: var(--color-bg);
+  }
+  .marginalia-editor .danger-btn:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
 </style>
