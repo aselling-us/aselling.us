@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-02T06:08:27.579Z",
+  "fetchedAt": "2026-11-02T07:05:59.395Z",
   "userId": 192647,
   "username": "aselling",
   "current": [
@@ -23,7 +23,9 @@
       "releaseYear": 2022,
       "rating": 0,
       "addedAt": "2026-08-13",
-      "startedAt": "2026-08-31"
+      "startedAt": "2026-08-31",
+      "currentPage": 216,
+      "totalPages": 595
     },
     {
       "title": "The Myth of Sisyphus",
