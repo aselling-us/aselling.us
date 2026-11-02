@@ -1,0 +1,331 @@
+/* ===========================================================
+   DESIGN TOKENS
+   Direction: technical drafting / blueprint document.
+   Hairline rules, steel-blue accents, and monospace "index"
+   labels used like drawing annotations.
+
+   Default theme: monet — an impressionist light variant with a
+   hazy blue-green ground (sky and water washes), lavender line
+   work, muted coral as the highlight (Antibes rooftops) and sage
+   as the vine color. Toggled via data-theme on <html> (slider in
+   Nav); the default has no data-theme attribute and lives
+   directly in :root.
+=========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Archivo+Black&family=Gentium+Book+Plus&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  /* -- color: ground -- */
+  --color-bg: #e6ecea;
+  --color-bg-elevated: #f0f4f1;
+  --color-bg-inset: #dbe6e6;
+
+  /* -- color: line work -- */
+  --color-hairline: #1d88f1;
+  --color-hairline-bright: #9ab6bc;
+
+  /* -- color: accents -- */
+  --color-accent: #6f9bb0;
+  --color-accent-bright: #3f6a86;
+  --color-highlight: #cf8871;
+  --color-highlight-bright: #96513c;
+
+  /* -- color: text -- */
+  --color-text: #3d4d4c;
+  --color-text-dim: #728583;
+  --color-text-faint: #9bb0ac;
+
+  /* -- color: ornaments (vines, chains) -- */
+  --color-vine: #7fa06a;
+  --color-chain: #b08a5f;
+
+  /* -- color: places map dots (lived/want-to-go/third-place — travel reuses accent) -- */
+  --color-dot-lived: #5f9e78;
+  --color-dot-want-to-go: #8f6fb0;
+  --color-dot-third-place: #c9922f;
+  /* fixed across all themes (not redefined per [data-theme] block on purpose) */
+  --color-dot-event: #398fa0;
+
+  /* -- type -- */
+  --font-display: 'Fraunces', Georgia, serif;
+  /* h1 only -- h2/h3 and everything else styled off --font-display stay Fraunces */
+  --font-h1: 'Archivo Black', 'Inter', sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  /* the .mono-label utility (nav, index markers, section labels, badges,
+     quote attributions, etc.) and other small annotation text */
+  --font-label: 'Gentium Book Plus', Georgia, serif;
+
+  /* -- layout -- */
+  --content-width: 780px;
+  --wide-width: 1100px;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+}
+
+/* ===========================================================
+   THEME: sunset
+   Light pastel variant — peach ground, dusty-rose line work,
+   purple takes the accent role, coral takes the highlight role.
+   Toggled via data-theme on <html> (slider in Nav).
+=========================================================== */
+[data-theme='sunset'] {
+  /* -- color: ground -- */
+  --color-bg: #f9ece4;
+  --color-bg-elevated: #fdf5ef;
+  --color-bg-inset: #f3ddd8;
+
+  /* -- color: line work -- */
+  --color-hairline: #e4c8cc;
+  --color-hairline-bright: #d89ba9;
+
+  /* -- color: accents -- */
+  --color-accent: #9e8cb8;
+  --color-accent-bright: #6f5c92;
+  --color-highlight: #c98a74;
+  --color-highlight-bright: #91533d;
+
+  /* -- color: text -- */
+  --color-text: #4a3a55;
+  --color-text-dim: #85718e;
+  --color-text-faint: #a893ae;
+
+  /* -- color: ornaments (vines, chains) -- */
+  --color-vine: #7da377;
+  --color-chain: #966040;
+
+  /* -- color: places map dots (lived/want-to-go/third-place — event/travel reuse highlight/accent) -- */
+  --color-dot-lived: #5a9165;
+  --color-dot-want-to-go: #c15f92;
+  --color-dot-third-place: #c67f1f;
+}
+
+/* ===========================================================
+   THEME: odyssey
+   Near-black navy ground with a hazy blue-teal fog, bronze/brass
+   takes the highlight role (armor and bone ornament rather than
+   metal coin-gold). The original default, now a named theme. Toggled
+   via data-theme on <html> (slider in Nav).
+=========================================================== */
+[data-theme='odyssey'] {
+  /* -- color: ground -- */
+  --color-bg: #0a1119;
+  --color-bg-elevated: #101b26;
+  --color-bg-inset: #0c141c;
+
+  /* -- color: line work -- */
+  --color-hairline: #25323f;
+  --color-hairline-bright: #3d5464;
+
+  /* -- color: accents -- */
+  --color-accent: #4f7f96;
+  --color-accent-bright: #7eb0c4;
+  --color-highlight: #a9814a;
+  --color-highlight-bright: #d1a562;
+
+  /* -- color: text -- */
+  --color-text: #e6e0d2;
+  --color-text-dim: #8b95a1;
+  --color-text-faint: #566270;
+
+  /* -- color: ornaments (vines, chains) -- */
+  --color-vine: #52785f;
+  --color-chain: #8f6b45;
+
+  /* -- color: places map dots (lived/want-to-go/third-place — event/travel reuse highlight/accent) -- */
+  --color-dot-lived: #6fbf8f;
+  --color-dot-want-to-go: #a385d9;
+  --color-dot-third-place: #e8944a;
+}
+
+/* ===========================================================
+   THEME: caravaggio
+   Near-black ground, a brick-red highlight (sampled from the
+   curtain in Judith Beheading Holofernes), hairline rules in a
+   dull gold (sampled from Mary Magdalene's hair) and a muted
+   teal-blue accent (sampled from her drapery). The first default,
+   now a named theme. Toggled via data-theme on <html> (slider in
+   Nav).
+=========================================================== */
+[data-theme='caravaggio'] {
+  /* -- color: ground -- */
+  --color-bg: #120d0c;
+  --color-bg-elevated: #1a1312;
+  --color-bg-inset: #160f0f;
+
+  /* -- color: line work -- */
+  --color-hairline: #7e6a44;
+  --color-hairline-bright: #b4985f;
+
+  /* -- color: accents -- */
+  --color-accent: #20696f;
+  --color-accent-bright: #45b2ba;
+  --color-highlight: #8a170f;
+  --color-highlight-bright: #e74438;
+
+  /* -- color: text -- */
+  --color-text: #ece0dd;
+  --color-text-dim: #a18b91;
+  --color-text-faint: #6d5661;
+
+  /* -- color: ornaments (vines, chains) -- */
+  --color-vine: #3f8f5f;
+  --color-chain: #946b38;
+
+  /* -- color: places map dots (lived/want-to-go/third-place — travel reuses accent) -- */
+  --color-dot-lived: #4f9e6f;
+  --color-dot-want-to-go: #9b72d1;
+  --color-dot-third-place: #e0973f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-bg);
+  color-scheme: light;
+}
+html[data-theme='caravaggio'],
+html[data-theme='odyssey'] {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--color-text);
+  margin: 0 0 var(--space-2);
+}
+
+h2, h3 { font-family: var(--font-display); }
+
+h1 {
+  font-family: var(--font-h1);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+}
+h2 { font-size: clamp(1.15rem, 2vw, 1.45rem); }
+h3 { font-size: 1.1rem; }
+
+p { margin: 0 0 var(--space-2); }
+
+a {
+  color: var(--color-accent-bright);
+  text-decoration: none;
+}
+a:hover { color: var(--color-highlight-bright); }
+
+/* markdown tables (the only <table>s on the site, rendered on several pages
+   with their own per-page .prose rules — so styled once here). The border is
+   a faint mix of the text color rather than a hairline token, so it stays
+   light on every theme's ground. Scrolls sideways instead of overflowing the
+   page when a wide table meets a narrow viewport. */
+table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: var(--space-3) 0;
+  font-size: 0.9rem;
+}
+th,
+td {
+  border: 1px solid color-mix(in srgb, var(--color-text) 20%, transparent);
+  padding: 0.35rem 0.7rem;
+}
+
+/* fenced code blocks (Shiki's <pre class="astro-code">): wrap long lines
+   instead of scrolling sideways. pre-wrap keeps the author's newlines and
+   indentation; overflow-wrap: anywhere then breaks otherwise-unbreakable runs
+   (long identifiers, template strings, URLs) at the box edge rather than
+   overflowing it. Shiki's inline overflow-x: auto stays as a backstop. */
+pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* keyboard focus visibility -- kept even though nav uses custom states */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-highlight-bright);
+  outline-offset: 2px;
+}
+
+/* utility: the small "index" label used throughout as a structural/
+   annotation device (nav, section eyebrows) — despite the name, no longer
+   monospace (see --font-label) */
+.mono-label {
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+/* utility: client-side show/hide toggle for filterable/paginated lists.
+   !important is deliberate -- this must always win over a component's own
+   `display` rule (e.g. a flex list item), regardless of selector specificity
+   or Astro's per-component scope class raising that specificity further. */
+.is-hidden { display: none !important; }
+
+/* utility: dev-only drop-slot marker inserted by wireDragReorder
+   (src/lib/dev-drag-reorder.ts) while a thumbnail is being dragged */
+.drag-reorder-placeholder {
+  border: 1px dashed var(--color-hairline-bright);
+  box-sizing: border-box;
+}
+
+/* utility: dev-only position number under a reorderable thumbnail, and the
+   gold "cover" tag on whichever one is currently first — that's the photo
+   shown by default elsewhere (a place's initial carousel image, or the
+   marginalia carousel's initially-active slide) */
+.thumb-num {
+  font-size: 0.55rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-text-faint);
+}
+.thumb-cover-badge {
+  position: absolute;
+  top: -0.4rem;
+  right: -0.4rem;
+  font-size: 0.5rem;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  padding: 0.1rem 0.25rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-hairline-bright);
+  color: var(--color-hairline-bright);
+  pointer-events: none;
+}
+
+.wrap {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+
+.wrap-wide {
+  max-width: var(--wide-width);
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
