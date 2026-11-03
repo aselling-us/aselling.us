@@ -1,20 +1,8 @@
 {
-  "fetchedAt": "2026-11-03T17:02:13.837Z",
+  "fetchedAt": "2026-11-03T22:29:31.705Z",
   "userId": 192647,
   "username": "aselling",
   "current": [
-    {
-      "title": "The Invisible Man",
-      "author": "H. G. Wells",
-      "link": "https://hardcover.app/books/the-invisible-man",
-      "cover": "https://assets.hardcover.app/edition/12035451/743a0a2f68d6d4d0e84f21201ea9a0b58cd4382f.jpeg",
-      "releaseYear": 1897,
-      "rating": 0,
-      "addedAt": "2025-08-19",
-      "startedAt": "2026-10-20",
-      "currentPage": 156,
-      "totalPages": 208
-    },
     {
       "title": "The Shards",
       "author": "Bret Easton Ellis",
@@ -892,6 +880,16 @@
     }
   ],
   "read": [
+    {
+      "title": "The Invisible Man",
+      "author": "H. G. Wells",
+      "link": "https://hardcover.app/books/the-invisible-man",
+      "cover": "https://assets.hardcover.app/edition/12035451/743a0a2f68d6d4d0e84f21201ea9a0b58cd4382f.jpeg",
+      "releaseYear": 1897,
+      "rating": 3.5,
+      "addedAt": "2025-08-19",
+      "readAt": "2026-11-03"
+    },
     {
       "title": "A World Without Email: Reimagining Work in an Age of Communication Overload",
       "author": "Cal Newport",
