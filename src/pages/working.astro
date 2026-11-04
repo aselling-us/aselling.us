@@ -632,6 +632,21 @@ const devJson = import.meta.env.DEV
   .prose :global(a:hover) {
     color: var(--color-highlight-bright);
   }
+  /* `==highlight==` markdown (remark-flexible-markers, see astro.config.mjs)
+     — same gold treatment as the blog */
+  .prose :global(mark) {
+    background: var(--color-highlight-bright);
+    color: var(--color-bg);
+    padding: 0.05em 0.2em;
+    border-radius: 2px;
+  }
+  /* a link inside a highlight would otherwise be accent-on-highlight (and
+     vanish on hover) — keep it legible, underline marks it as a link */
+  .prose :global(mark a),
+  .prose :global(mark a:hover) {
+    color: inherit;
+    text-decoration: underline;
+  }
 
   .tag-list {
     list-style: none;
