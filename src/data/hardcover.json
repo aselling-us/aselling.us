@@ -1,20 +1,8 @@
 {
-  "fetchedAt": "2026-11-02T19:21:36.914Z",
+  "fetchedAt": "2026-11-04T03:24:12.236Z",
   "userId": 192647,
   "username": "aselling",
   "current": [
-    {
-      "title": "The Invisible Man",
-      "author": "H. G. Wells",
-      "link": "https://hardcover.app/books/the-invisible-man",
-      "cover": "https://assets.hardcover.app/edition/12035451/743a0a2f68d6d4d0e84f21201ea9a0b58cd4382f.jpeg",
-      "releaseYear": 1897,
-      "rating": 0,
-      "addedAt": "2025-08-19",
-      "startedAt": "2026-10-20",
-      "currentPage": 156,
-      "totalPages": 208
-    },
     {
       "title": "The Shards",
       "author": "Bret Easton Ellis",
@@ -31,13 +19,13 @@
       "title": "The Myth of Sisyphus",
       "author": "Albert Camus",
       "link": "https://hardcover.app/books/the-myth-of-sisyphus",
-      "cover": "https://assets.hardcover.app/edition/30431414/d6d58e0c95102bdd7edd43457d24e6864b69bd6a.jpeg",
+      "cover": "https://assets.hardcover.app/external_data/48503761/f6334fc1456e9d9b5043c833710aae40fa83d4f1.jpeg",
       "releaseYear": 1942,
       "rating": 3,
       "addedAt": "2025-08-11",
       "startedAt": "2026-08-11",
       "currentPage": 26,
-      "totalPages": 192
+      "totalPages": 162
     },
     {
       "title": "The Secret History",
@@ -713,7 +701,7 @@
     {
       "title": "The Idiot",
       "author": "Fyodor Dostoevsky",
-      "link": "https://hardcover.app/books/the-idiot-trans-by-david-mcduff-1869",
+      "link": "https://hardcover.app/books/the-idiot-1869",
       "cover": "https://assets.hardcover.app/edition/31491802/b3306ed36c96c9886558134e75e2d1e57e996931.jpeg",
       "releaseYear": 1869,
       "rating": 0,
@@ -892,6 +880,16 @@
     }
   ],
   "read": [
+    {
+      "title": "The Invisible Man",
+      "author": "H. G. Wells",
+      "link": "https://hardcover.app/books/the-invisible-man",
+      "cover": "https://assets.hardcover.app/edition/12035451/743a0a2f68d6d4d0e84f21201ea9a0b58cd4382f.jpeg",
+      "releaseYear": 1897,
+      "rating": 3.5,
+      "addedAt": "2025-08-19",
+      "readAt": "2026-11-03"
+    },
     {
       "title": "A World Without Email: Reimagining Work in an Age of Communication Overload",
       "author": "Cal Newport",

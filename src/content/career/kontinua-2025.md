@@ -13,6 +13,9 @@ logo: ./kontinua-2025-logo.png
 
 Working one—on—one with MIT professor Aaron Hillegass to create an open and accessible STEM curriculum with accompanying resources for home-schools and under-privileged students.
 
+
+==For a full acknowledgement see [here](https://github.com/KontinuaFoundation/sequence/blob/master/ProjectDocs/Acknowledgements.md#arjan-ellingson)==
+
 - Assisting in development of 36 Workbooks on Math, Science, Physics, and Computer Science.
 - Building Python automation to validate objectives, detect prerequisite gaps and duplicates, generate draft
 quiz PDFs, and support deployment of [public workbook PDFs](https://kontinuafoundation.github.io/).
