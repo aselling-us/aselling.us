@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-04T03:24:12.236Z",
+  "fetchedAt": "2026-11-04T17:16:55.517Z",
   "userId": 192647,
   "username": "aselling",
   "current": [
@@ -7,13 +7,13 @@
       "title": "The Shards",
       "author": "Bret Easton Ellis",
       "link": "https://hardcover.app/books/the-shards",
-      "cover": "https://assets.hardcover.app/edition/30700224/680d0b00eab55660c3ea7ef5ba5b07ad92b9ea2e.jpeg",
+      "cover": "https://assets.hardcover.app/edition/30905122/ab25a619769540479c7ed022c555facfae91b802.jpeg",
       "releaseYear": 2022,
       "rating": 0,
       "addedAt": "2026-08-13",
       "startedAt": "2026-08-31",
-      "currentPage": 216,
-      "totalPages": 595
+      "currentPage": 235,
+      "totalPages": 609
     },
     {
       "title": "The Myth of Sisyphus",
@@ -884,7 +884,7 @@
       "title": "The Invisible Man",
       "author": "H. G. Wells",
       "link": "https://hardcover.app/books/the-invisible-man",
-      "cover": "https://assets.hardcover.app/edition/12035451/743a0a2f68d6d4d0e84f21201ea9a0b58cd4382f.jpeg",
+      "cover": "https://assets.hardcover.app/external_data/25860511/2883ece648e1cb0bf02d21c225e89dfc0b9dec79.jpeg",
       "releaseYear": 1897,
       "rating": 3.5,
       "addedAt": "2025-08-19",
@@ -934,7 +934,7 @@
       "title": "Notes from Underground",
       "author": "Fyodor Dostoevsky",
       "link": "https://hardcover.app/books/notes-from-underground-notes-from-underground-1864",
-      "cover": "https://assets.hardcover.app/external_data/3324369/c55511c008d9f8843038fa1d0c1ecc2203326e31.jpeg",
+      "cover": "https://assets.hardcover.app/external_data/59689604/555fd5da7f2437cea3b1276fb1ef20d34245b674.jpeg",
       "releaseYear": 1864,
       "rating": 4,
       "addedAt": "2025-08-11",
