@@ -74,7 +74,10 @@ const shelf = (hc, status) => Array.fromAsync(allPages((page) => hc.library.list
 
 export async function collectShelves(hc) {
   const [me, current, wantToRead, read] = await Promise.all([
+    // calls the graphql me query
     hc.me.get(),
+    // calls the graphql library query with status=CurrentlyReading
+    // and paginates through all pages
     shelf(hc, UserBookStatus.CurrentlyReading),
     shelf(hc, UserBookStatus.WantToRead),
     shelf(hc, UserBookStatus.Read),
@@ -88,8 +91,9 @@ export async function collectShelves(hc) {
   };
 }
 
-export function fetchHardcoverShelves(token) {
-  return collectShelves(
-    new HardcoverClient({ token, userAgent: 'aselling.us media snapshot (arjan.ellingson@gmail.com)' })
+export async function fetchHardcoverShelves(token) {
+  const shelves = await collectShelves(
+    new HardcoverClient({ token, userAgent: `${process.env.DOMAIN_ROOT} media snapshot (${process.env.HARDCOVER_CLIENT_EMAIL})` })
   );
+  return shelves;
 }

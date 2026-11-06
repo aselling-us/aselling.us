@@ -7,7 +7,7 @@ import { renderInlineMarkdown, stripMarkdown } from '../../src/lib/inline-markdo
 export { stripMarkdown };
 
 // The site's public domain, as referenced in outbound email copy.
-export const SITE_DOMAIN = 'aselling.us';
+export const SITE_DOMAIN = ` ${process.env.DOMAIN_ROOT}`;
 
 // Site mark (public/email-logo.png), a flattened PNG of the nav's RecordMark
 // component — email clients don't reliably render inline SVG, so this is a
