@@ -45,7 +45,7 @@ const htmlToText = (html) =>
 
 async function fetchXml(url) {
   const res = await fetch(url, {
-    headers: { 'User-Agent': 'aselling.us media snapshot (arjan.ellingson@gmail.com)' },
+    headers: { 'User-Agent': `${process.env.DOMAIN_ROOT} media snapshot (${process.env.HARDCOVER_CLIENT_EMAIL})` },
   });
   if (!res.ok) throw new Error(`${res.status} ${res.statusText} for ${url}`);
   return res.text();
@@ -87,7 +87,7 @@ async function fetchGithubRepos() {
   const res = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?type=owner&sort=pushed&per_page=100`, {
     headers: {
       Accept: 'application/vnd.github+json',
-      'User-Agent': 'aselling.us media snapshot (arjan.ellingson@gmail.com)',
+      'User-Agent': `${process.env.DOMAIN_ROOT} media snapshot (${process.env.HARDCOVER_CLIENT_EMAIL})`,
       // Unauthenticated calls share a 60/hr limit per IP, and Actions runners'
       // shared IPs regularly exhaust it (403 "rate limit exceeded", which took
       // the whole refresh down). A token lifts that to 5000/hr. It doesn't
@@ -163,7 +163,7 @@ async function fetchContributionCalendar() {
     headers: {
       Authorization: `bearer ${process.env.GH_CONTRIB_TOKEN}`,
       'Content-Type': 'application/json',
-      'User-Agent': 'aselling.us media snapshot (arjan.ellingson@gmail.com)',
+      'User-Agent': `${process.env.DOMAIN_ROOT} media snapshot (${process.env.HARDCOVER_CLIENT_EMAIL})`,
     },
     body: JSON.stringify({ query, variables: { login: GITHUB_USER } }),
   });
@@ -229,7 +229,7 @@ async function fetchContributedRepos() {
     headers: {
       Authorization: `bearer ${process.env.GH_CONTRIB_TOKEN}`,
       'Content-Type': 'application/json',
-      'User-Agent': 'aselling.us media snapshot (arjan.ellingson@gmail.com)',
+      'User-Agent': `${process.env.DOMAIN_ROOT} media snapshot (${process.env.HARDCOVER_CLIENT_EMAIL})`,
     },
     body: JSON.stringify({ query, variables: { login: GITHUB_USER } }),
   });
