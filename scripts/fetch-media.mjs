@@ -491,8 +491,7 @@ async function fetchFavoritesAndWatchlist() {
   const browser = await launchBrowser(chromium);
   try {
     const contextOptions = {
-      userAgent:
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 aselling.us media snapshot (${process.env.EMAIL})',
+      userAgent: `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 aselling.us media snapshot (${process.env.EMAIL})`,
     };
     // Separate contexts per page: reusing one session for both requests trips
     // Letterboxd's Cloudflare bot check on the second navigation.

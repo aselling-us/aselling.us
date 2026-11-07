@@ -20,6 +20,7 @@ const { title, description = 'Personal site — work, writing, and notes.' } = A
     <title>{title} · aselling</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/atom+xml" title="Arjan Ellingson" href="/rss.xml" />
     <script is:inline>
       // Restore the saved theme before first paint to avoid a flash of the default.
       try {
@@ -40,13 +41,24 @@ const { title, description = 'Personal site — work, writing, and notes.' } = A
     </main>
     <footer class="wrap-wide site-footer">
       <span class="mono-label">© {new Date().getFullYear()} — built with Astro</span>
+      <a class="mono-label footer-link" href="/rss.xml">rss</a>
     </footer>
   </body>
 </html>
 
 <style>
   .site-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
     padding: var(--space-3) 0 var(--space-4);
     border-top: 1px solid var(--color-hairline);
+  }
+  /* .mono-label's faint text color would otherwise beat the global `a` color */
+  .footer-link {
+    color: var(--color-accent-bright);
+  }
+  .footer-link:hover {
+    color: var(--color-highlight-bright);
   }
 </style>

@@ -6,7 +6,9 @@ import {
   createTransporter,
   escapeHtml,
   maskEmail,
+  buildBlogPostMailOptions,
   renderEmailCard,
+  rssFeedUrl,
   stripTags,
   unsubscribeToken,
   wrapEmailPreviewDocument,
@@ -84,6 +86,28 @@ describe('renderEmailCard', () => {
   it('omits the cover/body/cta rows entirely when not provided', () => {
     const html = renderEmailCard({ eyebrow: 'e', title: 't', footerHtml: 'f' });
     expect(html).not.toContain('data-role="cover"');
+  });
+});
+
+describe('rssFeedUrl', () => {
+  it('points at the feed on the same origin as the post', () => {
+    expect(rssFeedUrl('https://aselling.us/blog/hello/')).toBe('https://aselling.us/rss.xml');
+  });
+});
+
+describe('buildBlogPostMailOptions', () => {
+  const mail = buildBlogPostMailOptions({
+    title: 'Hello',
+    url: 'https://aselling.us/blog/hello/',
+    preview: 'A post.',
+    unsubscribe: 'https://worker.example.workers.dev/unsubscribe?token=abc',
+    to: 'reader@example.com',
+    from: 'arjan@example.com',
+  });
+
+  it('links the RSS feed in both the html and plain-text bodies', () => {
+    expect(mail.html).toContain('href="https://aselling.us/rss.xml"');
+    expect(mail.text).toContain('RSS: https://aselling.us/rss.xml');
   });
 });
 
