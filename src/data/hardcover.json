@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-04T17:16:55.517Z",
+  "fetchedAt": "2026-11-07T15:39:59.383Z",
   "userId": 192647,
   "username": "aselling",
   "current": [
@@ -12,7 +12,7 @@
       "rating": 0,
       "addedAt": "2026-08-13",
       "startedAt": "2026-08-31",
-      "currentPage": 235,
+      "currentPage": 245,
       "totalPages": 609
     },
     {
@@ -683,7 +683,7 @@
     {
       "title": "The Death of Ivan Ilyich",
       "author": "Leo Tolstoy",
-      "link": "https://hardcover.app/books/the-death-of-ivan-ilyich-new-translation-1886",
+      "link": "https://hardcover.app/books/the-death-of-ivan-ilyich",
       "cover": "https://assets.hardcover.app/external_data/4264054/6941cf4c83f8ad85aaa9f355efadebd68d0c6e2e.jpeg",
       "releaseYear": 1886,
       "rating": 0,
@@ -1144,7 +1144,7 @@
       "title": "Utopia",
       "author": "Thomas More",
       "link": "https://hardcover.app/books/utopia-utopia-1516",
-      "cover": "https://assets.hardcover.app/external_data/4500353/fdec6858a65ae5e027a799ce285a8839aeccd0f1.jpeg",
+      "cover": "https://assets.hardcover.app/edition/3773236/98f9c128-45ee-4dad-9a3f-9c3ea65ff900.jpg",
       "releaseYear": 1516,
       "rating": 4,
       "addedAt": "2025-08-15",
