@@ -93,7 +93,7 @@ export async function collectShelves(hc) {
 
 export async function fetchHardcoverShelves(token) {
   const shelves = await collectShelves(
-    new HardcoverClient({ token, userAgent: `${process.env.DOMAIN_ROOT} media snapshot (${process.env.HARDCOVER_CLIENT_EMAIL})` })
+    new HardcoverClient({ token, userAgent: `${process.env.DOMAIN_ROOT} media snapshot (${process.env.EMAIL})` })
   );
   return shelves;
 }
