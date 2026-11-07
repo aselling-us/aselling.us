@@ -1,17 +1,17 @@
 {
-  "fetchedAt": "2026-11-07T15:39:59.383Z",
+  "fetchedAt": "2026-11-07T20:34:26.661Z",
   "username": "aselling",
   "films": [
     {
       "title": "The Godfather",
       "year": 1972,
       "link": "https://letterboxd.com/aselling/film/the-godfather/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/8/1/8/51818-the-godfather-0-600-0-900-crop.jpg?v=bca8b67402",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/8/1/8/p/d6LbJZO8ruvXgOjjGRgjtdYpJS4-0-600-0-900-crop.jpg?v=54fd8b0786",
       "rating": null,
       "liked": false,
       "rewatch": false,
       "watchedDate": "2026-11-06",
-      "review": "this felt like an extended of the one episode of the flash with the man who turns into green smoke and kills a bunch of dudes"
+      "review": "This review may contain spoilers.\n\nthis felt like an extended of the one episode of the flash with the man who turns into green smoke and kills a bunch of dudes"
     },
     {
       "title": "The Substance",
@@ -605,12 +605,6 @@
       "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/7/8/2/51782-the-silence-of-the-lambs-0-600-0-900-crop.jpg?v=18d88bdff4"
     },
     {
-      "title": "The Godfather",
-      "year": 1972,
-      "link": "https://letterboxd.com/film/the-godfather/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/8/1/8/51818-the-godfather-0-600-0-900-crop.jpg?v=bca8b67402"
-    },
-    {
       "title": "The Shawshank Redemption",
       "year": 1994,
       "link": "https://letterboxd.com/film/the-shawshank-redemption/",
@@ -699,6 +693,12 @@
       "year": 1979,
       "link": "https://letterboxd.com/film/alien/",
       "poster": "https://a.ltrbxd.com/resized/sm/upload/8v/f1/qw/aa/bg7K6VtUG7Ew70gQj6SSroD5d4R-0-600-0-900-crop.jpg?v=a932f9e98e"
+    },
+    {
+      "title": "Michael",
+      "year": 2026,
+      "link": "https://letterboxd.com/film/michael-2026/",
+      "poster": null
     }
   ]
 }
