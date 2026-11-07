@@ -7,7 +7,7 @@ import { renderInlineMarkdown, stripMarkdown } from '../../src/lib/inline-markdo
 export { stripMarkdown };
 
 // The site's public domain, as referenced in outbound email copy.
-export const SITE_DOMAIN = ` ${process.env.DOMAIN_ROOT}`;
+export const SITE_DOMAIN = `${process.env.DOMAIN_ROOT}`;
 
 // Site mark (public/email-logo.png), a flattened PNG of the nav's RecordMark
 // component — email clients don't reliably render inline SVG, so this is a
@@ -269,6 +269,7 @@ ${coverCaptionHtml ? `<p data-role="cover-caption" style="margin:6px 0 0;font-fa
 // (scripts/dev-edit-blog.mjs) so the preview can't drift from what
 // subscribers actually get.
 export function renderBlogPostEmail({ title, url, preview, unsubscribe, coverUrl, coverAlt, coverCaption, logoSrc }) {
+  const linkStyle = `color:${EMAIL_THEME.textDim};`;
   return renderEmailCard({
     eyebrow: '03 / writing · new post',
     titleHtml: renderInlineMarkdown(title),
@@ -279,9 +280,16 @@ export function renderBlogPostEmail({ title, url, preview, unsubscribe, coverUrl
       ? `<p style="margin:0;font-family:${EMAIL_THEME.fontBody};font-size:15px;line-height:1.6;color:${EMAIL_THEME.textDim};">${renderInlineMarkdown(stripTags(preview))}</p>`
       : '',
     cta: { href: url, label: 'Read the post →' },
-    footerHtml: `sent to subscribers of ${SITE_DOMAIN} &middot; <a href="${escapeHtml(unsubscribe)}" style="color:${EMAIL_THEME.textDim};">unsubscribe</a>`,
+    footerHtml: `sent to subscribers of ${SITE_DOMAIN} &middot; <a href="${escapeHtml(rssFeedUrl(url))}" style="${linkStyle}">rss</a> &middot; <a href="${escapeHtml(unsubscribe)}" style="${linkStyle}">unsubscribe</a>`,
     logoSrc,
   });
+}
+
+// The Atom feed (src/pages/rss.xml.ts) lives at the site root, so derive it
+// from the post's own URL rather than threading another site-URL setting
+// through every caller.
+export function rssFeedUrl(postUrl) {
+  return new URL('/rss.xml', postUrl).href;
 }
 
 // Builds the full nodemailer message (subject, html via renderBlogPostEmail,
@@ -318,6 +326,7 @@ export function buildBlogPostMailOptions({
       '',
       `Read it here: ${url}`,
       '',
+      `RSS: ${rssFeedUrl(url)}`,
       `Unsubscribe: ${unsubscribe}`,
     ].join('\n'),
     html: renderBlogPostEmail({ title, url, preview, unsubscribe, coverUrl, coverAlt, coverCaption, logoSrc }),
