@@ -4,6 +4,7 @@ const AUTHOR_NAME = 'Arjan Singh Ellingson';
 
 export const VISIT_KINDS = ['travel', 'event', 'third-place'];
 
+
 const builder = new XMLBuilder({ format: true, ignoreAttributes: false });
 
 // snapshots store plain `YYYY-MM-DD` days; Atom wants RFC 3339 timestamps
@@ -41,7 +42,7 @@ export function filmEntries(films, { limit = 10 } = {}) {
     .slice(0, limit);
 }
 
-export function bookEntries({ current, read }, { limit = 10 } = {}) {
+export function bookEntries({ current, read }, { limit = 20 } = {}) {
   const reading = current.map((b) => ({
     id: `${b.link}#reading`,
     title: `Reading ${b.title}${b.author ? ` — ${b.author}` : ''}`,
@@ -68,14 +69,14 @@ export function bookEntries({ current, read }, { limit = 10 } = {}) {
 
 // `places` are `{ id, name, kind, date, sortDate, detail, body }` — `sortDate` is
 // the UTC-ms timestamp from parsePlaceDate (src/lib/place-date.ts), or null
-export function recentPlaces(places, { now, limit = 10 }) {
+export function recentPlaces(places, { now, limit = 20 }) {
   return places
     .filter((p) => VISIT_KINDS.includes(p.kind) && p.sortDate != null && p.sortDate <= now)
     .sort((a, b) => b.sortDate - a.sortDate)
     .slice(0, limit);
 }
 
-export function placeEntries(places, { site, now, limit = 10 }) {
+export function placeEntries(places, { site, now, limit = 20 }) {
   const base = withoutTrailingSlash(site);
   return recentPlaces(places, { now, limit }).map((p) => ({
     id: `${base}/travels#${p.id}`,
@@ -87,7 +88,35 @@ export function placeEntries(places, { site, now, limit = 10 }) {
   }));
 }
 
+// `posts` are `{ id, title, date, description, tags, draft, content }` — `content`
+// is the post body already rendered to HTML (absolute URLs), so the feed reader
+// shows the whole post rather than just the description
+export function recentBlogEntries(posts, { limit = 20 } = {}) {
+  return posts
+    .filter((p) => !p.draft)
+    .sort((a, b) => b.date.valueOf() - a.date.valueOf())
+    .slice(0, limit);
+}
+
+export function blogEntries(posts, { site, limit = 10 }) {
+  const base = withoutTrailingSlash(site);
+  return recentBlogEntries(posts, { limit }).map((p) => {
+    const link = `${base}/blog/${p.id}`;
+    return {
+      id: link,
+      title: p.title,
+      link,
+      updated: p.date.toISOString(),
+      category: 'blog',
+      tags: p.tags ?? [],
+      summary: p.description ?? '',
+      content: p.content ?? '',
+    };
+  });
+}
+
 /** @param {{ site: string, email?: string, updated?: string, entries: any[] }} opts */
+// called by rss.xml.ts to build the feed by combining entries from multiple sources (blog, books, films, places)
 export function buildFeed({ site, email, updated, entries }) {
   const base = withoutTrailingSlash(site);
   const sorted = [...entries].sort(newestFirst);
@@ -108,8 +137,10 @@ export function buildFeed({ site, email, updated, entries }) {
       title: e.title,
       link: { '@_href': e.link },
       updated: e.updated,
-      category: { '@_term': e.category },
+      // the entry's kind first, then any post tags
+      category: [e.category, ...(e.tags ?? [])].map((term) => ({ '@_term': term })),
       ...(e.summary ? { summary: { '@_type': 'text', '#text': e.summary } } : {}),
+      ...(e.content ? { content: { '@_type': 'html', '#text': e.content } } : {}),
     })),
   };
   return builder.build({ '?xml': { '@_version': '1.0', '@_encoding': 'UTF-8' }, feed });
