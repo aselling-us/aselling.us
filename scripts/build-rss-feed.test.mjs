@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { SyntaxValidator } from 'fast-xml-validator';
 import {
+  blogEntries,
   buildFeed,
   filmEntries,
   bookEntries,
@@ -137,6 +138,53 @@ describe('placeEntries', () => {
   });
 });
 
+const post = (over = {}) => ({
+  id: 'on-slow-technology',
+  title: 'On Slow Technology',
+  date: new Date('2026-10-01T00:00:00Z'),
+  description: 'Thoughts on slowing down.',
+  tags: ['tech', 'life'],
+  draft: false,
+  content: '<p>Slow down & <em>notice</em>.</p>',
+  ...over,
+});
+
+describe('blogEntries', () => {
+  const site = 'https://aselling.us/';
+
+  it('skips drafts, sorts newest first, and applies the limit', () => {
+    const posts = [
+      post({ id: 'old', date: new Date('2026-01-01T00:00:00Z') }),
+      post({ id: 'wip', date: new Date('2026-11-01T00:00:00Z'), draft: true }),
+      post({ id: 'new', date: new Date('2026-09-01T00:00:00Z') }),
+      post({ id: 'mid', date: new Date('2026-05-01T00:00:00Z') }),
+    ];
+    expect(blogEntries(posts, { site, limit: 2 }).map((e) => e.id)).toEqual([
+      'https://aselling.us/blog/new',
+      'https://aselling.us/blog/mid',
+    ]);
+  });
+
+  it('maps a post to its permalink, tags, description and rendered body', () => {
+    const [entry] = blogEntries([post()], { site });
+    expect(entry).toMatchObject({
+      id: 'https://aselling.us/blog/on-slow-technology',
+      link: 'https://aselling.us/blog/on-slow-technology',
+      title: 'On Slow Technology',
+      updated: '2026-10-01T00:00:00.000Z',
+      category: 'blog',
+      tags: ['tech', 'life'],
+      summary: 'Thoughts on slowing down.',
+      content: '<p>Slow down & <em>notice</em>.</p>',
+    });
+  });
+
+  it('tolerates a post with no tags, description or body', () => {
+    const [entry] = blogEntries([post({ tags: undefined, description: undefined, content: undefined })], { site });
+    expect(entry).toMatchObject({ tags: [], summary: '', content: '' });
+  });
+});
+
 describe('buildFeed', () => {
   const entries = [
     ...filmEntries(films),
@@ -168,5 +216,18 @@ describe('buildFeed', () => {
   it('omits <email> when none is configured', () => {
     expect(render({ email: undefined })).not.toContain('<email>');
     expect(render()).toContain('<email>test@example.com</email>');
+  });
+
+  it('writes a post as its kind plus one <category> per tag, with the body as escaped html <content>', () => {
+    const xml = render({ entries: blogEntries([post()], { site: 'https://aselling.us' }) });
+    expect(SyntaxValidator.validate(xml, { allowBooleanAttributes: true })).toBe(true);
+    expect(xml).toContain('<category term="blog">');
+    expect(xml).toContain('<category term="tech">');
+    expect(xml).toContain('<category term="life">');
+    expect(xml).toContain('<content type="html">&lt;p&gt;Slow down &amp; &lt;em&gt;notice&lt;/em&gt;.&lt;/p&gt;</content>');
+  });
+
+  it('writes no <content> for entries without a body', () => {
+    expect(render()).not.toContain('<content');
   });
 });
