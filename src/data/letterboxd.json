@@ -1,7 +1,29 @@
 {
-  "fetchedAt": "2026-11-08T19:24:40.572Z",
+  "fetchedAt": "2026-11-09T04:31:20.461Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Portrait of a Lady on Fire",
+      "year": 2019,
+      "link": "https://letterboxd.com/aselling/film/portrait-of-a-lady-on-fire/1/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/6/0/8/3/0/p/brYql72LnXNcecodypOlcc0ehCF-0-600-0-900-crop.jpg?v=98cc0adc4b",
+      "rating": null,
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-11-08",
+      "review": "This review may contain spoilers.\n\nfour lessons from this beautiful french cinematic masterpiece\n1. boycott men\n2. be lesbian\n3. dont play with fire unless that fire is your heart\n4. love is best learnt upon its loss"
+    },
+    {
+      "title": "You Can See Everything",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/you-can-see-everything/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/6/2/9/4/4/3/p/iofVpvLEhkyEuvx8kLnD6fOrz7s-0-600-0-900-crop.jpg?v=5041f68486",
+      "rating": null,
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-11-08",
+      "review": "the way she looks at people regularly is the way i look at people when im trying to be chalant"
+    },
     {
       "title": "The Godfather",
       "year": 1972,
@@ -529,28 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-08-05",
       "review": "a24 delivers again. incredible dual narrative of how love and loss affects all differently. talk about the color grading on this, and soundtrack by the same guys on Challengers. I liked the aspect ratio alteration a ton.You have to take a leap of faiththat's all anything is, a leap of faith. \n\n77/100"
-    },
-    {
-      "title": "Nuremberg",
-      "year": 2025,
-      "link": "https://letterboxd.com/aselling/film/nuremberg-2025/",
-      "poster": "https://a.ltrbxd.com/resized/film-poster/1/0/9/8/7/8/2/1098782-nuremberg-2025-0-600-0-900-crop.jpg?v=954f98ffb4",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-08-04",
-      "review": "don't take this the wrong way but I never wanna see you againah yes, fuck you respectfully"
-    },
-    {
-      "title": "The Hateful Eight",
-      "year": 2015,
-      "link": "https://letterboxd.com/aselling/film/the-hateful-eight/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/9/7/0/1/2/p/jpWHM7rZ6QnvbQFm8ZqQMiYZUx9-0-600-0-900-crop.jpg?v=cf42958898",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-08-03",
-      "review": "This review may contain spoilers.\n\nThe Invite (2026) but racist and bloody"
     }
   ],
   "favorites": [
@@ -561,10 +561,10 @@
       "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/9/3/5/0/p/6h6nfckQgkvYBGd7BbXQcoaNDRW-0-600-0-900-crop.jpg?v=e6451fd68d"
     },
     {
-      "title": "The Lost Boys",
-      "year": 1987,
-      "link": "https://letterboxd.com/film/the-lost-boys/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/0/9/8/7/p/enFBXzn8xs5rdtSMC83AVWQ80FP-0-600-0-900-crop.jpg?v=71b8ca097a"
+      "title": "Portrait of a Lady on Fire",
+      "year": 2019,
+      "link": "https://letterboxd.com/film/portrait-of-a-lady-on-fire/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/6/0/8/3/0/p/brYql72LnXNcecodypOlcc0ehCF-0-600-0-900-crop.jpg?v=98cc0adc4b"
     },
     {
       "title": "Ferris Bueller's Day Off",
@@ -573,10 +573,10 @@
       "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/7/2/1/9/p/zACzLwjg8WqWh2tEKiee9w90Z7b-0-600-0-900-crop.jpg?v=2a3ea45b90"
     },
     {
-      "title": "Resident Evil",
-      "year": 2026,
-      "link": "https://letterboxd.com/film/resident-evil-2026/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/3/0/2/7/1/7/p/dqpTqY3ch22sAYyq250lzzHVyDo-0-600-0-900-crop.jpg?v=7b3f5dba3a"
+      "title": "The Lost Boys",
+      "year": 1987,
+      "link": "https://letterboxd.com/film/the-lost-boys/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/0/9/8/7/p/enFBXzn8xs5rdtSMC83AVWQ80FP-0-600-0-900-crop.jpg?v=71b8ca097a"
     }
   ],
   "watchlist": [
@@ -698,7 +698,7 @@
       "title": "Captain America: Civil War",
       "year": 2016,
       "link": "https://letterboxd.com/film/captain-america-civil-war/",
-    "poster": null
+      "poster": null
     }
   ]
 }
