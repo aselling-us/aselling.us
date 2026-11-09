@@ -9,7 +9,6 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 
 const entries = await getCollection('places');
-
 // Photos dropped in src/content/places/<place-id>/ attach to that place
 // automatically, ordered by filename — prefix 01-, 02-… to control order.
 const galleries = import.meta.glob<{ default: ImageMetadata }>(
@@ -107,6 +106,8 @@ for (const entry of entries) {
   });
 }
 
+
+
 const placesJson = JSON.stringify(mapPlaces).replace(/</g, '\\u003c');
 
 const kindLabel = (kind: MapPlace['kind']) =>
@@ -134,7 +135,7 @@ const timelinePlaces = mapPlaces
 <BaseLayout title="Places" description="An interactive map of places — events, travels, and homes.">
   <!-- <span class="mono-label">index / 06</span> -->
   <h1>Places</h1>
-  <p style="color: var(--color-text-dim);">Places I've been — for concerts, travels, events, or just to be there. Includes some of my favorite <span style="font-style: italic;">3<sup>rd</sup></span> spaces. Click a marker for photos and notes.</p>
+  <p style="color: var(--color-text-dim);">Places I've been. Concert diary, events, home, 3rd spaces. Click a marker for photos and notes.</p>
 
   <div class="map-legend" role="group" aria-label="Filter map markers">
     <label class="legend-item"><input type="checkbox" data-kind="event" checked /> <span class="dot dot-event" aria-hidden="true"></span> Events</label>
