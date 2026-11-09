@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SubscribeForm from '../../components/SubscribeForm.astro';
 import PostList from '../../components/PostList.astro';
+import Quote from '../../components/Quote.astro';
 import { renderInlineMarkdown } from '../../lib/inline-markdown.mjs';
 // drafts are gitignored (never in the public repo); this committed file is the
 // only trace of them — just a count, kept current by scripts/count-drafts.mjs
@@ -73,7 +74,9 @@ const devJson = import.meta.env.DEV
       <p class="tag-archive-link"><a href="/blog/tags" class="mono-label">browse all tags →</a></p>
     </>
   )}
-
+  <Quote cite="— Oscar Wilde, The Picture of Dorian Gray">
+    Behind every exquisite thing that existed, there was something tragic. Worlds had to be in travail, that the meanest flower might blow...
+  </Quote>
   <h2 class="mono-label section-label">
     <span>posts / {String(posts.length).padStart(2, '0')}</span>
 
