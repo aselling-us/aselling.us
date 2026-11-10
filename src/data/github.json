@@ -1,7 +1,17 @@
 {
-  "fetchedAt": "2026-11-09T19:47:00.406Z",
+  "fetchedAt": "2026-11-10T17:01:02.692Z",
   "username": "aselling-us",
   "repos": [
+    {
+      "name": "MATH-3680",
+      "description": "My Projects / Notes for LaTeX course at Cal Poly with Dr. Sean Gasiorek.",
+      "link": "https://github.com/aselling-us/MATH-3680",
+      "homepage": null,
+      "language": "TeX",
+      "stars": 0,
+      "topics": [],
+      "pushedAt": "2026-11-09"
+    },
     {
       "name": "aselling.us",
       "description": "My website containing a portfolio of a variety of projects.",
@@ -21,16 +31,6 @@
       "stars": 0,
       "topics": [],
       "pushedAt": "2026-11-04"
-    },
-    {
-      "name": "MATH-3680",
-      "description": "My Projects / Notes for LaTeX course at Cal Poly with Dr. Sean Gasiorek.",
-      "link": "https://github.com/aselling-us/MATH-3680",
-      "homepage": null,
-      "language": "TeX",
-      "stars": 0,
-      "topics": [],
-      "pushedAt": "2026-11-03"
     },
     {
       "name": "CSC-3300",
@@ -104,7 +104,7 @@
     }
   ],
   "contributions": {
-    "total": 1312,
+    "total": 1323,
     "days": [
       {
         "date": "2025-11-09",
@@ -1568,6 +1568,10 @@
       },
       {
         "date": "2026-11-09",
+        "count": 11
+      },
+      {
+        "date": "2026-11-10",
         "count": 0
       }
     ]
