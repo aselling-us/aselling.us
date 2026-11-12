@@ -1,0 +1,36 @@
+<script lang="ts">
+  let { cite }: { cite?: string } = $props();
+</script>
+
+<blockquote class="quote">
+  <slot />
+  {#if cite}
+    <footer class="quote-cite">{cite}</footer>
+  {/if}
+</blockquote>
+
+<style>
+  .quote {
+    margin: var(--space-4) 0;
+    padding-left: var(--space-3);
+    border-left: 1px solid var(--color-highlight);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    color: var(--color-text);
+  }
+
+  .quote :global(p) {
+    margin: 0 0 var(--space-1);
+  }
+
+  .quote footer {
+    margin-top: var(--space-1);
+    font-family: var(--font-label);
+    font-style: normal;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    color: var(--color-accent-bright);
+  }
+</style>
