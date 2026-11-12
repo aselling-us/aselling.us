@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-11-09T04:31:20.461Z",
+  "fetchedAt": "2026-11-12T17:34:58.878Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Parthenope",
+      "year": 2024,
+      "link": "https://letterboxd.com/aselling/film/parthenope/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/ti/9r/wg/ng/ifH2PGwiuBfthphSatoRVw9Qi5X-0-600-0-900-crop.jpg?v=454f705582",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-11-11",
+      "review": "This review may contain spoilers. i dont know anything, but i love everything sums up parthenope and the entire film’s plot \n\ncinematography: 100\naura from parthenope: 100\nscript: 0"
+    },
     {
       "title": "Portrait of a Lady on Fire",
       "year": 2019,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-08-06",
       "review": "me n who me n who me n who me n who me n who me n who me n who me n who me n who\n\n91/100"
-    },
-    {
-      "title": "Waves",
-      "year": 2019,
-      "link": "https://letterboxd.com/aselling/film/waves-2019/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/6/2/5/7/3/p/wsIgcL28ElAlU2briIII6QiNyyD-0-600-0-900-crop.jpg?v=79ac8a7d34",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-08-05",
-      "review": "a24 delivers again. incredible dual narrative of how love and loss affects all differently. talk about the color grading on this, and soundtrack by the same guys on Challengers. I liked the aspect ratio alteration a ton.You have to take a leap of faiththat's all anything is, a leap of faith. \n\n77/100"
     }
   ],
   "favorites": [
