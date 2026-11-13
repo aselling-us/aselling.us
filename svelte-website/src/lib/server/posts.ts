@@ -26,12 +26,12 @@ const files = import.meta.glob<string>("/src/content/blog/**/*.md", {
 });
 
 const images = import.meta.glob<string>(
-  "/src/content/blog/**/*.{jpg,jpeg,png,webp,avif}",
+  "/src/content/blog/**/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}",
   {
     eager: true,
     query: "?url",
     import: "default",
-  }
+  },
 );
 
 export function getPosts(): Post[] {
@@ -40,8 +40,9 @@ export function getPosts(): Post[] {
       const parsed = matter(raw);
       const data = parsed.data as PostFrontmatter;
 
-      const coverPath = data.cover
-        ? path.replace(/[^/]+\.md$/, data.cover)
+      const cleanCover = data.cover?.replace(/^\.?\//, "");
+      const coverPath = cleanCover
+        ? path.replace(/[^/]+\.md$/, cleanCover)
         : undefined;
 
       return {
