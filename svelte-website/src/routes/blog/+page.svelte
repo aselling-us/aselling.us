@@ -3,6 +3,8 @@
   import type { PageData } from "./$types";
   //   import removeMd from 'remove-markdown';
   import { marked } from "marked";
+  import markedFootnote from 'marked-footnote';
+  marked.use(markedFootnote());
   let { data }: { data: PageData } = $props();
   import { readingTimeLabel } from "#lib/reading-time.mjs";
   // $derived is to stay in sync with data
