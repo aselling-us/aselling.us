@@ -1,9 +1,11 @@
 <script lang="ts">
-  let { cite }: { cite?: string } = $props();
+  import type { Snippet } from 'svelte';
+
+  let { cite, children }: { cite?: string; children: Snippet } = $props();
 </script>
 
 <blockquote class="quote">
-  <slot />
+  {@render children()}
   {#if cite}
     <footer class="quote-cite">{cite}</footer>
   {/if}
