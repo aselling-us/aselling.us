@@ -1,15 +1,24 @@
 <!-- ts -->
 <script lang="ts">
   import Quote from "#lib/Quote.svelte";
+  import me from "#lib/assets/me.jpg";
+  // import { posts } from "#lib/posts.ts";
 
-//   function greet() {
-//     alert("Welcome to Svelte!");
-//   }
+  // const latestPost = posts[0];
+  // console.log(JSON.stringify(latestPost, null, 2));
+  // can be used like {lastestPost}
 </script>
 
 <!-- HTML -->
 <h1>Hi, I'm Arjan.</h1>
-
+<figure class="me-figure">
+  <img
+    src={me}
+    alt="Standing on a rock outcrop looking out over Lake Superior in autumn"
+    loading="eager"
+    class="me-img"
+  />
+</figure>
 <p style="color: var(--color-text-dim); max-width: 60ch;">
   By trade, I'm a software engineer. By necessity, I am an innovator and
   designer. By passion, I am a cinephile and art aesthete.
@@ -31,10 +40,56 @@
   >, playing billiards, or watching obscure films no one has heard of.
 </p>
 
-
 <Quote cite="— Friedrich Nietzsche">
-Never trust a thought that occurs to you indoors.
+  Never trust a thought that occurs to you indoors.
 </Quote>
+
+<!-- currently section  -->
+<h2>Currently</h2>
+  {#if import.meta.env.DEV}
+<p>this is dev only</p>
+  {/if}
+<!-- make sure SOMETHING was fetched
+{#if latestPost}
+  <section class="home-section">
+    <h2 class="mono-label section-label">writing / latest post</h2>
+
+    <div class="latest-post">
+      <div class="latest-post-main">
+        <a class="latest-post-title" href={`/blog/${latestPost.slug}`}>
+          {latestPost.title}
+        </a>
+        <span class="mono-label post-date">
+          {latestPost.date.toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+          })}
+        </span> -->
+        <!-- 
+        {#if latestPost.description}
+          <p class="post-desc">{latestPost.description}</p>
+        {/if} -->
+      <!-- </div> -->
+      <!-- 
+      {#if latestPost.cover}
+        <figure class="latest-post-cover">
+          <img
+            src={latestPost.cover}
+            alt={latestPost.coverCaption ?? `Cover art for ${latestPost.title}`}
+          />
+
+          {#if latestPost.coverCaption}
+            <figcaption class="mono-label">
+              {latestPost.coverCaption}
+            </figcaption>
+          {/if}
+        </figure>
+      {/if} -->
+    <!-- </div> -->
+  <!-- </section> -->
+<!-- {/if} -->
+
 <!-- CSS -->
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Archivo+Black&family=Gentium+Book+Plus&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap");
@@ -90,19 +145,19 @@ Never trust a thought that occurs to you indoors.
     --space-4: 2.5rem;
     --space-5: 4rem;
 
-    h1,
-    h2,
+    /* h1 */
+    /* h2,
     h3 {
       font-weight: 500;
       line-height: 1.15;
       color: var(--color-text);
       margin: 0 0 var(--space-2);
-    }
+    } */
 
-    h2,
+    /* h2,
     h3 {
       font-family: var(--font-display);
-    }
+    } */
 
     h1 {
       font-family: var(--font-h1);
@@ -113,8 +168,23 @@ Never trust a thought that occurs to you indoors.
     h2 {
       font-size: clamp(1.15rem, 2vw, 1.45rem);
     }
-    h3 {
-      font-size: 1.1rem;
-    }
+  }
+
+  .me-img {
+    object-fit: cover;
+    width: 100%;
+    max-width: 380px;
+    /* Add a height or aspect-ratio so object-fit: cover works */
+    aspect-ratio: 3 / 3.65;
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .me-figure {
+    float: right;
+    width: clamp(240px, 34vw, 380px);
+    margin: 0 0 var(--space-3) var(--space-4);
+    border: 1px solid var(--color-hairline);
+    padding: 6px;
   }
 </style>
