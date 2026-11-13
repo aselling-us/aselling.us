@@ -2,9 +2,9 @@
 <script lang="ts">
   import Quote from "#lib/Quote.svelte";
   import me from "#lib/assets/me.jpg";
-  // import { posts } from "#lib/posts.ts";
-
-  // const latestPost = posts[0];
+  import type { PageData } from "./$types";
+  let { data }: { data: PageData } = $props();
+  const latestPost = $derived(data.posts[0]);
   // console.log(JSON.stringify(latestPost, null, 2));
   // can be used like {lastestPost}
 </script>
@@ -45,50 +45,15 @@
 </Quote>
 
 <!-- currently section  -->
-<h2>Currently</h2>
-  {#if import.meta.env.DEV}
-<p>this is dev only</p>
-  {/if}
-<!-- make sure SOMETHING was fetched
+<hr>
+<!-- make sure SOMETHING was fetched -->
 {#if latestPost}
-  <section class="home-section">
-    <h2 class="mono-label section-label">writing / latest post</h2>
-
-    <div class="latest-post">
-      <div class="latest-post-main">
-        <a class="latest-post-title" href={`/blog/${latestPost.slug}`}>
-          {latestPost.title}
-        </a>
-        <span class="mono-label post-date">
-          {latestPost.date.toLocaleDateString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric'
-          })}
-        </span> -->
-        <!-- 
-        {#if latestPost.description}
-          <p class="post-desc">{latestPost.description}</p>
-        {/if} -->
-      <!-- </div> -->
-      <!-- 
-      {#if latestPost.cover}
-        <figure class="latest-post-cover">
-          <img
-            src={latestPost.cover}
-            alt={latestPost.coverCaption ?? `Cover art for ${latestPost.title}`}
-          />
-
-          {#if latestPost.coverCaption}
-            <figcaption class="mono-label">
-              {latestPost.coverCaption}
-            </figcaption>
-          {/if}
-        </figure>
-      {/if} -->
-    <!-- </div> -->
-  <!-- </section> -->
-<!-- {/if} -->
+    <section class="home-section">
+      <h2 class="mono-label section-label">writing / latest post</h2>
+ <a href="/blog/{latestPost.slug}">{latestPost.title}</a>
+  <p>{latestPost.description}</p>
+  </section>
+{/if}
 
 <!-- CSS -->
 <style>
