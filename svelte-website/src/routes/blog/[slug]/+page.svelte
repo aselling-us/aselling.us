@@ -29,7 +29,7 @@
         alt={post.coverCaption ?? `Cover art for ${post.title}`}
         width="720"
       />
-      {#if post.coverCaption}<figcaption>{post.coverCaption}</figcaption>{/if}
+      {#if post.coverCaption}<figcaption>{@html marked.parseInline(post.coverCaption)}</figcaption>{/if}
     </figure>
   {/if}
 
