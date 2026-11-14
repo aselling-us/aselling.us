@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-13T17:12:04.062Z",
+  "fetchedAt": "2026-11-14T15:48:05.861Z",
   "userId": 192647,
   "username": "aselling",
   "current": [
@@ -12,7 +12,7 @@
       "rating": 0,
       "addedAt": "2026-08-13",
       "startedAt": "2026-08-31",
-      "currentPage": 245,
+      "currentPage": 265,
       "totalPages": 609
     },
     {
@@ -933,7 +933,7 @@
     {
       "title": "Notes from Underground",
       "author": "Fyodor Dostoevsky, Richard Pevear, Larissa Volokhonsky",
-      "link": "https://hardcover.app/books/notes-from-underground-notes-from-underground-1864",
+      "link": "https://hardcover.app/books/notes-from-underground",
       "cover": "https://assets.hardcover.app/external_data/59689604/555fd5da7f2437cea3b1276fb1ef20d34245b674.jpeg",
       "releaseYear": 1864,
       "rating": 4,
