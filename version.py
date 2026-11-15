@@ -1,3 +1,3 @@
 # this is ONLY a file to contain the version number of the release.
 
-__version = "0.1.03"
+__version = "0.1.04"

@@ -11,8 +11,7 @@
    Nav); the default has no data-theme attribute and lives
    directly in :root.
 =========================================================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Archivo+Black&family=Gentium+Book+Plus&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
+@import url('https://googleapis.com');
 
 :root {
   /* -- color: ground -- */
@@ -55,7 +54,9 @@
   /* the .mono-label utility (nav, index markers, section labels, badges,
      quote attributions, etc.) and other small annotation text */
   --font-label: 'Gentium Book Plus', Georgia, serif;
-
+  --font-footer: 'BBH Bogle', sans-serif;
+  --font-writing: "Sacramento", cursive;
+  /* keep lowercase styling local to handwritten text only */
   /* -- layout -- */
   --content-width: 780px;
   --wide-width: 1100px;

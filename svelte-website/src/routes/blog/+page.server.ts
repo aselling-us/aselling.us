@@ -1,5 +1,76 @@
 import matter from "gray-matter";
 import type { PageServerLoad } from "./$types";
+// src/routes/writing/+page.server.ts (or whichever route folder this is in)
+import { writeFile } from "node:fs/promises";
+import { fail, error } from "@sveltejs/kit";
+import type { Actions } from "./$types";
+
+export const actions: Actions = {
+  createPost: async ({ request }) => {
+    // Safeguard: ensure this never runs outside of dev mode
+    if (!import.meta.env.DEV) {
+      throw error(403, "Forbidden");
+    }
+
+    const formData = await request.formData();
+
+    const title = String(formData.get("title") || "");
+    const date = String(formData.get("date") || "");
+    const description = String(formData.get("description") || "");
+    const tags = String(formData.get("tags") || "")
+      .split(",")
+      .map((tag) => tag.trim())
+      .filter(Boolean);
+    const coverFile = formData.get("cover") as File | null;
+    const coverCaption = String(formData.get("covercaption") || "");
+    const body = String(formData.get("body") || "");
+    const draft = formData.get("draft") === "on";
+
+    // Note: coverFile is a File object, so use coverFile.name if present
+    const coverName = coverFile && coverFile.size > 0 ? coverFile.name : "";
+
+    const markdownContent = `---
+title: ${title}
+draft: ${draft}
+date: ${date}
+coverCaption: ${coverCaption}
+cover: ${coverName}
+description: ${description}
+tags: [${tags.join(", ")}]
+---
+
+${body}
+`;
+
+    if (draft) {
+      try {
+        await writeFile(
+          `src/content/blog/drafts/${title}.md`,
+          markdownContent,
+          "utf8",
+        );
+        return { success: true, message: `Saved ${title}.md successfully.` };
+      } catch (err) {
+        console.error("Error writing file:", err);
+        return fail(500, { message: `Failed to write ${title}.md` });
+      }
+    } else {
+      // non draft posts get s tored in content / blog
+      // FIXME add a precommit notif that this will notify blog ppl
+      try {
+        await writeFile(
+          `src/content/blog/${title}.md`,
+          markdownContent,
+          "utf8",
+        );
+        return { success: true, message: `Saved ${title}.md successfully.` };
+      } catch (err) {
+        console.error("Error writing file:", err);
+        return fail(500, { message: `Failed to write ${title}.md` });
+      }
+    }
+  },
+};
 
 export interface PostFrontmatter {
   title: string;
@@ -32,7 +103,7 @@ const images = import.meta.glob<string>(
     eager: true,
     query: "?url",
     import: "default",
-  }
+  },
 );
 
 export const load: PageServerLoad = async () => {
