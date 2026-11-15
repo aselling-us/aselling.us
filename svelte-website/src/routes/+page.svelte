@@ -152,4 +152,8 @@
     border: 1px solid var(--color-hairline);
     padding: 6px;
   }
+  .mono-label.section-label {
+    font-family: "Sacramento", cursive;
+    text-transform: lowercase;
+  }
 </style>

@@ -2,7 +2,15 @@
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
   "version": "0.2",
   "language": "en",
-  "dictionaries": ["typescript", "node", "npm", "html", "css", "markdown", "bash"],
+  "dictionaries": [
+    "typescript",
+    "node",
+    "npm",
+    "html",
+    "css",
+    "markdown",
+    "bash"
+  ],
   "ignorePaths": [
     "node_modules",
     "dist",
@@ -20,6 +28,7 @@
     "Ampitheatre",
     "Arjan",
     "aselling",
+
     "ASELLING",
     "asellingson",
     "Bambu",
@@ -29,6 +38,7 @@
     "bwignore",
     "Camino",
     "Camylio",
+    "covercaption",
     "candlemakers",
     "Canva",
     "Chanhassen",
@@ -65,6 +75,8 @@
     "Imgs",
     "INZO",
     "Jayhawks",
+    "tored",
+    "notif",
     "journaling",
     "Keown's",
     "Kontinua",

@@ -20,7 +20,7 @@
     })}{" · "}
     {post.minutes}</span
   >
-  <h1>{@html marked.parseInline(post.title)}</h1>
+  <h1 class="h1writing">{@html marked.parseInline(post.title)}</h1>
 
   {#if post.cover}
     <figure>
@@ -29,7 +29,7 @@
         alt={post.coverCaption ?? `Cover art for ${post.title}`}
         width="720"
       />
-      {#if post.coverCaption}<figcaption>{@html marked.parseInline(post.coverCaption)}</figcaption>{/if}
+      {#if post.coverCaption}<figcaption class="h1writing">{@html marked.parseInline(post.coverCaption)}</figcaption>{/if}
     </figure>
   {/if}
 
@@ -122,7 +122,9 @@
     border-top: 1px solid var(--color-hairline);
     margin: var(--space-4) 0;
   }
-
+  .h1writing {
+    font-family: var(--font-writing);
+  }
   .tag-list {
     list-style: none;
     display: flex;

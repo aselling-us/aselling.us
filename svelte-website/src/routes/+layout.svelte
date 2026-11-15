@@ -3,8 +3,14 @@
   import { navItems } from "#lib/nav-items.ts";
   import { page } from "$app/state";
   const year = new Date().getFullYear();
-
+  const shortMonth = new Date().toLocaleString("en-US", { month: "short" });
   let { children } = $props();
+
+  import versionFile from "../../../version.py?raw";
+
+  // Matches "__version = ..." on any line, ignoring comments and blank lines
+  const match = versionFile.match(/^\s*__version\s*=\s*["']([^"']+)["']/m);
+  const version = match ? match[1] : "unknown";
 </script>
 
 <svelte:head>
@@ -53,8 +59,10 @@
   {@render children()}
 </main>
 
-<footer class="wrap-wide site-footer">
-  <span class="mono-label">{year} — built with Svelte</span>
+<footer class="wrap-wide site-footer tn">
+  <span class="mono-label"
+    >{shortMonth} {year} — {version} built with Svelte</span
+  >
   <a class="mono-label footer-link" href="/rss.xml">rss</a>
 </footer>
 
@@ -73,6 +81,11 @@
 
   .footer-link:hover {
     color: var(--color-highlight-bright);
+  }
+
+  .site-footer .mono-label {
+    font-family: "Sacramento", cursive;
+    text-transform: lowercase;
   }
 
   .site-header {
