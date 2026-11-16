@@ -18,17 +18,24 @@
   let popover = $state<HTMLElement | null>(null);
 </script>
 
-<h1 class="h1writing" >Writing</h1>
-<p class="lede">
+<h1 class="h1writing">Writing</h1>
+<h3 class="lede">
   A collection of critiques, thoughts, and journaling. Often pulled straight
   from my obsidian vault.
-</p>
+</h3>
 
 {#if import.meta.env.DEV}
-  <button class="dev-btn mono-label" popovertarget="new-post-popover">+ New Post</button>
+  <button class="dev-btn mono-label" popovertarget="new-post-popover"
+    >+ New Post</button
+  >
 
   <!-- Popover Container ('manual' prevents accidental closing when clicking outside) -->
-  <div id="new-post-popover" bind:this={popover} popover="manual" class="editor-popover">
+  <div
+    id="new-post-popover"
+    bind:this={popover}
+    popover="manual"
+    class="editor-popover"
+  >
     <form
       id="post-form"
       method="POST"
@@ -99,7 +106,10 @@
         Tags (comma-separated)
         <input type="text" name="tags" placeholder="tag1, tag2, tag3..." />
       </label>
-      <p>FIXME I would like an insert images button, bold button, and insert link button for ease of access.</p>
+      <p>
+        FIXME I would like an insert images button, bold button, and insert link
+        button for ease of access.
+      </p>
       <label class="required-label form-body">
         Body (Markdown)
         <textarea
@@ -135,10 +145,12 @@
 </h2>
 
 <ul class="post-list">
-<!-- any instance of @html marked.parse takes the markeddown and converts it to html, then applies html formatting -->
+  <!-- any instance of @html marked.parse takes the markeddown and converts it to html, then applies html formatting -->
   {#each posts as post}
     <li
-      data-tags={JSON.stringify((post.tags ?? []).map((t) => t.toLowerCase()))}
+      data-tags={JSON.stringify(
+        (post.tags ?? []).map((t: any) => t.toLowerCase()),
+      )}
     >
       <div class="post-main">
         <a
@@ -163,8 +175,19 @@
         </a>
 
         {#if post.description}
-        
           <p class="post-desc">{@html marked.parse(post.description)}</p>
+        {/if}
+        {#if post.cover}
+          <figure>
+            <img
+              src={post.cover}
+              alt={post.coverCaption ?? `Cover art for ${post.title}`}
+              width="720"
+            />
+            {#if post.coverCaption}<figcaption class="h1writing">
+                {@html marked.parseInline(post.coverCaption)}
+              </figcaption>{/if}
+          </figure>
         {/if}
         <!-- {showDevControls && post.data.draft && <span class="draft-badge mono-label">draft</span>}
         {showDevControls && (
@@ -302,34 +325,33 @@
     flex-direction: column;
     gap: 1rem;
   }
-  
-  
+
   .row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
   }
-  
-label {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-}
 
-input[type='text'],
-input[type='date'],
-textarea {
-  flex: 1; /* Stretches the input to fill remaining space in the label */
-  min-width: 0; /* Prevents inputs from overflowing grid columns */
-  padding: 0.55rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-family: inherit;
-  font-size: 0.95rem;
-}
+  label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  textarea {
+    flex: 1; /* Stretches the input to fill remaining space in the label */
+    min-width: 0; /* Prevents inputs from overflowing grid columns */
+    padding: 0.55rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.95rem;
+  }
 
   /* Monospace font makes plain-text markdown easier to write */
   textarea {
@@ -365,13 +387,12 @@ textarea {
     display: inline;
   }
   .form-body {
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-family: inherit;
-  font-size: 0.95rem;
-  width: 100%;        /* Fills the width of its parent container */
-  min-height: 150px;  /* Sets a taller starting height while still allowing expansion */
-}
-
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    width: 100%; /* Fills the width of its parent container */
+    min-height: 150px; /* Sets a taller starting height while still allowing expansion */
+  }
 </style>
