@@ -17,6 +17,7 @@ export default defineConfig({
       adapter: adapter(),
     }),
   ],
+  envDir: "..",
   server: {
     fs: {
       allow: [
