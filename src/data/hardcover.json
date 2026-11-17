@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-14T15:48:05.861Z",
+  "fetchedAt": "2026-11-17T18:32:50.213Z",
   "userId": 192647,
   "username": "aselling",
   "current": [
@@ -931,6 +931,26 @@
       "readAt": "2026-06-28"
     },
     {
+      "title": "V for Vendetta",
+      "author": "Alan Moore",
+      "link": "https://hardcover.app/books/v-for-vendetta",
+      "cover": "https://assets.hardcover.app/editions/13065679/1687472402469130-A1GQ8YsGz2L._SL1500_.jpg",
+      "releaseYear": 1990,
+      "rating": 0,
+      "addedAt": "2026-03-13",
+      "readAt": "2026-05-22"
+    },
+    {
+      "title": "Cod: A Biography of the Fish that Changed the World",
+      "author": "Mark Kurlansky",
+      "link": "https://hardcover.app/books/cod-a-biography-of-the-fish-that-changed-the-world",
+      "cover": "https://assets.hardcover.app/edition/30394669/4936f55342c1217ddc5b60eba6fd7248066ce7f4.jpeg",
+      "releaseYear": 1997,
+      "rating": 0,
+      "addedAt": "2026-05-16",
+      "readAt": "2026-05-16"
+    },
+    {
       "title": "Notes from Underground",
       "author": "Fyodor Dostoevsky, Richard Pevear, Larissa Volokhonsky",
       "link": "https://hardcover.app/books/notes-from-underground",
@@ -981,6 +1001,16 @@
       "readAt": "2025-11-28"
     },
     {
+      "title": "How to Take Smart Notes: One Simple Technique to Boost Writing, Learning and Thinking",
+      "author": "Sönke Ahrens",
+      "link": "https://hardcover.app/books/how-to-take-smart-notes",
+      "cover": "https://assets.hardcover.app/external_data/61089766/120512e84976d321952cd1f92fb7c9fb846af07f.jpeg",
+      "releaseYear": 2017,
+      "rating": 0,
+      "addedAt": "2025-10-20",
+      "readAt": "2025-09-16"
+    },
+    {
       "title": "Becoming a Data Head: How to Think, Speak, and Understand Data Science, Statistics, and Machine Learning",
       "author": "Alex J. Gutman, Jordan Goldmeier",
       "link": "https://hardcover.app/books/becoming-a-data-head",
@@ -1001,6 +1031,16 @@
       "readAt": "2025-08-11"
     },
     {
+      "title": "The Metamorphosis / The Trial",
+      "author": "Franz Kafka",
+      "link": "https://hardcover.app/books/the-metamorphosis-the-trial",
+      "cover": "https://assets.hardcover.app/edition/33088967/70f57e0078b6a19e1e7ef55858c6af54e23fdb01.jpeg",
+      "releaseYear": 1960,
+      "rating": 0,
+      "addedAt": "2025-09-04",
+      "readAt": "2025-06-30"
+    },
+    {
       "title": "The Metamorphosis",
       "author": "Franz Kafka",
       "link": "https://hardcover.app/books/the-metamorphosis",
@@ -1011,14 +1051,34 @@
       "readAt": "2025-06-30"
     },
     {
+      "title": "Effortless: Make It Easier to Do What Matters Most",
+      "author": "Greg McKeown",
+      "link": "https://hardcover.app/books/effortless",
+      "cover": "https://assets.hardcover.app/external_data/47671297/c1808d8e6d785b67fcc0c098cc9137c2a7f49ae7.jpeg",
+      "releaseYear": 2021,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": "2025-06-25"
+    },
+    {
       "title": "1984",
       "author": "George Orwell",
       "link": "https://hardcover.app/books/1984",
-      "cover": "https://assets.hardcover.app/edition/25324831/62863aee-ef50-475f-b5ec-742f9da59115.tiff",
+      "cover": "https://assets.hardcover.app/edition/22881742/bb71454462ebe576d5cc1ad9ba32e122a85c4b16.jpeg",
       "releaseYear": 1949,
       "rating": 5,
       "addedAt": "2025-08-11",
       "readAt": "2025-03-01"
+    },
+    {
+      "title": "Building a Second Brain: A Proven Method to Organize Your Digital Life and Unlock Your Creative Potential",
+      "author": "Tiago Forte",
+      "link": "https://hardcover.app/books/building-a-second-brain",
+      "cover": "https://assets.hardcover.app/edition/30441090/f91279a130b918e5e21aaf8e0328dcc725fd2a68.jpeg",
+      "releaseYear": 2022,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": "2024-12-19"
     },
     {
       "title": "The Great Gatsby",
@@ -1031,34 +1091,74 @@
       "readAt": "2024-02-01"
     },
     {
-      "title": "Cod: A Biography of the Fish that Changed the World",
-      "author": "Mark Kurlansky",
-      "link": "https://hardcover.app/books/cod-a-biography-of-the-fish-that-changed-the-world",
-      "cover": "https://assets.hardcover.app/edition/30394669/4936f55342c1217ddc5b60eba6fd7248066ce7f4.jpeg",
-      "releaseYear": 1997,
-      "rating": 0,
-      "addedAt": "2026-05-16",
-      "readAt": null
+      "title": "Paradise Lost",
+      "author": "John Milton",
+      "link": "https://hardcover.app/books/paradise-lost",
+      "cover": "https://assets.hardcover.app/editions/3757554/1919948996411096.jpg",
+      "releaseYear": 1667,
+      "rating": 5,
+      "addedAt": "2025-08-15",
+      "readAt": "2024-01-01"
     },
     {
-      "title": "V for Vendetta",
-      "author": "Alan Moore",
-      "link": "https://hardcover.app/books/v-for-vendetta",
-      "cover": "https://assets.hardcover.app/editions/13065679/1687472402469130-A1GQ8YsGz2L._SL1500_.jpg",
-      "releaseYear": 1990,
-      "rating": 0,
-      "addedAt": "2026-03-13",
-      "readAt": null
+      "title": "Utopia",
+      "author": "Thomas More",
+      "link": "https://hardcover.app/books/utopia-utopia-1516",
+      "cover": "https://assets.hardcover.app/edition/3773236/98f9c128-45ee-4dad-9a3f-9c3ea65ff900.jpg",
+      "releaseYear": 1516,
+      "rating": 4,
+      "addedAt": "2025-08-15",
+      "readAt": "2024-01-01"
     },
     {
-      "title": "How to Take Smart Notes: One Simple Technique to Boost Writing, Learning and Thinking",
-      "author": "Sönke Ahrens",
-      "link": "https://hardcover.app/books/how-to-take-smart-notes",
-      "cover": "https://assets.hardcover.app/external_data/61089766/120512e84976d321952cd1f92fb7c9fb846af07f.jpeg",
-      "releaseYear": 2017,
-      "rating": 0,
-      "addedAt": "2025-10-20",
-      "readAt": null
+      "title": "Beowulf",
+      "author": "",
+      "link": "https://hardcover.app/books/beowulf",
+      "cover": "https://assets.hardcover.app/edition/25007163/c26fbb7071f17003b831bf092145f2c82ce3bdcd.jpeg",
+      "releaseYear": 950,
+      "rating": 3,
+      "addedAt": "2025-08-11",
+      "readAt": "2024-01-01"
+    },
+    {
+      "title": "Crime and Punishment",
+      "author": "Fyodor Dostoevsky",
+      "link": "https://hardcover.app/books/crime-and-punishment",
+      "cover": "https://assets.hardcover.app/edition/28595155/4856cea3-5227-4e62-8f80-512244556dce.jpg",
+      "releaseYear": 1866,
+      "rating": 4,
+      "addedAt": "2025-08-11",
+      "readAt": "2024-01-01"
+    },
+    {
+      "title": "The prologue to the Canterbury tales",
+      "author": "Geoffrey Chaucer",
+      "link": "https://hardcover.app/books/the-prologue-to-the-canterbury-tales",
+      "cover": "https://assets.hardcover.app/external_data/59882921/206afe7ec1c9a2e627971cad89cda3278dbb1df0.jpeg",
+      "releaseYear": 1400,
+      "rating": 4,
+      "addedAt": "2025-08-15",
+      "readAt": "2023-01-01"
+    },
+    {
+      "title": "How to Prevent the Next Pandemic",
+      "author": "Bill Gates",
+      "link": "https://hardcover.app/books/how-to-prevent-the-next-pandemic",
+      "cover": "https://assets.hardcover.app/edition/30420677/3028736716e44919343b67841655b0065e0e0f15.jpeg",
+      "releaseYear": 2022,
+      "rating": 3,
+      "addedAt": "2025-08-14",
+      "readAt": "2022-01-01"
+    },
+    {
+      "title": "The Iliad",
+      "author": "Homer",
+      "link": "https://hardcover.app/books/the-iliad",
+      "cover": "https://assets.hardcover.app/editions/30778024/7316607108184050-77265004.jpg",
+      "releaseYear": 801,
+      "rating": 4,
+      "addedAt": "2025-08-11",
+      "readAt": "2022-01-01"
     },
     {
       "title": "1984 / Animal Farm",
@@ -1081,16 +1181,6 @@
       "readAt": null
     },
     {
-      "title": "The Metamorphosis / The Trial",
-      "author": "Franz Kafka",
-      "link": "https://hardcover.app/books/the-metamorphosis-the-trial",
-      "cover": "https://assets.hardcover.app/external_data/59991878/3f8c60a655904726f2d280bef9f6790550ae3185.jpeg",
-      "releaseYear": 1960,
-      "rating": 0,
-      "addedAt": "2025-09-04",
-      "readAt": null
-    },
-    {
       "title": "The Lion, the Witch and the Wardrobe",
       "author": "C. S. Lewis",
       "link": "https://hardcover.app/books/the-lion-the-witch-and-the-wardrobe",
@@ -1098,16 +1188,6 @@
       "releaseYear": 1950,
       "rating": 4,
       "addedAt": "2025-08-16",
-      "readAt": null
-    },
-    {
-      "title": "Paradise Lost",
-      "author": "John Milton",
-      "link": "https://hardcover.app/books/paradise-lost",
-      "cover": "https://assets.hardcover.app/editions/3757554/1919948996411096.jpg",
-      "releaseYear": 1667,
-      "rating": 5,
-      "addedAt": "2025-08-15",
       "readAt": null
     },
     {
@@ -1131,36 +1211,6 @@
       "readAt": null
     },
     {
-      "title": "The prologue to the Canterbury tales",
-      "author": "Geoffrey Chaucer",
-      "link": "https://hardcover.app/books/the-prologue-to-the-canterbury-tales",
-      "cover": "https://assets.hardcover.app/external_data/59882921/206afe7ec1c9a2e627971cad89cda3278dbb1df0.jpeg",
-      "releaseYear": 1400,
-      "rating": 4,
-      "addedAt": "2025-08-15",
-      "readAt": null
-    },
-    {
-      "title": "Utopia",
-      "author": "Thomas More",
-      "link": "https://hardcover.app/books/utopia-utopia-1516",
-      "cover": "https://assets.hardcover.app/edition/3773236/98f9c128-45ee-4dad-9a3f-9c3ea65ff900.jpg",
-      "releaseYear": 1516,
-      "rating": 4,
-      "addedAt": "2025-08-15",
-      "readAt": null
-    },
-    {
-      "title": "Calculus Made Easy",
-      "author": "Silvanus Phillips Thompson",
-      "link": "https://hardcover.app/books/calculus-made-easy",
-      "cover": "https://assets.hardcover.app/edition/25520913/173276-L.jpg",
-      "releaseYear": 1910,
-      "rating": 4,
-      "addedAt": "2025-08-14",
-      "readAt": null
-    },
-    {
       "title": "Calculus: Early Transcendentals",
       "author": "James Stewart",
       "link": "https://hardcover.app/books/calculus-early-transcendentals",
@@ -1177,16 +1227,6 @@
       "cover": "https://assets.hardcover.app/edition/30399777/a3e4445cd335fb77e5833a27c0452817bded61af.jpeg",
       "releaseYear": 1952,
       "rating": 5,
-      "addedAt": "2025-08-14",
-      "readAt": null
-    },
-    {
-      "title": "How to Prevent the Next Pandemic",
-      "author": "Bill Gates",
-      "link": "https://hardcover.app/books/how-to-prevent-the-next-pandemic",
-      "cover": "https://assets.hardcover.app/edition/30420677/3028736716e44919343b67841655b0065e0e0f15.jpeg",
-      "releaseYear": 2022,
-      "rating": 3,
       "addedAt": "2025-08-14",
       "readAt": null
     },
@@ -1251,42 +1291,12 @@
       "readAt": null
     },
     {
-      "title": "Beowulf",
-      "author": "",
-      "link": "https://hardcover.app/books/beowulf",
-      "cover": "https://assets.hardcover.app/edition/25007163/c26fbb7071f17003b831bf092145f2c82ce3bdcd.jpeg",
-      "releaseYear": 950,
-      "rating": 3,
-      "addedAt": "2025-08-11",
-      "readAt": null
-    },
-    {
       "title": "Brave New World",
       "author": "Aldous Huxley",
       "link": "https://hardcover.app/books/brave-new-world",
       "cover": "https://assets.hardcover.app/external_data/61188097/03fb63a13f90219332db628d0a87332bd09329ac.jpeg",
       "releaseYear": 1932,
       "rating": 2,
-      "addedAt": "2025-08-11",
-      "readAt": null
-    },
-    {
-      "title": "Building a Second Brain: A Proven Method to Organize Your Digital Life and Unlock Your Creative Potential",
-      "author": "Tiago Forte",
-      "link": "https://hardcover.app/books/building-a-second-brain",
-      "cover": "https://assets.hardcover.app/edition/30441090/f91279a130b918e5e21aaf8e0328dcc725fd2a68.jpeg",
-      "releaseYear": 2022,
-      "rating": 5,
-      "addedAt": "2025-08-11",
-      "readAt": null
-    },
-    {
-      "title": "Crime and Punishment",
-      "author": "Fyodor Dostoevsky",
-      "link": "https://hardcover.app/books/crime-and-punishment",
-      "cover": "https://assets.hardcover.app/edition/28595155/4856cea3-5227-4e62-8f80-512244556dce.jpg",
-      "releaseYear": 1866,
-      "rating": 4,
       "addedAt": "2025-08-11",
       "readAt": null
     },
@@ -1317,16 +1327,6 @@
       "cover": "https://assets.hardcover.app/external_data/40873850/306e7f3f924dc95e73ac615b295d2481bc8adf82.jpeg",
       "releaseYear": 1605,
       "rating": 2,
-      "addedAt": "2025-08-11",
-      "readAt": null
-    },
-    {
-      "title": "Effortless: Make It Easier to Do What Matters Most",
-      "author": "Greg McKeown",
-      "link": "https://hardcover.app/books/effortless",
-      "cover": "https://assets.hardcover.app/external_data/47671297/c1808d8e6d785b67fcc0c098cc9137c2a7f49ae7.jpeg",
-      "releaseYear": 2021,
-      "rating": 5,
       "addedAt": "2025-08-11",
       "readAt": null
     },
@@ -1367,16 +1367,6 @@
       "cover": "https://assets.hardcover.app/edition/30429622/b5379145592e21e7020c2689f5f635cdf4b56fdf.jpeg",
       "releaseYear": 1933,
       "rating": 5,
-      "addedAt": "2025-08-11",
-      "readAt": null
-    },
-    {
-      "title": "The Iliad",
-      "author": "Homer",
-      "link": "https://hardcover.app/books/the-iliad",
-      "cover": "https://assets.hardcover.app/editions/30778024/7316607108184050-77265004.jpg",
-      "releaseYear": 801,
-      "rating": 4,
       "addedAt": "2025-08-11",
       "readAt": null
     },

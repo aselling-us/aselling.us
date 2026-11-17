@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-11-12T17:34:58.878Z",
+  "fetchedAt": "2026-11-17T18:32:50.213Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "Dead Poets Society",
+      "year": 1989,
+      "link": "https://letterboxd.com/aselling/film/dead-poets-society/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/8/4/6/51846-dead-poets-society-0-600-0-900-crop.jpg?v=9273e8acf7",
+      "rating": null,
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-11-16",
+      "review": "immediate thoughts:\ni saw a lot of my father and i within this film. there’s a part of me which strives for free thinking and personal expression, and there’s a part of me that strives for the order and obedience present. no method is going to make everyone happy, but determining your passions and following them is the best one can do\n\ncarpe diem, even if it kills me"
+    },
     {
       "title": "Parthenope",
       "year": 2024,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-08-07",
       "review": "This was such a beautiful film. What really stood out was the color grading, immaculate blending of colors on the screen with a bit of shading to make them stand out a bit more. Even the night time shots for the shadows had such a bright undertone to them. \n\nI think it was quite the interesting, but really fitting choice to have the same actress play Marina and her mother. Beautiful flashback \"rebellion\" sequence. Glad she finally found her home 🩵🌊"
-    },
-    {
-      "title": "One Night Only",
-      "year": 2026,
-      "link": "https://letterboxd.com/aselling/film/one-night-only-2026/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/3/1/1/6/7/7/p/uNyLeD7Dee8HsE01DzimLSdLj1F-0-600-0-900-crop.jpg?v=b21f6a72b6",
-      "rating": null,
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-08-06",
-      "review": "me n who me n who me n who me n who me n who me n who me n who me n who me n who\n\n91/100"
     }
   ],
   "favorites": [
