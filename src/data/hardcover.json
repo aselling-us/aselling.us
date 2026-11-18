@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-17T18:32:50.213Z",
+  "fetchedAt": "2026-11-18T18:02:36.913Z",
   "userId": 192647,
   "username": "aselling",
   "current": [
@@ -906,7 +906,7 @@
       "link": "https://hardcover.app/books/a-happy-death",
       "cover": "https://assets.hardcover.app/edition/30435764/68a0a9677d647960f446ebc9ad34dfc3910d332e.jpeg",
       "releaseYear": 1971,
-      "rating": 4,
+      "rating": 5,
       "addedAt": "2025-08-12",
       "readAt": "2026-08-09"
     },
@@ -958,7 +958,7 @@
       "releaseYear": 1864,
       "rating": 4,
       "addedAt": "2025-08-11",
-      "readAt": "2026-03-17"
+      "readAt": "2026-03-01"
     },
     {
       "title": "Train Dreams",
@@ -1001,6 +1001,16 @@
       "readAt": "2025-11-28"
     },
     {
+      "title": "No Longer Human",
+      "author": "Osamu Dazai",
+      "link": "https://hardcover.app/books/no-longer-human",
+      "cover": "https://assets.hardcover.app/editions/15248233/9349133283420308.jpg",
+      "releaseYear": 1948,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": "2025-10-26"
+    },
+    {
       "title": "How to Take Smart Notes: One Simple Technique to Boost Writing, Learning and Thinking",
       "author": "Sönke Ahrens",
       "link": "https://hardcover.app/books/how-to-take-smart-notes",
@@ -1009,6 +1019,26 @@
       "rating": 0,
       "addedAt": "2025-10-20",
       "readAt": "2025-09-16"
+    },
+    {
+      "title": "The Metamorphosis / The Trial",
+      "author": "Franz Kafka",
+      "link": "https://hardcover.app/books/the-metamorphosis-the-trial",
+      "cover": "https://assets.hardcover.app/edition/33088967/70f57e0078b6a19e1e7ef55858c6af54e23fdb01.jpeg",
+      "releaseYear": 1960,
+      "rating": 0,
+      "addedAt": "2025-09-04",
+      "readAt": "2025-09-01"
+    },
+    {
+      "title": "White Nights",
+      "author": "Fyodor Dostoevsky",
+      "link": "https://hardcover.app/books/white-nights",
+      "cover": "https://assets.hardcover.app/external_data/805530/91bbcc125fefca986a42cfc861c77c8be3038fc8.jpeg",
+      "releaseYear": 1848,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": "2025-09-01"
     },
     {
       "title": "Becoming a Data Head: How to Think, Speak, and Understand Data Science, Statistics, and Machine Learning",
@@ -1031,16 +1061,6 @@
       "readAt": "2025-08-11"
     },
     {
-      "title": "The Metamorphosis / The Trial",
-      "author": "Franz Kafka",
-      "link": "https://hardcover.app/books/the-metamorphosis-the-trial",
-      "cover": "https://assets.hardcover.app/edition/33088967/70f57e0078b6a19e1e7ef55858c6af54e23fdb01.jpeg",
-      "releaseYear": 1960,
-      "rating": 0,
-      "addedAt": "2025-09-04",
-      "readAt": "2025-06-30"
-    },
-    {
       "title": "The Metamorphosis",
       "author": "Franz Kafka",
       "link": "https://hardcover.app/books/the-metamorphosis",
@@ -1061,6 +1081,26 @@
       "readAt": "2025-06-25"
     },
     {
+      "title": "Tender Is the Night",
+      "author": "F. Scott Fitzgerald",
+      "link": "https://hardcover.app/books/tender-is-the-night",
+      "cover": "https://assets.hardcover.app/edition/30429622/b5379145592e21e7020c2689f5f635cdf4b56fdf.jpeg",
+      "releaseYear": 1933,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": "2025-04-01"
+    },
+    {
+      "title": "1984 / Animal Farm",
+      "author": "George Orwell",
+      "link": "https://hardcover.app/books/1984-animal-farm-1945",
+      "cover": "https://assets.hardcover.app/external_data/4320843/973b596a85d9a766d43a16d606b2907c7fb4d7aa.jpeg",
+      "releaseYear": 1945,
+      "rating": 0,
+      "addedAt": "2025-09-04",
+      "readAt": "2025-03-01"
+    },
+    {
       "title": "1984",
       "author": "George Orwell",
       "link": "https://hardcover.app/books/1984",
@@ -1071,14 +1111,84 @@
       "readAt": "2025-03-01"
     },
     {
-      "title": "Building a Second Brain: A Proven Method to Organize Your Digital Life and Unlock Your Creative Potential",
-      "author": "Tiago Forte",
-      "link": "https://hardcover.app/books/building-a-second-brain",
-      "cover": "https://assets.hardcover.app/edition/30441090/f91279a130b918e5e21aaf8e0328dcc725fd2a68.jpeg",
-      "releaseYear": 2022,
+      "title": "Calculus: Early Transcendentals",
+      "author": "James Stewart",
+      "link": "https://hardcover.app/books/calculus-early-transcendentals",
+      "cover": "https://assets.hardcover.app/external_data/4513611/c7083f8c9eed019b097fa0dd667b0adcb3f5ffb1.jpeg",
+      "releaseYear": 1995,
+      "rating": 4,
+      "addedAt": "2025-08-14",
+      "readAt": "2025-01-01"
+    },
+    {
+      "title": "Essentialism: The Disciplined Pursuit Of Less",
+      "author": "Greg McKeown",
+      "link": "https://hardcover.app/books/essentialism",
+      "cover": "https://assets.hardcover.app/book_mappings/7332543/49e97d3c85d756c9a823901d1a04c0cc2aab2007.jpeg",
+      "releaseYear": 2011,
       "rating": 5,
       "addedAt": "2025-08-11",
-      "readAt": "2024-12-19"
+      "readAt": "2024-12-01"
+    },
+    {
+      "title": "Fahrenheit 451",
+      "author": "Ray Bradbury",
+      "link": "https://hardcover.app/books/fahrenheit-451",
+      "cover": "https://assets.hardcover.app/edition/6336191/3d353406f14fd36043a8bdfb8c3288f90ee4f96c.jpeg",
+      "releaseYear": 1963,
+      "rating": 4,
+      "addedAt": "2025-08-11",
+      "readAt": "2024-11-01"
+    },
+    {
+      "title": "American Psycho",
+      "author": "Bret Easton Ellis",
+      "link": "https://hardcover.app/books/american-psycho",
+      "cover": "https://assets.hardcover.app/external_data/24972483/3b53200d26ea316ac20f5417a407b4095a2bce3d.jpeg",
+      "releaseYear": 1991,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": "2024-10-01"
+    },
+    {
+      "title": "Digital Minimalism: Choosing a Focused Life in a Noisy World",
+      "author": "Cal Newport",
+      "link": "https://hardcover.app/books/digital-minimalism",
+      "cover": "https://assets.hardcover.app/external_data/59340601/d5cda8f52cd8e844683d4a762edebd859a32c853.jpeg",
+      "releaseYear": 2019,
+      "rating": 4,
+      "addedAt": "2025-08-11",
+      "readAt": "2024-09-01"
+    },
+    {
+      "title": "Atomic habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+      "author": "James Clear",
+      "link": "https://hardcover.app/books/atomic-habits",
+      "cover": "https://assets.hardcover.app/editions/31309551/1170407510240263.jpg",
+      "releaseYear": 2018,
+      "rating": 4,
+      "addedAt": "2025-08-11",
+      "readAt": "2024-06-01"
+    },
+    {
+      "title": "Brave New World",
+      "author": "Aldous Huxley",
+      "link": "https://hardcover.app/books/brave-new-world",
+      "cover": "https://assets.hardcover.app/external_data/61188097/03fb63a13f90219332db628d0a87332bd09329ac.jpeg",
+      "releaseYear": 1932,
+      "rating": 2,
+      "addedAt": "2025-08-11",
+      "readAt": "2024-03-01"
+    },
+    {
+      "title": "The Stranger",
+      "author": "Albert Camus",
+      "link": "https://hardcover.app/books/the-stranger",
+      "cover": "https://assets.hardcover.app/edition/15655608/419742-L.jpg",
+      "releaseYear": 1942,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": "2024-02-04"
     },
     {
       "title": "The Great Gatsby",
@@ -1121,6 +1231,26 @@
       "readAt": "2024-01-01"
     },
     {
+      "title": "Building a Second Brain: A Proven Method to Organize Your Digital Life and Unlock Your Creative Potential",
+      "author": "Tiago Forte",
+      "link": "https://hardcover.app/books/building-a-second-brain",
+      "cover": "https://assets.hardcover.app/edition/30441090/f91279a130b918e5e21aaf8e0328dcc725fd2a68.jpeg",
+      "releaseYear": 2022,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": "2023-12-01"
+    },
+    {
+      "title": "Focus: The Hidden Driver of Excellence",
+      "author": "Daniel Goleman",
+      "link": "https://hardcover.app/books/focus-the-hidden-driver-of-excellence",
+      "cover": "https://assets.hardcover.app/external_data/60097265/f252d34bf1449b62d7af23668e2512e815902027.jpeg",
+      "releaseYear": 2013,
+      "rating": 3,
+      "addedAt": "2025-09-04",
+      "readAt": "2023-10-01"
+    },
+    {
       "title": "Crime and Punishment",
       "author": "Fyodor Dostoevsky",
       "link": "https://hardcover.app/books/crime-and-punishment",
@@ -1128,7 +1258,7 @@
       "releaseYear": 1866,
       "rating": 4,
       "addedAt": "2025-08-11",
-      "readAt": "2024-01-01"
+      "readAt": "2023-10-01"
     },
     {
       "title": "The prologue to the Canterbury tales",
@@ -1138,6 +1268,16 @@
       "releaseYear": 1400,
       "rating": 4,
       "addedAt": "2025-08-15",
+      "readAt": "2023-05-01"
+    },
+    {
+      "title": "The Picture of Dorian Gray",
+      "author": "Oscar Wilde",
+      "link": "https://hardcover.app/books/the-picture-of-dorian-gray",
+      "cover": "https://assets.hardcover.app/edition/25403534/25aad411adf5c70ceab52ba339ea701564cb93d6.jpeg",
+      "releaseYear": 1890,
+      "rating": 5,
+      "addedAt": "2025-08-11",
       "readAt": "2023-01-01"
     },
     {
@@ -1158,27 +1298,17 @@
       "releaseYear": 801,
       "rating": 4,
       "addedAt": "2025-08-11",
-      "readAt": "2022-01-01"
+      "readAt": "2021-01-01"
     },
     {
-      "title": "1984 / Animal Farm",
-      "author": "George Orwell",
-      "link": "https://hardcover.app/books/1984-animal-farm-1945",
-      "cover": "https://assets.hardcover.app/external_data/4320843/973b596a85d9a766d43a16d606b2907c7fb4d7aa.jpeg",
-      "releaseYear": 1945,
-      "rating": 0,
-      "addedAt": "2025-09-04",
-      "readAt": null
-    },
-    {
-      "title": "Focus: The Hidden Driver of Excellence",
-      "author": "Daniel Goleman",
-      "link": "https://hardcover.app/books/focus-the-hidden-driver-of-excellence",
-      "cover": "https://assets.hardcover.app/external_data/60097265/f252d34bf1449b62d7af23668e2512e815902027.jpeg",
-      "releaseYear": 2013,
-      "rating": 3,
-      "addedAt": "2025-09-04",
-      "readAt": null
+      "title": "The Odyssey",
+      "author": "Homer",
+      "link": "https://hardcover.app/books/the-odyssey",
+      "cover": "https://assets.hardcover.app/edition/27665794/e1cee359-68d9-4580-92ed-4000a4eb9f92.jpg",
+      "releaseYear": -700,
+      "rating": 5,
+      "addedAt": "2025-08-11",
+      "readAt": "2021-01-01"
     },
     {
       "title": "The Lion, the Witch and the Wardrobe",
@@ -1208,16 +1338,6 @@
       "releaseYear": 1513,
       "rating": 3,
       "addedAt": "2025-08-15",
-      "readAt": null
-    },
-    {
-      "title": "Calculus: Early Transcendentals",
-      "author": "James Stewart",
-      "link": "https://hardcover.app/books/calculus-early-transcendentals",
-      "cover": "https://assets.hardcover.app/external_data/4513611/c7083f8c9eed019b097fa0dd667b0adcb3f5ffb1.jpeg",
-      "releaseYear": 1995,
-      "rating": 4,
-      "addedAt": "2025-08-14",
       "readAt": null
     },
     {
@@ -1261,16 +1381,6 @@
       "readAt": null
     },
     {
-      "title": "American Psycho",
-      "author": "Bret Easton Ellis",
-      "link": "https://hardcover.app/books/american-psycho",
-      "cover": "https://assets.hardcover.app/external_data/24972483/3b53200d26ea316ac20f5417a407b4095a2bce3d.jpeg",
-      "releaseYear": 1991,
-      "rating": 5,
-      "addedAt": "2025-08-11",
-      "readAt": null
-    },
-    {
       "title": "Animal Farm",
       "author": "George Orwell",
       "link": "https://hardcover.app/books/animal-farm",
@@ -1281,41 +1391,11 @@
       "readAt": null
     },
     {
-      "title": "Atomic habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones",
-      "author": "James Clear",
-      "link": "https://hardcover.app/books/atomic-habits",
-      "cover": "https://assets.hardcover.app/editions/31309551/1170407510240263.jpg",
-      "releaseYear": 2018,
-      "rating": 4,
-      "addedAt": "2025-08-11",
-      "readAt": null
-    },
-    {
-      "title": "Brave New World",
-      "author": "Aldous Huxley",
-      "link": "https://hardcover.app/books/brave-new-world",
-      "cover": "https://assets.hardcover.app/external_data/61188097/03fb63a13f90219332db628d0a87332bd09329ac.jpeg",
-      "releaseYear": 1932,
-      "rating": 2,
-      "addedAt": "2025-08-11",
-      "readAt": null
-    },
-    {
       "title": "Dante",
       "author": "Robin Kirkpatrick",
       "link": "https://hardcover.app/books/dante-by-robin-kirkpatrick",
       "cover": "https://assets.hardcover.app/external_data/45201477/de94336c21e63f2ffad5b6109207be4d203cb466.jpeg",
       "releaseYear": null,
-      "rating": 4,
-      "addedAt": "2025-08-11",
-      "readAt": null
-    },
-    {
-      "title": "Digital Minimalism: Choosing a Focused Life in a Noisy World",
-      "author": "Cal Newport",
-      "link": "https://hardcover.app/books/digital-minimalism",
-      "cover": "https://assets.hardcover.app/external_data/59340601/d5cda8f52cd8e844683d4a762edebd859a32c853.jpeg",
-      "releaseYear": 2019,
       "rating": 4,
       "addedAt": "2025-08-11",
       "readAt": null
@@ -1331,92 +1411,12 @@
       "readAt": null
     },
     {
-      "title": "Essentialism: The Disciplined Pursuit Of Less",
-      "author": "Greg McKeown",
-      "link": "https://hardcover.app/books/essentialism",
-      "cover": "https://assets.hardcover.app/book_mappings/7332543/49e97d3c85d756c9a823901d1a04c0cc2aab2007.jpeg",
-      "releaseYear": 2011,
-      "rating": 5,
-      "addedAt": "2025-08-11",
-      "readAt": null
-    },
-    {
-      "title": "Fahrenheit 451",
-      "author": "Ray Bradbury",
-      "link": "https://hardcover.app/books/fahrenheit-451",
-      "cover": "https://assets.hardcover.app/edition/6336191/3d353406f14fd36043a8bdfb8c3288f90ee4f96c.jpeg",
-      "releaseYear": 1963,
-      "rating": 4,
-      "addedAt": "2025-08-11",
-      "readAt": null
-    },
-    {
-      "title": "No Longer Human",
-      "author": "Osamu Dazai",
-      "link": "https://hardcover.app/books/no-longer-human",
-      "cover": "https://assets.hardcover.app/editions/15248233/9349133283420308.jpg",
-      "releaseYear": 1948,
-      "rating": 5,
-      "addedAt": "2025-08-11",
-      "readAt": null
-    },
-    {
-      "title": "Tender Is the Night",
-      "author": "F. Scott Fitzgerald",
-      "link": "https://hardcover.app/books/tender-is-the-night",
-      "cover": "https://assets.hardcover.app/edition/30429622/b5379145592e21e7020c2689f5f635cdf4b56fdf.jpeg",
-      "releaseYear": 1933,
-      "rating": 5,
-      "addedAt": "2025-08-11",
-      "readAt": null
-    },
-    {
-      "title": "The Odyssey",
-      "author": "Homer",
-      "link": "https://hardcover.app/books/the-odyssey",
-      "cover": "https://assets.hardcover.app/edition/27665794/e1cee359-68d9-4580-92ed-4000a4eb9f92.jpg",
-      "releaseYear": -700,
-      "rating": 5,
-      "addedAt": "2025-08-11",
-      "readAt": null
-    },
-    {
-      "title": "The Picture of Dorian Gray",
-      "author": "Oscar Wilde",
-      "link": "https://hardcover.app/books/the-picture-of-dorian-gray",
-      "cover": "https://assets.hardcover.app/edition/25403534/25aad411adf5c70ceab52ba339ea701564cb93d6.jpeg",
-      "releaseYear": 1890,
-      "rating": 5,
-      "addedAt": "2025-08-11",
-      "readAt": null
-    },
-    {
-      "title": "The Stranger",
-      "author": "Albert Camus",
-      "link": "https://hardcover.app/books/the-stranger",
-      "cover": "https://assets.hardcover.app/edition/15655608/419742-L.jpg",
-      "releaseYear": 1942,
-      "rating": 5,
-      "addedAt": "2025-08-11",
-      "readAt": null
-    },
-    {
       "title": "The Trial",
       "author": "Franz Kafka",
       "link": "https://hardcover.app/books/the-trial",
       "cover": "https://assets.hardcover.app/book_mappings/7333110/1bad0e0acb5bd7f0911b6b939154638d812469b4.jpeg",
       "releaseYear": 1925,
       "rating": 4,
-      "addedAt": "2025-08-11",
-      "readAt": null
-    },
-    {
-      "title": "White Nights",
-      "author": "Fyodor Dostoevsky",
-      "link": "https://hardcover.app/books/white-nights",
-      "cover": "https://assets.hardcover.app/external_data/805530/91bbcc125fefca986a42cfc861c77c8be3038fc8.jpeg",
-      "releaseYear": 1848,
-      "rating": 5,
       "addedAt": "2025-08-11",
       "readAt": null
     }
