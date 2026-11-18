@@ -28,7 +28,8 @@
   "scripts": {
     "dev": "node --env-file-if-exists=../.env.local ./node_modules/vite/bin/vite.js dev",
     "hardcover": "tsx --env-file=../.env.local src/lib/server/hardcover.ts",
-    "build": "vite build && npm run prepack",
+    "letterboxd": "tsx --env-file=../.env.local src/lib/server/letterboxd.ts",
+    "build": "svelte-kit sync && vite build && npm run prepack",
     "preview": "vite preview",
     "prepare": "svelte-kit sync || echo ''",
     "prepack": "svelte-kit sync && svelte-package && publint",

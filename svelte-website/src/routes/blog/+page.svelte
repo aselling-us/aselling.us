@@ -4,6 +4,7 @@
   import { marked } from "marked";
   import markedFootnote from "marked-footnote";
   import { enhance } from "$app/forms";
+  import { refreshAll } from "$app/navigation";
   import { readingTimeLabel } from "#lib/reading-time.mjs";
 
   marked.use(markedFootnote());
@@ -16,6 +17,21 @@
 
   // Use a reactive reference instead of document.getElementById
   let popover = $state<HTMLElement | null>(null);
+
+  let editingPost = $state<(typeof posts)[number] | null>(null);
+
+  function openNewPost() {
+    editingPost = null;
+    popover?.showPopover();
+  }
+
+  function openEditPost(post: (typeof posts)[number]) {
+    editingPost = post;
+    popover?.showPopover();
+  }
+  function formatDateForInput(date: Date) {
+    return new Date(date).toISOString().split("T")[0];
+  }
 </script>
 
 <h1 class="h1writing">Writing</h1>
@@ -25,109 +41,139 @@
 </h3>
 
 {#if import.meta.env.DEV}
-  <button class="dev-btn mono-label" popovertarget="new-post-popover"
-    >+ New Post</button
-  >
+  <button class="dev-btn mono-label" onclick={openNewPost}>+ New Post</button>
 
-  <!-- Popover Container ('manual' prevents accidental closing when clicking outside) -->
   <div
     id="new-post-popover"
     bind:this={popover}
     popover="manual"
     class="editor-popover"
   >
-    <form
-      id="post-form"
-      method="POST"
-      action="?/createPost"
-      enctype="multipart/form-data"
-      use:enhance={() => {
-        return async ({ result, update }) => {
-          if (result.type === "success") {
-            popover?.hidePopover();
-            await update();
-          }
-        };
-      }}
-    >
-      <div class="popover-header">
-        <h2>Create New Post</h2>
-        <button
-          type="button"
-          popovertarget="new-post-popover"
-          popovertargetaction="hide"
-          aria-label="Close">✕</button
-        >
-      </div>
+    <!-- Keyed on slug so the form resets cleanly when switching between posts -->
+    {#key editingPost?.slug ?? "new"}
+      <form
+        id="post-form"
+        method="POST"
+        action={editingPost ? "?/updatePost" : "?/createPost"}
+        enctype="multipart/form-data"
+        use:enhance={() => {
+          return async ({ result, update }) => {
+            if (result.type === "success") {
+              popover?.hidePopover();
+              editingPost = null;
+              await update();
+              await refreshAll();
+            } else {
+              // Catches validation errors (result.type === 'failure') or 500s ('error')
+              console.error("Action result:", result);
+              await update();
+            }
+          };
+        }}
+      >
+        <div class="popover-header">
+          <h2>
+            {editingPost ? `Edit: ${editingPost.title}` : "Create New Post"}
+          </h2>
+          <button
+            type="button"
+            onclick={() => popover?.hidePopover()}
+            aria-label="Close">✕</button
+          >
+        </div>
 
-      <div class="row">
-        <label class="required-label">
-          Draft
-          <input name="draft" type="checkbox" checked />
-        </label>
-        <label class="required-label">
-          Title
+        <!-- Pass the original slug when updating so the server knows which file to edit -->
+        {#if editingPost}
+          <input type="hidden" name="slug" value={editingPost.slug} />
+        {/if}
+
+        <div class="row">
+          <label class="required-label">
+            Draft
+            <input
+              name="draft"
+              type="checkbox"
+              checked={editingPost ? editingPost.draft : true}
+            />
+          </label>
+          <label class="required-label">
+            Title
+            <input
+              type="text"
+              name="title"
+              value={editingPost?.title ?? ""}
+              placeholder="Post title..."
+              required
+            />
+          </label>
+        </div>
+
+        <div class="row">
+          <label class="required-label">
+            Date
+            <input
+              type="date"
+              name="date"
+              value={editingPost ? formatDateForInput(editingPost.date) : ""}
+              required
+            />
+          </label>
+          <label>
+            Cover Image
+            <input type="file" name="cover" accept="image/*" />
+          </label>
+        </div>
+
+        <label>
+          Cover Caption
           <input
             type="text"
-            name="title"
-            placeholder="Post title..."
-            required
+            name="covercaption"
+            value={editingPost?.coverCaption ?? ""}
+            placeholder="Where does this image come from?"
           />
         </label>
-      </div>
 
-      <div class="row">
         <label class="required-label">
-          Date
-          <input type="date" name="date" required />
+          Post Description
+          <input
+            type="text"
+            name="description"
+            value={editingPost?.description ?? ""}
+            placeholder="Short summary..."
+          />
         </label>
 
         <label>
-          Cover Image
-          <input type="file" name="cover" accept="image/*" />
+          Tags (comma-separated)
+          <input
+            type="text"
+            name="tags"
+            value={editingPost?.tags?.join(", ") ?? ""}
+            placeholder="tag1, tag2, tag3..."
+          />
         </label>
-      </div>
 
-      <label>
-        Cover Caption
-        <input
-          type="text"
-          name="covercaption"
-          placeholder="Where does this image come from?"
-        />
-      </label>
+        <label class="required-label form-body">
+          Body (Markdown)
+          <textarea
+            name="body"
+            rows="12"
+            placeholder="Write your unformatted markdown here..."
+            required>{editingPost?.body ?? ""}</textarea
+          >
+        </label>
 
-      <label class="required-label">
-        Post Description
-        <input type="text" name="description" placeholder="Short summary..." />
-      </label>
-
-      <label>
-        Tags (comma-separated)
-        <input type="text" name="tags" placeholder="tag1, tag2, tag3..." />
-      </label>
-      <p>
-        FIXME I would like an insert images button, bold button, and insert link
-        button for ease of access.
-      </p>
-      <label class="required-label form-body">
-        Body (Markdown)
-        <textarea
-          name="body"
-          rows="12"
-          placeholder="Write your unformatted markdown here..."
-          required></textarea>
-      </label>
-
-      <div class="popover-actions">
-        <button
-          type="button"
-          popovertarget="new-post-popover"
-          popovertargetaction="hide">Cancel</button
-        >
-        <button type="submit" class="primary">Save Post</button>
-      </div>
-    </form>
+        <div class="popover-actions">
+          <button type="button" onclick={() => popover?.hidePopover()}
+            >Cancel</button
+          >
+          <button type="submit" class="primary">
+            {editingPost ? "Update Post" : "Save Post"}
+          </button>
+        </div>
+      </form>
+    {/key}
   </div>
 {/if}
 
@@ -166,58 +212,53 @@
             })}
             {" · "}
             {readingTimeLabel(post.body)}
+            {" · "}
+            <!-- shorthand for {#if post.tags && post.tags.length > 0} -->
+            {#if post.tags?.length}
+              <div class="tag-list">
+                {#each post.tags as tag}
+                  <span class="tag">{tag}; </span>
+                {/each}
+              </div>
+            {/if}
           </span>
 
-          <!-- only show draft tag when in dev mode -->
-          {#if post.draft && import.meta.env.DEV}
-            <span class="draft-badge mono-label">draft</span>
+          <!-- ONLY MARK DRAFTS IN DEV AND ONLY SHOW EDIT BUTTON  -->
+          {#if import.meta.env.DEV}
+            {#if post.draft}
+              <span class="draft-badge mono-label">draft</span>
+            {/if}
+            <button
+              type="button"
+              class="mono-label edit-btn"
+              onclick={(e) => {
+                e.preventDefault(); // Prevents triggering the parent <a> link
+                openEditPost(post);
+              }}
+            >
+              edit
+            </button>
           {/if}
         </a>
-
         {#if post.description}
           <p class="post-desc">{@html marked.parse(post.description)}</p>
         {/if}
-        {#if post.cover}
-          <figure>
-            <img
-              src={post.cover}
-              alt={post.coverCaption ?? `Cover art for ${post.title}`}
-              width="720"
-            />
-            {#if post.coverCaption}<figcaption class="h1writing">
-                {@html marked.parseInline(post.coverCaption)}
-              </figcaption>{/if}
-          </figure>
-        {/if}
-        <!-- {showDevControls && post.data.draft && <span class="draft-badge mono-label">draft</span>}
-        {showDevControls && (
-          <button class="post-edit dev-btn mono-label" data-id={post.id} type="button">edit</button>
-        )} -->
-        <!-- <span class="mono-label post-date">
-          {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-          {' · '}
-          {readingTimeLabel(post.body)}
-        </span>
-
-        {#if post.data.tags && post.data.tags.length > 0}
-          <ul class="tag-list">
-            {#each post.data.tags.slice(0, 3) as tag}
-              <li class="tag"><a href={`/blog/tags/${tagSlug(tag)}`} set:html={renderInlineMarkdown(tag)} /></li>
-            {/each}
-            {#if post.data.tags.length > 3}
-              <li class="tag tag-more" title={post.data.tags.slice(3).map(stripMarkdown).join(', ')}>+{post.data.tags.length - 3}</li>
-            {/if}
-          </ul>
-        {/if} -->
       </div>
-      <!-- {#if post.data.cover}
+
+      {#if post.cover}
         <figure class="post-cover">
-          <Image src={post.data.cover} alt={post.data.coverCaption ? stripMarkdown(post.data.coverCaption) : `Cover art for ${stripMarkdown(post.data.title)}`} width={560} />
-          {#if post.data.coverCaption}
-            <figcaption class="mono-label" set:html={renderInlineMarkdown(post.data.coverCaption)} />
+          <img
+            src={post.cover}
+            alt={post.coverCaption ?? `Cover art for ${post.title}`}
+            width="560"
+          />
+          {#if post.coverCaption}
+            <figcaption class="h1writing">
+              {@html marked.parseInline(post.coverCaption)}
+            </figcaption>
           {/if}
         </figure>
-      {/if} -->
+      {/if}
     </li>
   {/each}
 </ul>
@@ -256,7 +297,35 @@
     color: var(--color-text-dim);
     margin-top: 0.4rem;
   }
+  .post-cover {
+    flex-shrink: 0;
+    width: 240px;
+    margin: 0;
+  }
+  .post-cover img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+    border: 1px solid var(--color-hairline);
+  }
+  .post-cover figcaption {
+    margin-top: 0.35rem;
+    text-transform: none;
+    letter-spacing: 0.04em;
+  }
 
+  @media (max-width: 640px) {
+    .post-list > li {
+      flex-direction: column;
+    }
+    .post-cover {
+      width: 100%;
+    }
+    .post-cover img {
+      height: 180px;
+    }
+  }
   .draft-badge {
     color: var(--color-highlight-bright);
     border: 1px dashed var(--color-highlight-bright);
@@ -270,26 +339,29 @@
     background: var(--color-highlight-bright);
     color: var(--color-bg);
   }
-  /* }
-    .post-main { flex: 1; min-width: 0; }
+  .post-main {
+    flex: 1;
+    min-width: 0;
+  }
 
-    .post-cover {
-        flex-shrink: 0;
-        width: 240px;
-        margin: 0;
-    }
-    .post-cover img {
-        width: 100%;
-        height: 160px;
-        object-fit: cover;
-        display: block;
-        border: 1px solid var(--color-hairline);
-    }
-    .post-cover figcaption {
-        margin-top: 0.35rem;
-        text-transform: none;
-        letter-spacing: 0.04em;
-    } */
+  .post-cover {
+    flex-shrink: 0;
+    width: 240px;
+    margin: 0;
+  }
+  .post-cover img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+    border: 1px solid var(--color-hairline);
+  }
+  .post-cover figcaption {
+    margin-top: 0.35rem;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-size: x-small;
+  }
 
   .editor-popover {
     width: min(650px, 92vw);
