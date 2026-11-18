@@ -14,10 +14,11 @@
   let imgFailed = $state(false);
 
   let progress = $derived(
-    book.currentPage && book.totalPages && book.totalPages > 0
+    book.currentPage != null && book.totalPages != null && book.totalPages > 0
       ? Math.min(100, Math.round((book.currentPage / book.totalPages) * 100))
       : null,
   );
+
   function handleImageError(event: Event) {
     const img = event.currentTarget as HTMLImageElement;
     console.error(`[BookCard] Failed to load cover for "${book.title}"`, {
@@ -59,7 +60,6 @@
       {#if book.year}
         ({book.year}){/if}
     </p>
-
     {#if progress !== null}
       <div
         class="progress"
@@ -82,13 +82,8 @@
           >
         </div>
       </div>
-      <!-- <div class="progress-wrapper">
-        <div class="progress-text">
-          <span>Page {book.currentPage} of {book.totalPages}</span>
-          <span>{progress}%</span>
-        </div>
-        <progress value={book.currentPage} max={book.totalPages}></progress>
-      </div> -->
+    {:else if book.currentPage === null}
+    <p>test</p>
     {/if}
   </div>
 </article>
@@ -253,19 +248,8 @@
   .progress {
     margin-top: 0.15rem;
   }
-  .progress-track {
-    height: 3px;
-    background: var(--color-hairline);
-  }
   .progress-fill {
     height: 100%;
     background: var(--color-highlight);
   }
-  .progress-label {
-    display: block;
-    margin-top: 0.3rem;
-    color: var(--color-text-faint);
-  }
-
-
 </style>

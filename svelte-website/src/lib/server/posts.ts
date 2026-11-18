@@ -1,12 +1,13 @@
 import matter from "gray-matter";
 
+export const COVER_EXTENSIONS = ["png", "jpg", "jpeg", "webp", "avif"] as const;
+
 export interface PostFrontmatter {
   title: string;
-  date: string;
+  date: string | Date;
   description: string;
   tags?: string[];
   draft?: boolean;
-  cover?: string;
   coverCaption?: string;
 }
 
@@ -34,25 +35,36 @@ const images = import.meta.glob<string>(
   },
 );
 
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 export function getPosts(): Post[] {
+  // all possible image entries the cover could match
+  const imagePaths = Object.keys(images);
+
   return Object.entries(files)
     .map(([path, raw]) => {
       const parsed = matter(raw);
       const data = parsed.data as PostFrontmatter;
+      const slug = path.split("/").pop()!.replace(/\.md$/, "");
+      const baseCoverPath = path.replace(/[^/]+\.md$/, `${slug}-cover`);
 
-      const cleanCover = data.cover?.replace(/^\.?\//, "");
-      const coverPath = cleanCover
-        ? path.replace(/[^/]+\.md$/, cleanCover)
-        : undefined;
+      // Matches "{slug}-cover.{png|jpg|jpeg|webp|avif}", case-insensitive
+      const coverRegex = new RegExp(
+        `^${escapeRegExp(baseCoverPath)}\\.(${COVER_EXTENSIONS.join("|")})$`,
+        "i",
+      );
+      const matchedKey = imagePaths.find((imgPath) => coverRegex.test(imgPath));
 
       return {
-        slug: path.split("/").pop()!.replace(".md", ""),
+        slug,
         title: data.title,
         date: new Date(data.date),
         description: data.description,
         tags: data.tags ?? [],
         draft: data.draft ?? false,
-        cover: coverPath ? images[coverPath] : undefined,
+        cover: matchedKey ? images[matchedKey] : undefined,
         coverCaption: data.coverCaption,
         body: parsed.content,
       };

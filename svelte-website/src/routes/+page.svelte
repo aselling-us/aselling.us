@@ -4,7 +4,8 @@
   import me from "#lib/assets/me.jpg";
   import type { PageData } from "./$types";
   let { data }: { data: PageData } = $props();
-  const latestPost = $derived(data.posts[0]);
+  const posts = $derived(data.posts.filter((post) => !post.draft));
+  const latestPost = $derived(posts[0])
   // console.log(JSON.stringify(latestPost, null, 2));
   // can be used like {lastestPost}
 </script>
