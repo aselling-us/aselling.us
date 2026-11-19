@@ -1,13 +1,20 @@
 import { HardcoverClient, UserBookStatus } from "@hardcover/sdk";
-import { env } from "$env/dynamic/private";
-
 let client: HardcoverClient | null = null;
 
-export function getHardcoverClient() {
+async function getToken(): Promise<string> {
+  let token: string | undefined;
+  try {
+    token = (await import("$app/env/private")).HARDCOVER_TOKEN;
+  } catch {
+    token = process.env.HARDCOVER_TOKEN; // running as a standalone script
+  }
+  if (!token) throw new Error("HARDCOVER_TOKEN is not set");
+  return token;
+}
+
+export async function getHardcoverClient() {
   if (!client) {
-    // Works in both SvelteKit ($env) and standalone tsx CLI (process.env)
-    const token = env.HARDCOVER_TOKEN ?? process.env.HARDCOVER_TOKEN;
-    client = new HardcoverClient({ token });
+    client = new HardcoverClient({ token: await getToken() });
   }
   return client;
 }
@@ -29,8 +36,9 @@ export interface BasicBookItem {
   hardcoverId: number;
   title: string;
   author: string;
-  year: number | null;
+  year: number | null; // publication year, metadata only
   readLog: string[];
+  sortDate: string | null;
 }
 
 export interface YearBucket {
@@ -38,99 +46,104 @@ export interface YearBucket {
   books: BasicBookItem[];
 }
 
-// Now async so API calls only run when requested, not during build analysis
+async function getAllReadBooks() {
+  const hc = await getHardcoverClient();
+  const items: Awaited<ReturnType<typeof hc.library.list>>["items"] = [];
+  let cursor: string | undefined;
+
+  do {
+    const page = await hc.library.list({
+      status: UserBookStatus.Read,
+      limit: 100,
+      cursor,
+    });
+
+    items.push(...page.items);
+    cursor = page.nextCursor;
+  } while (cursor);
+
+  return items;
+}
+
 export async function dataReading(): Promise<ReadingBookItem[]> {
-  const hc = getHardcoverClient();
+  const hc = await getHardcoverClient();
   const reading = await hc.library.list({
     status: UserBookStatus.CurrentlyReading,
   });
 
-  const data: ReadingBookItem[] = [];
-
-  for (const item of reading.items) {
-    const hardcoverId = item.bookId;
+  return reading.items.map((item) => {
     const book = item.book;
     const edition = item.edition;
-
-    const image = edition?.cachedImage?.url ?? null;
-    const slug = book?.slug ?? "";
-    const title = edition?.title ?? book?.title ?? "Untitled";
-
-    const author =
-      book?.contributions?.[0]?.author?.name ??
-      book?.cachedContributors?.[0]?.author?.name ??
-      "Unknown Author";
+    const reads = item.userBookReads ?? item.reads ?? [];
+    const currentRead = reads.at(-1);
 
     const releaseDate = edition?.releaseDate ?? book?.releaseDate;
-    const year = releaseDate ? new Date(releaseDate).getFullYear() : null;
+    const parsedYear = releaseDate ? new Date(releaseDate).getFullYear() : NaN;
 
-    const reads = item.userBookReads ?? item.reads ?? [];
-    const currentRead = reads[reads.length - 1];
-    const elapsedPages = currentRead?.progressPages ?? 0;
-    const totalPages = edition?.pages ?? book?.pages ?? null;
-
-    data.push({
-      image,
-      slug,
-      hardcoverId,
-      title,
-      author,
-      year,
-      elapsedPages,
-      totalPages,
-    });
-  }
-  return data;
+    return {
+      image: edition?.cachedImage?.url ?? book?.cachedImage?.url ?? null,
+      slug: book?.slug ?? "",
+      hardcoverId: item.bookId,
+      title: edition?.title ?? book?.title ?? "Untitled",
+      author:
+        book?.contributions?.[0]?.author?.name ??
+        book?.cachedContributors?.[0]?.author?.name ??
+        "Unknown Author",
+      year: Number.isNaN(parsedYear) ? null : parsedYear,
+      elapsedPages: currentRead?.progressPages ?? 0,
+      totalPages: edition?.pages ?? book?.pages ?? null,
+    };
+  });
 }
 
 export async function pastReads(): Promise<BasicBookItem[]> {
-  const hc = getHardcoverClient();
-  const past = await hc.library.list({ status: UserBookStatus.Read });
-
+  const pastItems = await getAllReadBooks();
   const data: BasicBookItem[] = [];
 
-  for (const item of past.items) {
-    const hardcoverId = item.bookId;
+  for (const item of pastItems) {
     const book = item.book;
     const edition = item.edition;
-
-    const image = edition?.cachedImage?.url ?? book?.cachedImage?.url ?? null;
-    const slug = book?.slug ?? "";
-    const title = edition?.title ?? book?.title ?? "Untitled";
-
-    const author =
-      book?.contributions?.[0]?.author?.name ??
-      book?.cachedContributors?.[0]?.author?.name ??
-      "Unknown Author";
-
-    const releaseDate = edition?.releaseDate ?? book?.releaseDate;
-    const year = releaseDate ? new Date(releaseDate).getFullYear() : null;
-
     const reads = item.userBookReads ?? item.reads ?? [];
+
     const readLog = reads
       .map((read) => read.finishedAt)
       .filter((date): date is string => Boolean(date))
       .sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
 
-    if (readLog.length === 0 && item.lastReadDate) {
-      readLog.push(item.lastReadDate);
-    }
+    const releaseDate = edition?.releaseDate ?? book?.releaseDate;
+    const publicationYear = releaseDate
+      ? new Date(releaseDate).getFullYear()
+      : null;
+
+    const sortDate = readLog[0] ?? null;
+
+    // Includes print, ebook, and audiobook entries.
+    // A completion date takes priority over the release date.
+    if (!sortDate) continue;
+
+    const year = new Date(sortDate).getFullYear();
+    if (Number.isNaN(year)) continue;
 
     data.push({
-      image,
-      slug,
-      hardcoverId,
-      title,
-      author,
-      year,
+      image: edition?.cachedImage?.url ?? book?.cachedImage?.url ?? null,
+      slug: book?.slug ?? "",
+      hardcoverId: item.bookId,
+      title: edition?.title ?? book?.title ?? "Untitled",
+      author:
+        book?.contributions?.[0]?.author?.name ??
+        book?.cachedContributors?.[0]?.author?.name ??
+        "Unknown Author",
+      year: Number.isNaN(publicationYear) ? null : publicationYear,
       readLog,
+      sortDate,
     });
   }
 
   return data.sort((a, b) => {
-    const latestA = a.readLog[0] ? new Date(a.readLog[0]).getTime() : 0;
-    const latestB = b.readLog[0] ? new Date(b.readLog[0]).getTime() : 0;
-    return latestB - latestA;
+    if (!a.sortDate) return 1;
+    if (!b.sortDate) return -1;
+
+    return new Date(b.sortDate).getTime() - new Date(a.sortDate).getTime();
   });
 }
 
@@ -139,16 +152,13 @@ export async function pastReadsByYear(): Promise<YearBucket[]> {
   const buckets = new Map<string, BasicBookItem[]>();
 
   for (const book of sortedBooks) {
-    const latestDate = book.readLog[0];
-    const readYear = latestDate ? latestDate.slice(0, 4) : "Undated";
-
-    if (!buckets.has(readYear)) {
-      buckets.set(readYear, []);
+    const year = book.sortDate ? book.sortDate.slice(0, 4) : "Undated";
+    if (!buckets.has(year)) {
+      buckets.set(year, []);
     }
-    buckets.get(readYear)!.push(book);
+
+    buckets.get(year)!.push(book);
   }
-  return Array.from(buckets, ([year, books]) => ({
-    year,
-    books,
-  }));
+
+  return Array.from(buckets, ([year, books]) => ({ year, books }));
 }

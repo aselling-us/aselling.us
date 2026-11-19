@@ -1,23 +1,21 @@
 <script lang="ts">
-  export interface Book {
-    id: string | number;
-    title: string;
-    author: string;
-    year: number | null;
-    cover: string | null;
-    link: string;
-    currentPage: number | null;
-    totalPages: number | null;
-  }
+  import type { Book } from "#lib/server/hardcover";
 
   let { book }: { book: Book } = $props();
+  // console.log(book)
+  // console.log(book);
   let imgFailed = $state(false);
-
-  let progress = $derived(
-    book.currentPage != null && book.totalPages != null && book.totalPages > 0
-      ? Math.min(100, Math.round((book.currentPage / book.totalPages) * 100))
-      : null,
-  );
+  let progress = $derived.by(() => {
+    if (
+      book.elapsedPages == null ||
+      book.totalPages == null ||
+      book.totalPages <= 0
+    ) {
+      return null;
+    }
+    const pct = Math.round((book.elapsedPages / book.totalPages) * 100);
+    return Math.min(100, Math.max(0, pct));
+  });
 
   function handleImageError(event: Event) {
     const img = event.currentTarget as HTMLImageElement;
@@ -67,7 +65,7 @@
         aria-label={`Reading progress for ${book.title}`}
         aria-valuemin="0"
         aria-valuemax={book.totalPages}
-        aria-valuenow={book.currentPage}
+        aria-valuenow={book.elapsedPages}
         style={`--p: ${progress}`}
       >
         <div class="progress-scale">
@@ -77,13 +75,13 @@
           </div>
         </div>
         <div class="progress-meta">
-          <span class="mono-label"
-            >page {book.currentPage} / {book.totalPages}</span
-          >
+          <span class="mono-label">
+            page {book.elapsedPages} / {book.totalPages}
+          </span>
         </div>
       </div>
-    {:else if book.currentPage === null}
-    <p>test</p>
+    {:else if book.elapsedPages == null}
+      <p>test</p>
     {/if}
   </div>
 </article>

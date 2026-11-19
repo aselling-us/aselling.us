@@ -217,7 +217,7 @@
             {#if post.tags?.length}
               <div class="tag-list">
                 {#each post.tags as tag}
-                  <span class="tag">{tag}; </span>
+                  <span class="tag">{tag}<br> </span>
                 {/each}
               </div>
             {/if}
@@ -466,5 +466,34 @@
     font-size: 0.95rem;
     width: 100%; /* Fills the width of its parent container */
     min-height: 150px; /* Sets a taller starting height while still allowing expansion */
+  }
+
+  .tag-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    padding: 0;
+    margin: 0.5rem 0 0;
+  }
+  span.tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-highlight-bright);
+    border: 1px solid var(--color-highlight-bright);
+    border-radius: 9999px;
+    padding: 0.2rem 0.75rem;
+    line-height: 1;
+    text-decoration: none;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+  }
+  .tag a:hover {
+    background: var(--color-highlight-bright);
+    color: var(--color-bg);
   }
 </style>
