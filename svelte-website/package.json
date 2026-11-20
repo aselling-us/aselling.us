@@ -26,10 +26,12 @@
     }
   },
   "scripts": {
-    "dev": "node ./node_modules/vite/bin/vite.js dev",
+    "dev": "npm run drafts && node ./node_modules/vite/bin/vite.js dev",
+    "drafts:count": "node src/lib/server/count-drafts.ts",
     "hardcover": "tsx src/lib/server/hardcover.ts",
     "letterboxd": "tsx src/lib/server/letterboxd.ts",
     "build": "svelte-kit sync && vite build && npm run prepack",
+    "sync": "npx svelte-kit sync",
     "preview": "vite preview",
     "prepare": "svelte-kit sync || echo ''",
     "prepack": "svelte-kit sync && svelte-package && publint",

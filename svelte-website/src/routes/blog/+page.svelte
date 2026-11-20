@@ -6,6 +6,7 @@
   import { enhance } from "$app/forms";
   import { refreshAll } from "$app/navigation";
   import { readingTimeLabel } from "#lib/reading-time.mjs";
+  import drafts from "#lib/data/drafts.json";
 
   marked.use(markedFootnote());
   let { data }: { data: PageData } = $props();
@@ -195,9 +196,14 @@
   had to be in travail, that the meanest flower might blow...
 </Quote>
 
-<h2 class="mono-label section-label">
+<h2 class="mono-label section-label posts-and-drafts">
   <!-- <span>posts / {String(posts.length).padStart(2, '0')}</span> -->
   <span>posts / {posts.length} posts</span>
+
+  <span class="mono-label drafts-note">
+    {drafts.count}
+    {drafts.count === 1 ? "draft" : "drafts"} in progress
+  </span>
 </h2>
 
 <ul class="post-list">
@@ -437,8 +443,8 @@
 
   /* Monospace font makes plain-text markdown easier to write */
   textarea {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-      monospace;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     resize: vertical;
     line-height: 1.5;
   }
@@ -477,7 +483,13 @@
     width: 100%; /* Fills the width of its parent container */
     min-height: 150px; /* Sets a taller starting height while still allowing expansion */
   }
-
+  .posts-and-drafts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--color-hairline);
+  }
   .tag-list {
     list-style: none;
     display: flex;
@@ -505,5 +517,8 @@
   .tag a:hover {
     background: var(--color-highlight-bright);
     color: var(--color-bg);
+  }
+  .drafts-note {
+    margin-left: auto;
   }
 </style>
