@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^8.0.0",
-    "@sveltejs/kit": "^3.0.0",
+    "@sveltejs/kit": "^3.4.0",
     "@sveltejs/package": "^2.5.8",
     "@sveltejs/vite-plugin-svelte": "^7.2.0",
     "publint": "^0.3.21",
@@ -53,6 +53,7 @@
   },
   "dependencies": {
     "@hardcover/sdk": "^0.1.1",
+    "@lucide/svelte": "^1.77.0",
     "gatsby-remark-copy-linked-files": "^6.16.0",
     "gray-matter": "^4.0.3",
     "marked": "^18.2.0",

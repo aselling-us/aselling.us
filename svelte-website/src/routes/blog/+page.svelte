@@ -84,7 +84,17 @@
 
         <!-- Pass the original slug when updating so the server knows which file to edit -->
         {#if editingPost}
-          <input type="hidden" name="slug" value={editingPost.slug} />
+          <input type="hidden" name="originalTitle" value={editingPost.title} />
+          <input
+            type="hidden"
+            name="originalDraft"
+            value={String(editingPost.draft)}
+          />
+          <input
+            type="hidden"
+            name="existingCover"
+            value={editingPost.cover ?? ""}
+          />
         {/if}
 
         <div class="row">
@@ -217,7 +227,7 @@
             {#if post.tags?.length}
               <div class="tag-list">
                 {#each post.tags as tag}
-                  <span class="tag">{tag}<br> </span>
+                  <span class="tag">{tag}<br /> </span>
                 {/each}
               </div>
             {/if}
@@ -427,8 +437,8 @@
 
   /* Monospace font makes plain-text markdown easier to write */
   textarea {
-    font-family:
-      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      monospace;
     resize: vertical;
     line-height: 1.5;
   }

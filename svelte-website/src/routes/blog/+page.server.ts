@@ -99,12 +99,21 @@ export const actions: Actions = {
 
     // Hidden inputs from your edit form to track the original file location
     const originalTitle = String(formData.get("originalTitle") || "");
+
+    if (!originalTitle) {
+      return fail(400, { message: "Original post title is missing." });
+    }
+
     const originalSlug = slugify(originalTitle);
     const originalDraft = formData.get("originalDraft") === "true";
     const existingCover = String(formData.get("existingCover") || "");
+    // const originalTitle = String(formData.get("originalTitle") || "");
+    // const originalSlug = slugify(originalTitle);
+    // const originalDraft = formData.get("originalDraft") === "true";
+    // const existingCover = String(formData.get("existingCover") || "");
 
     const title = String(formData.get("title") || "");
-    const slug = slugify(title)
+    const slug = slugify(title);
     const date = String(formData.get("date") || "");
     const description = String(formData.get("description") || "");
     const tags = String(formData.get("tags") || "")
@@ -133,25 +142,24 @@ export const actions: Actions = {
 
     // check if moved from drafts to blog
     const targetDir = draft ? "src/content/blog/drafts" : "src/content/blog";
-    const newPath = `${targetDir}/${slug}.md`;
-
     const oldDir = originalDraft
       ? "src/content/blog/drafts"
       : "src/content/blog";
+
+    const newPath = `${targetDir}/${slug}.md`;
     const oldPath = `${oldDir}/${originalSlug}.md`;
 
     try {
       await writeFile(newPath, markdownContent, "utf8");
 
-      // Remove the old file if the title or draft folder changed
-      if (originalTitle && oldPath !== newPath) {
-        await unlink(oldPath).catch(() => {});
+      if (oldPath !== newPath) {
+        await unlink(oldPath);
       }
 
-      return { success: true, message: `Updated ${title}.md successfully.` };
+      return { success: true, message: `Updated ${slug}.md successfully.` };
     } catch (err) {
       console.error("Error updating file:", err);
-      return fail(500, { message: `Failed to update ${title}.md` });
+      return fail(500, { message: `Failed to update ${slug}.md` });
     }
   },
 };

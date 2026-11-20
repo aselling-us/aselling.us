@@ -2,6 +2,8 @@
   import Quote from "#lib/Quote.svelte";
   import type { LetterboxdData } from "#lib/server/letterboxd";
   import type { PageData } from "./$types";
+  import { Repeat, Popcorn } from "@lucide/svelte";
+  import { formatDate } from "#lib/date-helper";
 
   const profileUrl = "https://letterboxd.com";
 
@@ -9,7 +11,8 @@
   const letterboxd = $derived(data.letterboxd as LetterboxdData);
   const { favorites, films, fetchedAt } = $derived(letterboxd);
 
-  let selectedMonth = $state<string>(data.uniqueMonths?.[0] ?? "");
+  // Svelte ≥ 5.25
+  let selectedMonth = $derived(data.uniqueMonths?.[0] ?? "");
   const filteredFilms = $derived(data.filmsByMonth[selectedMonth] ?? []);
 </script>
 
@@ -73,7 +76,7 @@
         class:active={bucket === selectedMonth}
         onclick={() => (selectedMonth = bucket)}
       >
-        {bucket} ({data.filmsByMonth[bucket]?.length ?? 0})
+        {bucket} 『{data.filmsByMonth[bucket]?.length ?? 0}』
       </button>
     {/each}
   </nav>
@@ -103,8 +106,13 @@
 
         <div class="film-meta">
           <span class="film-title">{@html film.title}</span>
-          {#if film.rating}
+          <!-- {#if film.rating}
             <span class="film-rating">{film.rating}</span>
+          {/if} -->
+          {#if film.directors}
+            {#each film.directors as dir}
+              <span class="film-dir">{dir}</span>
+            {/each}
           {/if}
           {#if film.year}
             <span class="film-release-year">released {film.year}</span>
@@ -112,9 +120,15 @@
           {#if film.watchedDate}
             <span class="film-log">
               <span class="log-label">
-                {film.rewatch ? "rewatched" : "watched"}
+                {#if film.rewatch}
+                  <span class="rewatch-label">
+                    rewatched <Repeat size={14} strokeWidth={2} />
+                  </span>
+                {:else}
+                  <span>watched <Popcorn size={14} strokeWidth={2} /></span>
+                {/if}
               </span>
-              {film.watchedDate}
+              {formatDate(film.watchedDate)}
             </span>
           {/if}
         </div>
@@ -191,6 +205,9 @@
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-bottom: 1rem;
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
   }
 
   .month-tab {
@@ -229,6 +246,10 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    /* this centers it within the seciton */
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
   }
 
   ul.minimal-list li {
@@ -258,6 +279,7 @@
     border-radius: 4px;
     display: inline-block;
     vertical-align: top;
+    border: 1px solid var(--color-hairline-bright);
   }
 
   .pastimg {
@@ -288,7 +310,7 @@
     line-height: 1.3;
   }
 
-  .film-rating {
+  .film-dir {
     font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
     font-size: 0.875rem;
     color: #444;

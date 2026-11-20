@@ -2,6 +2,8 @@
   import BookCard from "#lib/components/BookCard.svelte";
   import Quote from "#lib/Quote.svelte";
   import type { PageData } from "./$types";
+  import { formatDate } from "#lib/date-helper";
+
   let { data }: { data: PageData } = $props();
   let totalPastCount = $derived(
     data.pastBooksByYear.reduce((sum, b) => sum + b.books.length, 0),
@@ -55,7 +57,7 @@
         class:active={bucket.year === selectedYear}
         onclick={() => (selectedYear = bucket.year)}
       >
-        {bucket.year} ({bucket.books.length})
+        {bucket.year} 『{bucket.books.length}』
       </button>
     {/each}
   </nav>
@@ -94,7 +96,7 @@
           {#if past.readLog.length > 0}
             <span class="book-log">
               <span class="log-label">finished</span>
-              {past.readLog.join(" · ")}
+              {past.readLog.map(formatDate).join(" · ")}
             </span>
           {/if}
         </div>
