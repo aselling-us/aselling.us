@@ -3,5 +3,6 @@ import { defineEnvVars } from '@sveltejs/kit/env';
 
 export const variables = defineEnvVars({
   HARDCOVER_TOKEN: {},
-  PUBLIC_DOMAIN_ROOT: {public: true }
+  DOMAIN_ROOT: {public: true },
+  EMAIL: {}
 });

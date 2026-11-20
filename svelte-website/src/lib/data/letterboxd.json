@@ -1,0 +1,490 @@
+{
+  "fetchedAt": "2026-11-19T17:02:14.612Z",
+  "username": "aselling",
+  "films": [
+    {
+      "title": "Dead Poets Society",
+      "year": 1989,
+      "link": "https://letterboxd.com/aselling/film/dead-poets-society/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/8/4/6/51846-dead-poets-society-0-600-0-900-crop.jpg?v=9273e8acf7",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-11-16"
+    },
+    {
+      "title": "Parthenope",
+      "year": 2024,
+      "link": "https://letterboxd.com/aselling/film/parthenope/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/ti/9r/wg/ng/ifH2PGwiuBfthphSatoRVw9Qi5X-0-600-0-900-crop.jpg?v=454f705582",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-11-11"
+    },
+    {
+      "title": "Portrait of a Lady on Fire",
+      "year": 2019,
+      "link": "https://letterboxd.com/aselling/film/portrait-of-a-lady-on-fire/1/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/6/0/8/3/0/460830-portrait-of-a-lady-on-fire-0-600-0-900-crop.jpg?v=79b0f67aa9",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-11-08"
+    },
+    {
+      "title": "You Can See Everything",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/you-can-see-everything/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/6/2/9/4/4/3/1629443-you-can-see-everything-0-600-0-900-crop.jpg?v=84f6724d74",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-11-08"
+    },
+    {
+      "title": "The Godfather",
+      "year": 1972,
+      "link": "https://letterboxd.com/aselling/film/the-godfather/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/8/1/8/51818-the-godfather-0-600-0-900-crop.jpg?v=bca8b67402",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-11-06"
+    },
+    {
+      "title": "The Substance",
+      "year": 2024,
+      "link": "https://letterboxd.com/aselling/film/the-substance/1/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/8/3/8/1/4/0/838140-the-substance-0-600-0-900-crop.jpg?v=ab9e1072f8",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-10-31"
+    },
+    {
+      "title": "Hocus Pocus",
+      "year": 1993,
+      "link": "https://letterboxd.com/aselling/film/hocus-pocus/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/43/5h/8q/cg/vgtJwl5rmPyq0JQPNWd4NXbkGmd-0-600-0-900-crop.jpg?v=9e0fc85c24",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-10-28"
+    },
+    {
+      "title": "Solo Mio",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/solo-mio/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/1/7/4/3/2/2/1174322-solo-mio-0-600-0-900-crop.jpg?v=ba45be2924",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-25"
+    },
+    {
+      "title": "Videodrome",
+      "year": 1983,
+      "link": "https://letterboxd.com/aselling/film/videodrome/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/xw/sw/3v/st/o8psaYgwTYFpqJhHISoMq178J4n-0-600-0-900-crop.jpg?v=837f65a552",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-10-23"
+    },
+    {
+      "title": "Magnolia",
+      "year": 1999,
+      "link": "https://letterboxd.com/aselling/film/magnolia/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/7/2/8/51728-magnolia-0-600-0-900-crop.jpg?v=178b5e5c17",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-22"
+    },
+    {
+      "title": "The Lost Boys",
+      "year": 1987,
+      "link": "https://letterboxd.com/aselling/film/the-lost-boys/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/0/9/8/7/50987-the-lost-boys-0-600-0-900-crop.jpg?v=1832a48f47",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-18"
+    },
+    {
+      "title": "Carrie",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/carrie-2026/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/6/1/8/1/6/8/1618168-carrie-2026-0-600-0-900-crop.jpg?v=bef2e5cffd",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-17"
+    },
+    {
+      "title": "The Big Lebowski",
+      "year": 1998,
+      "link": "https://letterboxd.com/aselling/film/the-big-lebowski/1/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/9/3/5/51935-the-big-lebowski-0-600-0-900-crop.jpg?v=5cd64defcf",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-10-16"
+    },
+    {
+      "title": "Burn After Reading",
+      "year": 2008,
+      "link": "https://letterboxd.com/aselling/film/burn-after-reading/1/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/9/0/5/4/49054-burn-after-reading-0-600-0-900-crop.jpg?v=1a29d1c090",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-10-16"
+    },
+    {
+      "title": "Resident Evil",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/resident-evil-2026/1/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/3/0/2/7/1/7/1302717-untitled-resident-evil-reboot-0-600-0-900-crop.jpg?v=a688bf1bc7",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-10-13"
+    },
+    {
+      "title": "The Shining",
+      "year": 1980,
+      "link": "https://letterboxd.com/aselling/film/the-shining/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/7s/m2/bw/d0/caoYMcjUamGoBVy65i1AHJBvdzw-0-600-0-900-crop.jpg?v=88d9d6cce4",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-03"
+    },
+    {
+      "title": "The Revenant",
+      "year": 2015,
+      "link": "https://letterboxd.com/aselling/film/the-revenant-2015/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/2/0/7/2/2/4/207224-the-revenant-0-600-0-900-crop.jpg?v=f51b30a589",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-10-03"
+    },
+    {
+      "title": "O Brother, Where Art Thou?",
+      "year": 2000,
+      "link": "https://letterboxd.com/aselling/film/o-brother-where-art-thou/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/a0/sz/qf/mq/erBsxkzVwkXuvuzUBpVnNxxPYhO-0-600-0-900-crop.jpg?v=80375a32fa",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-10-03"
+    },
+    {
+      "title": "American Beauty",
+      "year": 1999,
+      "link": "https://letterboxd.com/aselling/film/american-beauty/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/2/7/0/3/2703-american-beauty-0-600-0-900-crop.jpg?v=30329dd752",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-01"
+    },
+    {
+      "title": "Primetime",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/primetime-2026/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/2/6/2/0/1/9/1262019-primetime-2026-0-600-0-900-crop.jpg?v=41640d6988",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-27"
+    },
+    {
+      "title": "Resident Evil",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/resident-evil-2026/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/3/0/2/7/1/7/1302717-untitled-resident-evil-reboot-0-600-0-900-crop.jpg?v=a688bf1bc7",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-25"
+    },
+    {
+      "title": "The Craft",
+      "year": 1996,
+      "link": "https://letterboxd.com/aselling/film/the-craft/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/7/3/4/5/47345-the-craft-0-600-0-900-crop.jpg?v=d340df121c",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-24"
+    },
+    {
+      "title": "The World, the Flesh and the Devil",
+      "year": 1959,
+      "link": "https://letterboxd.com/aselling/film/the-world-the-flesh-and-the-devil/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/9/0/6/9/49069-the-world-the-flesh-and-the-devil-0-600-0-900-crop.jpg?v=9b4a33aa24",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-22"
+    },
+    {
+      "title": "Romeo + Juliet",
+      "year": 1996,
+      "link": "https://letterboxd.com/aselling/film/romeo-juliet-1996/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/6/4/7/51647-romeo-juliet-0-600-0-900-crop.jpg?v=bbd8155493",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-16"
+    },
+    {
+      "title": "The Exorcist",
+      "year": 1973,
+      "link": "https://letterboxd.com/aselling/film/the-exorcist/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/7/0/4/8/47048-the-exorcist-0-600-0-900-crop.jpg?v=897c9aa211",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-09-11"
+    },
+    {
+      "title": "Beetlejuice",
+      "year": 1988,
+      "link": "https://letterboxd.com/aselling/film/beetlejuice/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/rs/wk/3i/nt/gWnW7vxm8yr01TVLQhL4aI02orp-0-600-0-900-crop.jpg?v=f8250fbc59",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-09"
+    },
+    {
+      "title": "After Hours",
+      "year": 1985,
+      "link": "https://letterboxd.com/aselling/film/after-hours/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/2z/7c/vx/lo/qpr5tRmvyx4rbv1gKMKbW1v5JUC-0-600-0-900-crop.jpg?v=3f65cdcb25",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-07"
+    },
+    {
+      "title": "Eyes Wide Shut",
+      "year": 1999,
+      "link": "https://letterboxd.com/aselling/film/eyes-wide-shut/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/7/1/7/51717-eyes-wide-shut-0-600-0-900-crop.jpg?v=7010402aeb",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-06"
+    },
+    {
+      "title": "A Clockwork Orange",
+      "year": 1971,
+      "link": "https://letterboxd.com/aselling/film/a-clockwork-orange/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/8/6/7/51867-a-clockwork-orange-0-600-0-900-crop.jpg?v=d6d5407b50",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-05"
+    },
+    {
+      "title": "Joker",
+      "year": 2019,
+      "link": "https://letterboxd.com/aselling/film/joker-2019/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/0/6/7/7/5/406775-joker-0-600-0-900-crop.jpg?v=e4ea7f98cc",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-01"
+    },
+    {
+      "title": "Hall Pass",
+      "year": 2011,
+      "link": "https://letterboxd.com/aselling/film/hall-pass/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/6/5/8/3/16583-hall-pass-0-600-0-900-crop.jpg?v=d27f952bc7",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-30"
+    },
+    {
+      "title": "Annabelle: Creation",
+      "year": 2017,
+      "link": "https://letterboxd.com/aselling/film/annabelle-creation/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/3/3/0/7/9/0/330790-annabelle-creation-0-600-0-900-crop.jpg?v=6ef299dffd",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-29"
+    },
+    {
+      "title": "Sicario",
+      "year": 2015,
+      "link": "https://letterboxd.com/aselling/film/sicario-2015/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/9/7/6/2/8/197628-sicario-0-600-0-900-crop.jpg?v=06d4163bb2",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-29"
+    },
+    {
+      "title": "The Conjuring: Last Rites",
+      "year": 2025,
+      "link": "https://letterboxd.com/aselling/film/the-conjuring-last-rites/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/9/3/6/0/6/5/936065-the-conjuring-last-rites-0-600-0-900-crop.jpg?v=597eedcd06",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-27"
+    },
+    {
+      "title": "The Mummy",
+      "year": 1999,
+      "link": "https://letterboxd.com/aselling/film/the-mummy-1999/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/5i/du/2g/s8/6CweTLmngcPrsEH4G6RKvdwmQdC-0-600-0-900-crop.jpg?v=397ac4a555",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-25"
+    },
+    {
+      "title": "The Bling Ring",
+      "year": 2013,
+      "link": "https://letterboxd.com/aselling/film/the-bling-ring/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/7/9/8/9/3/79893-the-bling-ring-0-600-0-900-crop.jpg?v=b9409f8bdc",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-24"
+    },
+    {
+      "title": "The Nun",
+      "year": 2018,
+      "link": "https://letterboxd.com/aselling/film/the-nun-2018/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/3/7/1/8/4/2/371842-the-nun-0-600-0-900-crop.jpg?v=f5b4ea0e76",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-23"
+    },
+    {
+      "title": "The Invite",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/the-invite-2026/1/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/8/5/4/8/3/1/854831-the-invite-2026-0-600-0-900-crop.jpg?v=ee72905e48",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-08-21"
+    },
+    {
+      "title": "The Conjuring: The Devil Made Me Do It",
+      "year": 2021,
+      "link": "https://letterboxd.com/aselling/film/the-conjuring-the-devil-made-me-do-it/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/3/5/6/7/2/3/356723-the-conjuring-the-devil-made-me-do-it-0-600-0-900-crop.jpg?v=baf20ea2fd",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-18"
+    },
+    {
+      "title": "mid90s",
+      "year": 2018,
+      "link": "https://letterboxd.com/aselling/film/mid90s/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/3/7/0/4/5/1/370451-mid90s-0-600-0-900-crop.jpg?v=75ec66cf80",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-17"
+    },
+    {
+      "title": "Tenet",
+      "year": 2020,
+      "link": "https://letterboxd.com/aselling/film/tenet/1/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/pq/9f/sr/vt/aCIFMriQh8rvhxpN1IWGgvH0Tlg-0-600-0-900-crop.jpg?v=f3165fe17f",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-08-16"
+    },
+    {
+      "title": "Ferris Bueller&#039;s Day Off",
+      "year": 1986,
+      "link": "https://letterboxd.com/aselling/film/ferris-buellers-day-off/2/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/7/2/1/9/47219-ferris-bueller-s-day-off-0-600-0-900-crop.jpg?v=5c27745153",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-08-15"
+    },
+    {
+      "title": "Leviticus",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/leviticus-2026/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/4/3/7/6/2/2/1437622-leviticus-2026-0-600-0-900-crop.jpg?v=87cb79b6d2",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-14"
+    },
+    {
+      "title": "The Conjuring 2",
+      "year": 2016,
+      "link": "https://letterboxd.com/aselling/film/the-conjuring-2/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/8/3/2/5/5/183255-the-conjuring-2-0-600-0-900-crop.jpg?v=d3a6df245b",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-12"
+    },
+    {
+      "title": "(500) Days of Summer",
+      "year": 2009,
+      "link": "https://letterboxd.com/aselling/film/500-days-of-summer/8/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/3/9/3/5/0/39350--500-days-of-summer-0-600-0-900-crop.jpg?v=05995ae0b3",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-08-11"
+    },
+    {
+      "title": "The Purge",
+      "year": 2013,
+      "link": "https://letterboxd.com/aselling/film/the-purge/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/1/8/1/1/0/118110-the-purge-0-600-0-900-crop.jpg?v=d4bfb65809",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-10"
+    },
+    {
+      "title": "Suspicion",
+      "year": 1941,
+      "link": "https://letterboxd.com/aselling/film/suspicion/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/4/5/2/8/1/45281-suspicion-0-600-0-900-crop.jpg?v=687e09d417",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-09"
+    },
+    {
+      "title": "Insidious",
+      "year": 2010,
+      "link": "https://letterboxd.com/aselling/film/insidious/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/te/ew/lb/gd/urAaOffVaxQzRJ8X5Z0oDqOWAjl-0-600-0-900-crop.jpg?v=7016f25e4f",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-08"
+    },
+    {
+      "title": "28 Years Later: The Bone Temple",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/28-years-later-the-bone-temple/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/1/5/6/4/0/9/1156409-28-years-later-the-bone-temple-0-600-0-900-crop.jpg?v=131058c6ff",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-08"
+    },
+    {
+      "title": "Romería",
+      "year": 2025,
+      "link": "https://letterboxd.com/aselling/film/romeria/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/0/6/9/0/3/7/1069037-romeria-0-600-0-900-crop.jpg?v=5268e5d224",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-07"
+    }
+  ],
+  "favorites": [
+    {
+      "fullName": "(500) Days of Summer (2009)",
+      "title": "(500) Days of Summer",
+      "year": 2009,
+      "link": "https://letterboxd.com/film/500-days-of-summer/",
+      "posterUrl": "https://a.ltrbxd.com/resized/alternative-poster/3/9/3/5/0/p/6h6nfckQgkvYBGd7BbXQcoaNDRW-0-300-0-450-crop.jpg?v=e6451fd68d",
+      "slug": "500-days-of-summer"
+    },
+    {
+      "fullName": "Portrait of a Lady on Fire (2019)",
+      "title": "Portrait of a Lady on Fire",
+      "year": 2019,
+      "link": "https://letterboxd.com/film/portrait-of-a-lady-on-fire/",
+      "posterUrl": "https://a.ltrbxd.com/resized/alternative-poster/4/6/0/8/3/0/p/rUDuOKpkKBHxx41BScqKej72iT3-0-300-0-450-crop.jpg?v=dfdf99986e",
+      "slug": "portrait-of-a-lady-on-fire"
+    },
+    {
+      "fullName": "Ferris Bueller's Day Off (1986)",
+      "title": "Ferris Bueller's Day Off",
+      "year": 1986,
+      "link": "https://letterboxd.com/film/ferris-buellers-day-off/",
+      "posterUrl": "https://a.ltrbxd.com/resized/alternative-poster/4/7/2/1/9/p/zACzLwjg8WqWh2tEKiee9w90Z7b-0-300-0-450-crop.jpg?v=2a3ea45b90",
+      "slug": "ferris-buellers-day-off"
+    },
+    {
+      "fullName": "The Lost Boys (1987)",
+      "title": "The Lost Boys",
+      "year": 1987,
+      "link": "https://letterboxd.com/film/the-lost-boys/",
+      "posterUrl": "https://a.ltrbxd.com/resized/alternative-poster/5/0/9/8/7/p/enFBXzn8xs5rdtSMC83AVWQ80FP-0-300-0-450-crop.jpg?v=71b8ca097a",
+      "slug": "the-lost-boys"
+    }
+  ]
+}

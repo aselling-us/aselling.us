@@ -27,7 +27,7 @@ const fmtDate = (iso: string | null) =>
         day: "numeric",
         timeZone: "UTC",
       })
-    : null;
+    : null; 
 
 // letterboxd ratings come in half-star steps
 const stars = (r: number) => "★".repeat(Math.floor(r)) + (r % 1 ? "½" : "");
