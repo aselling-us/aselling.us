@@ -1,20 +1,21 @@
 <script lang="ts">
   import Quote from "#lib/Quote.svelte";
   import type { PageData } from "./$types";
+  // import { unlink } from "node:fs/promises";
+
   import { marked } from "marked";
   import markedFootnote from "marked-footnote";
   import { enhance } from "$app/forms";
   import { refreshAll } from "$app/navigation";
   import { readingTimeLabel } from "#lib/reading-time.mjs";
+  import { Trash } from "@lucide/svelte";
   import drafts from "#lib/data/drafts.json";
 
   marked.use(markedFootnote());
   let { data }: { data: PageData } = $props();
 
   // $derived is to stay in sync with data
-  const posts = $derived(
-    data.posts.filter((post) => !post.draft || import.meta.env.DEV),
-  );
+  const posts = $derived(data.posts);
 
   // Use a reactive reference instead of document.getElementById
   let popover = $state<HTMLElement | null>(null);
@@ -131,7 +132,18 @@
           </label>
           <label>
             Cover Image
-            <input type="file" name="cover" accept="image/*" />
+            {#if editingPost?.cover}
+              <img
+                src={editingPost.cover}
+                alt={editingPost.coverCaption ?? "Current cover"}
+                style="max-width: 160px; border-radius: 4px;"
+              />
+            {/if}
+            <input
+              type="file"
+              name="cover"
+              accept=".png,.jpg,.jpeg,.webp,.avif,image/*"
+            />
           </label>
         </div>
 
@@ -176,9 +188,30 @@
         </label>
 
         <div class="popover-actions">
-          <button type="button" onclick={() => popover?.hidePopover()}
-            >Cancel</button
-          >
+          <button type="button" onclick={() => popover?.hidePopover()}>
+            Cancel
+          </button>
+
+          <!-- Only show the delete button when editingPost exists, and configure it to trigger ?/deletePost from page.Server.ts -->
+          <!-- When  click <Trash />, the browser runs onclick before submitting the form. -->
+          <!-- If you click OK, confirm(...) returns true, nothing prevents the default behavior, and the form submits to ?/deletePost. -->
+          <!-- If you click Cancel, e.preventDefault() stops the form submission completely and keeps your editor open. -->
+          {#if editingPost}
+            <button
+              type="submit"
+              formaction="?/deletePost"
+              formnovalidate
+              aria-label="Delete Post"
+              // confirm makes the cancel or okay
+              onclick={(e) => {
+                if (!confirm(`Delete "${editingPost?.title}"?`))
+                  e.preventDefault();
+              }}
+            >
+              <Trash />
+            </button>
+          {/if}
+
           <button type="submit" class="primary">
             {editingPost ? "Update Post" : "Save Post"}
           </button>

@@ -1,3 +1,4 @@
+import { dev } from "$app/env";
 import matter from "gray-matter";
 
 export const COVER_EXTENSIONS = ["png", "jpg", "jpeg", "webp", "avif"] as const;
@@ -69,6 +70,6 @@ export function getPosts(): Post[] {
         body: parsed.content,
       };
     })
-    .filter((post) => import.meta.env.DEV || !post.draft)
+    .filter((post) => !dev || !post.draft)
     .sort((a, b) => b.date.valueOf() - a.date.valueOf());
 }

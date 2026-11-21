@@ -11,7 +11,7 @@ import type { PageServerLoad } from "./$types";
 import { readingTimeLabel } from "#lib/reading-time.mjs";
 const blogImages = import.meta.glob<string>(
   "/src/content/blog/*.{jpg,jpeg,png,webp,gif,svg}",
-  { eager: true, query: "?url", import: "default" }
+  { eager: true, query: "?url", import: "default" },
 );
 
 marked.use(markedFootnote());
@@ -41,7 +41,7 @@ marked.use({
 });
 
 export const load: PageServerLoad = ({ params }) => {
-  const post = getPosts().find((p) => p.slug === params.slug);
+  const post = getPosts().find((p) => p.slug === params.slug && !p.draft);
   if (!post) error(404, "Post not found");
 
   const { body, ...rest } = post;
