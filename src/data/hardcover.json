@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-18T18:02:36.913Z",
+  "fetchedAt": "2026-11-21T16:46:48.835Z",
   "userId": 192647,
   "username": "aselling",
   "current": [
@@ -12,7 +12,7 @@
       "rating": 0,
       "addedAt": "2026-08-13",
       "startedAt": "2026-08-31",
-      "currentPage": 265,
+      "currentPage": 295,
       "totalPages": 609
     },
     {
@@ -41,6 +41,15 @@
     }
   ],
   "wantToRead": [
+    {
+      "title": "Art Is the Highest Form of Hope & Other Quotes by Artists",
+      "author": "Phaidon Press",
+      "link": "https://hardcover.app/books/art-is-the-highest-form-of-hope-other-quotes-by-artists",
+      "cover": "https://assets.hardcover.app/external_data/42517803/e06b19adc73d7ec5aa335b38e5d7ca4ebd4d4a6b.jpeg",
+      "releaseYear": 2016,
+      "rating": 0,
+      "addedAt": "2026-11-21"
+    },
     {
       "title": "Art Thinking: How to Carve Out Creative Space in a World of Schedules, Budgets, and Bosses",
       "author": "Amy Whitaker",
