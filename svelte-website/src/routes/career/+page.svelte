@@ -1,8 +1,57 @@
 <script lang="ts">
   import Quote from "#lib/Quote.svelte";
+  import type { PageData } from "./$types";
+
+  let { data }: { data: PageData } = $props();
+
+  const fmt = (d: Date) =>
+    d.toLocaleDateString("en-US", { year: "numeric", month: "short" });
+
+  // --- reference request form ---
+  // TODO: point this at wherever the old Astro script posted to
+  //   const REFERENCE_ENDPOINT = "/api/reference-request";
+
+  let showForm = $state(false);
+  let sending = $state(false);
+  let status = $state("");
+
+  //   async function submitReference(e: SubmitEvent) {
+  //     e.preventDefault();
+  //     const form = e.currentTarget as HTMLFormElement;
+  //     const fd = new FormData(form);
+
+  //     // honeypot filled in => bot; pretend success
+  //     if (fd.get("hp-note-b2")) {
+  //       status = "Request sent.";
+  //       showForm = false;
+  //       return;
+  //     }
+  //     const email = String(fd.get("email") ?? "").trim();
+  //     if (!/^\S+@\S+\.\S+$/.test(email)) {
+  //       status = "Please enter a valid email.";
+  //       return;
+  //     }
+
+  //     sending = true;
+  //     status = "Sending…";
+  //     try {
+  //       const res = await fetch(REFERENCE_ENDPOINT, {
+  //         method: "POST",
+  //         body: fd,
+  //       });
+  //       if (!res.ok) throw new Error(String(res.status));
+  //       status = "Request sent. Thank you!";
+  //       form.reset();
+  //       showForm = false;
+  //     } catch {
+  //       status = "Something went wrong. Please try again.";
+  //     } finally {
+  //       sending = false;
+  //     }
+  //   }
 </script>
 
-<h1 class="h1watching">Watching</h1>
+<h1 class="h1writing">Working</h1>
 <p class="lede">A résumé, a bit about me, and a brief history.</p>
 
 <section class="intro-row">
@@ -27,11 +76,23 @@
     </a>
 
     <div class="reference-box">
-      <button type="button" id="reference-toggle" class="reference-cta">
+      <button
+        type="button"
+        id="reference-toggle"
+        class="reference-cta"
+        hidden={showForm}
+        onclick={() => (showForm = true)}
+      >
         Request Professional References
       </button>
 
-      <form class="reference-form" id="reference-form" novalidate hidden>
+      <form
+        class="reference-form"
+        id="reference-form"
+        novalidate
+        hidden={!showForm}
+        onsubmit={submitReference}
+      >
         <input
           class="reference-input"
           id="reference-name"
@@ -70,8 +131,19 @@
           data-form-type="other"
         />
         <div class="reference-actions">
-          <button type="submit" id="reference-submit">send request</button>
-          <button type="button" id="reference-cancel">cancel</button>
+          <button type="submit" id="reference-submit" disabled={sending}>
+            send request
+          </button>
+          <button
+            type="button"
+            id="reference-cancel"
+            onclick={() => {
+              showForm = false;
+              status = "";
+            }}
+          >
+            cancel
+          </button>
         </div>
       </form>
 
@@ -80,7 +152,9 @@
         id="reference-status"
         role="status"
         aria-live="polite"
-      ></p>
+      >
+        {status}
+      </p>
     </div>
 
     <!-- Astro leftover; in Svelte this would be {#if import.meta.env.DEV}...{/if}
@@ -125,8 +199,73 @@
   </div>
 </section>
 
+<section>
+  <div class="history-header">
+    <span class="mono-label section-label">history</span>
+  </div>
+
+  {#if data.roles.length}
+    <ul class="history-list">
+      {#each data.roles as role (role.slug)}
+        <li class="history-item">
+          {#if role.logo}
+            <img
+              class="history-logo"
+              src={role.logo}
+              alt="{role.company} logo"
+              width="56"
+              height="56"
+            />
+          {/if}
+          <div class="history-main">
+            <div class="history-main">
+              <div class="history-head">
+                <h3 class="history-role">{role.role}</h3>
+                <span class="history-company">
+                  {#if role.companyUrl}
+                    <a
+                      href={role.companyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {role.company}
+                    </a>
+                  {:else}
+                    {role.company}
+                  {/if}
+                </span>
+              </div>
+
+              <div class="history-meta mono-label">
+                <span>
+                  {fmt(role.startDate)} – {role.endDate
+                    ? fmt(role.endDate)
+                    : "Present"}
+                </span>
+                {#if role.location}<span>{role.location}</span>{/if}
+              </div>
+
+              <div class="prose">{@html role.html}</div>
+
+              {#if role.tags.length}
+                <div class="tag-list">
+                  {#each role.tags as tag}
+                    <span class="tag">{tag}</span>
+                  {/each}
+                </div>
+              {/if}
+            </div>
+          </div>
+        </li>
+      {/each}
+    </ul>
+  {:else}
+    <p class="empty-state">No history to show yet.</p>
+  {/if}
+</section>
+
 <style>
-  .h1watching {
+  .h1writing {
     font-family: var(--font-writing);
   }
   .lede {
