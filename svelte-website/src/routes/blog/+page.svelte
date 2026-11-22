@@ -10,6 +10,7 @@
   import { readingTimeLabel } from "#lib/reading-time.mjs";
   import { Trash } from "@lucide/svelte";
   import drafts from "#lib/data/drafts.json";
+  import SubscribeForm from "../../components/SubscribeForm.svelte";
 
   marked.use(markedFootnote());
   let { data }: { data: PageData } = $props();
@@ -221,7 +222,8 @@
   </div>
 {/if}
 
-<p>FIXME subscribe form here</p>
+<SubscribeForm />
+
 <p>FIXME tags list</p>
 
 <Quote cite="— Oscar Wilde, The Picture of Dorian Gray">

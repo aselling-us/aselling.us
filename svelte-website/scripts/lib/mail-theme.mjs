@@ -201,6 +201,7 @@ export function buildUnsubscribeUrl(email) {
 // body copy, a bordered CTA button, hairline divider, mono footer.
 // title is escaped as plain text by default; pass titleHtml instead (already
 // rendered/safe markup, e.g. via renderInlineMarkdown) to allow inline
+
 // markdown formatting like **bold** or [links](url) in the heading.
 export function renderEmailCard({
   eyebrow,
@@ -240,10 +241,11 @@ ${coverCaptionHtml ? `<p data-role="cover-caption" style="margin:6px 0 0;font-fa
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:${t.card};border:1px solid ${t.line};">`,
     // hairline title-block rule, gold -> line -> blue, echoing the site nav
     `<tr><td style="height:3px;line-height:3px;font-size:0;background:${t.gold};background-image:linear-gradient(90deg, ${t.gold} 0%, ${t.line} 50%, ${t.blueBright} 100%);">&nbsp;</td></tr>`,
-    `<tr><td style="padding:28px 40px 0;text-align:center;">`,
-    `<img src="${escapeHtml(logoSrc)}" width="36" height="36" alt="${escapeHtml(SITE_DOMAIN)}" style="display:block;margin:0 auto;width:36px;height:36px;" />`,
-    `</td></tr>`,
-    `<tr><td style="padding:14px 40px 4px;">`,
+    // `<tr><td style="padding:28px 40px 0;text-align:center;">`,
+    // `<img src="${escapeHtml(logoSrc)}" width="36" height="36" alt="${escapeHtml(SITE_DOMAIN)}" style="display:block;margin:0 auto;width:36px;height:36px;" />`,
+    // `</td></tr>`,
+    // `<tr><td style="padding:14px 40px 4px;">`,
+    `<tr><td style="padding:28px 40px 4px;">`,
     `<span style="font-family:${t.fontMono};font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:${t.textFaint};">${escapeHtml(eyebrow)}</span>`,
     `</td></tr>`,
     `<tr><td style="padding:6px 40px 18px;">`,

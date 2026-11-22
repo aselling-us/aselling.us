@@ -274,7 +274,8 @@ if (previewMode) {
     const unsubscribe = buildUnsubscribeUrl('preview@example.com');
     const preview = post.description || `A new post is live on ${new URL(post.url).hostname}.`;
     const coverUrl = coverDataUri(post.file, post.cover);
-    const html = renderPostEmailHtml(post, preview, unsubscribe, coverUrl, logoDataUri());
+    // const html = renderPostEmailHtml(post, preview, unsubscribe, coverUrl, logoDataUri());
+    const html = renderPostEmailHtml(post, preview, unsubscribe, coverUrl);
     const doc = wrapEmailPreviewDocument(html, { title: `Email preview: ${stripMarkdown(post.title)}` });
 
     const outFile = path.join(outDir, `email-preview-${post.slug}.html`);

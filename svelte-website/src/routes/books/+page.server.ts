@@ -12,7 +12,7 @@ export const load: PageServerLoad = async () => {
     ...book,
     id: book.hardcoverId,
     cover: book.image,
-    link: `https://hardcover.app{book.slug}`,
+    link: `https://hardcover.app/${book.slug}`,
   }));
 
   const pastBooksByYear = pastBuckets.map((bucket) => ({
@@ -21,7 +21,7 @@ export const load: PageServerLoad = async () => {
       ...book,
       id: book.hardcoverId,
       cover: book.image,
-      link: `https://hardcover.app{book.slug}`,
+      link: `https://hardcover.app/${book.slug}`,
     })),
   }));
 
