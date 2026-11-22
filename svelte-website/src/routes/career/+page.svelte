@@ -1,7 +1,7 @@
 <script lang="ts">
   import Quote from "#lib/Quote.svelte";
   import type { PageData } from "./$types";
-
+  import { WORKER_URL } from "#lib/subscribe-worker.mjs";
   let { data }: { data: PageData } = $props();
 
   const fmt = (d: Date) =>
@@ -15,40 +15,79 @@
   let sending = $state(false);
   let status = $state("");
 
-  //   async function submitReference(e: SubmitEvent) {
-  //     e.preventDefault();
-  //     const form = e.currentTarget as HTMLFormElement;
-  //     const fd = new FormData(form);
+  let testSending = $state(false);
 
-  //     // honeypot filled in => bot; pretend success
-  //     if (fd.get("hp-note-b2")) {
-  //       status = "Request sent.";
-  //       showForm = false;
-  //       return;
-  //     }
-  //     const email = String(fd.get("email") ?? "").trim();
-  //     if (!/^\S+@\S+\.\S+$/.test(email)) {
-  //       status = "Please enter a valid email.";
-  //       return;
-  //     }
+  async function sendReferenceTest() {
+    testSending = true;
+    try {
+      const res = await fetch("/__test-reference-request-email", {
+        method: "POST",
+      });
+      if (!res.ok) {
+        const { error } = await res
+          .json()
+          .catch(() => ({ error: res.statusText }));
+        alert(`Could not send test email: ${error}`);
+        return;
+      }
+      const { to } = await res.json();
+      if (
+        confirm(
+          `Test reference-request email sent to ${to}. Open Gmail to check?`,
+        )
+      ) {
+        window.open("https://mail.google.com/mail/u/0/#inbox", "_blank");
+      }
+    } finally {
+      testSending = false;
+    }
+  }
 
-  //     sending = true;
-  //     status = "Sending…";
-  //     try {
-  //       const res = await fetch(REFERENCE_ENDPOINT, {
-  //         method: "POST",
-  //         body: fd,
-  //       });
-  //       if (!res.ok) throw new Error(String(res.status));
-  //       status = "Request sent. Thank you!";
-  //       form.reset();
-  //       showForm = false;
-  //     } catch {
-  //       status = "Something went wrong. Please try again.";
-  //     } finally {
-  //       sending = false;
-  //     }
-  //   }
+  async function submitReference(e: SubmitEvent) {
+    e.preventDefault();
+    const form = e.currentTarget as HTMLFormElement;
+    const emailInput = form.elements.namedItem("email") as HTMLInputElement;
+
+    if (!emailInput.checkValidity()) {
+      status = "enter a valid email address";
+      return;
+    }
+
+    sending = true;
+    status = "sending…";
+
+    try {
+      const val = (n: string) =>
+        (form.elements.namedItem(n) as HTMLInputElement).value;
+
+      const res = await fetch(new URL("/request-references", WORKER_URL), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: val("name").trim(),
+          email: val("email").trim(),
+          message: val("message").trim(),
+          website: val("hp-note-b2"), // honeypot, checked by the worker
+        }),
+      });
+
+      if (!res.ok) {
+        const { error } = await res.json().catch(() => ({ error: undefined }));
+        throw new Error(error || `status ${res.status}`);
+      }
+
+      status = "thanks — I'll be in touch";
+      form.reset();
+      showForm = false;
+    } catch (err) {
+      status =
+        err instanceof Error && err.message
+          ? err.message
+          : "something went wrong — try again in a moment";
+    } finally {
+      sending = false;
+    }
+  }
 </script>
 
 <h1 class="h1writing">Working</h1>
@@ -157,6 +196,19 @@
       </p>
     </div>
 
+    {#if import.meta.env.DEV}
+      <div class="dev-reference-test">
+        <span class="mono-label">dev: test reference request email</span>
+        <button
+          type="button"
+          class="dev-btn"
+          disabled={testSending}
+          onclick={sendReferenceTest}
+        >
+          {testSending ? "sending…" : "send test email to me"}
+        </button>
+      </div>
+    {/if}
     <!-- Astro leftover; in Svelte this would be {#if import.meta.env.DEV}...{/if}
     <div class="dev-reference-test">
       <span class="mono-label">dev: test reference request email</span>

@@ -12,7 +12,7 @@
 //   ratelimit:ref:<ip> -> request count this hour, /request-references only (1h TTL)
 
 const SITE_ORIGIN = 'https://aselling.us';
-const DEV_ORIGINS = ['http://localhost:4321', 'http://localhost:4322', 'http://localhost:4329'];
+const DEV_ORIGINS = ['http://localhost:4321', 'http://localhost:4322', 'http://localhost:4329', "http://localhost:5173"];
 const PENDING_TTL_SECONDS = 60 * 60 * 48;
 const RATE_LIMIT_WINDOW_SECONDS = 60 * 60;
 const RATE_LIMIT_MAX = 5;
