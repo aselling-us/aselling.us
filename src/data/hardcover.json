@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-11-21T16:46:48.835Z",
+  "fetchedAt": "2026-11-22T17:08:13.837Z",
   "userId": 192647,
   "username": "aselling",
   "current": [
@@ -681,9 +681,9 @@
       "addedAt": "2025-08-19"
     },
     {
-      "title": "The 4-Hour Workweek: Escape 9-5, Live Anywhere, and Join the New Rich",
+      "title": "The 4-Hour Work Week: Escape the 9-5, Live Anywhere and Join the New Rich",
       "author": "Timothy Ferriss",
-      "link": "https://hardcover.app/books/the-4-hour-workweek-escape-9-5-live-anywhere-and-join-the-new-rich-2006",
+      "link": "https://hardcover.app/books/the-4-hour-work-week",
       "cover": "https://assets.hardcover.app/edition/14030229/2a11e798f52fa3e17e0dfb4baf574c1948800aa1.jpeg",
       "releaseYear": 2006,
       "rating": 0,
@@ -1314,7 +1314,7 @@
       "author": "Homer",
       "link": "https://hardcover.app/books/the-odyssey",
       "cover": "https://assets.hardcover.app/edition/27665794/e1cee359-68d9-4580-92ed-4000a4eb9f92.jpg",
-      "releaseYear": -700,
+      "releaseYear": -800,
       "rating": 5,
       "addedAt": "2025-08-11",
       "readAt": "2021-01-01"
