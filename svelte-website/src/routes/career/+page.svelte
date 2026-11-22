@@ -3,7 +3,10 @@
   import type { PageData } from "./$types";
   import { WORKER_URL } from "#lib/subscribe-worker.mjs";
   let { data }: { data: PageData } = $props();
+  import { enhance } from "$app/forms";
+  import { dev } from "$app/env";
 
+  let popover = $state<HTMLElement | null>(null);
   const fmt = (d: Date) =>
     d.toLocaleDateString("en-US", { year: "numeric", month: "short" });
 
@@ -255,7 +258,72 @@
   <div class="history-header">
     <span class="mono-label section-label">history</span>
   </div>
+  <!-- ADD NEW ROLE FORM -->
+  {#if dev}
+    <button class="dev-btn mono-label" onclick={() => popover?.showPopover()}>
+      + Add role
+    </button>
 
+    <div bind:this={popover} popover="manual" class="career-editor">
+      <form
+        method="POST"
+        action="?/createRole"
+        enctype="multipart/form-data"
+        use:enhance={() => {
+          return async ({ result, update }) => {
+            if (result.type === "success") popover?.hidePopover();
+            else console.error("createRole:", result);
+            await update();
+          };
+        }}
+      >
+        <div class="row">
+          <label>Role <input name="role" required /></label>
+          <label>Company <input name="company" required /></label>
+        </div>
+        <div class="row">
+          <label>Company URL <input name="companyUrl" type="url" /></label>
+          <label>Location <input name="location" /></label>
+        </div>
+        <div class="row">
+          <label class="date-label"
+            >Start <input name="startDate" type="date" required /></label
+          >
+          <label class="date-label"
+            >End (blank = current) <input name="endDate" type="date" /></label
+          >
+        </div>
+        <label class="tags-label"
+          >Tags (comma-separated) <input name="tags" /></label
+        >
+        <label class="logo-label">
+          Logo
+          <input
+            name="logo"
+            type="file"
+            accept=".png,.jpg,.jpeg,.webp,.avif,.svg,image/*"
+          />
+        </label>
+        <label
+          >Description (Markdown) <textarea name="body" rows="8"
+          ></textarea></label
+        >
+
+        <div class="row">
+          <button
+            type="button"
+            id="career-cancel"
+            onclick={() => popover?.hidePopover()}
+          >
+            Cancel
+          </button>
+          <button type="submit">Save role</button>
+        </div>
+      </form>
+    </div>
+  {/if}
+
+  <!-- HISTORY -->
   {#if data.roles.length}
     <ul class="history-list">
       {#each data.roles as role (role.slug)}

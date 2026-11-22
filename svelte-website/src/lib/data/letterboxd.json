@@ -1,7 +1,33 @@
 {
-  "fetchedAt": "1:26:00 AM",
+  "fetchedAt": "12:11:17 AM",
   "username": "aselling",
   "films": [
+    {
+      "title": "Less Than Zero",
+      "year": 1987,
+      "link": "https://letterboxd.com/aselling/film/less-than-zero/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/3/6/6/4/p/1GY0ZhAxOR2RgxGnOkeKoKb2mFM-0-600-0-900-crop.jpg?v=95134c41bd",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-11-21",
+      "id": 13703,
+      "directors": [
+        "Marek Kanievska"
+      ]
+    },
+    {
+      "title": "Suspiria",
+      "year": 1977,
+      "link": "https://letterboxd.com/aselling/film/suspiria/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/4/9/0/0/p/qOa7rDpaNC5GjVS1Vyl6DZznUL9-0-600-0-900-crop.jpg?v=d1ea110fcb",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-11-21",
+      "id": 11906,
+      "directors": [
+        "Dario Argento"
+      ]
+    },
     {
       "title": "Dead Poets Society",
       "year": 1989,
@@ -627,32 +653,6 @@
       "id": 49018,
       "directors": [
         "James Wan"
-      ]
-    },
-    {
-      "title": "28 Years Later: The Bone Temple",
-      "year": 2026,
-      "link": "https://letterboxd.com/aselling/film/28-years-later-the-bone-temple/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/1/5/6/4/0/9/p/3zbEJRz7KbjYytn4cKEfUH6dOsj-0-600-0-900-crop.jpg?v=583a69e676",
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-08-08",
-      "id": 1272837,
-      "directors": [
-        "Nia DaCosta"
-      ]
-    },
-    {
-      "title": "Romería",
-      "year": 2025,
-      "link": "https://letterboxd.com/aselling/film/romeria/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/0/6/9/0/3/7/p/jWtKPt6mXnwmdTRD1RuKSWsT1PH-0-600-0-900-crop.jpg?v=0c5249a823",
-      "liked": true,
-      "rewatch": false,
-      "watchedDate": "2026-08-07",
-      "id": 1182861,
-      "directors": [
-        "Carla Simón"
       ]
     }
   ],
