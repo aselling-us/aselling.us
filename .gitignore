@@ -26,3 +26,5 @@ svelte-website/src/content/blog/drafts/
 
 # Local-only Claude Code project instructions
 CLAUDE.md
+
+.svelte-kit/
