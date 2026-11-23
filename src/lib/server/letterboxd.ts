@@ -230,13 +230,32 @@ export async function fetchDiaryPosters(): Promise<Map<string, string>> {
       waitUntil: "domcontentloaded",
     });
 
-    console.log("Page URL:", page.url());
-    console.log("Page title:", await page.title());
-    console.log(
-      "Page text:",
-      (await page.locator("body").innerText()).slice(0, 500),
-    );
+    // console.log("Page URL:", page.url());
+    // console.log("Page title:", await page.title());
+    // console.log(
+    //   "Page text:",
+    //   (await page.locator("body").innerText()).slice(0, 500),
+    // );
 
+    console.log(
+      "Diary poster samples:",
+      await items.evaluateAll((nodes) =>
+        nodes.slice(0, 5).map((el) => {
+          const img =
+            el.querySelector("img") ??
+            el.closest("tr, li")?.querySelector("img");
+
+          return {
+            slug:
+              el.getAttribute("data-item-slug") ??
+              el.getAttribute("data-film-slug"),
+            src: img?.getAttribute("src"),
+            srcset: img?.getAttribute("srcset"),
+            dataSrc: img?.getAttribute("data-src"),
+          };
+        }),
+      ),
+    );
     const items = page.locator("[data-item-slug], [data-film-slug]");
     await items.first().waitFor({ state: "attached", timeout: 15_000 });
 
