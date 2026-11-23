@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "npm run drafts:count && node ./node_modules/vite/bin/vite.js dev",
-    "build": "svelte-kit sync && vite build",
+    "build": "npm run drafts:count && npm run hardcover && npm run letterboxd && svelte-kit sync && vite build",
     "preview": "vite preview",
     "prepare": "husky && (svelte-kit sync || echo '')",
     "sync": "npx svelte-kit sync",
