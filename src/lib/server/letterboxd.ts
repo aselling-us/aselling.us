@@ -96,7 +96,7 @@ async function fetchDiary(
   )) {
     const poster =
       typeof item.description === "string"
-        ? item.description.match(/<img src="([^"]+)"/)?.[1] ?? ""
+        ? (item.description.match(/<img src="([^"]+)"/)?.[1] ?? "")
         : "";
 
     const id = item["tmdb:movieId"] ? Number(item["tmdb:movieId"]) : null;
@@ -106,7 +106,10 @@ async function fetchDiary(
       try {
         directors = await fetchDirectors(id);
       } catch (e) {
-        console.warn(`directors lookup failed for ${id}:`, (e as Error).message);
+        console.warn(
+          `directors lookup failed for ${id}:`,
+          (e as Error).message,
+        );
       }
       // Only throttle after a real TMDB request.
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -136,6 +139,12 @@ export async function fetchFavorites(): Promise<FavoriteFilm[]> {
       waitUntil: "domcontentloaded",
     });
 
+    console.log("Page URL:", page.url());
+    console.log("Page title:", await page.title());
+    console.log(
+      "Page text:",
+      (await page.locator("body").innerText()).slice(0, 500),
+    );
     const items = page.locator("#favourites [data-item-link]");
     await items.first().waitFor({ state: "attached", timeout: 15_000 });
     // Best-effort: give posters a few seconds, never throw
@@ -220,6 +229,13 @@ export async function fetchDiaryPosters(): Promise<Map<string, string>> {
     await page.goto(`https://letterboxd.com/${LETTERBOXD_USER}/diary/`, {
       waitUntil: "domcontentloaded",
     });
+
+    console.log("Page URL:", page.url());
+    console.log("Page title:", await page.title());
+    console.log(
+      "Page text:",
+      (await page.locator("body").innerText()).slice(0, 500),
+    );
 
     const items = page.locator("[data-item-slug], [data-film-slug]");
     await items.first().waitFor({ state: "attached", timeout: 15_000 });
@@ -330,7 +346,7 @@ export async function writeLetterboxdJson() {
     username: LETTERBOXD_USER,
     films,
     // Keep previous favorites if a scrape came back empty
-    favorites: favorites.length > 0 ? favorites : previous?.favorites ?? [],
+    favorites: favorites.length > 0 ? favorites : (previous?.favorites ?? []),
   };
 
   const unchanged =
