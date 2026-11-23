@@ -36,7 +36,8 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Build
         run: npm run build
-        env:
+        env:    
+          HEADLESS: "1"
           HARDCOVER_TOKEN: ${{ secrets.HARDCOVER_TOKEN }}
           DOMAIN_ROOT: ${{ secrets.DOMAIN_ROOT }}
           EMAIL: ${{ secrets.EMAIL }}
