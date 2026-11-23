@@ -236,6 +236,16 @@ export async function fetchDiaryPosters(): Promise<Map<string, string>> {
     //   "Page text:",
     //   (await page.locator("body").innerText()).slice(0, 500),
     // );
+    const items = page.locator("[data-item-slug], [data-film-slug]");
+    await items.first().waitFor({ state: "attached", timeout: 15_000 });
+
+    // Posters lazy-load, so scroll the page to trigger them.
+    await page.evaluate(async () => {
+      for (let y = 0; y < document.body.scrollHeight; y += 600) {
+        window.scrollTo(0, y);
+        await new Promise((r) => setTimeout(r, 100));
+      }
+    });
 
     console.log(
       "Diary poster samples:",
@@ -256,17 +266,6 @@ export async function fetchDiaryPosters(): Promise<Map<string, string>> {
         }),
       ),
     );
-    const items = page.locator("[data-item-slug], [data-film-slug]");
-    await items.first().waitFor({ state: "attached", timeout: 15_000 });
-
-    // Posters lazy-load, so scroll the page to trigger them.
-    await page.evaluate(async () => {
-      for (let y = 0; y < document.body.scrollHeight; y += 600) {
-        window.scrollTo(0, y);
-        await new Promise((r) => setTimeout(r, 100));
-      }
-    });
-
     await page
       .waitForFunction(
         () => {
