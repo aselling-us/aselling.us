@@ -5,7 +5,7 @@
   import { Repeat, Popcorn } from "@lucide/svelte";
   import { formatDate } from "#lib/date-helper";
 
-  const profileUrl = "https://letterboxd.com";
+  const profileUrl = "https://letterboxd.com/aselling/diary";
 
   let { data }: { data: PageData } = $props();
   const letterboxd = $derived(data.letterboxd as LetterboxdData);
@@ -111,7 +111,7 @@
           {/if} -->
           {#if film.directors}
             {#each film.directors as dir}
-              <span class="film-dir">{dir}</span>
+              <span class="film-dir">dir. {dir}</span>
             {/each}
           {/if}
           {#if film.year}
@@ -314,6 +314,7 @@
     font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
     font-size: 0.875rem;
     color: #444;
+    font-style: italic;
   }
 
   .film-release-year {
