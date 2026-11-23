@@ -43,6 +43,14 @@ jobs:
         env:
           GH_CONTRIB_TOKEN: ${{ secrets.GH_CONTRIB_TOKEN }}
           HARDCOVER_TOKEN: ${{ secrets.HARDCOVER_TOKEN }}
+          DOMAIN_ROOT: ${{ secrets.DOMAIN_ROOT }}
+          EMAIL: ${{ secrets.EMAIL }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_FROM: ${{ secrets.MAIL_FROM }}
+          WORKER_URL: ${{ secrets.WORKER_URL }}
+          UNSUBSCRIBE_SECRET: ${{ secrets.UNSUBSCRIBE_SECRET }}          
         run: npm run fetch:media
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
