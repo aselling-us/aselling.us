@@ -353,12 +353,19 @@ export async function writeLetterboxdJson() {
   }
   console.log("custom diary posters found:", posters.size);
 
+  const previousPosters = new Map(
+    (previous?.films ?? [])
+      .filter((film) => film.poster)
+      .map((film) => [film.link, film.poster]),
+  );
+
   for (const film of films) {
     const slug = film.link.match(/\/film\/([^/]+)/)?.[1];
     const custom = slug ? posters.get(slug) : undefined;
-    if (custom) film.poster = custom;
-  }
+    const cached = previousPosters.get(film.link);
 
+    film.poster = custom || cached || film.poster;
+  }
   const nextData: LetterboxdData = {
     fetchedAt: timeNow,
     username: LETTERBOXD_USER,
