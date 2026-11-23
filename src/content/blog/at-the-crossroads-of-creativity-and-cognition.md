@@ -31,7 +31,7 @@ A third example of this is, while this is extremely "meta" and surreal, is the f
 
 ## Passion & Creation
 
-Another up-and-coming notion that piqued my interest is the new Harvard Course Humanities 10a, often referred to as *Hum10*[^2] by the students. In short, Harvard's newly released course *Hum10* has a curriculum sequence spanning many classicists: Homer, Plato, Descartes, Shakespeare, Shelley, Kafka... the list goes on[^3]. The rigorous texts, technology bans, and intense Socratic discussions already cloud this course with extreme difficulty and suspense, not to mention the application-based enrollment into the class.
+Another up-and-coming notion that piqued my interest is the new Harvard Course Humanities 10a, often referred to as *Hum10*[^2] by the students. In short, Harvard's newly released course *Hum10* has a curriculum sequence spanning many classicists: Homer, Plato, Descartes, Shakespeare, Shelley, Kafka... the list goes on. The rigorous texts, technology bans, and intense Socratic discussions already cloud this course with extreme difficulty and suspense, not to mention the application-based enrollment into the class.
 
 ![](./at-the-crossroads-of-creativity-and-cognition-pxl-20240401-233044510.jpg "A picture from my high school Humanities class April Fool's Prank... felt appropriate.")
 

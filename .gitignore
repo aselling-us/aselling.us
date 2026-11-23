@@ -13,6 +13,7 @@ secrets.txt
 # Publishing a draft = moving its .md (and images) up into src/content/blog/.
 # src/data/drafts.json is the only committed trace: a count, no titles.
 src/content/blog/drafts/
+svelte-website/src/content/blog/drafts/
 
 # Playwright
 /test-results/
@@ -25,3 +26,6 @@ src/content/blog/drafts/
 
 # Local-only Claude Code project instructions
 CLAUDE.md
+
+.svelte-kit/
+.build/

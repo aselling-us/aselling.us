@@ -1,0 +1,109 @@
+---
+import Pagination from './Pagination.astro';
+
+interface Book {
+  link: string;
+  cover?: string | null;
+  title: string;
+  author: string;
+  rating?: number;
+  readAt?: string | null;
+}
+
+interface Props {
+  books: Book[];
+  gridId: string;
+  paginationLabel: string;
+  pageSize?: number;
+  mobilePageSize?: number;
+  showMeta?: boolean;
+  fmtDate?: (iso: string | null) => string | null;
+}
+
+const { books, gridId, paginationLabel, pageSize = 21, mobilePageSize, showMeta = false, fmtDate } = Astro.props;
+---
+<ul class="book-grid" id={gridId}>
+  {books.map((book, i) => {
+    const page = Math.floor(i / pageSize) + 1;
+    return (
+      <li class:list={['book', { 'is-hidden': page !== 1 }]} data-index={i}>
+        <a href={book.link} target="_blank" rel="noopener noreferrer">
+          {book.cover && <img class="book-cover" src={book.cover} alt={`Cover of ${book.title}`} loading="lazy" referrerpolicy="no-referrer" />}
+        </a>
+        <a class="book-title" href={book.link} target="_blank" rel="noopener noreferrer">{book.title}</a>
+        <span class="book-author">{book.author}</span>
+        {showMeta && (
+          <span class="mono-label book-row">
+            {book.rating! > 0 && (
+              <span class="stars" aria-label={`Rated ${book.rating} of 5`}>
+                {'★'.repeat(book.rating!)}<span class="stars-empty">{'★'.repeat(5 - book.rating!)}</span>
+              </span>
+            )}
+            {book.readAt && fmtDate && <span>{fmtDate(book.readAt)}</span>}
+          </span>
+        )}
+      </li>
+    );
+  })}
+</ul>
+<Pagination itemCount={books.length} gridId={gridId} label={paginationLabel} pageSize={pageSize} mobilePageSize={mobilePageSize} />
+
+<style>
+  .book-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(7, 100px);
+    width: fit-content;
+    gap: var(--space-5) var(--space-4);
+  }
+  .book {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 0;
+  }
+  .book-cover {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    display: block;
+    border: 1px solid var(--color-hairline);
+  }
+  .book a:hover .book-cover { border-color: var(--color-highlight); }
+
+  .book-title {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    line-height: 1.3;
+    color: var(--color-text);
+  }
+  .book-title:hover { color: var(--color-highlight-bright); }
+  .book .book-title { margin-top: 0.2rem; }
+
+  .book-author {
+    font-size: 0.72rem;
+    color: var(--color-text-dim);
+  }
+
+  .book-row {
+    display: flex;
+    gap: 0.6rem;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .stars {
+    color: var(--color-highlight-bright);
+    letter-spacing: 0.1em;
+  }
+  .stars-empty { color: var(--color-hairline-bright); }
+
+  @media (max-width: 700px) {
+    .book-grid {
+      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+      width: 100%;
+      gap: var(--space-3) var(--space-2);
+    }
+  }
+</style>

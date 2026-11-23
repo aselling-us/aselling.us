@@ -1,0 +1,701 @@
+{
+  "fetchedAt": "7:18:20 PM",
+  "username": "aselling",
+  "films": [
+    {
+      "title": "The Hunger Games",
+      "year": 2012,
+      "link": "https://letterboxd.com/aselling/film/the-hunger-games/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/9/2/8/1/p/3ZfeyMzqXVYHwN8QPlMsKBOOQk7-0-600-0-900-crop.jpg?v=25a6949a9e",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-11-22",
+      "id": 70160,
+      "directors": [
+        "Gary Ross"
+      ]
+    },
+    {
+      "title": "Less Than Zero",
+      "year": 1987,
+      "link": "https://letterboxd.com/aselling/film/less-than-zero/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/3/6/6/4/p/1GY0ZhAxOR2RgxGnOkeKoKb2mFM-0-600-0-900-crop.jpg?v=95134c41bd",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-11-21",
+      "id": 13703,
+      "directors": [
+        "Marek Kanievska"
+      ]
+    },
+    {
+      "title": "Suspiria",
+      "year": 1977,
+      "link": "https://letterboxd.com/aselling/film/suspiria/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/4/9/0/0/p/qOa7rDpaNC5GjVS1Vyl6DZznUL9-0-600-0-900-crop.jpg?v=d1ea110fcb",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-11-21",
+      "id": 11906,
+      "directors": [
+        "Dario Argento"
+      ]
+    },
+    {
+      "title": "Dead Poets Society",
+      "year": 1989,
+      "link": "https://letterboxd.com/aselling/film/dead-poets-society/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/8/4/6/p/jrHrhh9OEyPAoRIxNZPgp5AxphI-0-600-0-900-crop.jpg?v=05df4740f2",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-11-16",
+      "id": 207,
+      "directors": [
+        "Peter Weir"
+      ]
+    },
+    {
+      "title": "Parthenope",
+      "year": 2024,
+      "link": "https://letterboxd.com/aselling/film/parthenope/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/9/9/9/5/8/9/p/r8wtJDeknms9zqbeG0luOx84Pe1-0-600-0-900-crop.jpg?v=62d6e39c7a",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-11-11",
+      "id": 1109255,
+      "directors": [
+        "Paolo Sorrentino"
+      ]
+    },
+    {
+      "title": "Portrait of a Lady on Fire",
+      "year": 2019,
+      "link": "https://letterboxd.com/aselling/film/portrait-of-a-lady-on-fire/1/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/6/0/8/3/0/p/rUDuOKpkKBHxx41BScqKej72iT3-0-600-0-900-crop.jpg?v=dfdf99986e",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-11-08",
+      "id": 531428,
+      "directors": [
+        "Céline Sciamma"
+      ]
+    },
+    {
+      "title": "You Can See Everything",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/you-can-see-everything/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/6/2/9/4/4/3/p/iofVpvLEhkyEuvx8kLnD6fOrz7s-0-600-0-900-crop.jpg?v=5041f68486",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-11-08",
+      "id": 1765072,
+      "directors": [
+        "Nathan Fielder",
+        "Lance Oppenheim"
+      ]
+    },
+    {
+      "title": "The Godfather",
+      "year": 1972,
+      "link": "https://letterboxd.com/aselling/film/the-godfather/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/8/1/8/p/d6LbJZO8ruvXgOjjGRgjtdYpJS4-0-600-0-900-crop.jpg?v=54fd8b0786",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-11-06",
+      "id": 238,
+      "directors": [
+        "Francis Ford Coppola"
+      ]
+    },
+    {
+      "title": "The Substance",
+      "year": 2024,
+      "link": "https://letterboxd.com/aselling/film/the-substance/1/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/8/3/8/1/4/0/p/o7GFN0c1YvbnB0JmAb9aSoDDvdn-0-600-0-900-crop.jpg?v=515acb2d9a",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-10-31",
+      "id": 933260,
+      "directors": [
+        "Coralie Fargeat"
+      ]
+    },
+    {
+      "title": "Hocus Pocus",
+      "year": 1993,
+      "link": "https://letterboxd.com/aselling/film/hocus-pocus/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/6/2/2/9/p/jwOuMkY9Eb9XEje3fMae59zasP4-0-600-0-900-crop.jpg?v=4e51f5a666",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-10-28",
+      "id": 10439,
+      "directors": [
+        "Kenny Ortega"
+      ]
+    },
+    {
+      "title": "Solo Mio",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/solo-mio/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/1/7/4/3/2/2/p/AbWqSYUWOpuGjS23tXr3ohiJaHW-0-600-0-900-crop.jpg?v=9230c18cc0",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-25",
+      "id": 1291335,
+      "directors": [
+        "Charles Kinnane",
+        "Daniel Kinnane"
+      ]
+    },
+    {
+      "title": "Videodrome",
+      "year": 1983,
+      "link": "https://letterboxd.com/aselling/film/videodrome/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/3/1/5/p/w5bqL9IiGIH0g4oq7ExFEq4KSl4-0-600-0-900-crop.jpg?v=46515b9456",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-10-23",
+      "id": 837,
+      "directors": [
+        "David Cronenberg"
+      ]
+    },
+    {
+      "title": "Magnolia",
+      "year": 1999,
+      "link": "https://letterboxd.com/aselling/film/magnolia/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/7/2/8/p/fhHWjePJtaoFQaWTNKAh7asm0N5-0-600-0-900-crop.jpg?v=cc6c350cb5",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-22",
+      "id": 334,
+      "directors": [
+        "Paul Thomas Anderson"
+      ]
+    },
+    {
+      "title": "The Lost Boys",
+      "year": 1987,
+      "link": "https://letterboxd.com/aselling/film/the-lost-boys/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/0/9/8/7/p/enFBXzn8xs5rdtSMC83AVWQ80FP-0-600-0-900-crop.jpg?v=71b8ca097a",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-18",
+      "id": 1547,
+      "directors": [
+        "Joel Schumacher"
+      ]
+    },
+    {
+      "title": "Carrie",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/carrie-2026/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/6/1/8/1/6/8/p/5aVYFuwgAhv6KxdkC6F2CybgeIj-0-600-0-900-crop.jpg?v=e9e2ae6d0e",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-17",
+      "id": null,
+      "directors": []
+    },
+    {
+      "title": "The Big Lebowski",
+      "year": 1998,
+      "link": "https://letterboxd.com/aselling/film/the-big-lebowski/1/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/9/3/5/p/3HXu7aEjiZjJFQQruTCij5yhHAJ-0-600-0-900-crop.jpg?v=dd1e3cd2ed",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-10-16",
+      "id": 115,
+      "directors": [
+        "Joel Coen",
+        "Ethan Coen"
+      ]
+    },
+    {
+      "title": "Burn After Reading",
+      "year": 2008,
+      "link": "https://letterboxd.com/aselling/film/burn-after-reading/1/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/9/0/5/4/p/AtdSavNWZgwmtD3Xz3rQdLk0UnO-0-600-0-900-crop.jpg?v=90b167b4ef",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-10-16",
+      "id": 4944,
+      "directors": [
+        "Ethan Coen",
+        "Joel Coen"
+      ]
+    },
+    {
+      "title": "Resident Evil",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/resident-evil-2026/1/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/3/0/2/7/1/7/p/qku2uWSoJ9amQV5MWo1Eek29iji-0-600-0-900-crop.jpg?v=d519ab046d",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-10-13",
+      "id": 1423191,
+      "directors": [
+        "Zach Cregger"
+      ]
+    },
+    {
+      "title": "The Shining",
+      "year": 1980,
+      "link": "https://letterboxd.com/aselling/film/the-shining/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/4/3/2/p/4Zyk9d47uSk10GIEEwKjOLND3qx-0-600-0-900-crop.jpg?v=fe4929216f",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-03",
+      "id": 694,
+      "directors": [
+        "Stanley Kubrick"
+      ]
+    },
+    {
+      "title": "The Revenant",
+      "year": 2015,
+      "link": "https://letterboxd.com/aselling/film/the-revenant-2015/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/2/0/7/2/2/4/207224-the-revenant-0-600-0-900-crop.jpg?v=f51b30a589",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-10-03",
+      "id": 281957,
+      "directors": [
+        "Alejandro G. Iñárritu"
+      ]
+    },
+    {
+      "title": "O Brother, Where Art Thou?",
+      "year": 2000,
+      "link": "https://letterboxd.com/aselling/film/o-brother-where-art-thou/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/9/1/7/p/2YztYilviFCYcEtDAnrOstUWGie-0-600-0-900-crop.jpg?v=51162f4bbe",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-10-03",
+      "id": 134,
+      "directors": [
+        "Joel Coen"
+      ]
+    },
+    {
+      "title": "American Beauty",
+      "year": 1999,
+      "link": "https://letterboxd.com/aselling/film/american-beauty/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/2/7/0/3/p/xB9eO4pH1eI3MAXqku9wnTY4FQ1-0-600-0-900-crop.jpg?v=deea8bbc49",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-10-01",
+      "id": 14,
+      "directors": [
+        "Sam Mendes"
+      ]
+    },
+    {
+      "title": "Primetime",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/primetime-2026/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/1/2/6/2/0/1/9/1262019-primetime-2026-0-600-0-900-crop.jpg?v=41640d6988",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-27",
+      "id": 1375441,
+      "directors": [
+        "Lance Oppenheim"
+      ]
+    },
+    {
+      "title": "Resident Evil",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/resident-evil-2026/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/3/0/2/7/1/7/p/qku2uWSoJ9amQV5MWo1Eek29iji-0-600-0-900-crop.jpg?v=d519ab046d",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-25",
+      "id": 1423191,
+      "directors": [
+        "Zach Cregger"
+      ]
+    },
+    {
+      "title": "The Craft",
+      "year": 1996,
+      "link": "https://letterboxd.com/aselling/film/the-craft/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/7/3/4/5/p/qdYKYBArXneOsPYIX1EFzFtJz5C-0-600-0-900-crop.jpg?v=7b34a64a36",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-24",
+      "id": 9100,
+      "directors": [
+        "Andrew Fleming"
+      ]
+    },
+    {
+      "title": "The World, the Flesh and the Devil",
+      "year": 1959,
+      "link": "https://letterboxd.com/aselling/film/the-world-the-flesh-and-the-devil/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/9/0/6/9/p/uMB51OAkdrAx7r1dztvLub6RyPJ-0-600-0-900-crop.jpg?v=bf99111fd0",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-22",
+      "id": 4928,
+      "directors": [
+        "Ranald MacDougall"
+      ]
+    },
+    {
+      "title": "Romeo + Juliet",
+      "year": 1996,
+      "link": "https://letterboxd.com/aselling/film/romeo-juliet-1996/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/6/4/7/p/5OtrvCVYRhtbYcZb25wk6aQSuzs-0-600-0-900-crop.jpg?v=412d5b6ca3",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-16",
+      "id": 454,
+      "directors": [
+        "Baz Luhrmann"
+      ]
+    },
+    {
+      "title": "The Exorcist",
+      "year": 1973,
+      "link": "https://letterboxd.com/aselling/film/the-exorcist/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/7/0/4/8/p/4Afhno6y4Ux4I3ps0uZTmYQCKc4-0-600-0-900-crop.jpg?v=fd6670a366",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-09-11",
+      "id": 9552,
+      "directors": [
+        "William Friedkin"
+      ]
+    },
+    {
+      "title": "Beetlejuice",
+      "year": 1988,
+      "link": "https://letterboxd.com/aselling/film/beetlejuice/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/9/5/3/0/p/4va3Qym5PdvKK9zyayu39Jy9puC-0-600-0-900-crop.jpg?v=7c374b86a7",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-09",
+      "id": 4011,
+      "directors": [
+        "Tim Burton"
+      ]
+    },
+    {
+      "title": "After Hours",
+      "year": 1985,
+      "link": "https://letterboxd.com/aselling/film/after-hours/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/5/8/4/2/p/6dstQOB1ARUoVpAFWYSjZMH1Ts2-0-600-0-900-crop.jpg?v=35ae2530f7",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-07",
+      "id": 10843,
+      "directors": [
+        "Martin Scorsese"
+      ]
+    },
+    {
+      "title": "Eyes Wide Shut",
+      "year": 1999,
+      "link": "https://letterboxd.com/aselling/film/eyes-wide-shut/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/7/1/7/p/1vY5jd68cMuQM6f4PvOlXmdjeF8-0-600-0-900-crop.jpg?v=10373bbbcc",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-06",
+      "id": 345,
+      "directors": [
+        "Stanley Kubrick"
+      ]
+    },
+    {
+      "title": "A Clockwork Orange",
+      "year": 1971,
+      "link": "https://letterboxd.com/aselling/film/a-clockwork-orange/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/8/6/7/p/sk6jCkPtwtEBT0ezwsdmbhTFnDW-0-600-0-900-crop.jpg?v=2b9bdec9a5",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-05",
+      "id": 185,
+      "directors": [
+        "Stanley Kubrick"
+      ]
+    },
+    {
+      "title": "Joker",
+      "year": 2019,
+      "link": "https://letterboxd.com/aselling/film/joker-2019/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/0/6/7/7/5/p/4tLz5kIi4hCjYLMaPmBlN6pZNdF-0-600-0-900-crop.jpg?v=eb6efc37a0",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-09-01",
+      "id": 475557,
+      "directors": [
+        "Todd Phillips"
+      ]
+    },
+    {
+      "title": "Hall Pass",
+      "year": 2011,
+      "link": "https://letterboxd.com/aselling/film/hall-pass/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/6/5/8/3/p/dknAOstypoCvptUChZVLmEi5CW0-0-600-0-900-crop.jpg?v=85519b4e3e",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-30",
+      "id": 48988,
+      "directors": [
+        "Bobby Farrelly",
+        "Peter Farrelly"
+      ]
+    },
+    {
+      "title": "Annabelle: Creation",
+      "year": 2017,
+      "link": "https://letterboxd.com/aselling/film/annabelle-creation/",
+      "poster": "https://a.ltrbxd.com/resized/film-poster/3/3/0/7/9/0/330790-annabelle-creation-0-600-0-900-crop.jpg?v=6ef299dffd",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-29",
+      "id": 396422,
+      "directors": [
+        "David F. Sandberg"
+      ]
+    },
+    {
+      "title": "Sicario",
+      "year": 2015,
+      "link": "https://letterboxd.com/aselling/film/sicario-2015/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/9/7/6/2/8/p/cbgSuptofEiugwbAUEa6XR8TenF-0-600-0-900-crop.jpg?v=5578f68eaa",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-29",
+      "id": 273481,
+      "directors": [
+        "Denis Villeneuve"
+      ]
+    },
+    {
+      "title": "The Conjuring: Last Rites",
+      "year": 2025,
+      "link": "https://letterboxd.com/aselling/film/the-conjuring-last-rites/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/9/3/6/0/6/5/p/kb1EEHZmjUlZWJwknbTVaMq8sYJ-0-600-0-900-crop.jpg?v=72638579f9",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-27",
+      "id": 1038392,
+      "directors": [
+        "Michael Chaves"
+      ]
+    },
+    {
+      "title": "The Mummy",
+      "year": 1999,
+      "link": "https://letterboxd.com/aselling/film/the-mummy-1999/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/1/5/5/4/p/tmtDYVLxZiuQJ1TcmqcAbOmCwr-0-600-0-900-crop.jpg?v=df575384c0",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-25",
+      "id": 564,
+      "directors": [
+        "Stephen Sommers"
+      ]
+    },
+    {
+      "title": "The Bling Ring",
+      "year": 2013,
+      "link": "https://letterboxd.com/aselling/film/the-bling-ring/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/7/9/8/9/3/p/nTsoUG6RzpcefTOKK1GSAaemWOG-0-600-0-900-crop.jpg?v=5894941c44",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-24",
+      "id": 96936,
+      "directors": [
+        "Sofia Coppola"
+      ]
+    },
+    {
+      "title": "The Nun",
+      "year": 2018,
+      "link": "https://letterboxd.com/aselling/film/the-nun-2018/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/7/1/8/4/2/p/k22mrmbKA3nDS82eYEyJkGlHx3v-0-600-0-900-crop.jpg?v=787a022c06",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-23",
+      "id": 439079,
+      "directors": [
+        "Corin Hardy"
+      ]
+    },
+    {
+      "title": "The Invite",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/the-invite-2026/1/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/8/5/4/8/3/1/p/iIgyxguTm5viRqSTeKP1t04geR2-0-600-0-900-crop.jpg?v=aee270cf1a",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-08-21",
+      "id": 950028,
+      "directors": [
+        "Olivia Wilde"
+      ]
+    },
+    {
+      "title": "The Conjuring: The Devil Made Me Do It",
+      "year": 2021,
+      "link": "https://letterboxd.com/aselling/film/the-conjuring-the-devil-made-me-do-it/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/5/6/7/2/3/p/WcL9ZWI8n1hTp6IoKPwM7dpkYJ-0-600-0-900-crop.jpg?v=e2ab3d2623",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-18",
+      "id": 423108,
+      "directors": [
+        "Michael Chaves"
+      ]
+    },
+    {
+      "title": "mid90s",
+      "year": 2018,
+      "link": "https://letterboxd.com/aselling/film/mid90s/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/7/0/4/5/1/p/kC12onatWuaYlsfu490cO6o5lax-0-600-0-900-crop.jpg?v=51951cea3a",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-17",
+      "id": 437586,
+      "directors": [
+        "Jonah Hill"
+      ]
+    },
+    {
+      "title": "Tenet",
+      "year": 2020,
+      "link": "https://letterboxd.com/aselling/film/tenet/1/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/5/0/6/0/3/2/p/d2LpeXs2XyPm2B7AxyIsHlE2ySc-0-600-0-900-crop.jpg?v=6d0ffb75e3",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-08-16",
+      "id": 577922,
+      "directors": [
+        "Christopher Nolan"
+      ]
+    },
+    {
+      "title": "Ferris Bueller&#039;s Day Off",
+      "year": 1986,
+      "link": "https://letterboxd.com/aselling/film/ferris-buellers-day-off/2/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/7/2/1/9/p/zACzLwjg8WqWh2tEKiee9w90Z7b-0-600-0-900-crop.jpg?v=2a3ea45b90",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-08-15",
+      "id": 9377,
+      "directors": [
+        "John Hughes"
+      ]
+    },
+    {
+      "title": "Leviticus",
+      "year": 2026,
+      "link": "https://letterboxd.com/aselling/film/leviticus-2026/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/4/3/7/6/2/2/p/nm1GXDe9riIWZzTvvS4za5aPwmY-0-600-0-900-crop.jpg?v=4d83fb2ab7",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-14",
+      "id": 1564614,
+      "directors": [
+        "Adrian Chiarella"
+      ]
+    },
+    {
+      "title": "The Conjuring 2",
+      "year": 2016,
+      "link": "https://letterboxd.com/aselling/film/the-conjuring-2/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/8/3/2/5/5/p/pbUZSZPfCAVT8rcHGVJpSNlW49Z-0-600-0-900-crop.jpg?v=7e006c6840",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-12",
+      "id": 259693,
+      "directors": [
+        "James Wan"
+      ]
+    },
+    {
+      "title": "(500) Days of Summer",
+      "year": 2009,
+      "link": "https://letterboxd.com/aselling/film/500-days-of-summer/8/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/3/9/3/5/0/p/eQQ4ZLWrDwK3MsqaVKRjGqv29vd-0-600-0-900-crop.jpg?v=ddc869f63f",
+      "liked": true,
+      "rewatch": true,
+      "watchedDate": "2026-08-11",
+      "id": 19913,
+      "directors": [
+        "Marc Webb"
+      ]
+    },
+    {
+      "title": "The Purge",
+      "year": 2013,
+      "link": "https://letterboxd.com/aselling/film/the-purge/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/1/8/1/1/0/p/x6hwbnR2nGacSzljqYaXY25w1Me-0-600-0-900-crop.jpg?v=1ad146e519",
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-08-10",
+      "id": 158015,
+      "directors": [
+        "James DeMonaco"
+      ]
+    },
+    {
+      "title": "Suspicion",
+      "year": 1941,
+      "link": "https://letterboxd.com/aselling/film/suspicion/",
+      "poster": "https://a.ltrbxd.com/resized/alternative-poster/4/5/2/8/1/p/w7FfVu8PitqBX6XvItcgWRzpR9e-0-600-0-900-crop.jpg?v=7f6c27c775",
+      "liked": true,
+      "rewatch": false,
+      "watchedDate": "2026-08-09",
+      "id": 11462,
+      "directors": [
+        "Alfred Hitchcock"
+      ]
+    }
+  ],
+  "favorites": [
+    {
+      "fullName": "(500) Days of Summer (2009)",
+      "title": "(500) Days of Summer",
+      "year": 2009,
+      "link": "https://letterboxd.com/film/500-days-of-summer/",
+      "posterUrl": "https://a.ltrbxd.com/resized/alternative-poster/3/9/3/5/0/p/6h6nfckQgkvYBGd7BbXQcoaNDRW-0-300-0-450-crop.jpg?v=e6451fd68d",
+      "slug": "500-days-of-summer",
+      "id": null,
+      "directors": null
+    },
+    {
+      "fullName": "Portrait of a Lady on Fire (2019)",
+      "title": "Portrait of a Lady on Fire",
+      "year": 2019,
+      "link": "https://letterboxd.com/film/portrait-of-a-lady-on-fire/",
+      "posterUrl": "https://a.ltrbxd.com/resized/alternative-poster/4/6/0/8/3/0/p/rUDuOKpkKBHxx41BScqKej72iT3-0-300-0-450-crop.jpg?v=dfdf99986e",
+      "slug": "portrait-of-a-lady-on-fire",
+      "id": null,
+      "directors": null
+    },
+    {
+      "fullName": "Ferris Bueller's Day Off (1986)",
+      "title": "Ferris Bueller's Day Off",
+      "year": 1986,
+      "link": "https://letterboxd.com/film/ferris-buellers-day-off/",
+      "posterUrl": "https://a.ltrbxd.com/resized/alternative-poster/4/7/2/1/9/p/zACzLwjg8WqWh2tEKiee9w90Z7b-0-300-0-450-crop.jpg?v=2a3ea45b90",
+      "slug": "ferris-buellers-day-off",
+      "id": null,
+      "directors": null
+    },
+    {
+      "fullName": "The Lost Boys (1987)",
+      "title": "The Lost Boys",
+      "year": 1987,
+      "link": "https://letterboxd.com/film/the-lost-boys/",
+      "posterUrl": "https://a.ltrbxd.com/resized/alternative-poster/5/0/9/8/7/p/enFBXzn8xs5rdtSMC83AVWQ80FP-0-300-0-450-crop.jpg?v=71b8ca097a",
+      "slug": "the-lost-boys",
+      "id": null,
+      "directors": null
+    }
+  ]
+}

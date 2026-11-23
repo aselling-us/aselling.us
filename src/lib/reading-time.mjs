@@ -1,10 +1,13 @@
-// "x minute read" label for a post's raw markdown body, at the standard
-// 200 words/minute reading pace. Strips fenced code blocks first — code
-// isn't read at prose pace, and a large snippet would otherwise skew the
-// estimate. Plain .mjs so it can be imported the same way from .astro
-// files and (eventually) plain-Node scripts, matching inline-markdown.mjs.
+// AI Generated function to convert a markdown body into an "x minute read" label 
 const WORDS_PER_MINUTE = 200;
 
+
+/**
+ * Converts a markdown body into an "x minute read" label.
+ * @param {string} markdown - The markdown content to evaluate.
+ * @param {number} [wordsPerMinute=200] - Optional reading speed in words per minute.
+ * @returns {string}
+ */
 export function readingTimeLabel(markdown, wordsPerMinute = WORDS_PER_MINUTE) {
   const words = String(markdown ?? '')
     .replace(/```[\s\S]*?```/g, ' ')
