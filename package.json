@@ -15,7 +15,7 @@
     "sync": "npx svelte-kit sync",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "drafts:count": "node src/lib/server/count-drafts.ts",
+    "drafts:count": "tsx src/lib/server/count-drafts.ts",
     "hardcover": "tsx src/lib/server/hardcover.ts",
     "letterboxd": "tsx src/lib/server/letterboxd.ts",
     "fetch:media": "node --env-file-if-exists=.env.local scripts/fetch-media.mjs",
