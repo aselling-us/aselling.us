@@ -34,14 +34,9 @@ jobs:
       - run: npm ci
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
-      - name: Refresh media snapshots
-        # Best-effort: a flaky Hardcover/Letterboxd/GitHub fetch shouldn't
-        # block a real code deploy — on failure this just leaves the
-        # already-checked-out src/data/*.json (committed by refresh-media.yml)
-        # in place, same as a local build would use.
-        continue-on-error: true
+      - name: Build
+        run: npm run build
         env:
-          GH_CONTRIB_TOKEN: ${{ secrets.GH_CONTRIB_TOKEN }}
           HARDCOVER_TOKEN: ${{ secrets.HARDCOVER_TOKEN }}
           DOMAIN_ROOT: ${{ secrets.DOMAIN_ROOT }}
           EMAIL: ${{ secrets.EMAIL }}
@@ -49,10 +44,8 @@ jobs:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           MAIL_FROM: ${{ secrets.MAIL_FROM }}
-          WORKER_URL: ${{ secrets.WORKER_URL }}
-          UNSUBSCRIBE_SECRET: ${{ secrets.UNSUBSCRIBE_SECRET }}          
-        run: npm run fetch:media
-      - run: npm run build
+          WORKER_URL: ${{ vars.WORKER_URL }}
+          UNSUBSCRIBE_SECRET: ${{ secrets.UNSUBSCRIBE_SECRET }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
