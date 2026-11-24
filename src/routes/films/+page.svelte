@@ -2,7 +2,7 @@
   import Quote from "#lib/Quote.svelte";
   import type { LetterboxdData } from "#lib/server/letterboxd";
   import type { PageData } from "./$types";
-  import { Repeat, Popcorn } from "@lucide/svelte";
+  import { Repeat, Popcorn, Heart } from "@lucide/svelte";
   import { formatDate } from "#lib/date-helper";
 
   const profileUrl = "https://letterboxd.com/aselling/diary";
@@ -117,6 +117,9 @@
           {#if film.year}
             <span class="film-release-year">released {film.year}</span>
           {/if}
+          <!-- {#if film.liked}
+            <span><Heart /></span>
+          {/if} -->
           {#if film.watchedDate}
             <span class="film-log">
               <span class="log-label">
@@ -127,8 +130,14 @@
                 {:else}
                   <span>watched <Popcorn size={14} strokeWidth={2} /></span>
                 {/if}
+
+                {formatDate(film.watchedDate)}
+                {#if film.liked}
+                  <span class="liked-label"
+                    ><Heart size={14} strokeWidth={2} /></span
+                  >
+                {/if}
               </span>
-              {formatDate(film.watchedDate)}
             </span>
           {/if}
         </div>
