@@ -12,4 +12,5 @@ export const navItems: NavItem[] = [
   { n: '04', label: 'Reading', href: '/books' },
   { n: '05', label: 'Watching', href: '/films' },
   { n: '06', label: 'Places', href: '/travels' },
+  { n: '07', label: 'Listening', href: '/music' },
 ];
