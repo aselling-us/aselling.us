@@ -1,7 +1,18 @@
 {
-  "fetchedAt": "2026-11-22T17:08:13.837Z",
+  "fetchedAt": "2026-11-23T21:18:43.630Z",
   "username": "aselling",
   "films": [
+    {
+      "title": "The Hunger Games",
+      "year": 2012,
+      "link": "https://letterboxd.com/aselling/film/the-hunger-games/",
+      "poster": "https://a.ltrbxd.com/resized/sm/upload/x3/tw/wu/z4/vAkjFEm76Lu5hSevquxPgQ91OtI-0-600-0-900-crop.jpg?v=f4bfaf16df",
+      "rating": null,
+      "liked": false,
+      "rewatch": false,
+      "watchedDate": "2026-11-22",
+      "review": "camera work almost as unstable as my emotions \n\nthey played hopscotch with their emotions like god pick a trope"
+    },
     {
       "title": "Less Than Zero",
       "year": 1987,
@@ -540,17 +551,6 @@
       "rewatch": false,
       "watchedDate": "2026-08-09",
       "review": "this guy had worse pick up lines than guys i know today and somehow the still married him. Like why are we marrying who calls you \"Monkeyface\". \n\nHowever, for a 40s film (and my first Hitchcock!) this was quite impressive. Lots of cuts so I wonder how difficult it was to edit."
-    },
-    {
-      "title": "Insidious",
-      "year": 2010,
-      "link": "https://letterboxd.com/aselling/film/insidious/",
-      "poster": "https://a.ltrbxd.com/resized/alternative-poster/1/6/5/5/6/p/wyW7absvZmdXaPjflIjacZgyy3U-0-600-0-900-crop.jpg?v=2729cff519",
-      "rating": null,
-      "liked": false,
-      "rewatch": false,
-      "watchedDate": "2026-08-08",
-      "review": "this was not a fun watch in bed at night in an old creaky apartment\n\nwhat is with rose byrne having kids connected to heart rate monitors like get better kids\n\nwtf was that ending though"
     }
   ],
   "favorites": [
@@ -603,12 +603,6 @@
       "year": 1991,
       "link": "https://letterboxd.com/film/the-silence-of-the-lambs/",
       "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/7/8/2/51782-the-silence-of-the-lambs-0-600-0-900-crop.jpg?v=18d88bdff4"
-    },
-    {
-      "title": "The Hunger Games",
-      "year": 2012,
-      "link": "https://letterboxd.com/film/the-hunger-games/",
-      "poster": null
     },
     {
       "title": "The Shawshank Redemption",
@@ -699,6 +693,12 @@
       "year": 2005,
       "link": "https://letterboxd.com/film/brokeback-mountain/",
       "poster": "https://a.ltrbxd.com/resized/film-poster/5/1/9/0/9/51909-brokeback-mountain-0-600-0-900-crop.jpg?v=40ad2b59a0"
+    },
+    {
+      "title": "The Hunger Games: The Ballad of Songbirds & Snakes",
+      "year": 2023,
+      "link": "https://letterboxd.com/film/the-hunger-games-the-ballad-of-songbirds-snakes/",
+      "poster": null
     }
   ]
 }
