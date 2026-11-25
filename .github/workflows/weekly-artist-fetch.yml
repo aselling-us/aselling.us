@@ -1,0 +1,101 @@
+name: Fetch Artists 21:00 Sunday
+
+on:
+  schedule:
+    - cron: "00 21 * * 0"
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Fetch Spotify artists
+        id: spotify
+        if: github.event_name == 'schedule'
+        continue-on-error: true
+        run: npm run spotify:artists
+        env:
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+          SPOTIFY_REFRESH_TOKEN: ${{ secrets.SPOTIFY_REFRESH_TOKEN }}
+
+      - name: Restore previous artists if fetch failed
+        if: steps.spotify.outcome == 'failure'
+        run: |
+          git restore src/data/spotify-artists.json
+          echo "::warning::Spotify fetch failed; keeping previous data."
+
+      - name: Commit updated artists
+        if: steps.spotify.outcome == 'success'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add src/data/spotify-artists.json
+
+          if git diff --cached --quiet; then
+            echo "No changes to Spotify artists."
+          else
+            git commit -m "data: refresh Spotify artists"
+            git push origin HEAD:main
+          fi
+
+      - name: Build
+        run: npm run build
+        env:
+          HEADLESS: "1"
+          HARDCOVER_TOKEN: ${{ secrets.HARDCOVER_TOKEN }}
+          DOMAIN_ROOT: ${{ secrets.DOMAIN_ROOT }}
+          EMAIL: ${{ secrets.EMAIL }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_FROM: ${{ secrets.MAIL_FROM }}
+          WORKER_URL: ${{ vars.WORKER_URL }}
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+          SPOTIFY_REFRESH_TOKEN: ${{ secrets.SPOTIFY_REFRESH_TOKEN }}
+          UNSUBSCRIBE_SECRET: ${{ secrets.UNSUBSCRIBE_SECRET }}
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Deployment message
+        run: echo "THANK GOD IT'S ALMOST MONDAY"

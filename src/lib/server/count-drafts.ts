@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 // Assuming commands are run from the SvelteKit project root (where package.json lives)
 const root = process.cwd();
 const DEFAULT_DRAFTS_DIR = path.join(root, 'src/content/blog/drafts');
-const DEFAULT_OUT_FILE = path.join(root, 'src/lib/data/drafts.json');
+const DEFAULT_OUT_FILE = path.join(root, 'src/data/drafts.json');
 
 export function countDrafts(draftsDir = DEFAULT_DRAFTS_DIR) {
   if (!fs.existsSync(draftsDir)) return 0;

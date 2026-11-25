@@ -8,7 +8,9 @@ if (!clientId || !clientSecret || !refreshToken) {
   throw new Error("Missing Spotify environment variables");
 }
 
-const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString("base64");
+const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString(
+  "base64",
+);
 
 const tokenResponse = await fetch("https://accounts.spotify.com/api/token", {
   method: "POST",
@@ -59,7 +61,7 @@ const topArtists = data.items.map((artist) => ({
   external_urls: artist.external_urls,
 }));
 
-await mkdir("static", { recursive: true });
+await mkdir("src/data", { recursive: true });
 await writeFile(
   "src/data/spotify-artists.json",
   JSON.stringify({ topArtists }, null, 2),

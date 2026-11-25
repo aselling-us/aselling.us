@@ -9,7 +9,7 @@
   import { refreshAll } from "$app/navigation";
   import { readingTimeLabel } from "#lib/reading-time.mjs";
   import { Trash } from "@lucide/svelte";
-  import drafts from "#lib/data/drafts.json";
+  import drafts from "../../data/drafts.json";
   import SubscribeForm from "../../components/SubscribeForm.svelte";
 
   marked.use(markedFootnote());

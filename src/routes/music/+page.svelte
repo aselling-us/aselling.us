@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { Earbuds, ChartNoAxesColumn } from "@lucide/svelte";
+  import { Earbuds, Disc, Disc3 } from "@lucide/svelte";
 
   type Song = {
     title: string;
@@ -35,7 +35,10 @@
 
   async function updateSong() {
     try {
-      const response = await fetch("https://aselling-blog-subscribe.aselling.workers.dev/spotify", { cache: "no-store" });
+      const response = await fetch(
+        "https://aselling-blog-subscribe.aselling.workers.dev/spotify",
+        { cache: "no-store" },
+      );
       if (!response.ok) throw new Error("Spotify request failed");
 
       const data = await response.json();
@@ -67,6 +70,7 @@
     }
   }
 
+  const REFRESH_MS = 30_000; // 45 may be better for rate limit
   //   SINCE we can t poll spotify every 1 second, we start a timer on our own to use progress bar
   let elapsedMs = $state(0);
 
@@ -77,7 +81,7 @@
     updateArtists();
 
     // SPOTIFY REFREESH: 2 MINUTES
-    const spotifyInterval = setInterval(updateSong, 120_000);
+    const spotifyInterval = setInterval(updateSong, REFRESH_MS);
 
     const progressInterval = setInterval(() => {
       if (song?.isPlaying && song.durationMs != null) {
@@ -118,7 +122,14 @@
     <div class="details">
       <span class="mono-label status">
         {song.isPlaying ? "now playing" : "most recently played"}
-        <Earbuds />
+
+        {#if song.isPlaying}
+          <span class="disc-icon spinning-disc">
+            <Disc3 size={20} color="#2589C8" strokeWidth={1.25} />
+          </span>
+        {:else}
+          <Disc size={20} color="#2589C8" strokeWidth={1.25} />
+        {/if}
       </span>
 
       <h2>
@@ -165,7 +176,11 @@
   <p>No recent Spotify tracks found.</p>
 {/if}
 <!-- ===== TOP ARTISTS -->
-<h2 class="artists-heading">Top artists of past month <ChartNoAxesColumn /></h2>
+<!-- <h2 class="artists-heading">Top artists of past month <ChartNoAxesColumn /></h2> -->
+<h2 class="artists-heading">
+  Heavy Rotation
+  <Earbuds size={28} color="#2589C8" strokeWidth={1.25} />
+</h2>
 <div class="artist-grid">
   {#each topArtists.slice(0, 10) as artist, index (artist.id)}
     <a
@@ -200,6 +215,8 @@
     border: 1px solid #4175b8;
     border-radius: 8px;
     max-width: 500px;
+    /* this centers it on the page */
+    margin-inline: auto;
   }
 
   img,
@@ -208,6 +225,7 @@
     height: 90px;
     border-radius: 4px;
     display: block;
+    border: 1.25px solid var(--color-hairline);
   }
 
   img {
@@ -243,17 +261,27 @@
   h2 a {
     color: inherit;
     text-decoration: none;
+    /* font-family: var(--font-mono); */
+    font-family: var(--font-writing);
   }
 
   h2 a:hover {
     text-decoration: underline;
   }
 
-  .artist,
+  .artist {
+    margin: 0 0 0.25rem;
+    color: #4a5568;
+    font-size: 0.95rem;
+    /* font-family: var(--font-writing);
+     */
+    font-family: var(--font-mono);
+  }
   .album {
     margin: 0 0 0.25rem;
     color: #4a5568;
     font-size: 0.95rem;
+    font-family: var(--font-display);
   }
 
   .played-at {
@@ -295,6 +323,7 @@
 
   .artist-image {
     object-fit: cover;
+    border: 1px solid var(--color-hairline);
   }
 
   .artist-placeholder {
@@ -345,6 +374,40 @@
     margin-top: 0.7rem;
   }
   .artists-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     margin-top: 2rem;
+  }
+
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-highlight);
+  }
+
+  .disc-icon {
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+  }
+
+  .spinning-disc {
+    animation: spin 4s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spinning-disc {
+      animation: none;
+    }
   }
 </style>

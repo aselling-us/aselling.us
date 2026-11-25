@@ -6,7 +6,7 @@ import { pathToFileURL } from "node:url";
 import { chromium } from "playwright";
 
 const LETTERBOXD_USER = "aselling";
-const OUTPUT_PATH = path.resolve("src/lib/data/letterboxd.json");
+const OUTPUT_PATH = path.resolve("src/data/letterboxd.json");
 
 const monthFormatter = new Intl.DateTimeFormat("en-US", {
   month: "short",

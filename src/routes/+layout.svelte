@@ -5,9 +5,8 @@
   const year = new Date().getFullYear();
   const shortMonth = new Date().toLocaleString("en-US", { month: "short" });
   let { data, children } = $props();
-    
+  import { House } from "@lucide/svelte";
 </script>
-
 
 <svelte:head>
   <meta charset="utf-8" />
@@ -23,29 +22,34 @@
 </svelte:head>
 
 <header class="site-header">
-  <nav aria-label="Primary">
-    <!-- fetches routes for header from nav-items.ts -->
-    <ul>
-      {#each navItems as item}
-        {@const active = page.url.pathname === item.href}
-        {@const external = /^(https?:)?\/\//.test(item.href)}
+  <div class="header-row">
+    <a href="/" class="nav-link house" aria-label="Home">
+      <House size={28} strokeWidth={2.25} color="#2589C8" />
+    </a>
+    <nav aria-label="Primary">
+      <!-- fetches routes for header from nav-items.ts -->
+      <ul>
+        {#each navItems as item}
+          {@const active = page.url.pathname === item.href}
+          {@const external = /^(https?:)?\/\//.test(item.href)}
 
-        <li>
-          <a
-            href={item.href}
-            class="nav-link"
-            class:active
-            aria-current={active ? "page" : undefined}
-            target={external ? "_blank" : undefined}
-            rel={external ? "noopener noreferrer" : undefined}
-          >
-            <span class="mono-label nav-n">{item.n}</span>
-            <span class="nav-label">{item.label}</span>
-          </a>
-        </li>
-      {/each}
-    </ul>
-  </nav>
+          <li>
+            <a
+              href={item.href}
+              class="nav-link"
+              class:active
+              aria-current={active ? "page" : undefined}
+              target={external ? "_blank" : undefined}
+              rel={external ? "noopener noreferrer" : undefined}
+            >
+              <span class="mono-label nav-n">{item.n}</span>
+              <span class="nav-label">{item.label}</span>
+            </a>
+          </li>
+        {/each}
+      </ul>
+    </nav>
+  </div>
   <hr />
 </header>
 <main
@@ -107,5 +111,16 @@
     border: none;
     border-top: 1px solid #d1d5db;
     margin: 1.5rem 0;
+  }
+  .house {
+    display: flex;
+
+    align-items: baseline; /* Centers vertically */
+  }
+  .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
   }
 </style>

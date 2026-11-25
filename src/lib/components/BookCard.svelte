@@ -1,7 +1,19 @@
 <script lang="ts">
   import type { Book } from "#lib/server/hardcover";
+  import { type ReadingBookItem } from "#lib/server/hardcover.ts";
+  let {
+    book,
+    showProgress = true,
+    imageWidth = 90,
+    imageHeight = 135,
+  }: {
+    book: ReadingBookItem;
+    showProgress?: boolean;
+    imageWidth?: number;
+    imageHeight?: number;
+  } = $props();
 
-  let { book }: { book: Book } = $props();
+  const bookLink = $derived(`https://hardcover.app/books/${book.slug}`);
   // console.log(book)
   // console.log(book);
   let imgFailed = $state(false);
@@ -19,9 +31,9 @@
 
   function handleImageError(event: Event) {
     const img = event.currentTarget as HTMLImageElement;
-    console.error(`[BookCard] Failed to load cover for "${book.title}"`, {
+    console.error(`[BookCard] Failed to load image for "${book.title}"`, {
       attemptedSrc: img.currentSrc || img.src,
-      rawBookCover: book.cover,
+      rawBookCover: book.image,
       naturalWidth: img.naturalWidth,
     });
     imgFailed = true;
@@ -30,14 +42,16 @@
 
 <article class="book-card">
   <a
-    href={book.link}
+    href={bookLink}
+    style:--image-width="{imageWidth}px"
+    style:--image-height="{imageHeight}px"
     target="_blank"
     rel="noopener noreferrer"
     class="cover-link"
   >
-    {#if book.cover && !imgFailed}
+    {#if book.image && !imgFailed}
       <img
-        src={book.cover}
+        src={book.image}
         alt="Cover of {book.title}"
         referrerpolicy="no-referrer"
         onerror={handleImageError}
@@ -49,7 +63,7 @@
 
   <div class="details">
     <h2>
-      <a href={book.link} target="_blank" rel="noopener noreferrer">
+      <a href={bookLink} target="_blank" rel="noopener noreferrer">
         {book.title}
       </a>
     </h2>
@@ -58,7 +72,7 @@
       {#if book.year}
         ({book.year}){/if}
     </p>
-    {#if progress !== null}
+    {#if showProgress && progress !== null}
       <div
         class="progress"
         role="progressbar"
@@ -98,11 +112,12 @@
 
   img,
   .cover-placeholder {
-    width: 90px;
-    height: 135px;
+    width: var(--image-width);
+    height: var(--image-height);
     border-radius: 4px;
     display: block;
     flex-shrink: 0;
+    border: 1px solid var(--color-hairline);
   }
 
   img {

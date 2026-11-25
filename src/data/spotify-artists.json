@@ -1,27 +1,243 @@
 {
   "topArtists": [
     {
-      "id": "example-1",
+      "id": "2Vvj76fff5uAw10W1sW54W",
+      "name": "The Wldlfe",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab6761610000e5ebe9eb79088777d1de38ec9f90",
+          "width": 640
+        },
+        {
+          "height": 320,
+          "url": "https://i.scdn.co/image/ab67616100005174e9eb79088777d1de38ec9f90",
+          "width": 320
+        },
+        {
+          "height": 160,
+          "url": "https://i.scdn.co/image/ab6761610000f178e9eb79088777d1de38ec9f90",
+          "width": 160
+        }
+      ],
+      "external_urls": {
+        "spotify": "https://open.spotify.com/artist/2Vvj76fff5uAw10W1sW54W"
+      }
+    },
+    {
+      "id": "5Rl15oVamLq7FbSb0NNBNy",
       "name": "5 Seconds of Summer",
-      "images": [],
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab6761610000e5eb87cde49a53cfbdbecf68fe02",
+          "width": 640
+        },
+        {
+          "height": 320,
+          "url": "https://i.scdn.co/image/ab6761610000517487cde49a53cfbdbecf68fe02",
+          "width": 320
+        },
+        {
+          "height": 160,
+          "url": "https://i.scdn.co/image/ab6761610000f17887cde49a53cfbdbecf68fe02",
+          "width": 160
+        }
+      ],
       "external_urls": {
-        "spotify": "https://open.spotify.com/"
+        "spotify": "https://open.spotify.com/artist/5Rl15oVamLq7FbSb0NNBNy"
       }
     },
     {
-      "id": "example-2",
+      "id": "42FzVuyJH8YbkhzWSR2n8E",
+      "name": "almost monday",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab6761610000e5eb0bd9fe06c7f3ed09bc7a3c41",
+          "width": 640
+        },
+        {
+          "height": 320,
+          "url": "https://i.scdn.co/image/ab676161000051740bd9fe06c7f3ed09bc7a3c41",
+          "width": 320
+        },
+        {
+          "height": 160,
+          "url": "https://i.scdn.co/image/ab6761610000f1780bd9fe06c7f3ed09bc7a3c41",
+          "width": 160
+        }
+      ],
+      "external_urls": {
+        "spotify": "https://open.spotify.com/artist/42FzVuyJH8YbkhzWSR2n8E"
+      }
+    },
+    {
+      "id": "4iJLPqClelZOBCBifm8Fzv",
+      "name": "Pierce The Veil",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab6761610000e5eb6f8f8d13be17bf486219edc7",
+          "width": 640
+        },
+        {
+          "height": 320,
+          "url": "https://i.scdn.co/image/ab676161000051746f8f8d13be17bf486219edc7",
+          "width": 320
+        },
+        {
+          "height": 160,
+          "url": "https://i.scdn.co/image/ab6761610000f1786f8f8d13be17bf486219edc7",
+          "width": 160
+        }
+      ],
+      "external_urls": {
+        "spotify": "https://open.spotify.com/artist/4iJLPqClelZOBCBifm8Fzv"
+      }
+    },
+    {
+      "id": "6d4jrmreCmsenscuieJERc",
+      "name": "The Band CAMINO",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab6761610000e5ebb0fe71e2abf292bd597297f7",
+          "width": 640
+        },
+        {
+          "height": 320,
+          "url": "https://i.scdn.co/image/ab67616100005174b0fe71e2abf292bd597297f7",
+          "width": 320
+        },
+        {
+          "height": 160,
+          "url": "https://i.scdn.co/image/ab6761610000f178b0fe71e2abf292bd597297f7",
+          "width": 160
+        }
+      ],
+      "external_urls": {
+        "spotify": "https://open.spotify.com/artist/6d4jrmreCmsenscuieJERc"
+      }
+    },
+    {
+      "id": "3QaxveoTiMetZCMp1sftiu",
+      "name": "Waterparks",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab6761610000e5eb5b2def3b8774dfeaca4aaa46",
+          "width": 640
+        },
+        {
+          "height": 320,
+          "url": "https://i.scdn.co/image/ab676161000051745b2def3b8774dfeaca4aaa46",
+          "width": 320
+        },
+        {
+          "height": 160,
+          "url": "https://i.scdn.co/image/ab6761610000f1785b2def3b8774dfeaca4aaa46",
+          "width": 160
+        }
+      ],
+      "external_urls": {
+        "spotify": "https://open.spotify.com/artist/3QaxveoTiMetZCMp1sftiu"
+      }
+    },
+    {
+      "id": "7zNEP2UROEGrRn43h46zTk",
       "name": "In Color",
-      "images": [],
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab6761610000e5eb73554eb4c7d1e6a77796925f",
+          "width": 640
+        },
+        {
+          "height": 320,
+          "url": "https://i.scdn.co/image/ab6761610000517473554eb4c7d1e6a77796925f",
+          "width": 320
+        },
+        {
+          "height": 160,
+          "url": "https://i.scdn.co/image/ab6761610000f17873554eb4c7d1e6a77796925f",
+          "width": 160
+        }
+      ],
       "external_urls": {
-        "spotify": "https://open.spotify.com/"
+        "spotify": "https://open.spotify.com/artist/7zNEP2UROEGrRn43h46zTk"
       }
     },
     {
-      "id": "example-3",
-      "name": "Almost Monday",
-      "images": [],
+      "id": "3xc0dLvxU2nAYefEJdDVBw",
+      "name": "Never Ending Fall",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab6761610000e5ebb0b8b81cad3e1744d981231f",
+          "width": 640
+        },
+        {
+          "height": 320,
+          "url": "https://i.scdn.co/image/ab67616100005174b0b8b81cad3e1744d981231f",
+          "width": 320
+        },
+        {
+          "height": 160,
+          "url": "https://i.scdn.co/image/ab6761610000f178b0b8b81cad3e1744d981231f",
+          "width": 160
+        }
+      ],
       "external_urls": {
-        "spotify": "https://open.spotify.com/"
+        "spotify": "https://open.spotify.com/artist/3xc0dLvxU2nAYefEJdDVBw"
+      }
+    },
+    {
+      "id": "7I3bkknknQkIiatWiupQgD",
+      "name": "Beach Weather",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab6761610000e5ebb63779a7ea34bd4fa735d0cc",
+          "width": 640
+        },
+        {
+          "height": 320,
+          "url": "https://i.scdn.co/image/ab67616100005174b63779a7ea34bd4fa735d0cc",
+          "width": 320
+        },
+        {
+          "height": 160,
+          "url": "https://i.scdn.co/image/ab6761610000f178b63779a7ea34bd4fa735d0cc",
+          "width": 160
+        }
+      ],
+      "external_urls": {
+        "spotify": "https://open.spotify.com/artist/7I3bkknknQkIiatWiupQgD"
+      }
+    },
+    {
+      "id": "4o0pNHbyj36LPvukNqEug0",
+      "name": "The Maine",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab6761610000e5eb5beebe23413effb7f033cdd5",
+          "width": 640
+        },
+        {
+          "height": 320,
+          "url": "https://i.scdn.co/image/ab676161000051745beebe23413effb7f033cdd5",
+          "width": 320
+        },
+        {
+          "height": 160,
+          "url": "https://i.scdn.co/image/ab6761610000f1785beebe23413effb7f033cdd5",
+          "width": 160
+        }
+      ],
+      "external_urls": {
+        "spotify": "https://open.spotify.com/artist/4o0pNHbyj36LPvukNqEug0"
       }
     }
   ]

@@ -1,4 +1,4 @@
-import letterboxd from "#lib/data/letterboxd.json";
+import letterboxd from "../../data/letterboxd.json";
 import {
   getMonthLabel,
   type DiaryFilm,
