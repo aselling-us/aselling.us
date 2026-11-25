@@ -1,0 +1,28 @@
+{
+  "topArtists": [
+    {
+      "id": "example-1",
+      "name": "5 Seconds of Summer",
+      "images": [],
+      "external_urls": {
+        "spotify": "https://open.spotify.com/"
+      }
+    },
+    {
+      "id": "example-2",
+      "name": "In Color",
+      "images": [],
+      "external_urls": {
+        "spotify": "https://open.spotify.com/"
+      }
+    },
+    {
+      "id": "example-3",
+      "name": "Almost Monday",
+      "images": [],
+      "external_urls": {
+        "spotify": "https://open.spotify.com/"
+      }
+    }
+  ]
+}

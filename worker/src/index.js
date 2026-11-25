@@ -20,6 +20,9 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_NAME_LENGTH = 200;
 const MAX_MESSAGE_LENGTH = 2000;
 
+
+// for caching spotify data
+import { handleSpotify } from "./spotify.js";
 // Mirrors scripts/lib/mail-theme.mjs's EMAIL_THEME. Duplicated (not
 // imported) on purpose: that module pulls in nodemailer, which doesn't
 // belong in a Workers bundle, and it's a handful of hex values, not worth a
@@ -473,6 +476,9 @@ export default {
       return handleSubscribers(request, env);
     }
 
+    if (url.pathname === "/spotify" && request.method === "GET") {
+      return handleSpotify(request, env, corsHeaders(origin));
+    }
     return new Response('Not found', { status: 404 });
   },
 };
