@@ -4,7 +4,7 @@ import { DOMAIN_ROOT } from "$app/env/public";
 import { getPosts } from "#lib/server/posts";
 import { dataReading, pastReadsByYear } from "#lib/server/hardcover.ts";
 
-import letterboxd from "#lib/data/letterboxd.json";
+import letterboxd from "../../data/letterboxd.json";
 // @ts-ignore: plain .mjs shared with the GitHub Actions scripts
 import {
   blogEntries,
