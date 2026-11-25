@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { Earbuds, Disc, Disc3 } from "@lucide/svelte";
-
+  import artists from "../../data/spotify-artists.json";
   type Song = {
     title: string;
     artist: string;
@@ -22,7 +22,7 @@
   };
 
   let song = $state<Song | null>(null);
-  let topArtists = $state<Artist[]>([]);
+  const topArtists = artists.topArtists;
   let loading = $state(true);
   let error = $state(false);
   let imgFailed = $state(false);
@@ -58,18 +58,6 @@
     }
   }
 
-  async function updateArtists() {
-    try {
-      const response = await fetch("src/data/spotify-artists.json");
-      if (!response.ok) throw new Error("Could not load top artists");
-
-      const data = await response.json();
-      topArtists = data.topArtists;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   const REFRESH_MS = 30_000; // 45 may be better for rate limit
   //   SINCE we can t poll spotify every 1 second, we start a timer on our own to use progress bar
   let elapsedMs = $state(0);
@@ -78,7 +66,6 @@
   // The artists load once per page visit; playback checks every minute.
   onMount(() => {
     updateSong();
-    updateArtists();
 
     // SPOTIFY REFREESH: 2 MINUTES
     const spotifyInterval = setInterval(updateSong, REFRESH_MS);
