@@ -3,8 +3,6 @@ name: Fetch Artists 21:00 Sunday
 on:
   schedule:
     - cron: "00 21 * * 0"
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
