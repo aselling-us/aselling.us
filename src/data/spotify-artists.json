@@ -1,4 +1,5 @@
 {
+  "fetchedAt": "Wed Nov 25 2026",
   "topArtists": [
     {
       "id": "2Vvj76fff5uAw10W1sW54W",
@@ -121,27 +122,27 @@
       }
     },
     {
-      "id": "3QaxveoTiMetZCMp1sftiu",
-      "name": "Waterparks",
+      "id": "3xc0dLvxU2nAYefEJdDVBw",
+      "name": "Never Ending Fall",
       "images": [
         {
           "height": 640,
-          "url": "https://i.scdn.co/image/ab6761610000e5eb5b2def3b8774dfeaca4aaa46",
+          "url": "https://i.scdn.co/image/ab6761610000e5ebb0b8b81cad3e1744d981231f",
           "width": 640
         },
         {
           "height": 320,
-          "url": "https://i.scdn.co/image/ab676161000051745b2def3b8774dfeaca4aaa46",
+          "url": "https://i.scdn.co/image/ab67616100005174b0b8b81cad3e1744d981231f",
           "width": 320
         },
         {
           "height": 160,
-          "url": "https://i.scdn.co/image/ab6761610000f1785b2def3b8774dfeaca4aaa46",
+          "url": "https://i.scdn.co/image/ab6761610000f178b0b8b81cad3e1744d981231f",
           "width": 160
         }
       ],
       "external_urls": {
-        "spotify": "https://open.spotify.com/artist/3QaxveoTiMetZCMp1sftiu"
+        "spotify": "https://open.spotify.com/artist/3xc0dLvxU2nAYefEJdDVBw"
       }
     },
     {
@@ -169,27 +170,27 @@
       }
     },
     {
-      "id": "3xc0dLvxU2nAYefEJdDVBw",
-      "name": "Never Ending Fall",
+      "id": "3QaxveoTiMetZCMp1sftiu",
+      "name": "Waterparks",
       "images": [
         {
           "height": 640,
-          "url": "https://i.scdn.co/image/ab6761610000e5ebb0b8b81cad3e1744d981231f",
+          "url": "https://i.scdn.co/image/ab6761610000e5eb5b2def3b8774dfeaca4aaa46",
           "width": 640
         },
         {
           "height": 320,
-          "url": "https://i.scdn.co/image/ab67616100005174b0b8b81cad3e1744d981231f",
+          "url": "https://i.scdn.co/image/ab676161000051745b2def3b8774dfeaca4aaa46",
           "width": 320
         },
         {
           "height": 160,
-          "url": "https://i.scdn.co/image/ab6761610000f178b0b8b81cad3e1744d981231f",
+          "url": "https://i.scdn.co/image/ab6761610000f1785b2def3b8774dfeaca4aaa46",
           "width": 160
         }
       ],
       "external_urls": {
-        "spotify": "https://open.spotify.com/artist/3xc0dLvxU2nAYefEJdDVBw"
+        "spotify": "https://open.spotify.com/artist/3QaxveoTiMetZCMp1sftiu"
       }
     },
     {
@@ -217,27 +218,27 @@
       }
     },
     {
-      "id": "4o0pNHbyj36LPvukNqEug0",
-      "name": "The Maine",
+      "id": "48LeC49ZUI6oXfZrTA2QlL",
+      "name": "Good Boy Daisy",
       "images": [
         {
           "height": 640,
-          "url": "https://i.scdn.co/image/ab6761610000e5eb5beebe23413effb7f033cdd5",
+          "url": "https://i.scdn.co/image/ab6761610000e5eb8cd4c9340292f499f44596e7",
           "width": 640
         },
         {
           "height": 320,
-          "url": "https://i.scdn.co/image/ab676161000051745beebe23413effb7f033cdd5",
+          "url": "https://i.scdn.co/image/ab676161000051748cd4c9340292f499f44596e7",
           "width": 320
         },
         {
           "height": 160,
-          "url": "https://i.scdn.co/image/ab6761610000f1785beebe23413effb7f033cdd5",
+          "url": "https://i.scdn.co/image/ab6761610000f1788cd4c9340292f499f44596e7",
           "width": 160
         }
       ],
       "external_urls": {
-        "spotify": "https://open.spotify.com/artist/4o0pNHbyj36LPvukNqEug0"
+        "spotify": "https://open.spotify.com/artist/48LeC49ZUI6oXfZrTA2QlL"
       }
     }
   ]

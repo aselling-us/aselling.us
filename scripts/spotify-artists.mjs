@@ -34,7 +34,7 @@ const params = new URLSearchParams({
   time_range: "short_term",
   limit: "10",
 });
-
+const fetchedAt = new Date().toDateString();
 const artistsResponse = await fetch(
   `https://api.spotify.com/v1/me/top/artists?${params}`,
   {
@@ -64,7 +64,7 @@ const topArtists = data.items.map((artist) => ({
 await mkdir("src/data", { recursive: true });
 await writeFile(
   "src/data/spotify-artists.json",
-  JSON.stringify({ topArtists }, null, 2),
+  JSON.stringify({ fetchedAt, topArtists }, null, 2),
 );
 
 console.log(`Saved ${topArtists.length} top artists.`);

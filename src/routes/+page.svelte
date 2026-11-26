@@ -69,6 +69,14 @@
         {#if latestPost.description}
           <p>{latestPost.description}</p>
         {/if}
+
+        {#if latestPost.tags}
+          <div class="tag-list">
+            {#each latestPost.tags as t}
+              <span class="tag">{t}<br /> </span>
+            {/each}
+          </div>
+        {/if}
       </div>
 
       {#if latestPost.cover}
@@ -579,5 +587,34 @@
     display: block;
     color: var(--color-text-dim);
     font-size: 0.85rem;
+  }
+
+  .tag-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    padding: 0;
+    margin: 0.5rem 0 0;
+  }
+  span.tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-highlight-bright);
+    border: 1px solid var(--color-highlight-bright);
+    border-radius: 9999px;
+    padding: 0.2rem 0.75rem;
+    line-height: 1;
+    text-decoration: none;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+  }
+  .tag a:hover {
+    background: var(--color-highlight-bright);
+    color: var(--color-bg);
   }
 </style>

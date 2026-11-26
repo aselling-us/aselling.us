@@ -14,15 +14,10 @@
     durationMs: number | null;
   };
 
-  type Artist = {
-    id: string;
-    name: string;
-    images: { url: string }[];
-    external_urls: { spotify: string };
-  };
 
   let song = $state<Song | null>(null);
   const topArtists = artists.topArtists;
+  const artistFetch = artists.fetchedAt;
   let loading = $state(true);
   let error = $state(false);
   let imgFailed = $state(false);
@@ -108,7 +103,7 @@
 
     <div class="details">
       <span class="mono-label status">
-        {song.isPlaying ? "now playing" : "most recently played"}
+        {song.isPlaying ? "now playing" : "last played"}
 
         {#if song.isPlaying}
           <span class="disc-icon spinning-disc">
@@ -165,9 +160,12 @@
 <!-- ===== TOP ARTISTS -->
 <!-- <h2 class="artists-heading">Top artists of past month <ChartNoAxesColumn /></h2> -->
 <h2 class="artists-heading">
-  Heavy Rotation
+  Who soundtracks my day?
   <Earbuds size={28} color="#2589C8" strokeWidth={1.25} />
 </h2>
+<p class="mono-label played-at fetched">
+  fetched at {artistFetch}
+</p>
 <div class="artist-grid">
   {#each topArtists.slice(0, 10) as artist, index (artist.id)}
     <a
@@ -360,12 +358,13 @@
     justify-content: space-between;
     margin-top: 0.7rem;
   }
-  .artists-heading {
+  .artists-heading, .fetched {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 
   .status {
