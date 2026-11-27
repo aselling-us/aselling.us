@@ -3,24 +3,19 @@ import path from "node:path";
 import { fail, error } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";
 import { getPosts, COVER_EXTENSIONS } from "#lib/server/posts";
+import { dev } from "$app/env";
+import { slugify } from "#lib/slugify.ts";
+import type { Post } from "#lib/types.ts";
+export const prerender = !dev;
 
-export const load: PageServerLoad = async () => {
-  const posts = getPosts();
+export const load: PageServerLoad = async (): Promise<{ posts: Post[] }> => {
+  const posts: Post[] = await getPosts(); // remove `await` if getPosts() is synchronous
 
   return {
-    posts: import.meta.env.DEV ? posts : posts.filter((post) => !post.draft),
+    posts: dev ? posts : posts.filter((post) => !post.draft),
   };
 };
-function slugify(input: string) {
-  return (
-    input
-      .normalize("NFKD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "") || "untitled"
-  );
-}
+
 
 // Finds an existing "{slug}-cover.{ext}" file in a directory, if one exists
 async function findCoverFile(
@@ -100,10 +95,10 @@ tags: [${data.tags.map((t) => JSON.stringify(t)).join(", ")}]
 ${data.body}
 `;
 }
-export const actions: Actions | undefined = import.meta.env.DEV
+export const actions: Actions | undefined = dev
   ? {
       createPost: async ({ request }) => {
-        if (!import.meta.env.DEV) throw error(403, "Forbidden");
+        if (!dev) throw error(403, "Forbidden");
 
         const formData = await request.formData();
         const title = String(formData.get("title") || "");

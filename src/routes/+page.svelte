@@ -138,7 +138,7 @@
 
             {#if film.liked}
               <span class="liked-label" aria-label="Liked">
-                <Heart size={18} fill="currentColor" />
+                <Heart size={18} fill="#e01f36" />
               </span>
             {/if}
           </a>

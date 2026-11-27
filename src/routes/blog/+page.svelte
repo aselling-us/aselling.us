@@ -9,30 +9,64 @@
   import { refreshAll } from "$app/navigation";
   import { readingTimeLabel } from "#lib/reading-time.mjs";
   import { Trash } from "@lucide/svelte";
+  import type { Post } from "#lib/types.ts"; // or '#lib/types' if using your #lib alias
   import drafts from "../../data/drafts.json";
   import SubscribeForm from "../../components/SubscribeForm.svelte";
+  import { dev } from "$app/env";
 
+  import { slugify } from "#lib/slugify.ts";
   marked.use(markedFootnote());
   let { data }: { data: PageData } = $props();
 
   // $derived is to stay in sync with data
   const posts = $derived(data.posts);
 
+  // set removes duplicates
+  const tags = $derived(
+    [
+      ...new Set(
+        posts.flatMap((post: Post) =>
+          (post.tags ?? []).map((t) => t.toLowerCase()),
+        ),
+      ),
+    ].sort(),
+  );
+  // const postsByTag = $derived.by(() => {
+  //   const map = new Map<string, Post[]>();
+  //   for (const post of posts) {
+  //     for (const t of post.tags ?? []) {
+  //       const key = t.toLowerCase();
+  //       if (!map.has(key)) map.set(key, []);
+  //       map.get(key)!.push(post);
+  //     }
+  //   }
+  //   return map;
+  // });
+
+  // let activeTag = $state<string>(""); // "" = all
+
+  // const visiblePosts = $derived(
+  //   activeTag
+  //     ? posts.filter((p: Post) =>
+  //         (p.tags ?? []).some((t) => t.toLowerCase() === activeTag),
+  //       )
+  //     : posts,
+  // );
   // Use a reactive reference instead of document.getElementById
   let popover = $state<HTMLElement | null>(null);
 
-  let editingPost = $state<(typeof posts)[number] | null>(null);
+  let editingPost = $state<Post | null>(null);
 
   function openNewPost() {
     editingPost = null;
     popover?.showPopover();
   }
 
-  function openEditPost(post: (typeof posts)[number]) {
+  function openEditPost(post: Post) {
     editingPost = post;
     popover?.showPopover();
   }
-  function formatDateForInput(date: Date) {
+  function formatDateForInput(date: string | Date): string {
     return new Date(date).toISOString().split("T")[0];
   }
 </script>
@@ -43,7 +77,8 @@
   from my obsidian vault.
 </h3>
 
-{#if import.meta.env.DEV}
+<!-- ===== NEW POST BUTTON -->
+{#if dev}
   <button class="dev-btn mono-label" onclick={openNewPost}>+ New Post</button>
 
   <div
@@ -53,176 +88,180 @@
     class="editor-popover"
   >
     <!-- Keyed on slug so the form resets cleanly when switching between posts -->
-     {#if import.meta.env.DEV}
-    {#key editingPost?.slug ?? "new"}
-      <form
-        id="post-form"
-        method="POST"
-        action={editingPost ? "?/updatePost" : "?/createPost"}
-        enctype="multipart/form-data"
-        use:enhance={() => {
-          return async ({ result, update }) => {
-            if (result.type === "success") {
-              popover?.hidePopover();
-              editingPost = null;
-              await update();
-              await refreshAll();
-            } else {
-              // Catches validation errors (result.type === 'failure') or 500s ('error')
-              console.error("Action result:", result);
-              await update();
-            }
-          };
-        }}
-      >
-        <div class="popover-header">
-          <h2>
-            {editingPost ? `Edit: ${editingPost.title}` : "Create New Post"}
-          </h2>
-          <button
-            type="button"
-            onclick={() => popover?.hidePopover()}
-            aria-label="Close">✕</button
-          >
-        </div>
-
-        <!-- Pass the original slug when updating so the server knows which file to edit -->
-        {#if editingPost}
-          <input type="hidden" name="originalTitle" value={editingPost.title} />
-          <input
-            type="hidden"
-            name="originalDraft"
-            value={String(editingPost.draft)}
-          />
-          <input
-            type="hidden"
-            name="existingCover"
-            value={editingPost.cover ?? ""}
-          />
-        {/if}
-
-        <div class="row">
-          <label class="required-label">
-            Draft
-            <input
-              name="draft"
-              type="checkbox"
-              checked={editingPost ? editingPost.draft : true}
-            />
-          </label>
-          <label class="required-label">
-            Title
-            <input
-              type="text"
-              name="title"
-              value={editingPost?.title ?? ""}
-              placeholder="Post title..."
-              required
-            />
-          </label>
-        </div>
-
-        <div class="row">
-          <label class="required-label">
-            Date
-            <input
-              type="date"
-              name="date"
-              value={editingPost ? formatDateForInput(editingPost.date) : ""}
-              required
-            />
-          </label>
-          <label>
-            Cover Image
-            {#if editingPost?.cover}
-              <img
-                src={editingPost.cover}
-                alt={editingPost.coverCaption ?? "Current cover"}
-                style="max-width: 160px; border-radius: 4px;"
-              />
-            {/if}
-            <input
-              type="file"
-              name="cover"
-              accept=".png,.jpg,.jpeg,.webp,.avif,image/*"
-            />
-          </label>
-        </div>
-
-        <label>
-          Cover Caption
-          <input
-            type="text"
-            name="covercaption"
-            value={editingPost?.coverCaption ?? ""}
-            placeholder="Where does this image come from?"
-          />
-        </label>
-
-        <label class="required-label">
-          Post Description
-          <input
-            type="text"
-            name="description"
-            value={editingPost?.description ?? ""}
-            placeholder="Short summary..."
-          />
-        </label>
-
-        <label>
-          Tags (comma-separated)
-          <input
-            type="text"
-            name="tags"
-            value={editingPost?.tags?.join(", ") ?? ""}
-            placeholder="tag1, tag2, tag3..."
-          />
-        </label>
-
-        <label class="required-label form-body">
-          Body (Markdown)
-          <textarea
-            name="body"
-            rows="12"
-            placeholder="Write your unformatted markdown here..."
-            required>{editingPost?.body ?? ""}</textarea
-          >
-        </label>
-
-        <div class="popover-actions">
-          <button type="button" onclick={() => popover?.hidePopover()}>
-            Cancel
-          </button>
-
-          <!-- Only show the delete button when editingPost exists, and configure it to trigger ?/deletePost from page.Server.ts -->
-          <!-- When  click <Trash />, the browser runs onclick before submitting the form. -->
-          <!-- If you click OK, confirm(...) returns true, nothing prevents the default behavior, and the form submits to ?/deletePost. -->
-          <!-- If you click Cancel, e.preventDefault() stops the form submission completely and keeps your editor open. -->
-          {#if editingPost}
+    {#if dev}
+      {#key editingPost?.slug ?? "new"}
+        <form
+          id="post-form"
+          method="POST"
+          action={editingPost ? "?/updatePost" : "?/createPost"}
+          enctype="multipart/form-data"
+          use:enhance={() => {
+            return async ({ result, update }) => {
+              if (result.type === "success") {
+                popover?.hidePopover();
+                editingPost = null;
+                await update();
+                await refreshAll();
+              } else {
+                // Catches validation errors (result.type === 'failure') or 500s ('error')
+                console.error("Action result:", result);
+                await update();
+              }
+            };
+          }}
+        >
+          <div class="popover-header">
+            <h2>
+              {editingPost ? `Edit: ${editingPost.title}` : "Create New Post"}
+            </h2>
             <button
-              type="submit"
-              formaction="?/deletePost"
-              formnovalidate
-              aria-label="Delete Post"
-              // confirm makes the cancel or okay
-              onclick={(e) => {
-                if (!confirm(`Delete "${editingPost?.title}"?`))
-                  e.preventDefault();
-              }}
+              type="button"
+              onclick={() => popover?.hidePopover()}
+              aria-label="Close">✕</button
             >
-              <Trash />
-            </button>
+          </div>
+
+          <!-- Pass the original slug when updating so the server knows which file to edit -->
+          {#if editingPost}
+            <input
+              type="hidden"
+              name="originalTitle"
+              value={editingPost.title}
+            />
+            <input
+              type="hidden"
+              name="originalDraft"
+              value={String(editingPost.draft)}
+            />
+            <input
+              type="hidden"
+              name="existingCover"
+              value={editingPost.cover ?? ""}
+            />
           {/if}
 
-          <button type="submit" class="primary">
-            {editingPost ? "Update Post" : "Save Post"}
-          </button>
-        </div>
-      </form>
-    {/key}
+          <div class="row">
+            <label class="required-label">
+              Draft
+              <input
+                name="draft"
+                type="checkbox"
+                checked={editingPost ? editingPost.draft : true}
+              />
+            </label>
+            <label class="required-label">
+              Title
+              <input
+                type="text"
+                name="title"
+                value={editingPost?.title ?? ""}
+                placeholder="Post title..."
+                required
+              />
+            </label>
+          </div>
 
-  <!-- draft links and editor controls -->
-{/if}
+          <div class="row">
+            <label class="required-label">
+              Date
+              <input
+                type="date"
+                name="date"
+                value={editingPost ? formatDateForInput(editingPost.date) : ""}
+                required
+              />
+            </label>
+            <label>
+              Cover Image
+              {#if editingPost?.cover}
+                <img
+                  src={editingPost.cover}
+                  alt={editingPost.coverCaption ?? "Current cover"}
+                  style="max-width: 160px; border-radius: 4px;"
+                />
+              {/if}
+              <input
+                type="file"
+                name="cover"
+                accept=".png,.jpg,.jpeg,.webp,.avif,image/*"
+              />
+            </label>
+          </div>
+
+          <label>
+            Cover Caption
+            <input
+              type="text"
+              name="covercaption"
+              value={editingPost?.coverCaption ?? ""}
+              placeholder="Where does this image come from?"
+            />
+          </label>
+
+          <label class="required-label">
+            Post Description
+            <input
+              type="text"
+              name="description"
+              value={editingPost?.description ?? ""}
+              placeholder="Short summary..."
+            />
+          </label>
+
+          <label>
+            Tags (comma-separated)
+            <input
+              type="text"
+              name="tags"
+              value={editingPost?.tags?.join(", ") ?? ""}
+              placeholder="tag1, tag2, tag3..."
+            />
+          </label>
+
+          <label class="required-label form-body">
+            Body (Markdown)
+            <textarea
+              name="body"
+              rows="12"
+              placeholder="Write your unformatted markdown here..."
+              required>{editingPost?.body ?? ""}</textarea
+            >
+          </label>
+
+          <div class="popover-actions">
+            <button type="button" onclick={() => popover?.hidePopover()}>
+              Cancel
+            </button>
+
+            <!-- Only show the delete button when editingPost exists, and configure it to trigger ?/deletePost from page.Server.ts -->
+            <!-- When  click <Trash />, the browser runs onclick before submitting the form. -->
+            <!-- If you click OK, confirm(...) returns true, nothing prevents the default behavior, and the form submits to ?/deletePost. -->
+            <!-- If you click Cancel, e.preventDefault() stops the form submission completely and keeps your editor open. -->
+            {#if editingPost}
+              <button
+                type="submit"
+                formaction="?/deletePost"
+                formnovalidate
+                aria-label="Delete Post"
+                // confirm makes the cancel or okay
+                onclick={(e) => {
+                  if (!confirm(`Delete "${editingPost?.title}"?`))
+                    e.preventDefault();
+                }}
+              >
+                <Trash />
+              </button>
+            {/if}
+
+            <button type="submit" class="primary">
+              {editingPost ? "Update Post" : "Save Post"}
+            </button>
+          </div>
+        </form>
+      {/key}
+
+      <!-- draft links and editor controls -->
+    {/if}
   </div>
 {/if}
 
@@ -234,6 +273,22 @@
   Behind every exquisite thing that existed, there was something tragic. Worlds
   had to be in travail, that the meanest flower might blow...
 </Quote>
+
+<h2 class="mono-label section-label topics-list">
+  <!-- <span>posts / {String(posts.length).padStart(2, '0')}</span> -->
+  <span>tags / {tags.length} tags</span>
+  <span class="mono-label topics-note">
+    <a class="shelf-link" href="/topics">browse all topics →</a>
+  </span>
+</h2>
+{#if tags.length > 0}
+  <p class="topic-para">
+    {#each tags as tag, i (tag)}
+      <a class="tag" href="/topics/{slugify(tag)}">{tag}</a
+      >{#if i < tags.length - 1},
+      {/if}
+    {/each}
+  </p>{/if}
 
 <h2 class="mono-label section-label posts-and-drafts">
   <!-- <span>posts / {String(posts.length).padStart(2, '0')}</span> -->
@@ -260,7 +315,7 @@
         >
           <span>{@html marked.parseInline(post.title)}</span>
           <span class="mono-label post-date">
-            {post.date.toLocaleDateString("en-US", {
+            {new Date(post.date).toLocaleDateString("en-US", {
               year: "numeric",
               month: "short",
               day: "numeric",
@@ -268,7 +323,6 @@
             {" · "}
             {readingTimeLabel(post.body)}
             {" · "}
-            <!-- shorthand for {#if post.tags && post.tags.length > 0} -->
             {#if post.tags?.length}
               <div class="tag-list">
                 {#each post.tags as tag}
@@ -522,7 +576,8 @@
     width: 100%; /* Fills the width of its parent container */
     min-height: 150px; /* Sets a taller starting height while still allowing expansion */
   }
-  .posts-and-drafts {
+  .posts-and-drafts,
+  .topics-list {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -557,7 +612,13 @@
     background: var(--color-highlight-bright);
     color: var(--color-bg);
   }
-  .drafts-note {
+  .drafts-note,
+  .topics-note {
     margin-left: auto;
+  }
+  .topic-para a {
+    padding-left: 8px;
+    text-decoration: underline;
+    font-family: var(--font-mono);
   }
 </style>

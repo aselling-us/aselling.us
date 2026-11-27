@@ -1,30 +1,6 @@
 {
-  "fetchedAt": "Wed Nov 25 2026",
+  "fetchedAt": "Fri Nov 27 2026",
   "topArtists": [
-    {
-      "id": "2Vvj76fff5uAw10W1sW54W",
-      "name": "The Wldlfe",
-      "images": [
-        {
-          "height": 640,
-          "url": "https://i.scdn.co/image/ab6761610000e5ebe9eb79088777d1de38ec9f90",
-          "width": 640
-        },
-        {
-          "height": 320,
-          "url": "https://i.scdn.co/image/ab67616100005174e9eb79088777d1de38ec9f90",
-          "width": 320
-        },
-        {
-          "height": 160,
-          "url": "https://i.scdn.co/image/ab6761610000f178e9eb79088777d1de38ec9f90",
-          "width": 160
-        }
-      ],
-      "external_urls": {
-        "spotify": "https://open.spotify.com/artist/2Vvj76fff5uAw10W1sW54W"
-      }
-    },
     {
       "id": "5Rl15oVamLq7FbSb0NNBNy",
       "name": "5 Seconds of Summer",
@@ -47,6 +23,30 @@
       ],
       "external_urls": {
         "spotify": "https://open.spotify.com/artist/5Rl15oVamLq7FbSb0NNBNy"
+      }
+    },
+    {
+      "id": "2Vvj76fff5uAw10W1sW54W",
+      "name": "The Wldlfe",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab6761610000e5ebe9eb79088777d1de38ec9f90",
+          "width": 640
+        },
+        {
+          "height": 320,
+          "url": "https://i.scdn.co/image/ab67616100005174e9eb79088777d1de38ec9f90",
+          "width": 320
+        },
+        {
+          "height": 160,
+          "url": "https://i.scdn.co/image/ab6761610000f178e9eb79088777d1de38ec9f90",
+          "width": 160
+        }
+      ],
+      "external_urls": {
+        "spotify": "https://open.spotify.com/artist/2Vvj76fff5uAw10W1sW54W"
       }
     },
     {
@@ -194,30 +194,6 @@
       }
     },
     {
-      "id": "7I3bkknknQkIiatWiupQgD",
-      "name": "Beach Weather",
-      "images": [
-        {
-          "height": 640,
-          "url": "https://i.scdn.co/image/ab6761610000e5ebb63779a7ea34bd4fa735d0cc",
-          "width": 640
-        },
-        {
-          "height": 320,
-          "url": "https://i.scdn.co/image/ab67616100005174b63779a7ea34bd4fa735d0cc",
-          "width": 320
-        },
-        {
-          "height": 160,
-          "url": "https://i.scdn.co/image/ab6761610000f178b63779a7ea34bd4fa735d0cc",
-          "width": 160
-        }
-      ],
-      "external_urls": {
-        "spotify": "https://open.spotify.com/artist/7I3bkknknQkIiatWiupQgD"
-      }
-    },
-    {
       "id": "48LeC49ZUI6oXfZrTA2QlL",
       "name": "Good Boy Daisy",
       "images": [
@@ -239,6 +215,30 @@
       ],
       "external_urls": {
         "spotify": "https://open.spotify.com/artist/48LeC49ZUI6oXfZrTA2QlL"
+      }
+    },
+    {
+      "id": "7I3bkknknQkIiatWiupQgD",
+      "name": "Beach Weather",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab6761610000e5ebb63779a7ea34bd4fa735d0cc",
+          "width": 640
+        },
+        {
+          "height": 320,
+          "url": "https://i.scdn.co/image/ab67616100005174b63779a7ea34bd4fa735d0cc",
+          "width": 320
+        },
+        {
+          "height": 160,
+          "url": "https://i.scdn.co/image/ab6761610000f178b63779a7ea34bd4fa735d0cc",
+          "width": 160
+        }
+      ],
+      "external_urls": {
+        "spotify": "https://open.spotify.com/artist/7I3bkknknQkIiatWiupQgD"
       }
     }
   ]

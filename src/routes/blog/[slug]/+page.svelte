@@ -36,6 +36,25 @@
   <div class="prose">{@html post.html}</div>
 </article>
 
+{#if related}
+  <section class="related-post">
+    <span class="mono-label section-label">related</span>
+    <a class="related-link" href="/blog/{related.id}">
+      <span class="related-title">
+        {@html renderInlineMarkdown(related.data.title)}
+      </span>
+      <span class="mono-label related-date">
+        {related.data.date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        })}
+      </span>
+    </a>
+  </section>
+{/if}
+
+
 <style>
   .post {
     max-width: 68ch;

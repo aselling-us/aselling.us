@@ -2,6 +2,7 @@ import { marked, type TokenizerAndRendererExtension } from "marked";
 import { getCareerCollection } from "#lib/server/career.js";
 import type { PageServerLoad } from "./$types";
 import { writeFile, access } from "node:fs/promises";
+import { slugify } from "#lib/slugify.ts";
 import path from "node:path";
 import { fail, error } from "@sveltejs/kit";
 
@@ -10,16 +11,7 @@ import type { Actions } from "./$types";
 const CAREER_DIR = "src/content/career";
 const LOGO_EXTENSIONS = ["png", "jpg", "jpeg", "webp", "avif", "svg"];
 
-function slugify(input: string) {
-  return (
-    input
-      .normalize("NFKD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "") || "untitled"
-  );
-}
+
 const highlightExtension: TokenizerAndRendererExtension = {
   name: "highlight",
   level: "inline",

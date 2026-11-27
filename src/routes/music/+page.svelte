@@ -79,9 +79,9 @@
 </script>
 
 {#if loading}
-  <p>Loading Spotify...</p>
+  <h1>Loading Spotify...</h1>
 {:else if error}
-  <p>Spotify is currently unavailable.</p>
+  <h1>Most recent listened is unavailable at the moment </h1>
 {:else if song}
   <article class="song-card">
     <a

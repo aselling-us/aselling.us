@@ -40,6 +40,11 @@ marked.use({
   },
 });
 
+// goal: convert current slug to current tags, and then get all posts with same / similar tags. if none match / repeated, pick at random
+function getRelatedPosts(currentSlug, allPosts) {
+  
+}
+
 export const load: PageServerLoad = ({ params }) => {
   const post = getPosts().find((p) => p.slug === params.slug && !p.draft);
   if (!post) error(404, "Post not found");
