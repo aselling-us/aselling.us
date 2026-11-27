@@ -9,6 +9,8 @@ import markedFootnote from "marked-footnote";
 import { getPosts } from "#lib/server/posts";
 import type { PageServerLoad } from "./$types";
 import { readingTimeLabel } from "#lib/reading-time.mjs";
+import { slugify } from "#lib/slugify.ts";
+import { dev } from "$app/env";
 const blogImages = import.meta.glob<string>(
   "/src/content/blog/*.{jpg,jpeg,png,webp,gif,svg}",
   { eager: true, query: "?url", import: "default" },
@@ -41,8 +43,25 @@ marked.use({
 });
 
 // goal: convert current slug to current tags, and then get all posts with same / similar tags. if none match / repeated, pick at random
-function getRelatedPosts(currentSlug, allPosts) {
-  
+function getRelatedPosts(currentSlug: string) {
+  const currentPost = getPosts().find(
+    (p) => p.slug === currentSlug && !p.draft,
+  );
+  if (!currentPost) return;
+
+  const possibleKeys = currentPost?.tags ?? [];
+
+  const relatedPosts = getPosts().filter(
+    (post) =>
+      // avoid current post 
+      post.slug !== currentSlug &&
+      // no drafts
+      (dev || !post.draft) &&
+      // other posts include a possible tag
+      post.tags?.some((t) => possibleKeys.includes(t)),
+  );
+
+  return relatedPosts
 }
 
 export const load: PageServerLoad = ({ params }) => {
@@ -56,5 +75,6 @@ export const load: PageServerLoad = ({ params }) => {
       html: marked.parse(body, { async: false }),
       minutes: readingTimeLabel(post.body),
     },
+    related: getRelatedPosts(params.slug),
   };
 };

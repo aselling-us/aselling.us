@@ -16,6 +16,10 @@
   const filteredFilms = $derived(data.filmsByMonth[selectedMonth] ?? []);
 </script>
 
+<svelte:head>
+  <title>films | aselling.us</title>
+</svelte:head>
+
 <h1 class="h1watching">Watching</h1>
 <p class="lede">
   Recent entries from my <a

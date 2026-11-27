@@ -1,15 +1,24 @@
 <script lang="ts">
   import type { PageData } from "./$types";
- import { marked } from "marked";
-  import markedFootnote from 'marked-footnote';
+  import { marked } from "marked";
+  import { renderInlineMarkdown } from "#lib/inline-markdown.mjs";
+  import { readingTimeLabel } from "#lib/reading-time.mjs";
   let { data }: { data: PageData } = $props();
   const post = $derived(data.post);
+  const related = $derived(data.related.slice(0, 2)); // first two
+
+  const plainTitle = $derived(
+    marked.parseInline(post.title).replace(/<[^>]*>/g, ""),
+  );
 </script>
 
 <svelte:head>
-	<title>{marked.parseInline(post.title)}</title>
-	<!-- <meta name="description" content={post.description} /> -->
+  <title>{plainTitle}</title>
+  {#if post.description}
+    <meta name="description" content={post.description} />
+  {/if}
 </svelte:head>
+
 
 <article class="post">
   <span
@@ -29,31 +38,37 @@
         alt={post.coverCaption ?? `Cover art for ${post.title}`}
         width="720"
       />
-      {#if post.coverCaption}<figcaption class="h1writing">{@html marked.parseInline(post.coverCaption)}</figcaption>{/if}
+      {#if post.coverCaption}<figcaption class="h1writing">
+          {@html marked.parseInline(post.coverCaption)}
+        </figcaption>{/if}
     </figure>
   {/if}
 
   <div class="prose">{@html post.html}</div>
 </article>
 
-{#if related}
+{#if related?.length}
   <section class="related-post">
     <span class="mono-label section-label">related</span>
-    <a class="related-link" href="/blog/{related.id}">
-      <span class="related-title">
-        {@html renderInlineMarkdown(related.data.title)}
-      </span>
-      <span class="mono-label related-date">
-        {related.data.date.toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric'
-        })}
-      </span>
-    </a>
+    {#each related as post (post.slug)}
+      <a class="related-link" href="/blog/{post.slug}">
+        <span class="related-title">
+          {@html renderInlineMarkdown(post.title)}
+          <span class="mono-label reading-time">
+            · {readingTimeLabel(post.content)}
+          </span>
+        </span>
+        <span class="mono-label related-date">
+          {post.date.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })}
+        </span>
+      </a>
+    {/each}
   </section>
 {/if}
-
 
 <style>
   .post {
@@ -76,8 +91,12 @@
     letter-spacing: 0.04em;
   }
 
-  .prose { margin-top: var(--space-3); }
-  .prose :global(p) { color: var(--color-text); }
+  .prose {
+    margin-top: var(--space-3);
+  }
+  .prose :global(p) {
+    color: var(--color-text);
+  }
   .prose :global(img) {
     max-width: 100%;
     height: auto;
@@ -88,8 +107,12 @@
   /* captioned inline images (markdown `![alt](src "caption")`) are wrapped
      in a figure by rehype-image-captions.mjs — reset the img's own margin
      so the figure owns the spacing instead */
-  .prose :global(figure) { margin: var(--space-3) auto; }
-  .prose :global(figure img) { margin: 0; }
+  .prose :global(figure) {
+    margin: var(--space-3) auto;
+  }
+  .prose :global(figure img) {
+    margin: 0;
+  }
   .prose :global(figcaption) {
     margin-top: 0.4rem;
     text-align: center;
@@ -117,7 +140,7 @@
     color: var(--color-text);
   }
   .prose :global(blockquote::before) {
-    content: '\201C';
+    content: "\201C";
     position: absolute;
     top: -0.1em;
     left: var(--space-1);
@@ -158,7 +181,9 @@
     border-radius: 3px;
     padding: 0.15rem 0.5rem;
     text-decoration: none;
-    transition: color 0.15s ease, border-color 0.15s ease;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
   }
   .tag a:hover {
     color: var(--color-highlight-bright);
@@ -189,6 +214,11 @@
     font-size: 1rem;
     color: var(--color-accent-bright);
   }
-  .related-link:hover .related-title { color: var(--color-highlight-bright); }
-  .related-date { color: var(--color-text-faint); flex-shrink: 0; }
+  .related-link:hover .related-title {
+    color: var(--color-highlight-bright);
+  }
+  .related-date {
+    color: var(--color-text-faint);
+    flex-shrink: 0;
+  }
 </style>

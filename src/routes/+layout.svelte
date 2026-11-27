@@ -7,19 +7,10 @@
   let { data, children } = $props();
   import { House } from "@lucide/svelte";
 </script>
-
 <svelte:head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- <link rel="icon" href="/favicon.svg" type="image/svg+xml" /> -->
-  <link
-    rel="alternate"
-    type="application/atom+xml"
-    title="Arjan Ellingson"
-    href="/rss.xml"
-  />
-  <!-- FIXME switch between monet and caravaggio -->
+  <title>aselling.us</title>
 </svelte:head>
+
 
 <header class="site-header">
   <div class="header-row">

@@ -70,6 +70,9 @@
     return new Date(date).toISOString().split("T")[0];
   }
 </script>
+<svelte:head>
+  <title>blog | aselling.us</title>
+</svelte:head>
 
 <h1 class="h1writing">Writing</h1>
 <h3 class="lede">

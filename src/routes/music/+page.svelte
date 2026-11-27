@@ -14,7 +14,6 @@
     durationMs: number | null;
   };
 
-
   let song = $state<Song | null>(null);
   const topArtists = artists.topArtists;
   const artistFetch = artists.fetchedAt;
@@ -78,10 +77,14 @@
   });
 </script>
 
+<svelte:head>
+  <title>music | aselling.us</title>
+</svelte:head>
+
 {#if loading}
   <h1>Loading Spotify...</h1>
 {:else if error}
-  <h1>Most recent listened is unavailable at the moment </h1>
+  <h1>Most recent listened is unavailable at the moment</h1>
 {:else if song}
   <article class="song-card">
     <a
@@ -358,7 +361,8 @@
     justify-content: space-between;
     margin-top: 0.7rem;
   }
-  .artists-heading, .fetched {
+  .artists-heading,
+  .fetched {
     display: flex;
     align-items: center;
     justify-content: center;

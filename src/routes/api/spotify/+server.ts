@@ -16,13 +16,25 @@ type SpotifyTrack = {
   external_urls: { spotify: string };
   duration_ms: number | null;
 };
+type SpotifyEpisode = {
+  name: string;
+  show?: {
+    name?: string;
+    publisher?: string;
+    images?: { url: string }[];
+  };
+  images?: { url: string }[];
+  external_urls?: { spotify?: string };
+  duration_ms?: number | null;
+};
 
 type Song = {
   title: string;
   artist: string;
   album: string;
   albumArt: string | null;
-  songUrl: string;
+  songUrl: string | null;
+  type: "track" | "episode";
   isPlaying: boolean;
   playedAt: string | null;
   progressMs: number | null;
@@ -44,6 +56,18 @@ function formatTrack(track: SpotifyTrack) {
     albumArt: track.album.images[0]?.url ?? null,
     songUrl: track.external_urls.spotify,
     durationMs: track.duration_ms,
+  };
+}
+
+function formatEpisode(episode: SpotifyEpisode) {
+  return {
+    title: episode.name,
+    artist: episode.show?.publisher ?? "",
+    album: episode.show?.name ?? "Podcast",
+    albumArt:
+      episode.images?.[0]?.url ?? episode.show?.images?.[0]?.url ?? null,
+    songUrl: episode.external_urls?.spotify ?? null,
+    durationMs: episode.duration_ms ?? null,
   };
 }
 
@@ -85,7 +109,7 @@ async function fetchSong(): Promise<Song | null> {
   const headers = { Authorization: `Bearer ${token}` };
 
   const currentResponse = await fetch(
-    "https://api.spotify.com/v1/me/player/currently-playing",
+    "https://api.spotify.com/v1/me/player/currently-playing?additional_types=track,episode",
     { headers },
   );
 
@@ -93,9 +117,15 @@ async function fetchSong(): Promise<Song | null> {
     await checkResponse(currentResponse, "Spotify playback request");
     const current = await currentResponse.json();
 
-    if (current.is_playing && current.item?.type === "track") {
+        if (
+      current.is_playing &&
+      (current.item?.type === "track" || current.item?.type === "episode")
+    ) {
       return {
-        ...formatTrack(current.item),
+        ...(current.item.type === "episode"
+          ? formatEpisode(current.item)
+          : formatTrack(current.item)),
+        type: current.item.type,
         isPlaying: true,
         playedAt: null,
         progressMs: current.progress_ms,
@@ -117,6 +147,7 @@ async function fetchSong(): Promise<Song | null> {
 
   return {
     ...formatTrack(item.track),
+    type: "track",
     isPlaying: false,
     playedAt: item.played_at,
     progressMs: null,

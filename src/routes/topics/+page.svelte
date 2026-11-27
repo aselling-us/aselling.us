@@ -16,7 +16,9 @@
     ].sort(),
   );
 </script>
-
+<svelte:head>
+  <title>topics | aselling.us</title>
+</svelte:head>
 <h2 class="mono-label section-label topics-list">
   <!-- <span>posts / {String(posts.length).padStart(2, '0')}</span> -->
   <span>tags / {tags.length} tags</span>

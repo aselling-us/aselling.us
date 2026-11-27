@@ -1,4 +1,4 @@
-const CACHE_SECONDS = 120;
+const CACHE_SECONDS = 30;
 
 function formatTrack(track) {
   return {
@@ -8,6 +8,17 @@ function formatTrack(track) {
     albumArt: track.album.images[0]?.url ?? null,
     songUrl: track.external_urls.spotify,
     durationMs: track.duration_ms ?? null,
+  };
+}
+function formatEpisode(episode) {
+  return {
+    title: episode.name,
+    artist: episode.show?.publisher ?? "",
+    album: episode.show?.name ?? "Podcast",
+    albumArt:
+      episode.images?.[0]?.url ?? episode.show?.images?.[0]?.url ?? null,
+    songUrl: episode.external_urls?.spotify ?? null,
+    durationMs: episode.duration_ms ?? null,
   };
 }
 
@@ -52,16 +63,24 @@ async function fetchSong(env) {
   const headers = { Authorization: `Bearer ${token}` };
 
   const currentResponse = await spotifyFetch(
-    "https://api.spotify.com/v1/me/player/currently-playing",
+    "https://api.spotify.com/v1/me/player/currently-playing?additional_types=track,episode",
     { headers },
   );
-
   if (currentResponse.status !== 204) {
     const current = await currentResponse.json();
 
-    if (current.is_playing && current.item?.type === "track") {
+    if (
+      current.is_playing &&
+      (current.item?.type === "track" || current.item?.type === "episode")
+    ) {
+      const formatted =
+        current.item.type === "episode"
+          ? formatEpisode(current.item)
+          : formatTrack(current.item);
+
       return {
-        ...formatTrack(current.item),
+        ...formatted,
+        type: current.item.type,
         isPlaying: true,
         playedAt: null,
         progressMs: current.progress_ms,
@@ -123,11 +142,7 @@ export async function handleSpotify(request, env, originHeaders) {
 
     let { song } = data;
 
-    if (
-      song?.isPlaying &&
-      song.progressMs != null &&
-      song.durationMs != null
-    ) {
+    if (song?.isPlaying && song.progressMs != null && song.durationMs != null) {
       song = {
         ...song,
         progressMs: Math.min(

@@ -20,6 +20,9 @@
   );
 </script>
 
+<svelte:head>
+  <title>books | aselling.us</title>
+</svelte:head>
 <!-- html -->
 <h1 class="h1writing">Reading</h1>
 <h3 class="lede">
