@@ -5,10 +5,8 @@
 
   import { marked } from "marked";
   import markedFootnote from "marked-footnote";
-  import { enhance } from "$app/forms";
-  import { refreshAll } from "$app/navigation";
+  import PostEditor from "../../components/PostEditor.svelte";
   import { readingTimeLabel } from "#lib/reading-time.mjs";
-  import { Trash } from "@lucide/svelte";
   import type { Post } from "#lib/types.ts"; // or '#lib/types' if using your #lib alias
   import drafts from "../../data/drafts.json";
   import SubscribeForm from "../../components/SubscribeForm.svelte";
@@ -66,10 +64,8 @@
     editingPost = post;
     popover?.showPopover();
   }
-  function formatDateForInput(date: string | Date): string {
-    return new Date(date).toISOString().split("T")[0];
-  }
 </script>
+
 <svelte:head>
   <title>blog | aselling.us</title>
 </svelte:head>
@@ -83,189 +79,7 @@
 <!-- ===== NEW POST BUTTON -->
 {#if dev}
   <button class="dev-btn mono-label" onclick={openNewPost}>+ New Post</button>
-
-  <div
-    id="new-post-popover"
-    bind:this={popover}
-    popover="manual"
-    class="editor-popover"
-  >
-    <!-- Keyed on slug so the form resets cleanly when switching between posts -->
-    {#if dev}
-      {#key editingPost?.slug ?? "new"}
-        <form
-          id="post-form"
-          method="POST"
-          action={editingPost ? "?/updatePost" : "?/createPost"}
-          enctype="multipart/form-data"
-          use:enhance={() => {
-            return async ({ result, update }) => {
-              if (result.type === "success") {
-                popover?.hidePopover();
-                editingPost = null;
-                await update();
-                await refreshAll();
-              } else {
-                // Catches validation errors (result.type === 'failure') or 500s ('error')
-                console.error("Action result:", result);
-                await update();
-              }
-            };
-          }}
-        >
-          <div class="popover-header">
-            <h2>
-              {editingPost ? `Edit: ${editingPost.title}` : "Create New Post"}
-            </h2>
-            <button
-              type="button"
-              onclick={() => popover?.hidePopover()}
-              aria-label="Close">✕</button
-            >
-          </div>
-
-          <!-- Pass the original slug when updating so the server knows which file to edit -->
-          {#if editingPost}
-            <input
-              type="hidden"
-              name="originalTitle"
-              value={editingPost.title}
-            />
-            <input
-              type="hidden"
-              name="originalDraft"
-              value={String(editingPost.draft)}
-            />
-            <input
-              type="hidden"
-              name="existingCover"
-              value={editingPost.cover ?? ""}
-            />
-          {/if}
-
-          <div class="row">
-            <label class="required-label">
-              Draft
-              <input
-                name="draft"
-                type="checkbox"
-                checked={editingPost ? editingPost.draft : true}
-              />
-            </label>
-            <label class="required-label">
-              Title
-              <input
-                type="text"
-                name="title"
-                value={editingPost?.title ?? ""}
-                placeholder="Post title..."
-                required
-              />
-            </label>
-          </div>
-
-          <div class="row">
-            <label class="required-label">
-              Date
-              <input
-                type="date"
-                name="date"
-                value={editingPost ? formatDateForInput(editingPost.date) : ""}
-                required
-              />
-            </label>
-            <label>
-              Cover Image
-              {#if editingPost?.cover}
-                <img
-                  src={editingPost.cover}
-                  alt={editingPost.coverCaption ?? "Current cover"}
-                  style="max-width: 160px; border-radius: 4px;"
-                />
-              {/if}
-              <input
-                type="file"
-                name="cover"
-                accept=".png,.jpg,.jpeg,.webp,.avif,image/*"
-              />
-            </label>
-          </div>
-
-          <label>
-            Cover Caption
-            <input
-              type="text"
-              name="covercaption"
-              value={editingPost?.coverCaption ?? ""}
-              placeholder="Where does this image come from?"
-            />
-          </label>
-
-          <label class="required-label">
-            Post Description
-            <input
-              type="text"
-              name="description"
-              value={editingPost?.description ?? ""}
-              placeholder="Short summary..."
-            />
-          </label>
-
-          <label>
-            Tags (comma-separated)
-            <input
-              type="text"
-              name="tags"
-              value={editingPost?.tags?.join(", ") ?? ""}
-              placeholder="tag1, tag2, tag3..."
-            />
-          </label>
-
-          <label class="required-label form-body">
-            Body (Markdown)
-            <textarea
-              name="body"
-              rows="12"
-              placeholder="Write your unformatted markdown here..."
-              required>{editingPost?.body ?? ""}</textarea
-            >
-          </label>
-
-          <div class="popover-actions">
-            <button type="button" onclick={() => popover?.hidePopover()}>
-              Cancel
-            </button>
-
-            <!-- Only show the delete button when editingPost exists, and configure it to trigger ?/deletePost from page.Server.ts -->
-            <!-- When  click <Trash />, the browser runs onclick before submitting the form. -->
-            <!-- If you click OK, confirm(...) returns true, nothing prevents the default behavior, and the form submits to ?/deletePost. -->
-            <!-- If you click Cancel, e.preventDefault() stops the form submission completely and keeps your editor open. -->
-            {#if editingPost}
-              <button
-                type="submit"
-                formaction="?/deletePost"
-                formnovalidate
-                aria-label="Delete Post"
-                // confirm makes the cancel or okay
-                onclick={(e) => {
-                  if (!confirm(`Delete "${editingPost?.title}"?`))
-                    e.preventDefault();
-                }}
-              >
-                <Trash />
-              </button>
-            {/if}
-
-            <button type="submit" class="primary">
-              {editingPost ? "Update Post" : "Save Post"}
-            </button>
-          </div>
-        </form>
-      {/key}
-
-      <!-- draft links and editor controls -->
-    {/if}
-  </div>
+  <PostEditor bind:popover bind:editingPost />
 {/if}
 
 <SubscribeForm />
@@ -475,110 +289,6 @@
     font-size: x-small;
   }
 
-  .editor-popover {
-    width: min(650px, 92vw);
-    max-height: 90vh;
-    padding: 1.5rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background: #ffffff;
-    color: #111;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-  }
-
-  /* Dim the background when the popover is open */
-  .editor-popover::backdrop {
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(2px);
-  }
-
-  .popover-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-
-  .popover-header h2 {
-    margin: 0;
-    font-size: 1.25rem;
-  }
-
-  #post-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-
-  label {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-  }
-
-  input[type="text"],
-  input[type="date"],
-  textarea {
-    flex: 1; /* Stretches the input to fill remaining space in the label */
-    min-width: 0; /* Prevents inputs from overflowing grid columns */
-    padding: 0.55rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-family: inherit;
-    font-size: 0.95rem;
-  }
-
-  /* Monospace font makes plain-text markdown easier to write */
-  textarea {
-    font-family:
-      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    resize: vertical;
-    line-height: 1.5;
-  }
-
-  .popover-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.75rem;
-    margin-top: 0.5rem;
-  }
-
-  button {
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    background: #f5f5f5;
-    cursor: pointer;
-  }
-
-  button.primary {
-    background: #111;
-    color: #fff;
-    border-color: #111;
-  }
-  .required-label::before {
-    content: " *";
-    color: rgb(185, 23, 23);
-    display: inline;
-  }
-  .form-body {
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-family: inherit;
-    font-size: 0.95rem;
-    width: 100%; /* Fills the width of its parent container */
-    min-height: 150px; /* Sets a taller starting height while still allowing expansion */
-  }
   .posts-and-drafts,
   .topics-list {
     display: flex;

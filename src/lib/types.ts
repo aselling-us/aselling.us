@@ -5,6 +5,7 @@ export interface Post {
   date: string | Date;
   draft: boolean;
   body: string;
+  bodyHtml: string;
   tags?: string[];
   cover?: string;
   coverCaption?: string;

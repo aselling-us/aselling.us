@@ -44,7 +44,7 @@
     </figure>
   {/if}
 
-  <div class="prose">{@html post.html}</div>
+  <div class="prose">{@html post.bodyHtml}</div>
 </article>
 
 {#if related?.length}

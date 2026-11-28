@@ -1,5 +1,7 @@
 import { dev } from "$app/env";
 import matter from "gray-matter";
+import { Marked } from "marked";
+import markedFootnote from "marked-footnote";
 
 export const COVER_EXTENSIONS = ["png", "jpg", "jpeg", "webp", "avif"] as const;
 
@@ -19,6 +21,7 @@ export interface Post extends Omit<PostFrontmatter, "date"> {
   draft: boolean;
   cover?: string;
   body: string;
+  bodyHtml: string;
 }
 
 const files = import.meta.glob<string>("/src/content/blog/**/*.md", {
@@ -36,6 +39,33 @@ const images = import.meta.glob<string>(
   },
 );
 
+function renderPostBody(body: string, postPath: string): string {
+  const directory = postPath.slice(0, postPath.lastIndexOf("/") + 1);
+
+  const renderer = new Marked(markedFootnote(), {
+    walkTokens(token) {
+      if (token.type !== "image" || !token.href.startsWith("./")) return;
+
+      let filename: string;
+
+      try {
+        filename = decodeURIComponent(token.href.slice(2));
+      } catch {
+        return;
+      }
+
+      // Look up the image in the same directory as the Markdown file.
+      const imageUrl = images[directory + filename];
+
+      if (imageUrl) {
+        token.href = imageUrl;
+      }
+    },
+  });
+
+  return renderer.parse(body, { async: false });
+}
+
 function escapeRegExp(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
@@ -44,32 +74,37 @@ export function getPosts(): Post[] {
   // all possible image entries the cover could match
   const imagePaths = Object.keys(images);
 
-  return Object.entries(files)
-    .map(([path, raw]) => {
-      const parsed = matter(raw);
-      const data = parsed.data as PostFrontmatter;
-      const slug = path.split("/").pop()!.replace(/\.md$/, "");
-      const baseCoverPath = path.replace(/[^/]+\.md$/, `${slug}-cover`);
+  return (
+    Object.entries(files)
+      .map(([path, raw]) => {
+        const parsed = matter(raw);
+        const data = parsed.data as PostFrontmatter;
+        const slug = path.split("/").pop()!.replace(/\.md$/, "");
+        const baseCoverPath = path.replace(/[^/]+\.md$/, `${slug}-cover`);
 
-      // Matches "{slug}-cover.{png|jpg|jpeg|webp|avif}", case-insensitive
-      const coverRegex = new RegExp(
-        `^${escapeRegExp(baseCoverPath)}\\.(${COVER_EXTENSIONS.join("|")})$`,
-        "i",
-      );
-      const matchedKey = imagePaths.find((imgPath) => coverRegex.test(imgPath));
-
-      return {
-        slug,
-        title: data.title,
-        date: new Date(data.date),
-        description: data.description,
-        tags: data.tags ?? [],
-        draft: data.draft ?? false,
-        cover: matchedKey ? images[matchedKey] : undefined,
-        coverCaption: data.coverCaption,
-        body: parsed.content,
-      };
-    })
-    .filter((post) => !dev || !post.draft)
-    .sort((a, b) => b.date.valueOf() - a.date.valueOf());
+        // Matches "{slug}-cover.{png|jpg|jpeg|webp|avif}", case-insensitive
+        const coverRegex = new RegExp(
+          `^${escapeRegExp(baseCoverPath)}\\.(${COVER_EXTENSIONS.join("|")})$`,
+          "i",
+        );
+        const matchedKey = imagePaths.find((imgPath) =>
+          coverRegex.test(imgPath),
+        );
+        return {
+          slug,
+          title: data.title,
+          date: new Date(data.date),
+          description: data.description,
+          tags: data.tags ?? [],
+          draft: data.draft ?? false,
+          cover: matchedKey ? images[matchedKey] : undefined,
+          coverCaption: data.coverCaption,
+          body: parsed.content,
+          bodyHtml: renderPostBody(parsed.content, path),
+        };
+      })
+      // .filter((post) => !dev || !post.draft)
+      .filter((post) => dev || !post.draft)
+      .sort((a, b) => b.date.valueOf() - a.date.valueOf())
+  );
 }

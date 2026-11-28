@@ -1,35 +1,56 @@
 <script>
-// @ts-nocheck
+  // @ts-nocheck
 
-import { navItems } from "#lib/nav-items.ts";
+  import { navItems } from "#lib/nav-items.ts";
+
+  import { onMount } from "svelte";
+  import {LeafletMap, TileLayer, Marker, Circle, Polygon} from 'leaflet';
+  import "leaflet/dist/leaflet.css";
+
+  let mapElement;
+
+  onMount(() => {
+    let map;
+    let destroyed = false;
+
+    async function initMap() {
+      const L = await import("leaflet");
+      if (destroyed) return;
+
+      map = L.map(mapElement).setView([44.9778, -93.265], 12);
+
+      const marker = new Marker([44.9778, -93.265]).addTo(map);
+
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+    }
+
+    initMap();
+
+    return () => {
+      destroyed = true;
+      map?.remove();
+    };
+  });
 </script>
+
 <svelte:head>
-  <title>Not Found · aselling</title>
+  <title>travels · aselling.us</title>
   <meta name="description" content="This page doesn't exist." />
 </svelte:head>
-  <!-- <span class="mono-label">sheet / 404</span> -->
 
-  <div class="nf-hero">
-    <span class="nf-stamp mono-label" aria-hidden="true">not on file</span>
-    <h1 class="nf-num">Coming Soon</h1>
-    <p class="lede">I am rewriting the entire website in Svelte, and in the process, redoing the pages that I do not like. I am working on a better way to display my personal projects; coming soon!</p>
-    <a href="/" class="nf-home mono-label">&larr; back to the index</a>
-  </div>
-
-  <h2 class="mono-label section-label">index</h2>
-  <ul class="quick-links" role="list">
-    {#each navItems as item (item.href)}
-      <li>
-        <a href={item.href} class="quick-link">
-          <span class="mono-label quick-link-n">{item.n}</span>
-          <span class="quick-link-label">{item.label}</span>
-        </a>
-      </li>
-    {/each}
-  </ul>
+<div class="map" bind:this={mapElement}></div>
 
 <style>
-  .lede { color: var(--color-text-dim); }
+  .map {
+    height: 500px;
+    width: 100%;
+  }
+  .lede {
+    color: var(--color-text-dim);
+  }
 
   .section-label {
     color: var(--color-highlight-bright);
@@ -77,7 +98,9 @@ import { navItems } from "#lib/nav-items.ts";
     border: 1px solid var(--color-highlight-bright);
     border-radius: 9999px;
     padding: 0.35rem 1rem;
-    transition: background-color 0.15s ease, color 0.15s ease;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
   }
   .nf-home:hover {
     background: var(--color-highlight-bright);
@@ -100,22 +123,31 @@ import { navItems } from "#lib/nav-items.ts";
     padding: 0.6rem 1rem;
     min-width: 10rem;
     color: var(--color-text);
-    transition: border-color 0.15s ease, color 0.15s ease;
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease;
   }
   .quick-link:hover {
     border-color: var(--color-highlight);
     color: var(--color-highlight-bright);
   }
-  .quick-link-n { color: var(--color-text-faint); }
+  .quick-link-n {
+    color: var(--color-text-faint);
+  }
   .quick-link-label {
     font-family: var(--font-display);
     font-size: 1.05rem;
   }
 
   @media (max-width: 640px) {
-    .nf-stamp { position: static; display: inline-block; margin-bottom: var(--space-2); transform: rotate(-2deg); }
-    .quick-link { min-width: 100%; }
+    .nf-stamp {
+      position: static;
+      display: inline-block;
+      margin-bottom: var(--space-2);
+      transform: rotate(-2deg);
+    }
+    .quick-link {
+      min-width: 100%;
+    }
   }
-
-  
 </style>
