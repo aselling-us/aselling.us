@@ -43,8 +43,10 @@ async function syncCoverImage(options: {
   oldSlug?: string;
   targetDir: string;
   newSlug: string;
+  removeCover?: boolean;
 }) {
-  const { coverFile, oldDir, oldSlug, targetDir, newSlug } = options;
+  const { coverFile, oldDir, oldSlug, targetDir, newSlug, removeCover } =
+    options;
 
   // 1. If a new image was uploaded, remove any old cover and write "{newSlug}-cover.{ext}"
   if (coverFile && coverFile.size > 0) {
@@ -65,6 +67,13 @@ async function syncCoverImage(options: {
     return;
   }
 
+  if (removeCover) {
+    if (oldDir && oldSlug) {
+      const oldCover = await findCoverFile(oldDir, oldSlug);
+      if (oldCover) await unlink(oldCover);
+    }
+    return;
+  }
   // 2. If no new image was uploaded, rename/move the existing cover if slug or draft folder changed
   if (oldDir && oldSlug && (oldDir !== targetDir || oldSlug !== newSlug)) {
     const prevCover = await findCoverFile(oldDir, oldSlug);
@@ -320,6 +329,7 @@ export const actions: Actions | undefined = dev
             oldSlug: originalSlug,
             targetDir,
             newSlug: slug,
+            removeCover: formData.get("removeCover") === "on",
           });
 
           await writeFile(

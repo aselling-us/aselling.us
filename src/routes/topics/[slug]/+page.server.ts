@@ -1,8 +1,8 @@
 import type { PageServerLoad } from "./$types";
 import { getPosts } from "#lib/server/posts";
-import { dev } from "$app/environment";
 import { slugify } from "#lib/slugify";
 import type { Post } from "#lib/types.ts";
+import { dev } from "$app/env";
 
 export const prerender = !dev;
 
